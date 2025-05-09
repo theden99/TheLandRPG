@@ -1,0 +1,117 @@
++module.
+    const toggleButton = (iName,iToggleType,attributes) => {
+        if (iToggleType===2) {
+            const theCurValue = attributes[iName];
+            if (theCurValue===1) {
+                attributes[iName] = 0;
+            } else {
+                attributes[iName] = 1;
+            }
+        } else {
+            attributes[iName] = iToggleType;
+        }
+    };
+
+    const parseFieldName = (iFieldName) => {
+        const theList = iFieldName.split('-');
+
+        return theList;
+    };
+
+    const getSummaryStr = (iSection) => {
+        let theSection;
+        let theSummary;
+
+        theSummary = '';
+
+        theSection = iSection[idFormulas];
+        Object.keys(theSection).forEach((key) => {
+            if (theSummary!=='') {
+                theSummary += '\n';
+            }            
+            theSummary += theSection[key].formula;
+        });
+
+        theSection = iSection[idCalcs];
+        Object.keys(theSection).forEach((key) => {
+            if (theSection[key].calcdesc!=='') {
+                if (theSummary!=='') {
+                    theSummary += '\n';
+                }            
+                theSummary += theSection[key].calcdesc;
+            }
+        });
+
+        theSection = iSection[idFuncs];
+        Object.keys(theSection).forEach((key) => {
+            if (theSection[key].funcdesc!=='') {
+                if (theSummary!=='') {
+                    theSummary += '\n';
+                }            
+                theSummary += theSection[key].funcdesc;
+            }
+        });
+
+        theSection = iSection[idEffects];
+        theSection.forEach((key) => {
+            if (theSummary!=='') {
+                theSummary += '\n';
+            }            
+            theSummary += 'Applies the effect: '+key+'.'
+        });
+
+        return theSummary;
+    };
+    k.registerFuncs({getSummaryStr});
+
+    const funcHelpButton = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const [thePage,theZone,theTable,theField] = parseFieldName(buttonName);
+
+        let theCollapse;
+        if (rowID) {
+            theCollapse = getFieldID(thePage,theZone,theTable,idCollapse,rowID)
+        } else {
+            theCollapse = getFieldID(thePage,theZone,theZone,idCollapse,theTable)
+        }
+        toggleButton(theCollapse,2,attributes);
+    };
+    k.registerFuncs({funcHelpButton});
+
+    const funcInfoButton = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const theSenderID = buttonName;
+        const [thePage,theZone,theTable,theField] = parseFieldName(buttonName);
+
+        let theValue
+        let theInfoID;
+        let theSummary;
+
+        theValue = schemaCore[theZone];
+        theValue = theValue[theTable];
+        theValue = theValue[idInfoURL];
+        theInfoID = getFieldID(idInfo,idInfo,'',idInfoURL);
+        attributes[theInfoID] = theValue;
+
+        theValue = schemaCore[theZone];
+        theValue = theValue[theTable];
+        theValue = theValue[idDisplayName];
+        theInfoID = getFieldID(idInfo,idInfo,'',idDisplayName);
+        attributes[theInfoID] = theValue;
+
+        theValue = schemaCore[theZone];
+        theValue = theValue[theTable];
+        theValue = theValue[idInfoDesc];
+        theInfoID = getFieldID(idInfo,idInfo,'',idInfoDesc)
+        attributes[theInfoID] = theValue;
+
+        theValue = schemaCore[theZone];
+        theValue = theValue[theTable];
+
+        theSummary = getSummaryStr(theValue);
+
+        theInfoID = getFieldID(idInfo,idInfo,'',idInfoSummary)
+        attributes[theInfoID] = theSummary;
+    };
+    k.registerFuncs({funcInfoButton});
+

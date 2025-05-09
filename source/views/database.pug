@@ -1,0 +1,240 @@
++tab({name:"effects", container:"article", button:{class:'thelandrpg-tabs-button boxed','data-i18n':"Database"}})
+    .thelandrpg-tabs-section-effects
+        +span({'data-i18n':'DATABASE'}).header-title.paper-background
+        .effects-items-section
+            .div-items
+                .div-items-container
+                    .collapse-container
+                        +span({'data-i18n':'Effects'}).collapse-title.paper-background
+                        +collapse('effects-collapse')
+                        .div-items-collapse.collapsed
+                            .div-market
+                                .effects-items-section.paper-background
+                                    include _effects-effects.pug                                
+        .effects-effect-section
+            .div-effect
+                .div-effect-container
+                    .collapse-container
+                        +span({'data-i18n':'Create New Effect'}).collapse-title.paper-background
+                        +collapse('effect-collapse')
+                        .div-effect-collapse.collapsed
+                            .effect-add-section
+                                .effect-wallofdropdowns
+                                    +text({name:'query-query',value:'query'}).underlined
+                                    +text({name:'query-result',value:'result'}).underlined
+                                .effect-button
+                                    +button({name:'effects-effect-add-button',type:'action','data-i18n':'Create It',class:'effect-add-button',trigger:{triggeredFuncs:['doEffectsEffectAdd']}})
+                                    +button({name:'effects-effect-add-button2',type:'action','data-i18n':'switch to tab Info-Event13',class:'effect-add-button',trigger:{triggeredFuncs:['doEffectsEffectAdd2']}})
+                                    +button({name:'effects-effect-add-button3',type:'action','data-i18n':'psuedoQuery',class:'effect-add-button',trigger:{triggeredFuncs:['doEffectsEffectAdd3']}})
+                                    +button({name:'effects-effect-add-button4',type:'action','data-i18n':'extractQuery',class:'effect-add-button',trigger:{triggeredFuncs:['doEffectsEffectAdd4']}})
+                                    +button({name:'effects-effect-add-button5',type:'action','data-i18n':'parseKFormula',class:'effect-add-button',trigger:{triggeredFuncs:['doEffectsEffectAdd5']}})
+                                .div-send.div-inline
+                                    +text({name:'send-name',value:'Send T0 Name'}).underlined
+                                    +text({name:'send-message',value:'Message'}).underlined
+                                .div-receive.div-inline
+                                    +text({name:'receive-name',value:'Received From Name'}).underlined
+                                    +text({name:'receive-message',value:'Message'}).underlined
+                                +button({name:'send-button',type:'action','data-i18n':'Send',class:'effect-add-button',trigger:{triggeredFuncs:['doAutomateSend']}})
+
++module.                                    
+    const doEffectsEffectAdd = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const oldTriggerName = trigger.name;
+
+        let newTrigger = trigger;
+        newTrigger.name = 'act_nav-tabs-thelandrpg--inventory';
+        k.callFunc('kSwitchTab',{trigger,attributes});
+        //can't do sub-tabs without more research
+        //newTrigger.name = 'act_nav-tabs-inventory-main--inventory-accessory';
+        //k.callFunc('kSwitchTab',{trigger,attributes});
+
+        trigger.name = oldTriggerName;
+    };
+    k.registerFuncs({doEffectsEffectAdd});
+    
+    const doEffectsEffectAdd2 = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const oldTriggerName = trigger.name;
+
+        let newTrigger = trigger;
+        newTrigger.name = 'act_nav-tabs-sidebar--info-event';
+
+        //attributes['test13-textarea'] = 'jimmy was here bibidy yo yo yo'; works but not sure on line-breaks, etc
+        k.callFunc('kSwitchTab',{trigger,attributes});
+        //can't do sub-tabs without more research
+        //newTrigger.name = 'act_nav-tabs-inventory-main--inventory-accessory';
+        //k.callFunc('kSwitchTab',{trigger,attributes});
+
+        trigger.name = oldTriggerName;
+    };
+    k.registerFuncs({doEffectsEffectAdd2});
+
+    const doEffectsEffectAdd3 = async function ({trigger,attributes,sections,casc}) {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const queryQuery = attributes['query-query'];
+        const queryValue = await k.pseudoQuery(queryQuery);
+        k.setAttrs({'query-result':queryValue});
+    };
+    k.registerFuncs({doEffectsEffectAdd3});
+    
+    const doEffectsEffectAdd4 = async function ({trigger,attributes,sections,casc}) {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const queryQuery = attributes['query-query'];
+        const queryValue = await k.extractQueryResult(queryQuery);
+        k.setAttrs({'query-result':queryValue});
+    };
+    k.registerFuncs({doEffectsEffectAdd4});
+    
+    const doEffectsEffectAdd5 = async function ({trigger,attributes,sections,casc}) {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const queryQuery = attributes['query-query'];
+        //const queryValue = k.parseKFormula({trigger,attributes,sections,cass}); //allows repeating sections to be used but trigger has to be set
+        const queryValue = k.parseMacro(queryQuery,attributes,sections);
+        let attrChanges = {};
+        attrChanges['query-result'] = queryValue;
+        k.setAttrs(attrChanges);
+    };
+    k.registerFuncs({doEffectsEffectAdd5});
+
+    
+    //Function that is called by the source sheet
+    const doAutomateSend = async function({trigger,attributes,sections,casc}){
+        const fromName = attributes['character_name'];
+        const toName = attributes['send-name'];
+
+        //this object is passed to setAttrs by receiver  (????? never set directly ?????)
+        let attrUpdates = {};
+        
+        attrUpdates['repeating_inventory-stagingarea-items_-1234567890123456789_itemname'] = 'staging table from '+fromName;
+        attrUpdates['repeating_inventory-stagingarea-items_-1234567890123456789_qty'] = 44;
+
+        //remote commands to be executed on receiver
+        let commandList = [];
+
+        commandList.push({
+            funcName : 'doAddItem',
+            params : [
+                {rowID:'',itemname:'name of item',qty:5},
+                {rowID:'-34ewras',itemname:'name of item2',qty:53},
+                {rowID:'-alfjaskj',itemname:'name of item4',qty:4563}
+            ]
+        });
+        commandList.push({
+            funcName : 'doAddItem',
+            params : [
+                {rowID:'-ewfsdf',itemname:'another item',qty:23},
+                {rowID:'-dfd-fd',itemname:'push it',qty:343}
+            ]
+        });
+        commandList.push({
+            funcName : 'doAddBuff',
+            params : {rowID:'',name:'Weak Slow Heal',duraction:10,effectRowID:'=lfkjdfldkjf'}
+        });
+        commandList.push({
+            funcName : 'doAddItem12345',
+            params : {rowID:'-ewfsdf',itemname:'another item',qty:23}
+        });
+        
+
+        //send commands
+        k.send(toName,'doCommandReceive',fromName,attrUpdates,commandList);
+        attributes.set();
+    };
+    k.registerFuncs({doAutomateSend});
+
+    //Function called on target sheet. Partner is the attributes from the source sheet
+    const doCommandReceive  = function({trigger,attributes,sections,casc},fromName,attrUpdates,commandList){
+
+        //-for (var key of Object.keys(commandList)) {
+        //-    let commandBlock = {
+        //-        funcName : commandList[key],
+        //-        funcParam : key,
+        //-        params : {}
+        //-    };
+
+        //-    commandBlocks[commandBlock.funcName] = commandBlock;
+        //-};
+
+        //process commands
+        if (commandList.length > 0) {
+            commandList.forEach(command => {
+                if (command.funcName==='doAddItem') {
+
+                } else if (command.funcName==='doAddBuff') {
+
+                }
+                else {
+                    k.log('command.funcName='+command.funcName+' not found in command list');
+                }
+            });
+        };
+
+        //fields sent to be updated from fromName
+        k.setAttrs(attrUpdates,true,()=>{
+            k.log('updated received fields');
+        });
+    };
+    k.registerFuncs({doCommandReceive});
+
++scss('sheet').
+    .thelandrpg-tabs-section-effects{
+        .collapse-title {
+            font-size: 18px;
+            text-align: center;
+        }
+        width: 1100px;
+        display: grid;
+        grid-gap: var(--tiny-gap);
+        font: {size: 12px;family: Arial;weight: normal;};
+
+        grid-template-columns: auto;
+        grid-template-areas:
+            'title'
+            'effects'
+            'addeffect'
+        ;
+        .header-title{
+            grid-area: title;
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .effects-items-section {
+            grid-area: effects;
+        }
+        .effects-effect-section {
+            grid-area: addeffect;
+            
+            .effect-add-section{
+                display: grid;
+                grid-gap: var(--tiny-gap);
+                font: {size: 12px;family: Arial;weight: normal;};
+
+                grid-template-columns: auto;
+                grid-template-areas:
+                    'wallofdropdowns'
+                    'button'
+                ;
+
+                .effect-wallofdropdowns {
+                    grid-area: wallofdropdowns;
+
+                }
+                .effect-button {
+                    grid-area: button;
+                    
+                    .effect-add-button {
+                        @include k.text-button;
+                        text-align: center;
+                        width: 100%;
+                        background-color: lightgreen;
+                    }
+                }
+            }
+        }
+    }

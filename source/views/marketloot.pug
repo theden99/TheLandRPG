@@ -1,0 +1,562 @@
++tab({name:"market", container:"article", button:{class:'thelandrpg-tabs-button boxed','data-i18n':"Market/Loot"}})
+    .thelandrpg-tabs-section-marketloot
+        .marketloot-header-section
+            +span({'data-i18n':'MARKET/LOOT'}).head-title.paper-background
+            .div-tots
+                .div-tots-section.paper-background.div-inline
+                    .div-numitems.div-inline
+                        +span({'data-i18n':'# Items:'}).numitems-label
+                        +number({name:'inventory-numitems',class:'boxed',value:0,readonly:'',}).numitems-input
+                    .div
+                    .div-totalweight.div-inline
+                        +span({'data-i18n':'Total Weight:'}).totweight-label
+                        +number({name:'inventory-totweight',class:'boxed',value:0,readonly:''}).totweight-input
+                    .div
+                    .div-maxweight.div-inline
+                        +span({'data-i18n':'Max Weight:'}).maxweight-label
+                        +number({name:'inventory-maxweight',class:'boxed',value:0,readonly:''}).maxweight-input
+                    .div
+                    .div-coinweight.div-inline
+                        +span({'data-i18n':'Coin Weight:'}).coinweight-label
+                        +number({name:'inventory-coinweight',class:'boxed',value:0,readonly:''}).coinweight-input
+                    .div-pp.div-inline
+                        +span({'data-i18n':'pp:'}).coin-label
+                        +number({name:'inventory-coin-pp',class:'coin-pp boxed',value:0,readonly:''})
+                    .div
+                    .div-gp.div-inline
+                        +span({'data-i18n':'gp:'}).coin-label
+                        +number({name:'inventory-coin-gp',class:'coin-gp boxed',value:0,readonly:''})
+                    .div
+                    .div-sp.div-inline
+                        +span({'data-i18n':'sp:'}).coin-label
+                        +number({name:'inventory-coin-sp',class:'coin-sp boxed',value:0,readonly:''})
+                    .div
+                    .div-cp.div-inline
+                        +span({'data-i18n':'cp:'}).coin-label
+                        +number({name:'inventory-coin-cp',class:'coin-cp boxed',value:0,readonly:''})
+        <hr>
+        .div-loot
+            .div-loot-container
+                .collapse-container
+                    +span({'data-i18n':'Loot'}).collapse-title.paper-background
+                    +collapse('loot-collapse')
+                    .div-loot-collapse.collapsed
+                        .thelandrpg-tabs-section-market
+                            .div-tots
+                                .div-tots-section.paper-background.div-inline
+                                    .div-numitems.div-inline
+                                        +span({'data-i18n':'# Items:'}).numitems-label
+                                        +number({name:'loot-numitems',class:'boxed',value:0,readonly:'',trigger:{}}).numitems-input
+                                    .div
+                                    .div-totalweight.div-inline
+                                        +span({'data-i18n':'Total Weight:'}).totweight-label
+                                        +number({name:'loot-totweight',class:'boxed',value:0,readonly:'',trigger:{calculation:'calcTotWeightLoot'}}).totweight-input
+                                    .div
+                                    .div-maxweight.div-inline
+                                        +span({'data-i18n':'Max Weight:'}).maxweight-label
+                                        +number({name:'inventory-maxweight',class:'boxed',value:0,readonly:''}).maxweight-input
+                                    .div
+                                    .div-coinweight.div-inline
+                                        +span({'data-i18n':'Coin Weight:'}).coinweight-label
+                                        +number({name:'loot-coinweight',class:'boxed',value:0,readonly:'',trigger:{affects:['loot-totweight'],formula:'(floor((@{loot-coin-pp}*0.4)+(@{loot-coin-gp}*0.3)+(@{loot-coin-sp}*0.2)+(@{loot-coin-cp}*0.1)))'}}).coinweight-input
+                                    .div-pp.div-inline
+                                        +span({'data-i18n':'pp:'}).coin-label
+                                        +number({name:'loot-coin-pp',class:'coin-pp boxed',value:0,readonly:'',trigger:{affects:['loot-coinweight']}})
+                                    .div
+                                    .div-gp.div-inline
+                                        +span({'data-i18n':'gp:'}).coin-label
+                                        +number({name:'loot-coin-gp',class:'coin-gp boxed',value:0,readonly:'',trigger:{affects:['loot-coinweight']}})
+                                    .div
+                                    .div-sp.div-inline
+                                        +span({'data-i18n':'sp:'}).coin-label
+                                        +number({name:'loot-coin-sp',class:'coin-sp boxed',value:0,readonly:'',trigger:{affects:['loot-coinweight']}})
+                                    .div
+                                    .div-cp.div-inline
+                                        +span({'data-i18n':'cp:'}).coin-label
+                                        +number({name:'loot-coin-cp',class:'coin-cp boxed',value:0,readonly:'',trigger:{affects:['loot-coinweight']}})
+                            .div-market
+                                .market-market.paper-background
+                                    +span({'data-i18n':'Loot'}).staging-title
+                                    include _marketloot-loot-loot
+                            .div-buying
+                                .market-buying.paper-background
+                                    +span({'data-i18n':'Looting'}).slot-title
+                                    include _marketloot-loot-looting
+                            .div-buyall
+                                +button({name:'marketloot-loot-lootall-button',type:'action','data-i18n':'Take It',class:'marketloot-big-button',trigger:{triggeredFuncs:['doLootLootAll']}})
+        <hr>
+        .div-market
+            .div-market-container
+                .collapse-container
+                    +span({'data-i18n':'Market'}).collapse-title.paper-background
+                    +collapse('market-collapse')
+                    .div-market-collapse.collapsed
+                        .thelandrpg-tabs-section-market
+                            .div-tots
+                                .div-tots-section.paper-background.div-inline
+                                    .div-numitems.div-inline
+                                        +span({'data-i18n':'# Items:'}).numitems-label
+                                        +number({name:'market-numitems',class:'boxed',value:0,readonly:'',trigger:{}}).numitems-input
+                                    .div
+                                    .div-totalweight.div-inline
+                                        +span({'data-i18n':'Total Weight:'}).totweight-label
+                                        +number({name:'market-totweight',class:'boxed',value:0,readonly:'',trigger:{calculation:'calcTotWeightMarket'}}).totweight-input
+                                    .div
+                                    .div-maxweight.div-inline
+                                        +span({'data-i18n':'Max Weight:'}).maxweight-label
+                                        +number({name:'inventory-maxweight',class:'boxed',value:0,readonly:''}).maxweight-input
+                                    .div
+                                    .div-coinweight.div-inline
+                                        +span({'data-i18n':'Coin Weight:'}).coinweight-label
+                                        +number({name:'market-coinweight',class:'boxed',value:0,readonly:'',trigger:{affects:['market-totweight'],formula:'((@{market-coin-pp}*0.4)+(@{market-coin-gp}*0.3)+(@{market-coin-sp}*0.2)+(@{market-coin-cp}*0.1))'}}).coinweight-input
+                                    .div-pp.div-inline
+                                        +span({'data-i18n':'pp:'}).coin-label
+                                        +number({name:'market-coin-pp',class:'coin-pp boxed',value:0,readonly:'',trigger:{affects:['market-coinweight']}})
+                                    .div
+                                    .div-gp.div-inline
+                                        +span({'data-i18n':'gp:'}).coin-label
+                                        +number({name:'market-coin-gp',class:'coin-gp boxed',value:0,readonly:'',trigger:{affects:['market-coinweight']}})
+                                    .div
+                                    .div-sp.div-inline
+                                        +span({'data-i18n':'sp:'}).coin-label
+                                        +number({name:'market-coin-sp',class:'coin-sp boxed',value:0,readonly:'',trigger:{affects:['market-coinweight']}})
+                                    .div
+                                    .div-cp.div-inline
+                                        +span({'data-i18n':'cp:'}).coin-label
+                                        +number({name:'market-coin-cp',class:'coin-cp boxed',value:0,readonly:'',trigger:{affects:['market-coinweight']}})
+                            .div-market
+                                .market-market.paper-background
+                                    +span({'data-i18n':'Market'}).staging-title
+                                    include _marketloot-market-market
+                            .div-buying
+                                .market-buying.paper-background
+                                    +span({'data-i18n':'Buying'}).slot-title
+                                    include _marketloot-market-buying
+                            .div-buyall
+                                +button({name:'marketloot-market-buyall-button',type:'action','data-i18n':'Buy It',class:'marketloot-big-button',trigger:{triggeredFuncs:['doMarketBuyAll']}})
+        <hr>
+        .div-auctionhouse
+            .div-auctionhouse-container
+                .collapse-container
+                    +span({'data-i18n':'Auction House'}).collapse-title.paper-background
+                    +collapse('auctionhouse-collapse')
+                    .div-aucitonhouse-collapse.collapsed
+                        .thelandrpg-tabs-section-market
+                            .div-tots
+                                .div-tots-section.paper-background.div-inline
+                                    .div-numitems.div-inline
+                                        +span({'data-i18n':'# Items:'}).numitems-label
+                                        +number({name:'auctionhouse-numitems',class:'boxed',value:0,readonly:'',trigger:{}}).numitems-input
+                                    .div
+                                    .div-totalweight.div-inline
+                                        +span({'data-i18n':'Total Weight:'}).totweight-label
+                                        +number({name:'auctionhouse-totweight',class:'boxed',value:0,readonly:'',trigger:{calculation:'calcTotWeightAuctionHouse'}}).totweight-input
+                                    .div
+                                    .div-maxweight.div-inline
+                                        +span({'data-i18n':'Max Weight:'}).maxweight-label
+                                        +number({name:'inventory-maxweight',class:'boxed',value:0,readonly:''}).maxweight-input
+                                    .div
+                                    .div-coinweight.div-inline
+                                        +span({'data-i18n':'Coin Weight:'}).coinweight-label
+                                        +number({name:'auctionhouse-coinweight',class:'boxed',value:0,readonly:'',trigger:{affects:['auctionhouse-totweight'],formula:'((@{auctionhouse-coin-pp}*0.4)+(@{auctionhouse-coin-gp}*0.3)+(@{auctionhouse-coin-sp}*0.2)+(@{auctionhouse-coin-cp}*0.1))'}}).coinweight-input
+                                    .div-pp.div-inline
+                                        +span({'data-i18n':'pp:'}).coin-label
+                                        +number({name:'auctionhouse-coin-pp',class:'coin-pp boxed',value:0,readonly:'',trigger:{affects:['auctionhouse-coinweight']}})
+                                    .div
+                                    .div-gp.div-inline
+                                        +span({'data-i18n':'gp:'}).coin-label
+                                        +number({name:'auctionhouse-coin-gp',class:'coin-gp boxed',value:0,readonly:'',trigger:{affects:['auctionhouse-coinweight']}})
+                                    .div
+                                    .div-sp.div-inline
+                                        +span({'data-i18n':'sp:'}).coin-label
+                                        +number({name:'auctionhouse-coin-sp',class:'coin-sp boxed',value:0,readonly:'',trigger:{affects:['auctionhouse-coinweight']}})
+                                    .div
+                                    .div-cp.div-inline
+                                        +span({'data-i18n':'cp:'}).coin-label
+                                        +number({name:'auctionhouse-coin-cp',class:'coin-cp boxed',value:0,readonly:'',trigger:{affects:['auctionhouse-coinweight']}})
+                            .div-market
+                                .market-market.paper-background
+                                    +span({'data-i18n':'Auction'}).staging-title
+                                    include _marketloot-auctionhouse-auction
+                            .div-buying
+                                .market-buying.paper-background
+                                    +span({'data-i18n':'Bidding'}).slot-title
+                                    include _marketloot-auctionhouse-bidding
+                            .div-buyall
+                                +button({name:'marketloot-auctionhouse-bidall-button',type:'action','data-i18n':'Bid It',class:'marketloot-big-button',trigger:{triggeredFuncs:['doAuctionHouseBidAll']}})
+        <hr>
++module.
+    const calcTotWeightLoot = ({trigger,attributes,sections,casc}) => {
+        const calcSection = 'repeating_loot-looting-items';
+
+        let totItemWeight = 0;
+        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,calcSection);
+
+        let totWeight = 0;
+        totWeight = calcCoinWeight(
+            attributes['loot-coin-pp'],
+            attributes['loot-coin-gp'],
+            attributes['loot-coin-cp'],
+            attributes['loot-coin-sp']
+        ) + totItemWeight;
+        totWeight = Number.parseFloat(totWeight).toFixed(2);
+
+        let totItems = 0;
+        totItems = totItems + sections[calcSection].length;
+
+        attributes['loot-numitems'] = totItems;
+
+        return totWeight;
+    };
+    k.registerFuncs({calcTotWeightLoot});
+
+    const calcTotWeightMarket = ({trigger,attributes,sections,casc}) => {
+        const calcSection = 'repeating_market-buying-items';
+
+        let totItemWeight = 0;
+        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,calcSection);
+
+        let totWeight = 0;
+        totWeight = calcCoinWeight(
+            attributes['market-coin-pp'],
+            attributes['market-coin-gp'],
+            attributes['market-coin-cp'],
+            attributes['market-coin-sp']
+        ) + totItemWeight;
+        totWeight = Number.parseFloat(totWeight).toFixed(2);
+
+        let totItems = 0;
+        totItems = totItems + sections[calcSection].length;
+
+        attributes['market-numitems'] = totItems;
+
+        return totWeight;
+    };
+    k.registerFuncs({calcTotWeightMarket});
+
+    const calcTotWeightAuctionHouse = ({trigger,attributes,sections,casc}) => {
+        const calcSection = 'repeating_auctionhouse-bidding-items';
+
+        let totItemWeight = 0;
+        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,calcSection);
+
+        let totWeight = 0;
+        totWeight = calcCoinWeight(
+            attributes['auctionhouse-coin-pp'],
+            attributes['auctionhouse-coin-gp'],
+            attributes['auctionhouse-coin-cp'],
+            attributes['auctionhouse-coin-sp']
+        ) + totItemWeight;
+        totWeight = Number.parseFloat(totWeight).toFixed(2);
+
+        let totItems = 0;
+        totItems = totItems + sections[calcSection].length;
+
+        attributes['auctionhouse-numitems'] = totItems;
+
+        return totWeight;
+    };
+    k.registerFuncs({calcTotWeightAuctionHouse});
+
+    const doLootLootAll = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const fromSection = 'repeating_loot-looting-items';
+        const toSection = 'repeating_inventory-stagingarea-items';
+        let fromSectionID = '';
+        let toSectionID = '';
+        if (sections[fromSection].length > 0) {
+            sections[fromSection].forEach(id => {
+                fromSectionID = fromSection+'_'+id;
+                toSectionID = k.generateRowID(toSection,sections);
+                doSectionCopy(attributes,sections,fromSectionID,toSectionID);
+                doSectionDelete(attributes,sections,fromSectionID);
+            });
+        };
+
+        checkStagingAreaCollapse(attributes,sections);
+    };
+    k.registerFuncs({doLootLootAll});
+    
+    const doMarketBuyAll = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const fromSection = 'repeating_market-buying-items';
+        const toSection = 'repeating_inventory-stagingarea-items';
+        let fromSectionID = '';
+        let toSectionID = '';
+        if (sections[fromSection].length > 0) {
+            sections[fromSection].forEach(id => {
+                fromSectionID = fromSection+'_'+id;
+                toSectionID = k.generateRowID(toSection,sections);
+                doSectionCopy(attributes,sections,fromSectionID,toSectionID);
+                doSectionDelete(attributes,sections,fromSectionID);
+            });
+        };
+
+        checkStagingAreaCollapse(attributes,sections);
+    };
+    k.registerFuncs({doMarketBuyAll});
+    
+    const doAuctionHouseBidAll = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const fromSection = 'repeating_auctionhouse-bidding-items';
+        const toSection = 'repeating_inventory-stagingarea-items';
+        let fromSectionID = '';
+        let toSectionID = '';
+        if (sections[fromSection].length > 0) {
+            sections[fromSection].forEach(id => {
+                fromSectionID = fromSection+'_'+id;
+                toSectionID = k.generateRowID(toSection,sections);
+                doSectionCopy(attributes,sections,fromSectionID,toSectionID);
+                doSectionDelete(attributes,sections,fromSectionID);
+            });
+        };
+
+        checkStagingAreaCollapse(attributes,sections);
+    };
+    k.registerFuncs({doAuctionHouseBidAll});
+    
++scss('sheet').
+    .thelandrpg-tabs-section-marketloot {
+        .repitem:hover > .collapse, .repitem:hover .roll-container,
+        .collapse-container:hover > .collapse,
+        .collapse-container:hover .roll-container {
+            opacity: 1;
+        }
+        .repitem > .collapse,
+        .collapse-container > .collapse {
+            opacity:  1;
+            position: absolute;
+            left: -10px;
+            top: 0px;
+            pointer-events: auto;
+        }
+
+        .collapse-title {
+            font-size: 18px;
+            text-align: center;
+        }
+        .marketloot-button{
+            @include k.base-button;
+            width: 50px;
+            text-align: center;
+        }
+        .marketloot-big-button {
+            @include k.text-button;
+            text-align: center;
+            width: 100%;
+            background-color: lightgreen;
+        }
+        .marketloot-header-section {
+            display: grid;
+            grid-gap: var(--tiny-gap);
+            font: {size: 12px;family: Arial;weight: normal;};
+
+            grid-template-columns: auto auto;
+            grid-template-areas:
+                'title title'
+                'tots tots'
+            ;
+
+            .head-title{
+                grid-area: title;
+                font-size: 24px;
+                text-align: center;
+                font-weight: bold;
+            }
+            .div-tots{
+                grid-area: tots;
+                text-align: center;
+                width: 1100px;
+                .div-numitems{
+                    text-align: center;
+                    .numitems-label{
+                        margin-right: 3px;
+                        margin-top: 5px;
+                        width: 50px;
+                        text-align: right;
+                    }
+                    .numitems-input{
+                        margin-right: 5px;
+                    }
+                }
+                .div-totalweight {
+                    text-align: center;
+                    .totweight-label{
+                        margin-right: 3px;
+                        margin-top: 5px;
+                        width: 70px;
+                        text-align: right;
+                    }
+                    .totweight-input{
+                        margin-right: 5px;
+                    }
+                }
+                .div-maxweight {
+                    text-align: center;
+                    .maxweight-label{
+                        margin-right: 3px;
+                        margin-top: 5px;
+                        width: 70px;
+                        text-align: right;
+                    }
+                    .maxweight-input{
+                        margin-right: 5px;
+                    }
+                }
+                .div-coinweight {
+                    text-align: center;
+                    .coinweight-label{
+                        margin-right: 3px;
+                        margin-top: 5px;
+                        width: 70px;
+                        text-align: right;
+                    }
+                    .coinweight-input{
+                        margin-right: 5px;
+                    }
+                }
+                .div-pp{
+                    text-align: center;
+                    .coin-pp{
+                    }
+                }
+                .div-gp{
+                    text-align: center;
+                    .coin-gp{
+                    }
+                }
+                .div-sp{
+                    text-align: center;
+                    .coin-sp{
+                    }
+                }
+                .div-cp{
+                    text-align: center;
+                    .coin-cp{
+                    }
+                }
+                .coin-label{
+                    margin-right: 3px;
+                    margin-top: 5px;
+                    width: 30px;
+                    text-align: center;
+                }
+            }
+        }
+        .thelandrpg-tabs-section-market{
+            display: grid;
+            grid-gap: var(--tiny-gap);
+            font: {size: 12px;family: Arial;weight: normal;};
+
+            grid-template-columns: auto auto;
+            grid-template-areas:
+                'tots tots'
+                'market buying'
+                'market buyall'
+            ;
+
+            .market-market {
+                grid-area: market;
+                text-align: center;
+                width: 476px;
+                .staging-title {
+                    width: 100%;
+                    font-size: 14px;
+                }
+            }
+            .market-buying {
+                grid-area: buying;
+                text-align: center;
+                width: 476px;
+                .slot-title {
+                    width: 100%;
+                    font-size: 14px;
+                }
+            }
+            .div-buyall {
+                grid-area: buyall;
+            }
+            .div-tots{
+                grid-area: tots;
+                text-align: center;
+                width: 1100px;
+                .div-numitems{
+                    text-align: center;
+                    .numitems-label{
+                        margin-right: 3px;
+                        margin-top: 5px;
+                        width: 50px;
+                        text-align: right;
+                    }
+                    .numitems-input{
+                        margin-right: 5px;
+                    }
+                }
+                .div-totalweight {
+                    text-align: center;
+                    .totweight-label{
+                        margin-right: 3px;
+                        margin-top: 5px;
+                        width: 70px;
+                        text-align: right;
+                    }
+                    .totweight-input{
+                        margin-right: 5px;
+                    }
+                }
+                .div-maxweight {
+                    text-align: center;
+                    .maxweight-label{
+                        margin-right: 3px;
+                        margin-top: 5px;
+                        width: 70px;
+                        text-align: right;
+                    }
+                    .maxweight-input{
+                        margin-right: 5px;
+                    }
+                }
+                .div-coinweight {
+                    text-align: center;
+                    .coinweight-label{
+                        margin-right: 3px;
+                        margin-top: 5px;
+                        width: 70px;
+                        text-align: right;
+                    }
+                    .coinweight-input{
+                        margin-right: 5px;
+                    }
+                }
+                .div-pp{
+                    text-align: center;
+                    .coin-pp{
+                    }
+                }
+                .div-gp{
+                    text-align: center;
+                    .coin-gp{
+                    }
+                }
+                .div-sp{
+                    text-align: center;
+                    .coin-sp{
+                    }
+                }
+                .div-cp{
+                    text-align: center;
+                    .coin-cp{
+                    }
+                }
+                .coin-label{
+                    margin-right: 3px;
+                    margin-top: 5px;
+                    width: 30px;
+                    text-align: center;
+                }
+            }
+        }
+    }

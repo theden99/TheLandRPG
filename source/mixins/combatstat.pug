@@ -1,0 +1,47 @@
+mixin rowCombatStat(iPage,iZone,iTemplate,iStat,iEntry,iClassPrefix,iRoller)
+    - const theTotalID = getFieldID(iPage,iZone,iTemplate,idTotal,iStat);
+    - const theStat = iEntry;
+    - const theDisplayName = theStat.displayname;
+    - let theFormula;
+    - let theID;
+    - let theSchemaFormula;
+    - let theSchemaAffects;
+    - let theDefault = theStat.default;
+
+    .div-inline
+        - theID = getFieldID(iPage,iZone,iTemplate,idRoller,iStat);
+        if (iRoller===idCombatSpeed) || (iRoller===idAll)
+            +roller({name:theID,class:'general-roller '+iClassPrefix+'-noroller','data-i18n':theDisplayName,trigger:{triggeredFuncs:['funcCore']}})
+        else
+            +text({name:theID,class:iClassPrefix+'-noroller','data-i18n':theDisplayName,value:theDisplayName})
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idBase,iStat);
+        - theFormula = '@{'+theID+'} +';
+        - theSchemaFormula = theStat.formulas[idBase].kformula;
+        if (iTemplate===idCombatStats) || (iStat===idMovementSpeed)
+            +number({name:theID,readonly:'',class:'boxed '+iClassPrefix+'-base',value:theDefault,trigger:{formula:theSchemaFormula,affects:[theTotalID]}})
+        else
+            +number({name:theID,class:'boxed '+iClassPrefix+'-base',value:theDefault,trigger:{formula:theSchemaFormula,affects:[theTotalID]}})
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idEquipBonus,iStat);
+        - theFormula += '@{'+theID+'} +';
+        +number({name:theID,class:'boxed '+iClassPrefix+'-equipbonus',readonly:'',value:0,trigger:{affects:[theTotalID]}})
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idBuffBonus,iStat);
+        - theFormula += '@{'+theID+'} +';
+        +number({name:theID,class:'boxed '+iClassPrefix+'-buffbonus',readonly:'',value:0,trigger:{affects:[theTotalID]}})
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idMiscBonus,iStat);
+        - theFormula += '@{'+theID+'}';
+        +number({name:theID,class:'boxed '+iClassPrefix+'-miscbonus',value:0,trigger:{affects:[theTotalID]}}).
+
+        - theID = theTotalID;
+        - theSchemaAffects = [];
+        if (sheetAffects[theID])
+            - theSchemaAffects = sheetAffects[theID];
+        +number({name:theID,class:'boxed '+iClassPrefix+'-total',readonly:'',value:theDefault,trigger:{formula:theFormula,affects:theSchemaAffects}})
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idHelpButton,iStat);
+        +button({name:theID,type:'action',class:'button-help',trigger:{triggeredFuncs:['funcHelpButton']}}).column-help
++module.
++scss('sheet').

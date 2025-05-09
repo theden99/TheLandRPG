@@ -1,0 +1,152 @@
+.roll20-window
+    include _header.pug
+    include _sidebar.pug
+    include _tabs.pug
+    //- include _footer.pug
++module.
+
++scss('sheet').
+    .roll20-window{
+        display: grid;
+        gap: var(--half-gap);
+        grid-template-columns: 1100px 650px;
+        grid-auto-rows: minmax(100px,auto);
+        grid-template-areas:
+            'headerx headerx'
+            'tabsx sidebarx'
+            //- 'footerx footerx'
+        ;        
+        .thelandrpg-header{
+            grid-area:headerx;
+        }
+        .thelandrpg-tabs{
+            grid-area:tabsx;
+        }
+        .thelandrpg-sidebar{
+            grid-area:sidebarx;
+        }
+        font: {
+          size: 12px;
+          family: Arial;
+          weight: bold;
+        };
+        .paper-background{
+            border:var(--half-gap) solid transparent;
+            border-image:{
+                source:url(https://t4.ftcdn.net/jpg/05/39/78/15/240_F_539781530_9kVln7bwkJTpsq91scLQT74pWHz4ALLO.jpg);
+                slice:40 fill;
+                width:1rem;
+                position: center;
+                repeat: no-repeat;
+                size: cover;
+            };
+            filter:drop-shadow(rgba(0, 0, 0, 0.16) 0px 3px 6px) drop-shadow(rgba(0, 0, 0, 0.23) 0px 3px 6px);
+        }
+        .parchment-background {
+            background-image: url('https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/ADnD_1E_Revised/images/back2.jpg');
+            background-repeat: repeat;
+            overflow: visible;
+        }
+        .base-button {
+            @include k.base-button;
+        }
+        .text-button {
+            @include k.text-button;
+        }
+        .thelandrpg-tabs-button{
+            @include k.text-button;
+            background-color: lightblue;
+        }
+        .thelandrpg-subtab-button{
+            @include k.base-button;
+            background-color: lightblue;
+            font-size: 10px;
+        }
+
+        .items-header-addbuttongap{
+            width: 23px;
+        }
+        .items-header-header{
+            margin-right: 3px;
+            text-align: center;
+            background-color: lightskyblue;
+        }
+
+        .boxed {
+            border: 1px solid var(--borderColor);
+            border-radius: 0;
+            box-sizing: border-box;
+        }
+
+        .adaptive--text{
+            min-height:1.6rem;
+        }
+
+        .k-active-tab {
+        }
+        .k-active-button {
+            background-color: silver;            
+        }
+        .tabs__nav-item{
+            padding: 5px 5px;
+        }
+
+        .repcontainer {
+            gap: var(--tiny-gap);
+        }
+
+        .repitem > .collapse:before,
+        .collapse-container > .collapse:before {
+            content: "y"; //'x'; crafting symbol
+            font-family: pictos;
+        }
+        .roller:before {
+            //content: "T";
+            //font-family: dicefontd10;
+            content: '';
+        }
+        .roller {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            background-image: url('https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299'); 
+            //background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Ambition_Avarice/images/d20.png"); 
+            background-size: 26px 26px;
+            background-repeat: no-repeat;
+            width: 26px;
+            height: 26px;
+            border-style: none;
+            background-color: transparent;
+        }
+        .button-help:before {
+            content: "?";
+            font-family: pictos;
+            font-size : 16px;
+        }
+        .button-help {
+            text-align: center;
+        }
+        .column-help {
+            width: 20px;
+        }
+
+        .button-info:before {
+            content: "i";
+            font-family: pictos;
+            font-size : 16px;
+        }
+        .button-info {
+            text-align: center;
+        }
+        .column-info {
+            width: 20px;
+        }
+
+        .addbutton-padding {
+            width: 20px;
+        }
+        .trashcan-padding{
+            width: 23px;
+        }
+
+    }

@@ -1,0 +1,104 @@
++tab({name:"inventory-discardpile", container:"article", button:{class:'inventory-main-tabs-button boxed','data-i18n':"Discard Pile"}})
+    .inventory-discardpile-section
+        .div-item-header.div-inline
+            +span({}).item-head-addbuttongap
+            +span({'data-i18n':'Name'}).item-head-itemname.underlined
+            +span({'data-i18n':'Item Type'}).item-head-slottype.underlined
+            +span({'data-i18n':'Qty'}).item-head-qty.underlined
+        .div-inven-items.div-inline
+            +customControlFieldset({name:'inventory-discardpile-items',addClass:'',trigger:{affects:['inventory-totweight'],triggeredFuncs:['doDiscardpileRemove']}})
+                +text({name:'itemname',class:'item_itemname underlined',value:''})
+                +select({name:'slottypeitem',class:'item_slottype underlined'})
+                    +option({value:'slottypeArmor','data-i18n':'Armor'})
+                    +option({value:'slottypeWeapon','data-i18n':'Weapon'})
+                    +option({value:'slottypeAccessory','data-i18n':'Accessory'})
+                    +option({value:'slottypeAmmo','data-i18n':'Ammo'})
+                    +option({value:'slottypeBeltPouch','data-i18n':'Belt/Pouch'})
+                    +option({value:'slottypeStorage','data-i18n':'Storage'})
+                    +option({value:'slottypeDiscardPile','data-i18n':'Discard Pile'})
+                +number({name:'qty',class:'item_qty boxed',value:1})
+                +button({name:'unequip-discardpile-button',type:'action','data-i18n':'Unequip',class:'staging-button',trigger:{triggeredFuncs:['doDiscardPileUnequip']}})
+                +text({name:'trashcan-padding',class:'item_padding',readonly:''})
+                +text({name:'slottype',class:'underlined hidden',readonly:''})
+                +collapseItemDetails('inventory-totweight')
++module.
+    const doDiscardPileRemove = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        attributes['inventory-totweight'] = calcTotWeightInventory({trigger,attributes,sections,casc});
+    };
+    k.registerFuncs({doDiscardPileRemove});
+
+    const doDiscardPileUnequip = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const fromSectionID = sectionName+'_'+rowID;
+
+        const toSection = 'repeating_inventory-stagingarea-items';
+        const toSectionID = k.generateRowID(toSection,sections);
+
+        doSectionCopy(attributes,sections,fromSectionID,toSectionID);
+
+        k.removeRepeatingRow(fromSectionID,attributes,sections);
+
+        checkStagingAreaCollapse(attributes,sections);
+    };
+    k.registerFuncs({doDiscardPileUnequip});
+
++scss('sheet').
+    .inventory-discardpile-section{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: top;
+        gap: var(--tiny-gap);
+        width: 460px;
+        .div-item-header{
+            .item-head-addbuttongap{
+                width: 23px;
+            }
+            .item-head-itemname{
+                margin-right: 3px;
+                width: 120px;
+                text-align: center;
+                background-color: lightskyblue;
+            }
+            .item-head-slottype{
+                margin-right: 3px;
+                width: 90px;
+                text-align: center;
+                background-color: lightskyblue;
+            }
+            .item-head-slot{
+                margin-right: 3px;
+                width: 90px;
+                text-align: center;
+                background-color: lightskyblue;
+            }
+            .item-head-qty{
+                margin-right: 3px;
+                width: 40px;
+                text-align: center;
+                background-color: lightskyblue;
+            }
+        }
+        .div-inven-items{
+            .staging-button{
+                @include k.base-button;
+            }
+            .item_padding{
+                width: 10px;
+            }
+            .item_itemname{
+                width: 120px;
+            }       
+            .item_slottype{
+                width: 90px;
+            }       
+            .item_slot{
+                width: 90px;
+            }       
+            .item_qty{
+                width: 40px;
+            }       
+        }
+    }

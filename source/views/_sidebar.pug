@@ -1,0 +1,43 @@
+.thelandrpg-sidebar
+    .div-sidebar.paper-background
+        .div-info-event
+            .div-info-event-header
+                +img({name:'info-info-infourl',src:'https://files.d20.io/images/418259312/IRr6MU5n3fch__TqXVUNYg/max.png?1732095184'}).info-image
+                +text({name:'info-info-displayname',readonly:'',value:'sender name'}).info-header
+            .div-info-event-info
+                +span({'data-i18n':'Information'})
+                +adaptiveTextarea({name:'info-info-infodesc',readonly:'',class:'boxed',spellcheck:'false'})
+            .div-info-event-summary
+                +span({'data-i18n':'Summary'})
+                +adaptiveTextarea({name:'info-info-infosummary',readonly:'',class:'boxed',spellcheck:'false'})
+            .div-info-event-detail
+                +span({'data-i18n':'Detail'})
+                +adaptiveTextarea({name:'info-info-infodetail',readonly:'',class:'boxed',spellcheck:'false'})
++scss('sheet').
+    .thelandrpg-sidebar{
+        display: flex;
+        width: 400px;
+        .tabs--sidebar__header{
+            //background-color: skyblue;
+            height: 5px;
+            .tabs__nav-item{
+                display: none;
+            }
+        }
+
+        .div-info-event {
+            width: 380px;
+
+            .info-header {
+                text-align: center;
+                width: 100%;
+                font-size: 20px;
+                font-weight: bold;
+            }
+            .info-image {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    }

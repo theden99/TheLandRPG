@@ -1,0 +1,148 @@
+.inventory-skinny-section
+    .div-item-header.div-inline
+        +span({}).item-head-addbuttongap
+        +span({'data-i18n':'Name'}).item-head-itemname.underlined
+        +span({'data-i18n':'Type'}).item-head-slottype.underlined
+        +span({'data-i18n':'Slot'}).item-head-slot.underlined
+        +span({'data-i18n':'Qty'}).item-head-qty.underlined
+    .div-inven-items.div-inline
+        +customControlFieldset({name:'inventory-slots-items',addClass:''})
+            +text({name:'itemname',class:'item_itemname underlined',value:''})
+            +select({name:'slottype',class:'item_slottype underlined',readonly:''})
+                +option({value:'slottypeArmor','data-i18n':'Armor'})
+                +option({value:'slottypeWeapon','data-i18n':'Weapon'})
+                +option({value:'slottypeAccessory','data-i18n':'Accessory'})
+                +option({value:'slottypeAmmo','data-i18n':'Ammo'})
+                +option({value:'slottypeBeltPouch','data-i18n':'Belt/Pouch'})
+                +option({value:'slottypeStorage','data-i18n':'Storage'})
+                +option({value:'slottypeDiscardPile','data-i18n':'Discard Pile'})
+            +select({name:'slot',class:'item_slot underlined',readonly:''})
+                +option({value:'slotArmorHead','data-i18n':'Head'})
+                +option({value:'slotArmorBody','data-i18n':'Body'})
+                +option({value:'slotArmorArms','data-i18n':'Arms'})
+                +option({value:'slotArmorHands','data-i18n':'Hands'})
+                +option({value:'slotArmorLegs','data-i18n':'Legs'})
+                +option({value:'slotArmorFeet','data-i18n':'Feet'})
+                +option({value:'slotWeaponSet1Primary','data-i18n':'Primary-1'})
+                +option({value:'slotWeaponSet1Secondary','data-i18n':'Secondary-1'})
+                +option({value:'slotWeaponSet1Ranged','data-i18n':'Ranged-1'})
+                +option({value:'slotWeaponSet1Thrown','data-i18n':'Thrown-1'})
+                +option({value:'slotWeaponSet2Primary','data-i18n':'Primary-2'})
+                +option({value:'slotWeaponSet2Secondary','data-i18n':'Secondary-2'})
+                +option({value:'slotWeaponSet2Ranged','data-i18n':'Ranged-2'})
+                +option({value:'slotWeaponSet2Thrown','data-i18n':'Thrown-2'})
+                +option({value:'slotAccessoryNeck','data-i18n':'Neck'})
+                +option({value:'slotAccessoryEarLeft','data-i18n':'Ear Left'})
+                +option({value:'slotAccessoryEarRight','data-i18n':'Ear Right'})
+                +option({value:'slotAccessoryWristLeft','data-i18n':'Wrist Left'})
+                +option({value:'slotAccessoryWristRight','data-i18n':'Wrist Right'})
+                +option({value:'slotAccessoryWaist','data-i18n':'Waist'})
+                +option({value:'slotAccessoryAnkleLeft','data-i18n':'Ankle Left'})
+                +option({value:'slotAccessoryAnkleRight','data-i18n':'Ankle Right'})
+                +option({value:'slotAccessoryRing1','data-i18n':'Ring-1'})
+                +option({value:'slotAccessoryRing2','data-i18n':'Ring-2'})
+                +option({value:'slotAccessoryRing3','data-i18n':'Ring-3'})
+                +option({value:'slotAccessoryRing4','data-i18n':'Ring-4'})
+                +option({value:'slotAccessoryRing5','data-i18n':'Ring-5'})
+                +option({value:'slotAccessoryRing6','data-i18n':'Ring-6'})
+                +option({value:'slotAccessoryRing7','data-i18n':'Ring-7'})
+                +option({value:'slotAccessoryRing8','data-i18n':'Ring-8'})
+                +option({value:'slotAmmoQuiver','data-i18n':'Quiver'})
+                +option({value:'slotAmmoBandelero','data-i18n':'Bandelaro'})
+                +option({value:'slotBeltPouchBelt','data-i18n':'Belt'})
+                +option({value:'slotBeltPouchPouch1','data-i18n':'Pouch 1'})
+                +option({value:'slotBeltPouchPouch2','data-i18n':'Pouch 2'})
+                +option({value:'slotStorageBackpack','data-i18n':'Backpack'})
+                +option({value:'slotStorageSack','data-i18n':'Sack'})
+                +option({value:'slotStorageWagonMount','data-i18n':'Wagon/Mount'})
+                +option({value:'slotStorageHouseBank','data-i18n':'House/Bank'})
+                +option({value:'slotDiscardPile','data-i18n':'Discard Pile'})
+            +number({name:'qty',class:'item_qty boxed',value:0})
+            +button({name:'equip-slots-button',type:'action','data-i18n':'Equip',class:'staging-button',trigger:{triggeredFuncs:['doSlotsEquip']}})
+            +text({name:'trashcan-padding',class:'item_padding',readonly:''})
+            +text({name:'slottype',class:'underlined hidden',readonly:''})
+            +collapseItemDetails('inventory-totweight')
++module.
+    const doSlotsEquip = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const slotsSlotType = attributes[sectionName+'_'+rowID+'_slottype'];
+        const slotsSlot = attributes[sectionName+'_'+rowID+'_slot'];
+
+        const stagingID = attributes['slot-rowid'];
+        const stagingSection = 'repeating_inventory-stagingarea-items';
+        const stagingSectionID = stagingSection+'_'+stagingID;
+
+        const invenSection = getSlotTypeSection(slotsSlotType);
+        const invenSectionID = k.generateRowID(invenSection,sections);
+
+        doSectionCopy(attributes,sections,stagingSectionID,invenSectionID);
+        attributes[invenSectionID+'_slottype'] = slotsSlotType;
+        attributes[invenSectionID+'_slot'] = slotsSlot;
+
+        doSectionRemoveAll(attributes,sections,sectionName);
+
+        doSectionDelete(attributes,sections,stagingSectionID);
+
+        checkStagingAreaCollapse(attributes,sections);
+        doSlotTypeCollapse(attributes);
+        checkSlotsCollapse(attributes,sections);
+    };
+    k.registerFuncs({doSlotsEquip});
++scss('sheet').
+    .inventory-skinny-section{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: top;
+        gap: var(--tiny-gap);
+        width: 460px;
+        .div-item-header{
+            .item-head-addbuttongap{
+                width: 23px;
+            }
+            .item-head-itemname{
+                margin-right: 3px;
+                width: 120px;
+                text-align: center;
+                background-color: lightskyblue;
+            }
+            .item-head-slottype{
+                margin-right: 3px;
+                width: 90px;
+                text-align: center;
+                background-color: lightskyblue;
+            }
+            .item-head-slot{
+                margin-right: 3px;
+                width: 90px;
+                text-align: center;
+                background-color: lightskyblue;
+            }
+            .item-head-qty{
+                margin-right: 3px;
+                width: 40px;
+                text-align: center;
+                background-color: lightskyblue;
+            }
+        }
+        .div-inven-items{
+            .staging-button{
+                @include k.base-button;
+            }
+            .item_padding{
+                width: 10px;
+            }
+            .item_itemname{
+                width: 120px;
+            }       
+            .item_slottype{
+                width: 90px;
+            }       
+            .item_slot{
+                width: 90px;
+            }       
+            .item_qty{
+                width: 40px;
+            }       
+        }
+    }

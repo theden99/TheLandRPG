@@ -1,0 +1,83 @@
+const getFieldID = (iPage,iZone,iTable,iField,iRowID) => { 
+    let theFieldID = iPage;
+    if (iZone!=='') { theFieldID += '-'+iZone};
+    if (iTable!=='') { 
+        if (tableIsTemplate.indexOf(iTable)!==(-1)) {
+            theFieldID += '-'+iRowID+'-'+iField
+        } else {
+            theFieldID += '-'+iTable;
+            if (iRowID!=='') {
+                theFieldID = 'repeating_'+theFieldID+'_'+iRowID+'_' 
+            } else {
+                theFieldID = 'repeating_'+theFieldID+'_$X_'  
+            }
+            theFieldID += iField;
+        }
+    } else {
+        if (iField!=='') { 
+            theFieldID += '-'+iField
+        };
+    };
+
+    //special fields
+    if (iPage===idHeader) {
+        if (iZone===idCharacter) {
+            if (iField===idName) {
+            theFieldID = 'character_name'
+            }
+            if (iField===idToken) {
+                theFieldID = 'character_token'
+            }
+            if (iField===idAvatar) {
+                theFieldID = 'character_avatar'
+            }
+        }
+    }
+
+    return theFieldID;
+};
+
+const getSummaryStr = (iSection) => {
+    let theSection;
+    let theSummary;
+
+    theSummary = '';
+
+    theSection = iSection[idFormulas];
+    Object.keys(theSection).forEach((key) => {
+        if (theSummary!=='') {
+            theSummary += '\n';
+        }            
+        theSummary += theSection[key].formula;
+    });
+
+    theSection = iSection[idCalcs];
+    Object.keys(theSection).forEach((key) => {
+        if (theSection[key].calcdesc!=='') {
+            if (theSummary!=='') {
+                theSummary += '\n';
+            }            
+            theSummary += theSection[key].calcdesc;
+        }
+    });
+
+    theSection = iSection[idFuncs];
+    Object.keys(theSection).forEach((key) => {
+        if (theSection[key].funcdesc!=='') {
+            if (theSummary!=='') {
+                theSummary += '\n';
+            }            
+            theSummary += theSection[key].funcdesc;
+        }
+    });
+
+    theSection = iSection[idEffects];
+    theSection.forEach((key) => {
+        if (theSummary!=='') {
+            theSummary += '\n';
+        }            
+        theSummary += 'Applies the effect: '+key+'.'
+    });
+
+    return theSummary;
+};

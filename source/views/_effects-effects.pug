@@ -1,0 +1,57 @@
+.effects-effects
+    .effects-section
+        .effects-header.div-inline
+            +span({}).items-header-addbuttongap
+            +span({'data-i18n':'Name'}).items-header-header.effect-itemname
+            +span({'data-i18n':'Type'}).items-header-header.effect-effecttype
+            +span({'data-i18n':'Description'}).items-header-header.effect-description
+        .effects-row.div-inline
+            +customControlFieldset({name:'effects-effects-items',addClass:''})
+                +text({name:'itemname',class:'effect-itemname underlined',trigger:{triggeredFuncs:['doEffectsItemNameChange']}})
+                +select({name:'effecttype',class:'effect-effecttype underlined'})
+                    +option({value:'effecttypeAttack','data-i18n':'Attack'})
+                    +option({value:'effecttypeDefense','data-i18n':'Defense'})
+                    +option({value:'effecttypeBuff','data-i18n':'Buff'})
+                    +option({value:'effecttypeDebuff','data-i18n':'Debuff'})
+                    +option({value:'effecttypeMovement','data-i18n':'Movement'})
+                +text({name:'description',class:'effect-description underlined',value:''})
+                +text({name:'trashcan-padding',class:'items-trashcangap',readonly:''})
+                .collapse-container
+                    +collapse('details-collapse')
+                    .effects-row-help
+                        +span({'data-i18n':'-'})
+                    .expanded
+                    .collapsed
+                        //-include .\partials\_effects-detail-skinny.pug
++module.
+    const doEffectsItemNameChange = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+    };
+    k.registerFuncs({doEffectsItemNameChange});
+
++scss('sheet').
+    .effects-effects {
+        .effects-section{
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--tiny-gap);
+
+            .effects-header,
+            .effects-row{
+                width: 100%;
+                .effect-itemname{
+                    width: 150px;
+                }       
+                .effect-effecttype{
+                    width: 80px;
+                }       
+                .effect-description{
+                    width: 770px;
+                }       
+                .effect-row-help {
+                    text-align: left;
+                }
+            }
+        }
+    }

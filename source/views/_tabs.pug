@@ -1,0 +1,22 @@
+.thelandrpg-tabs
+    +tabs({name:'thelandrpg',defaultActiveTab:'intro',persistent:true})
+        include chaosseed.pug
+        include skills.pug
+        include battle.pug
+        include inventory.pug
+        include marketloot.pug
+        //include personaltime.pug
+        //include risetopower.pug
+        //include settings.pug
+        //include database.pug
+        //include charactercreation.pug
+        //include intro.pug
++scss('sheet').
+    .thelandrpg-tabs{
+        width: 1010px;
+        display: flex;
+        .tabs--thelandrpg__header{
+            //-background-color: skyblue;
+            height: 45px;
+        }
+    }

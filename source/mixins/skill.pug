@@ -1,0 +1,188 @@
+mixin rowSkill(iPage,iZone,iTemplate,iSkill)
+    - const theTotalID = getFieldID(iPage,iZone,iTemplate,idTotal,iSkill);
+    - const theSkill = schemaCore.skills[iSkill];
+    - const theDisplayName = theSkill.displayname;
+    - let theFormula = '';
+    - let theID = '';
+    - let theAffects = [];
+    - let theValue = '';
+    - let theCalc;
+    - let theSection;
+
+    .div-inline
+        - theID = getFieldID(iPage,iZone,iTemplate,idRoller,iSkill);
+        +roller({name:theID,class:'general-roller row-skill-roller','data-i18n':theDisplayName,trigger:{triggeredFuncs:['funcCore']}})
+        - theID = getFieldID(iPage,iZone,iTemplate,idRarity,iSkill);
+        - theValue = theSkill.rarity;
+        - theValue = theValue.charAt(0).toUpperCase(); //get first char C, U, R
+        +text({name:theID,class:'row-skill-rarity',value:theValue,readonly:''})
+
+        - theFormula = '@{'+getFieldID(iPage,iZone,iTemplate,idRank,iSkill)+'} +'
+        - theFormula += '@{'+getFieldID(iPage,iZone,iTemplate,idEquipBonus,iSkill)+'} +'
+        - theFormula += '@{'+getFieldID(iPage,iZone,iTemplate,idBuffBonus,iSkill)+'} +'
+        - theFormula += '@{'+getFieldID(iPage,iZone,iTemplate,idMiscBonus,iSkill)+'} +'
+        - theFormula += '@{'+getFieldID(iPage,iZone,iTemplate,idParentBonus,iSkill)+'} +'
+        - theFormula += '@{'+getFieldID(iPage,iZone,iTemplate,idStatBonus,iSkill)+'}'
+        - theAffects = [];
+        if (sheetAffects[theTotalID])
+            - theAffects = sheetAffects[theTotalID];
+            - theID = getFieldID(iPage,iZone,iTemplate,idRankTitle,iSkill);
+            - theAffects.push(theID)
+        - theID = theTotalID;
+        +number({name:theID,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula,affects:theAffects}}).row-skill-total
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idRank,iSkill);
+        - theAffects = [theTotalID,getFieldID(iPage,iZone,iTemplate,idRankTitle,iSkill)];
+        +number({name:theID,class:'boxed',value:0,trigger:{affects:theAffects}}).row-skill-rank
+        - theID = getFieldID(iPage,iZone,iTemplate,idEquipBonus,iSkill);
+        +number({name:theID,class:'boxed',readonly:'',value:0,trigger:{affects:[theTotalID]}}).row-skill-equipbonus
+        - theID = getFieldID(iPage,iZone,iTemplate,idBuffBonus,iSkill);
+        +number({name:theID,class:'boxed',readonly:'',value:0,trigger:{affects:[theTotalID]}}).row-skill-buffbonus
+        - theID = getFieldID(iPage,iZone,iTemplate,idMiscBonus,iSkill);
+        +number({name:theID,class:'boxed',value:0,trigger:{affects:[theTotalID]}}).row-skill-miscbonus
+        - theID = getFieldID(iPage,iZone,iTemplate,idParentBonus,iSkill);
+        +number({name:theID,class:'boxed',readonly:'',value:0,trigger:{calculation:['calcParentBonus'],affects:[theTotalID]}}).row-skill-parentbonus
+        - theID = getFieldID(iPage,iZone,iTemplate,idStatBonus,iSkill);
+        +number({name:theID,class:'boxed',readonly:'',value:0,trigger:{affects:[theTotalID]}}).row-skill-statbonus
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idStat,iSkill);
+        - theValue = '';
+        if (theSkill.stats.length>0)
+          - theValue = capitalize(theSkill.stats[0]);
+        +text({name:theID,class:'',value:theValue,readonly:'',trigger:{calculation:['calcSkillStat']}}).row-skill-stat
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idAffinity,iSkill);
+        - theAffects = getFieldID(iPage,iZone,iTemplate,idMaxRank,iSkill);
+        +text({name:theID,class:'row-skill-affinity',value:idAffinity0,readonly:'',trigger:{affects:theAffects}})
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idMaxRank,iSkill);
+        - theFormula = theSkill.formulas[idMaxRank].kformula;
+        - theCalc = [];
+        - theSection = theSkill[idCalcs]
+        if (theSection.hasOwnProperty(idMaxRank))
+                - theSection = theSection[idMaxRank];
+                - theSection = theSection[idCalc]
+                - theCalc = [theSection];
+        +number({name:theID,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula,calculation:theCalc}}).row-skill-maxrank
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idRankTitle,iSkill);
+        - theValue = capitalize(idNovice);
+        if (theSkill.rarity!==idCommon)
+          - theValue = capitalize(idUnskilled);
+        +text({name:theID,class:'',value:theValue,readonly:'',trigger:{calculation:['calcRankTitle']}}).row-skill-ranktitle
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idNextTitle,iSkill);
+        - theValue = 10;
+        if (theSkill.rarity!==idCommon)
+          - theValue = 1
+        +number({name:theID,class:'boxed',value:theValue,readonly:''}).row-skill-nexttitle
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idHelpButton,iSkill);
+        +button({name:theID,type:'action',class:'button-help',trigger:{triggeredFuncs:['funcHelpButton']}}).column-help
++module.                                
+    const calcParentBonus = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const theCallerID = buttonName;
+        const [thePage,theZone,theTemplate,theField] = parseFieldName(buttonName);
+        let theParents;
+        let theID;
+        let theSkillBonus;
+        let theStatBonus;
+
+        theSkillBonus = 0;
+        theStatBonus = 0;
+        theParents = schemaCore[idSkills];
+        theParents = theParents[theTemplate];
+        theParents = theParents[idParents];
+        theParents.forEach(theSkill => {
+            theID = getFieldID(idChaosSeed,idSkills,idSkills,idTotal,theSkill);
+            const theValue = attributes[theID];
+            if (theValue>=theSkillBonus) {
+                theSkillBonus = theValue;
+                theID = getFieldID(idChaosSeed,idSkills,idSkills,idStatBonus,theSkill);
+                theStatBonus = attributes[theID];
+            }
+        });
+
+        return theSkillBonus-theStatBonus;
+    };
+    k.registerFuncs({calcParentBonus});
+
+    const calcSkillStat = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const theCallerID = buttonName;
+        const [thePage,theZone,theTemplate,theField] = parseFieldName(buttonName);
+        let theSkillStat;
+        let theID;
+        let theStatValue;
+
+        theSkillStat = idNA;
+        theStatValue = 0;
+        schemaCore.skills[theTemplate].stats.forEach(stat => {
+            theID = getFieldID(idChaosSeed,idStats,idStats,idTotal,stat);
+            const theBonus = attributes[theID];
+            if (theBonus>=theStatValue) {
+                theStatValue = theBonus;
+                theSkillStat = k.capitalize(stat);
+            }
+        });
+
+        theID = getFieldID(idChaosSeed,idSkills,idSkills,idStatBonus,theTemplate);
+        attributes[theID] = theStatValue;
+
+        return theSkillStat;
+    };
+    k.registerFuncs({calcSkillStat});
+
+    const calcRankTitle = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const theCallerID = buttonName;
+        const [thePage,theZone,theTemplate,theField] = parseFieldName(buttonName);
+        let theID;
+        
+        theID = getFieldID(thePage,theZone,idSkills,idRank,theTemplate)
+        const theRank = attributes[theID];
+        const theRarity = schemaCore.skills[theTemplate].rarity;
+        let theRankTitle = '';
+        let theNextTitle = 0;
+        if (theRank===0) {
+            if (theRarity===idCommon) {
+                theRankTitle = idNovice
+                theNextTitle = 10;
+            } 
+            else {
+                theRankTitle = idUnskilled
+                theNextTitle = 1;
+            }
+        } else if (theRank<=9) {
+            theRankTitle = idNovice
+            theNextTitle = 10;
+        } else if (theRank<=24) {
+            theRankTitle = idInitiate
+            theNextTitle = 25;
+        } else if (theRank<=44) {
+            theRankTitle = idApprentice
+            theNextTitle = 45;
+        } else if (theRank<=69) {
+            theRankTitle = idJourneyman
+            theNextTitle = 70;
+        } else if (theRank<=99) {
+            theRankTitle = idAdept
+            theNextTitle = 100;
+        } else if (theRank<=149) {
+            theRankTitle = idMaster
+            theNextTitle = 150;
+        } 
+        else {
+            theRankTitle = idGrandMaster
+            theNextTitle = 999;
+        }
+
+        theID = getFieldID(thePage,theZone,idSkills,idNextTitle,theTemplate)
+        attributes[theID] = theNextTitle;
+
+        theRankTitle = k.capitalize(theRankTitle);
+        return theRankTitle;
+    }
+    k.registerFuncs({calcRankTitle});
++scss('sheet').

@@ -1,0 +1,45 @@
+mixin collapseHelp(iPage,iZone,iTemplate,iStat,iSection)
+    - let theID = '';
+
+    - const theHelpDesc = iSection.helpdesc;
+    - const theSummary = getSummaryStr(iSection);
+
+    .collapse-container
+        - theID = getFieldID(iPage,iZone,iTemplate,idCollapse,iStat);
+        +collapse(theID)
+        .expanded
+        .collapsed
+            .div-help
+                - theID = getFieldID(iPage,iZone,iTemplate,idHelpDesc,iStat);
+                +adaptiveTextarea({name:theID,class:'underlined',readonly:'','data-i18n':theHelpDesc,spellcheck:'false'}).row-stat-helpdesc
+                - theID = getFieldID(iPage,iZone,iTemplate,idInfoButton,iStat);
+                +button({name:theID,type:'action',class:'button-info',trigger:{triggeredFuncs:['funcInfoButton']}}).column-info
+                if (theSummary!=='')
+                    - theID = getFieldID(iPage,iZone,iTemplate,idSummary,iStat);
+                    +adaptiveTextarea({name:theID,class:'',readonly:'','data-i18n':theSummary,spellcheck:'false'}).row-stat-calc
++module.
++scss('sheet').
+    .div-help {
+        display: grid;
+        grid-template-columns: auto 20px;
+        grid-template-areas: 
+            'desc info'
+            'calc info'
+        ;
+        border-width: 1px;
+        border-style: solid;
+        border-color: black;
+        background-color: lightgrey;
+        
+        .row-stat-helpdesc {
+            grid-area: desc;
+            width: 100%;
+        }
+        .column-info {
+            grid-area: info;
+        }
+        .row-stat-calc {
+            grid-area: calc;
+            width: 100%;
+        }
+    }

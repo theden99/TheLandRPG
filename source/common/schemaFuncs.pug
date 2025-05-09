@@ -1,0 +1,141 @@
++module.
+    const pp_weight = 0.4;
+    const gp_weight = 0.3;
+    const sp_weight = 0.2;
+    const cp_weight = 0.1;
+
+    const getFieldID = (iPage,iZone,iTable,iField,iRowID) => {  // <<<------  duplicate in 
+        let theFieldID = iPage;
+        if (iZone!=='') { theFieldID += '-'+iZone};
+        if (iTable!=='') { 
+            if (tableIsTemplate.indexOf(iTable)!==(-1)) {
+                theFieldID += '-'+iRowID+'-'+iField
+            } else {
+                theFieldID += '-'+iTable;
+                if (iRowID!=='') {
+                    theFieldID = 'repeating_'+theFieldID+'_'+iRowID+'_'  //specific field
+                } else {
+                    theFieldID = 'repeating_'+theFieldID+'_$X_'  //used in Affects and KFormula => formula = 'SUM of '+iTable+'.iField' => '(@{'+theFieldID+'})'
+                }
+                theFieldID += iField;
+            }
+        } else {
+            if (iField!=='') { 
+                theFieldID += '-'+iField
+            };
+        };
+
+        //special fields
+        if (iPage===idHeader) {
+            if (iZone===idCharacter) {
+                if (iField===idName) {
+                theFieldID = 'character_name'
+                }
+                if (iField===idToken) {
+                    theFieldID = 'character_token'
+                }
+                if (iField===idAvatar) {
+                    theFieldID = 'character_avatar'
+                }
+            }
+        }
+
+        return theFieldID;
+    };
+    k.registerFuncs({getFieldID});
+
+    const calcCoinWeight = (pp,gp,sp,cp) => {
+        let coinTotal = 0;
+        coinTotal = coinTotal+
+            (pp*pp_weight) +
+            (gp*gp_weight) +
+            (sp*sp_weight) +
+            (cp*cp_weight)
+        ;
+
+        return coinTotal;
+    };
+    k.registerFuncs({calcCoinWeight});
+
+    const calcSectionWeight = (attributes,sections,sectionCalc) => {
+        let totItemWeight = 0;
+        if (sections[sectionCalc].length > 0) {
+            sections[sectionCalc].forEach(id => {
+                totItemWeight = totItemWeight + 
+                    (attributes[sectionCalc+'_'+id+'_weight'] *
+                        attributes[sectionCalc+'_'+id+'_qty']);
+            });
+        };
+
+        return totItemWeight;
+    };
+    k.registerFuncs({calcSectionWeight});
+
+    const getSlotTypeSection = (slottype) => {
+        let rowSlotTypeSection = 'repeating_inventory-';
+        if (slottype==='slottypeArmor') {
+            rowSlotTypeSection = rowSlotTypeSection+'armor-items'
+        } else if (slottype==='slottypeWeapon') {
+            rowSlotTypeSection = rowSlotTypeSection+'weapon-items'
+        } else if (slottype==='slottypeAccessory') {
+            rowSlotTypeSection = rowSlotTypeSection+'accessory-items'
+        } else if (slottype==='slottypeAmmo') {
+            rowSlotTypeSection = rowSlotTypeSection+'ammo-items'
+        } else if (slottype==='slottypeBeltPouch') {
+            rowSlotTypeSection = rowSlotTypeSection+'beltpouch-items'
+        } else if (slottype==='slottypeStorage') {
+            rowSlotTypeSection = rowSlotTypeSection+'storage-items'
+        } 
+        else {
+            rowSlotTypeSection = rowSlotTypeSection+'discardpile-items';
+        }
+
+        return rowSlotTypeSection;
+    };
+    k.registerFuncs({getSlotTypeSection});
+
+    const doSectionRemoveAll = (attributes,sections,rowSection) => {
+        if (sections[rowSection].length > 0) {
+            sections[rowSection].forEach(id => {
+                k.removeRepeatingRow(rowSection+'_'+id,attributes,sections);
+            });
+        };
+    }
+    k.registerFuncs({doSectionRemoveAll});
+
+    const doSectionCopy = (attributes,sections,fromSectionID,toSectionID) => {
+        let newRow = {};
+        newRow[toSectionID+'_itemname'] = attributes[fromSectionID+'_itemname'];
+        newRow[toSectionID+'_slottype'] = attributes[fromSectionID+'_slottype'];
+        newRow[toSectionID+'_slottypeitem'] = attributes[fromSectionID+'_slottypeitem'];
+        newRow[toSectionID+'_slot'] = attributes[fromSectionID+'_slot'];
+        newRow[toSectionID+'_qty'] = attributes[fromSectionID+'_qty'];
+        newRow[toSectionID+'_category'] = attributes[fromSectionID+'_category'];
+        newRow[toSectionID+'_weight'] = attributes[fromSectionID+'_weight'];
+        newRow[toSectionID+'_cost'] = attributes[fromSectionID+'_cost'];
+        newRow[toSectionID+'_size'] = attributes[fromSectionID+'_size'];
+        newRow[toSectionID+'_armorvalue'] = attributes[fromSectionID+'_armorvalue'];
+        newRow[toSectionID+'_armortype'] = attributes[fromSectionID+'_armortype'];
+        newRow[toSectionID+'_movetype'] = attributes[fromSectionID+'_movetype'];
+        newRow[toSectionID+'_attackvs'] = attributes[fromSectionID+'_attackvs'];
+        newRow[toSectionID+'_accmod'] = attributes[fromSectionID+'_accmod'];
+        newRow[toSectionID+'_dammod'] = attributes[fromSectionID+'_dammod'];
+        newRow[toSectionID+'_basedam'] = attributes[fromSectionID+'_basedam'];
+        newRow[toSectionID+'_attacktype'] = attributes[fromSectionID+'_attacktype'];
+        newRow[toSectionID+'_range'] = attributes[fromSectionID+'_range'];
+        newRow[toSectionID+'_critabove'] = attributes[fromSectionID+'_critabove'];
+        newRow[toSectionID+'_critmult'] = attributes[fromSectionID+'_critmult'];
+        newRow[toSectionID+'_ammotype'] = attributes[fromSectionID+'_ammotype'];
+        newRow[toSectionID+'_removeqty'] = attributes[fromSectionID+'_removeqty'];
+        newRow[toSectionID+'_recoverperc'] = attributes[fromSectionID+'_recoverperc'];
+        newRow[toSectionID+'_notes'] = attributes[fromSectionID+'_notes'];
+        newRow[toSectionID+'_effects'] = attributes[fromSectionID+'_effects'];
+
+        k.setAttrs(newRow,true);
+    };
+    k.registerFuncs({doSectionCopy});
+
+    const doSectionDelete = (attributes,sections,rowSectionID) => {
+        k.removeRepeatingRow(rowSectionID,attributes,sections);
+    }
+    k.registerFuncs({doSectionDelete});

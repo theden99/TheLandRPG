@@ -1,0 +1,227 @@
+.thelandrpg-header.div-inline
+  +img({name:'thelandrpg-header-image',src:'https://www.thelandrpg.com/wp-content/uploads/2020/07/thelandlogo.png'}).logo-image
+  .header-details.paper-background
+    .div-character-name.div-inline
+      +span({'data-i18n':'Name:'}).character-name-label
+      +text({name:'character_name',class:'underlined'}).character-name-input
+    .div-character-gender.div-inline
+      +span({'data-i18n':'Gender:'}).character-gender-label
+      +text({name:'header-character-gender',class:'underlined'}).character-gender-input
+    .div-character-alignment.div-inline
+      +span({'data-i18n':'Alignment:'}).character-alignment-label
+      +text({name:'header-character-alignment',class:'underlined'}).character-alignment-input
+    .div-character-age.div-inline
+      +span({'data-i18n':'Age:'}).character-age-label
+      +text({name:'header-character-age',class:'underlined'}).character-age-input
+    .div
+    .div-character-height.div-inline
+      +span({'data-i18n':'Height:'}).character-height-label
+      +text({name:'header-character-height',class:'underlined'}).character-height-input
+    .div-character-weight.div-inline
+      +span({'data-i18n':'Weight:'}).character-weight-label
+      +text({name:'header-character-weight',class:'underlined'}).character-weight-input
+    .div-character-haircolor.div-inline
+      +span({'data-i18n':'Hair Color:'}).character-haircolor-label
+      +text({name:'header-character-haircolor',class:'underlined'}).character-haircolor-input
+    .div-character-eyecolor.div-inline
+      +span({'data-i18n':'Eye Color:'}).character-eyecolor-label
+      +text({name:'header-character-eyecolor',class:'underlined'}).character-eyecolor-input
+    .div
+    .div-character-race.div-inline
+      +span({'data-i18n':'Race:'}).character-race-label
+      +text({name:'header-character-race',class:'underlined'}).character-race-input
+    .div-character-classprofession.div-inline
+      +span({'data-i18n':'Class/Profession:'}).character-classprofession-label
+      +text({name:'header-character-classprofession',class:'underlined'}).character-classprofession-input
+    .div-character-exp.div-inline
+      +span({'data-i18n':'Exp:'}).character-exp-label
+      +number({name:'header-character-exp',class:'underlined'}).character-exp-input
+    .div-character-level.div-inline
+      +span({'data-i18n':'Level:'}).character-level-label
+      +number({name:'header-character-level',class:'underlined'}).character-level-input
+    .div-character-deaths.div-inline
+      +span({'data-i18n':'Deaths:'}).character-deaths-label
+      +number({name:'header-character-deaths',class:'underlined'}).character-deaths-input
+  .div-character-image
+    +img({name:'character_avatar'}).character-image
+    .div-character-id.div-inline
+      +span({'data-i18n':' ID:'}).character-id-label
+      +text({name:'header-character-id',trigger:{triggeredFuncs:['doCharacterID']}}).underlined
+  .div-character-image
+    +img({name:'character_token'}).character-image
++module.
+  const doCharacterID = ({trigger,attributes,sections,casc}) => {
+    //attributes['character-id'] = k.parseMacro('@{character-deaths}',attributes,sections);
+  };
+  k.registerFuncs({doCharacterID});
++scss('sheet').
+    .thelandrpg-header{
+        .logo-image {
+          width: 200px;
+          height: 100px;
+        }
+        .div-character-image {
+          width: 120px;
+          text-align: right;
+          .character-image {
+            width: 100px;
+            height: 100px;
+          }
+        }
+        .header-details {
+          width: 700px;
+          .div-character-name {
+            width: 250px;
+            .character-name-label{
+                margin-right: 3px;
+                margin-top: 5px;
+            }
+            .character-name-input{
+                margin-right: 5px;
+                width: 200px;
+            }
+          };
+          .div-character-gender {
+            width: 150px;
+            .character-gender-label{
+                margin-right: 3px;
+                margin-top: 5px;
+            }
+            .character-gender-input{
+                margin-right: 5px;
+                width: 80px;
+            }
+          };
+          .div-character-alignment {
+            width: 150px;
+            .character-alignment-label{
+                margin-right: 3px;
+                margin-top: 5px;
+            }
+            .character-alignment-input{
+                margin-right: 5px;
+                width: 80px;
+            }
+          };
+          .div-character-age {
+            width: 100px;
+            .character-age-label{
+                margin-right: 3px;
+                margin-top: 5px;
+            }
+            .character-age-input{
+                margin-right: 5px;
+                width: 50px;
+            }
+          };
+          .div-character-height {
+            width: 150px;
+            .character-height-label{
+                margin-right: 3px;
+                margin-top: 5px;
+            }
+            .character-height-input{
+                margin-right: 5px;
+                width: 100px;
+            }
+          };
+          .div-character-weight {
+            width: 150px;
+            .character-weight-label{
+                margin-right: 3px;
+                margin-top: 5px;
+            }
+            .character-weight-input{
+                margin-right: 5px;
+                width: 100px;
+            }
+          };
+          .div-character-haircolor {
+            width: 150px;
+            .character-haircolor-label{
+                margin-right: 3px;
+                margin-top: 5px;
+                width: 70px;
+            }
+            .character-haircolor-input{
+                margin-right: 5px;
+                width: 80px;
+            }
+          };
+          .div-character-eyecolor {
+            width: 150px;
+            .character-eyecolor-label{
+                margin-right: 3px;
+                margin-top: 5px;
+                width: 70px;
+            }
+            .character-eyecolor-input{
+                margin-right: 5px;
+                width: 80px;
+            }
+          };
+          .div-character-race {
+            width: 120px;
+            .character-race-label{
+                margin-right: 3px;
+                margin-top: 5px;
+            }
+            .character-race-input{
+                margin-right: 5px;
+                width: 80px;
+            }
+          };
+          .div-character-classprofession {
+            width: 210px;
+            .character-classprofession-label{
+                margin-right: 3px;
+                margin-top: 5px;
+            }
+            .character-classprofession-input{
+                margin-right: 5px;
+                width: 100px;
+            }
+          };
+          .div-character-exp {
+            width: 120px;
+            .character-exp-label{
+                margin-right: 3px;
+                margin-top: 5px;
+            }
+            .character-exp-input{
+                margin-right: 5px;
+                width: 70px;
+            }
+          };
+          .div-character-level {
+            width: 80px;
+            .character-level-label{
+                margin-right: 3px;
+                margin-top: 5px;
+            }
+            .character-level-input{
+                margin-right: 5px;
+                width: 40px;
+            }
+          };
+          .div-character-deaths {
+            width: 100px;
+            .character-deaths-label{
+                margin-right: 3px;
+                margin-top: 5px;
+            }
+            .character-deaths-input{
+                margin-right: 5px;
+                width: 40px;
+            }
+          };
+          .div-character-image {
+            .div-character-id {
+              .character-id-label{
+                  margin-right: 3px;
+                  margin-top: 5px;
+              }
+            }
+          }
+        }
+    }

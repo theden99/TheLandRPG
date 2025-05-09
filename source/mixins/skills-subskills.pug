@@ -1,0 +1,22 @@
+mixin collapseSubskills(iPage,iZone,iTemplate,iSkill,iSubSkills)
+    - let theID = '';
+
+    .collapse-container
+        - theID = getFieldID(iPage,iZone,iTemplate,idCollapse,iSkill);
+        +collapse(theID)
+        .expanded
+        .collapsed
+            .div-subskills
+                each theSkill in iSubSkills
+                    +rowSkill(idChaosSeed,idSkills,idSkills,theSkill)
+                    - theEntry = schemaCore[idSkills];
+                    - theEntry = theEntry[theSkill]
+                    +collapseHelp(idChaosSeed,idSkills,idSkills,theSkill,theEntry)
+            
++module.
++scss('sheet').
+    .div-subskills {
+        display: flex;
+        flex-direction: column;
+        flex-basis: fit-content;
+    }

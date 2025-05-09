@@ -1,0 +1,433 @@
+- let theFormula = '';
++tab({name:"chaosseed", container:"section", button:{class:"thelandrpg-tabs-button boxed",'data-i18n':"Chaos Seed"}})
+    .thelandrpg-tabs-section-chaosseed
+        +span({'data-i18n':'CHAOS SEED'}).chaosseed-title.paper-background
+        .chaosseed-stats
+            .row-stat-section.paper-background
+                +span({'data-i18n':'Stats'}).row-stat-title
+                .div-inline
+                    +span({'data-i18n':'Stat'}).row-stat-roller.row-stat-header
+                    +span({'data-i18n':'Base'}).row-stat-base.row-stat-header
+                    +span({'data-i18n':'Equip Bonus'}).row-stat-equipbonus.row-stat-header
+                    +span({'data-i18n':'Buff Bonus'}).row-stat-buffbonus.row-stat-header
+                    +span({'data-i18n':'Misc Bonus'}).row-stat-miscbonus.row-stat-header
+                    +span({'data-i18n':'Total'}).row-stat-total.row-stat-header
+                    +span({'data-i18n':'Max'}).row-stat-max.row-stat-header
+                    +span({'data-i18n':''}).column-help.row-stat-header
+                each entry,stat in schemaCore.stats
+                    +rowStat(idChaosSeed,idStats,idStats,stat)
+                    +collapseHelp(idChaosSeed,idStats,idStats,stat,entry)
+                .div-inline
+                    +span({'data-i18n':'Total'}).row-stat-totalstats
+                    - theFormula = '(0 '; //placeholder
+                    each entry,stat in schemaCore.stats
+                        - theFormula += '+ @{'+getFieldID(idChaosSeed,idStats,idStats,idBase,stat)+'} ';
+                    - theFormula += ')';
+                    +number({name:getFieldID(idChaosSeed,idStats,idStats,idBase,idTotal),class:'boxed',readonly:'',value:0,trigger:{formula:theFormula}}).row-stat-base
+        .chaosseed-movement
+            .row-movement-section.paper-background
+                +span({'data-i18n':'Movement'}).row-movement-title
+                .div-inline
+                    +span({'data-i18n':'Movement'}).row-movement-noroller.row-movement-header
+                    +span({'data-i18n':'Base'}).row-movement-base.row-movement-header
+                    +span({'data-i18n':'Equip Bonus'}).row-movement-equipbonus.row-movement-header
+                    +span({'data-i18n':'Buff Bonus'}).row-movement-buffbonus.row-movement-header
+                    +span({'data-i18n':'Misc Bonus'}).row-movement-miscbonus.row-movement-header
+                    +span({'data-i18n':'Total'}).row-movement-total.row-movement-header
+                    +span({'data-i18n':''}).column-help.row-movement-header
+                each entry,stat in schemaCore.movement
+                    +rowCombatStat(idChaosSeed,idMovement,idMovement,stat,entry,'row-movement',idNone)
+                    +collapseHelp(idChaosSeed,idMovement,idMovement,stat,entry)
+                .div-inline
+                    +span({'data-i18n':'Move'}).row-move-move-text
+                    - theFormula = 'floor(@{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovementSpeed) + '} + @{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovePenalty) + '})';
+                    +number({name:idMoveTotal,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula}}).row-move-total
+                    +span({'data-i18n':'Feet'}).row-move-feet-text
+                    - theFormula = 'floor((@{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovementSpeed) + '} + @{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovePenalty) + '})/ 5)';
+                    +number({name:idMoveSquares,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula}}).row-move-squares
+                    +span({'data-i18n':'Squares'}).row-move-squares-text
+        .chaosseed-combat
+            .row-combat-section.paper-background
+                +span({'data-i18n':'Combat Stats'}).row-combat-title
+                .div-inline
+                    +span({'data-i18n':'Combat Stat'}).row-combat-noroller.row-combat-header
+                    +span({'data-i18n':'Base'}).row-combat-base.row-combat-header
+                    +span({'data-i18n':'Equip Bonus'}).row-combat-equipbonus.row-combat-header
+                    +span({'data-i18n':'Buff Bonus'}).row-combat-buffbonus.row-combat-header
+                    +span({'data-i18n':'Misc Bonus'}).row-combat-miscbonus.row-combat-header
+                    +span({'data-i18n':'Total'}).row-combat-total.row-combat-header
+                    +span({'data-i18n':''}).column-help.row-combat-header
+                each entry,stat in schemaCore.combatstats
+                    +rowCombatStat(idChaosSeed,idCombatStats,idCombatStats,stat,entry,'row-combat',stat)
+                    +collapseHelp(idChaosSeed,idCombatStats,idCombatStats,stat,entry)
+        .chaosseed-resists
+            .row-resists-section.paper-background
+                +span({'data-i18n':'Normal Resists'}).row-resists-title
+                .div-inline
+                    +span({'data-i18n':'Resist'}).row-resists-noroller.row-resists-header
+                    +span({'data-i18n':'Base'}).row-resists-base.row-resists-header
+                    +span({'data-i18n':'Equip Bonus'}).row-resists-equipbonus.row-resists-header
+                    +span({'data-i18n':'Buff Bonus'}).row-resists-buffbonus.row-resists-header
+                    +span({'data-i18n':'Misc Bonus'}).row-resists-miscbonus.row-resists-header
+                    +span({'data-i18n':'Total'}).row-resists-total.row-resists-header
+                    +span({'data-i18n':''}).column-help.row-resists-header
+                each entry,stat in schemaCore.resists
+                    +rowCombatStat(idChaosSeed,idResists,idResists,stat,entry,'row-resists',idAll,false)
+                    +collapseHelp(idChaosSeed,idResists,idResists,stat,entry)
+        .chaosseed-spellresists
+            .row-resists-section.paper-background
+                +span({'data-i18n':'Spell Resists'}).row-resists-title
+                .div-inline
+                    +span({'data-i18n':'Spell Resist'}).row-resists-noroller.row-resists-header
+                    +span({'data-i18n':'Base'}).row-resists-base.row-resists-header
+                    +span({'data-i18n':'Equip Bonus'}).row-resists-equipbonus.row-resists-header
+                    +span({'data-i18n':'Buff Bonus'}).row-resists-buffbonus.row-resists-header
+                    +span({'data-i18n':'Misc Bonus'}).row-resists-miscbonus.row-resists-header
+                    +span({'data-i18n':'Total'}).row-resists-total.row-resists-header
+                    +span({'data-i18n':''}).column-help.row-resists-header
+                each entry,stat in schemaCore.spellresists
+                    +rowCombatStat(idChaosSeed,idResists,idResists,stat,entry,'row-resists',idAll,false)
+                    +collapseHelp(idChaosSeed,idResists,idResists,stat,entry)
+        .chaosseed-efficiencies
+            .row-efficiencies-section.paper-background
+                +span({'data-i18n':'Efficiencies'}).row-efficiencies-title
+                .div-inline
+                    +span({'data-i18n':'Efficiency'}).row-efficiencies-noroller.row-efficiencies-header
+                    +span({'data-i18n':'Base'}).row-efficiencies-base.row-efficiencies-header
+                    +span({'data-i18n':'Equip Bonus'}).row-efficiencies-equipbonus.row-efficiencies-header
+                    +span({'data-i18n':'Buff Bonus'}).row-efficiencies-buffbonus.row-efficiencies-header
+                    +span({'data-i18n':'Misc Bonus'}).row-efficiencies-miscbonus.row-efficiencies-header
+                    +span({'data-i18n':'Total'}).row-efficiencies-total.row-efficiencies-header
+                    +span({'data-i18n':''}).column-help.row-efficiencies-header
+                each entry,stat in schemaCore.efficiencies
+                    +rowCombatStat(idChaosSeed,idEfficiencies,idEfficiencies,stat,entry,'row-efficiencies',idNone,false)
+                    +collapseHelp(idChaosSeed,idEfficiencies,idEfficiencies,stat,entry)
++module.
+    const assembleRollField = (attrName,attributes) => {
+        let rollString = attributes['character_name'] + ' rolls a ' + `${attrName}` + ' check of [[ 1d100 + ' +  `@{${attrName}-total}` + 'd100 [statd100] - @{target|target1|stat-total} [t1-stat] - @{target|target2|stat-total} [t2-stat] ]] ';
+        return rollString;
+    };
+    k.registerFuncs({assembleRollField});
+
+    const assembleRollString = (rollObj,rollStart = '&{template:default}') => {
+        return Object.entries(rollObj)
+            .reduce((str,[field,value]) => {
+                return str + ` {{${field}=${value}}}`;
+            },rollStart);
+    };
+    k.registerFuncs({assembleRollString});
+
+    const actionRoll = async function({trigger,attributes,sections,casc}){
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const attrName = parseFieldName(buttonName); // !!!!! points to wrong function. now return page,zone,table,id !!!
+        const rollObj = {
+            roll: assembleRollField(attrName,attributes),  //rolltemplate string
+            name: attributes['character_name'],
+            roll_name: attrName,
+            target: '@{target|target1|character_name} = @{target|target2|character_name}'
+        };
+
+        const rollString = assembleRollString(rollObj);
+        const roll = await startRoll(rollString);
+        finishRoll(roll.rollId);
+    };
+    k.registerFuncs({actionRoll});
+
++scss('sheet').
+    .thelandrpg-tabs-section-chaosseed{
+        .repitem:hover > .collapse, .repitem:hover .roll-container,
+        .collapse-container:hover > .collapse,
+        .collapse-container:hover .roll-container {
+            opacity: 0;
+        }
+        .repitem > .collapse,
+        .collapse-container > .collapse {
+            opacity: 0;
+            position: absolute;
+            left: -10px;
+            top: 0px;
+            font-size: 0px;
+            pointer-events: none;
+        }
+
+        display: grid;
+        grid-gap: var(--tiny-gap);
+        font: {size: 12px;family: Arial;weight: normal;};
+        width: 1100px;
+
+        grid-template-columns: auto auto auto auto auto auto;
+        grid-template-areas:
+            'title title title'
+            'stats movement combat'
+            'stats movement combat'
+            'resists spellresists efficiencies'
+        ;
+
+        .chaosseed-title{
+            grid-area: title;
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .chaosseed-stats {
+            grid-area: stats;
+            width: 365px;
+
+            .row-stat-section {
+                display: grid;
+
+                .row-stat-title {
+                    font-size: 14px;
+                    text-align: center;
+                    font-weight: bold;
+                    width: 100%;
+                }
+                .row-stat-header {
+                    text-align: center;
+                    font-weight: bold;
+                    background-color: lightblue;
+                }
+                .row-stat-totalstats {
+                    width: 100px;
+                    text-align: center;                    
+                    font-weight: bold;
+                }
+                .row-stat-roller {
+                    width: 100px;
+                }
+                .row-stat-base {
+                    text-align: center;
+                    width: 40px;
+                }
+                .row-stat-equipbonus {
+                    text-align: center;
+                    width: 40px;
+                }
+                .row-stat-buffbonus {
+                    text-align: center;
+                    width: 40px;
+                }
+                .row-stat-miscbonus {
+                    text-align: center;
+                    width: 40px;
+                }
+                .row-stat-total {
+                    text-align: center;
+                    width: 40px;
+                }
+                .row-stat-max {
+                    text-align: center;
+                    width: 35px;
+                }
+            }
+        }
+        .chaosseed-combat {
+            grid-area: combat;
+            width: 365px;
+            
+            .row-combat-section {
+                display: grid;
+
+                .row-combat-title {
+                    font-size: 14px;
+                    text-align: center;
+                    font-weight: bold;
+                }
+                .row-combat-header {
+                    text-align: center;
+                    font-weight: bold;
+                    background-color: lightblue;
+                }
+                .row-combat-roller {
+                    width: 120px;
+                }
+                .row-combat-noroller {
+                    width: 110px;
+                }
+                .row-combat-base {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-combat-equipbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-combat-buffbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-combat-miscbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-combat-total {
+                    text-align: center;
+                    width: 45px;
+                }
+            }
+        }
+        .chaosseed-movement {
+            grid-area: movement;
+            width: 360px;
+            align-self: center;
+            justify-self: center;
+
+            .row-movement-section {
+                display: grid;
+
+                .row-movement-title {
+                    font-size: 14px;
+                    text-align: center;
+                    font-weight: bold;
+                }
+                .row-movement-header {
+                    text-align: center;
+                    font-weight: bold;
+                    background-color: lightblue;
+                }
+                .row-movement-noroller {
+                    width: 110px;
+                }
+                .row-movement-base {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-movement-equipbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-movement-buffbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-movement-miscbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-movement-total {
+                    text-align: center;
+                    width: 45px;
+                }
+
+                .row-move-move-text {
+                    text-align: right;
+                    width: 60px;
+                    padding: 5px;
+                    font-weight: bold;
+                }
+                .row-move-total {
+                    text-align: center;
+                    width: 40px;
+                    font-weight: bold;
+                }
+                .row-move-feet-text {
+                    text-align: left;
+                    width: 60px;
+                    padding: 5px;
+                    font-weight: bold;
+                }
+                .row-move-squares {
+                    text-align: center;
+                    width: 40px;
+                    font-weight: bold;
+                }
+                .row-move-squares-text {
+                    text-align: left;
+                    width: 60px;
+                    padding: 5px;
+                    font-weight: bold;
+                }
+            }
+        }
+        .chaosseed-spellresists,
+        .chaosseed-resists {
+            grid-area: resists;
+            width: 365px;
+
+            .row-resists-section {
+                display: grid;
+
+                .row-resists-title {
+                    font-size: 14px;
+                    text-align: center;
+                    font-weight: bold;
+                    width: 100%;
+                }
+                .row-resists-header {
+                    text-align: center;
+                    font-weight: bold;
+                    background-color: lightblue;
+                }
+                .row-resists-noroller {
+                    width: 115px;
+                }
+                .row-resists-base {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-resists-equipbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-resists-buffbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-resists-miscbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-resists-total {
+                    text-align: center;
+                    width: 45px;
+                }
+            }
+        }
+        .chaosseed-spellresists {
+            grid-area: spellresists;
+        }
+
+        .chaosseed-efficiencies {
+            grid-area: efficiencies;
+            width: 365px;
+
+            .row-efficiencies-section {
+                display: grid;
+
+                .row-efficiencies-title {
+                    font-size: 14px;
+                    text-align: center;
+                    font-weight: bold;
+                    width: 100%;
+                }
+                .row-efficiencies-header {
+                    text-align: center;
+                    font-weight: bold;
+                    background-color: lightblue;
+                }
+                .row-efficiencies-noroller {
+                    width: 115px;
+                }
+                .row-efficiencies-base {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-efficiencies-equipbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-efficiencies-buffbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-efficiencies-miscbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-efficiencies-total {
+                    text-align: center;
+                    width: 45px;
+                }
+            }
+        }
+    }

@@ -1,0 +1,52 @@
+mixin rowStat(iPage,iZone,iTemplate,iStat)
+    - const theTotalID = getFieldID(iPage,iZone,iTemplate,idTotal,iStat);
+    - const theStat = schemaCore.stats[iStat];
+    - const theDisplayName = theStat.displayname;
+    - let theFormula = '';
+    - let theID = '';
+    - let theAffects;
+    - let theDefault = theStat.default;
+
+    .div-inline
+        - theID = getFieldID(iPage,iZone,iTemplate,idRoller,iStat);
+        +roller({name:theID,class:'general-roller row-stat-roller','data-i18n':theDisplayName,trigger:{triggeredFuncs:['funcCore']}})
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idBase,iStat);
+        - theFormula += '@{'+theID+'} +';
+        +number({name:theID,class:'boxed',value:theDefault,trigger:{calculation:['calcCheckMax'],affects:[theTotalID]}}).row-stat-base
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idEquipBonus,iStat);
+        - theFormula += '@{'+theID+'} +';
+        +number({name:theID,class:'boxed',readonly:'',value:0,trigger:{affects:[theTotalID]}}).row-stat-equipbonus
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idBuffBonus,iStat);
+        - theFormula += '@{'+theID+'} +';
+        +number({name:theID,class:'boxed',readonly:'',value:0,trigger:{affects:[theTotalID]}}).row-stat-buffbonus
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idMiscBonus,iStat);
+        - theFormula += '@{'+theID+'}';
+        +number({name:theID,class:'boxed',value:0,trigger:{affects:[theTotalID]}}).row-stat-miscbonus
+
+        - theID = theTotalID;
+        - theAffect = [];
+        if (sheetAffects[theID])
+            - theAffects = sheetAffects[theID];
+        +number({name:theID,class:'boxed',readonly:'',value:theDefault,trigger:{formula:theFormula,affects:theAffects}}).row-stat-total
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idMaxStat,iStat);
+        - theFormula = theStat.formulas[idMaxStat].kformula;
+        +number({name:theID,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula}}).row-stat-max
+
+        - theID = getFieldID(iPage,iZone,iTemplate,idHelpButton,iStat);
+        +button({name:theID,type:'action',class:'button-help',trigger:{triggeredFuncs:['funcHelpButton']}}).column-help
++module.
+    const calcCheckMax = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const theCallerID = buttonName;
+        const [thePage,theZone,theTemplate,theField] = parseFieldName(buttonName);
+
+        return 342;
+    };
+    k.registerFuncs({calcCheckMax});
+    
++scss('sheet').

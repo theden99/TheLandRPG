@@ -1,0 +1,438 @@
++tab({name:"inventory", container:"article", button:{class:'thelandrpg-tabs-button boxed','data-i18n':"Inventory"}})
+    .inventory-main
+        +span({'data-i18n':'INVENTORY'}).head-title.paper-background
+        .div-tots
+            .div-tots-section.paper-background.div-inline
+                .div-numitems.div-inline
+                    +span({'data-i18n':'# Items:'}).numitems-label
+                    +number({name:'inventory-numitems',class:'boxed',value:0,readonly:'',trigger:{}}).numitems-input
+                .div
+                .div-totalweight.div-inline
+                    +span({'data-i18n':'Total Weight:'}).totweight-label
+                    +number({name:'inventory-totweight',class:'boxed',value:0,readonly:'',trigger:{calculation:'calcTotWeightInventory'}}).totweight-input
+                .div
+                .div-maxweight.div-inline
+                    +span({'data-i18n':'Max Weight:'}).maxweight-label
+                    +number({name:'inventory-maxweight',class:'boxed',value:0,readonly:'',trigger:{formula:'@{stat-total} * 10'}}).maxweight-input
+                .div
+                .div-coinweight.div-inline
+                    +span({'data-i18n':'Coin Weight:'}).coinweight-label
+                    +number({name:'inventory-coinweight',class:'boxed',value:0,readonly:'',trigger:{affects:['inventory-totweight'],formula:'((@{inventory-coin-pp}*0.4)+(@{inventory-coin-gp}*0.3)+(@{inventory-coin-sp}*0.2)+(@{inventory-coin-cp}*0.1))'}}).coinweight-input
+                .div-pp.div-inline
+                    +span({'data-i18n':'pp:'}).coin-label
+                    +number({name:'inventory-coin-pp',class:'coin-pp boxed',value:0,trigger:{affects:['inventory-coinweight']}})
+                .div
+                .div-gp.div-inline
+                    +span({'data-i18n':'gp:'}).coin-label
+                    +number({name:'inventory-coin-gp',class:'coin-gp boxed',value:0,trigger:{affects:['inventory-coinweight']}})
+                .div
+                .div-sp.div-inline
+                    +span({'data-i18n':'sp:'}).coin-label
+                    +number({name:'inventory-coin-sp',class:'coin-sp boxed',value:0,trigger:{affects:['inventory-coinweight']}})
+                .div
+                .div-cp.div-inline
+                    +span({'data-i18n':'cp:'}).coin-label
+                    +number({name:'inventory-coin-cp',class:'coin-cp boxed',value:0,trigger:{affects:['inventory-coinweight']}})
+        .div-stagingarea
+            .inventory-main-stagingarea.paper-background
+                .collapse-container
+                    +collapse('stagingarea-collapse')
+                    .div-slot-collapse.collapsed
+                        +span({'data-i18n':'STAGING AREA'}).staging-title
+                        include _inventory-stagingarea
+        .div-slottype
+            .inventory-main-slottype.paper-background
+                .collapse-container
+                    +collapse('rowid-collapse')
+                    .div-rowid-collapse.collapsed
+                        .div
+                            +text({name:'slot-rowid',value:'Selected Row',class:'slottype-rowid'})
+                .collapse-container
+                    +collapse('armor-collapse')
+                    .div-armor-collapse.collapsed
+                        .div
+                            +button({name:'slot-armor',type:'action','data-i18n':'Armor',class:'slottype-button',trigger:{triggeredFuncs:['doSlotTypeLoad']}})
+                .collapse-container
+                    +collapse('weapon-collapse')
+                    .div-weapon-collapse.collapsed
+                        .div
+                            +button({name:'slot-weapon',type:'action','data-i18n':'Weapon',class:'slottype-button',trigger:{triggeredFuncs:['doSlotTypeLoad']}})
+                .collapse-container
+                    +collapse('accessory-collapse')
+                    .div-accessory-collapse.collapsed
+                        .div
+                            +button({name:'slot-accessory',type:'action','data-i18n':'Accessory',class:'slottype-button',trigger:{triggeredFuncs:['doSlotTypeLoad']}})
+                .collapse-container
+                    +collapse('ammo-collapse')
+                    .div-ammo-collapse.collapsed
+                        .div
+                            +button({name:'slot-ammo',type:'action','data-i18n':'Ammo',class:'slottype-button',trigger:{triggeredFuncs:['doSlotTypeLoad']}})
+                .collapse-container
+                    +collapse('beltpouch-collapse')
+                    .div-beltpouch-collapse.collapsed
+                        .div
+                            +button({name:'slot-beltpouch',type:'action','data-i18n':'Belt/Pouch',class:'slottype-button',trigger:{triggeredFuncs:['doSlotTypeLoad']}})
+                .collapse-container
+                    +collapse('storage-collapse')
+                    .div-storage-collapse.collapsed
+                        .div
+                            +button({name:'slot-storage',type:'action','data-i18n':'Storage',class:'slottype-button',trigger:{triggeredFuncs:['doSlotTypeLoad']}})
+                .collapse-container
+                    +collapse('discardpile-collapse')
+                    .div-discardpile-collapse.collapsed
+                        .div
+                            +button({name:'slot-discardpile',type:'action','data-i18n':'Discard Pile',class:'slottype-button',trigger:{triggeredFuncs:['doSlotTypeLoad']}})
+        .div-slot
+            .inventory-main-slot.paper-background
+                .collapse-container
+                    +collapse('slots-collapse')
+                    .div-slot-collapse.collapsed
+                        +span({'data-i18n':'SLOTS'}).slot-title
+                        include _inventory-slots
+        .inventory-main-tabs.paper-background
+            +tabs({name:'inventory-main',defaultActiveTab:'inventory-equipped',persistent:false})
+                +tab({name:"inventory-equipped", container:"article", button:{class:'inventory-main-tabs-button boxed','data-i18n':"Equipped"}})
+                    +tabs({name:'inventory-equipped-tabs',defaultActiveTab:'inventory-armor',persistent:false})
+                        include _inventory-armor
+                        include _inventory-weapon
+                        include _inventory-accessory
+                        include _inventory-ammo
+                        include _inventory-beltpouch
+                +tab({name:"inventory-storage1", container:"article", button:{class:'inventory-main-tabs-button boxed','data-i18n':"Storage"}})
+                    +tabs({name:'inventory-storage-tabs',defaultActiveTab:'inventory-storage',persistent:false})
+                        include _inventory-storage
+                        include _inventory-discardpile
++module.
+    const calcTotWeightInventory = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        //-const [attrName,sheetName] = parseButtonName2(buttonName);
+
+        let totItemWeight = 0;
+        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeArmor'));
+        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeWeapon'));
+        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeAccessory'));
+        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeAmmo'));
+        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeBeltPouch'));
+        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeStorage'));
+        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeDiscardPile'));
+
+        let totWeight = 0;
+        totWeight = calcCoinWeight(
+            attributes['inventory-coin-pp'],
+            attributes['inventory-coin-gp'],
+            attributes['inventory-coin-sp'],
+            attributes['inventory-coin-cp']
+        ) + totItemWeight;
+        totWeight = Number.parseFloat(totWeight).toFixed(2);
+
+        let totItems = 0;
+        totItems = totItems + sections[getSlotTypeSection('slottypeArmor')].length;
+        totItems = totItems + sections[getSlotTypeSection('slottypeWeapon')].length;
+        totItems = totItems + sections[getSlotTypeSection('slottypeAccessory')].length;
+        totItems = totItems + sections[getSlotTypeSection('slottypeAmmo')].length;
+        totItems = totItems + sections[getSlotTypeSection('slottypeBeltPouch')].length;
+        totItems = totItems + sections[getSlotTypeSection('slottypeStorage')].length;
+        totItems = totItems + sections[getSlotTypeSection('slottypeDiscardPile')].length;
+
+        attributes['inventory-numitems'] = totItems;
+
+        return totWeight;
+    };
+    k.registerFuncs({calcTotWeightInventory});
+
+    const checkStagingAreaCollapse = (attributes,sections) => {
+        if (sections['repeating_inventory-stagingarea-items']) {
+            if (sections['repeating_inventory-stagingarea-items'].length > 0) {
+                attributes['stagingarea-collapse'] = 1;
+            } else {
+                attributes['stagingarea-collapse'] = 0;
+            }
+        }
+    }
+    k.registerFuncs({checkStagingAreaCollapse});
+
+    const checkSlotsCollapse = (attributes,sections) => {
+        if (sections['repeating_inventory-slots-items']) {
+            if (sections['repeating_inventory-slots-items'].length > 0) {
+                attributes['slots-collapse'] = 1;
+            } else {
+                attributes['slots-collapse'] = 0;
+            }
+        }
+    }
+    k.registerFuncs({checkSlotsCollapse});
+
+    const doSlotTypeCollapse = (attributes) => {
+        attributes['armor-collapse'] = 0;
+        attributes['weapon-collapse'] = 0;
+        attributes['accessory-collapse'] = 0;
+        attributes['ammo-collapse'] = 0;
+        attributes['beltpouch-collapse'] = 0;
+        attributes['storage-collapse'] = 0;
+        attributes['discardpile-collapse'] = 0;
+    }
+    k.registerFuncs({doSlotTypeCollapse});
+
+    const doSlotAdd = (attributes,sections,slotsSection,slottypeSection,slottype,slot) => {
+        let slotUsed = 0;
+        let slottypeSectionID;
+        
+        const newSectionID = k.generateRowID(slotsSection,sections);
+
+        if (slottypeSection !== '') {
+            if (sections[slottypeSection].length > 0) {
+                sections[slottypeSection].forEach(id => {
+                    slottypeSectionID = slottypeSection+'_'+id;
+                    if (attributes[slottypeSectionID+'_slot']===slot) {
+                        slotUsed = 1;
+                        doSectionCopy(attributes,sections,slottypeSectionID,newSectionID);
+                    }
+                });
+            }
+        }
+
+        if (slotUsed===0) {
+            let newRow = {};
+            newRow[newSectionID+'_itemname'] = 'Empty';
+            newRow[newSectionID+'_slottype'] = slottype;
+            newRow[newSectionID+'_slot'] = slot;
+
+            k.setAttrs(newRow,true);
+        }
+    };
+    k.registerFuncs({doSlotAdd});
+
+    const doSlotTypeAdd = (attributes,sections,slotsSection,slottype) => {
+        let slottypeSection = getSlotTypeSection(slottype);
+        if (slottype==='slottypeArmor') {
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotArmorHead');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotArmorBody');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotArmorArms');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotArmorHands');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotArmorLegs');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotArmorFeet');
+        } else if (slottype==='slottypeWeapon') {
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotWeaponSet1Primary');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotWeaponSet1Secondary');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotWeaponSet1Ranged');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotWeaponSet1Thrown');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotWeaponSet2Primary');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotWeaponSet2Secondary');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotWeaponSet2Ranged');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotWeaponSet2Thrown');
+        } else if (slottype==='slottypeAccessory') {
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryNeck');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryEarLeft');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryEarRight');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryWristLeft');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryWristRight');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryWaist');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryAnkleLeft');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryAnkleRight');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryRing1');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryRing2');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryRing3');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryRing4');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryRing5');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryRing6');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryRing7');
+            doSlotAdd(attributes,sections,slotsSection,slottypeSection,slottype,'slotAccessoryRing8');
+        } else if (slottype==='slottypeAmmo') {
+            doSlotAdd(attributes,sections,slotsSection,'',slottype,'slotAmmoQuiver');
+            doSlotAdd(attributes,sections,slotsSection,'',slottype,'slotAmmoBandelero');
+        } else if (slottype==='slottypeBeltPouch') {
+            doSlotAdd(attributes,sections,slotsSection,'',slottype,'slotBeltPouchBelt');
+            doSlotAdd(attributes,sections,slotsSection,'',slottype,'slotBeltPouchPouch1');
+            doSlotAdd(attributes,sections,slotsSection,'',slottype,'slotBeltPouchPouch2');
+        } else if (slottype==='slottypeStorage') {
+            doSlotAdd(attributes,sections,slotsSection,'',slottype,'slotStorageBackpack');
+            doSlotAdd(attributes,sections,slotsSection,'',slottype,'slotStorageSack');
+            doSlotAdd(attributes,sections,slotsSection,'',slottype,'slotStorageWagonMount');
+            doSlotAdd(attributes,sections,slotsSection,'',slottype,'slotStorageHouseBank');
+        } 
+        else {
+            doSlotAdd(attributes,sections,slotsSection,'',slottype,'slotDiscardPile');
+        }
+    };
+    k.registerFuncs({doSlotTypeAdd})
+
+    const doSlotTypeLoad = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        attributes['slots-collapse'] = 1;
+
+        const slotsSection = 'repeating_inventory-slots-items';
+        doSectionRemoveAll(attributes,sections,slotsSection);
+        
+        if (buttonName==='slot-armor') {
+            doSlotTypeAdd(attributes,sections,slotsSection,'slottypeArmor');
+        } else if (buttonName==='slot-weapon') {
+            doSlotTypeAdd(attributes,sections,slotsSection,'slottypeWeapon');
+        } else if (buttonName==='slot-accessory') {
+            doSlotTypeAdd(attributes,sections,slotsSection,'slottypeAccessory');
+        } else if (buttonName==='slot-ammo') {
+            doSlotTypeAdd(attributes,sections,slotsSection,'slottypeAmmo');
+        } else if (buttonName==='slot-beltpouch') {
+            doSlotTypeAdd(attributes,sections,slotsSection,'slottypeBeltPouch');
+        } else if (buttonName==='slot-storage') {
+            doSlotTypeAdd(attributes,sections,slotsSection,'slottypeStorage');
+        }
+        else {
+            doSlotTypeAdd(attributes,sections,slotsSection,'slottypeDiscardPile');
+        }
+    };
+    k.registerFuncs({doSlotTypeLoad});
+
++scss('sheet').
+    .inventory-main{
+        .repitem:hover > .collapse, .repitem:hover .roll-container,
+        .collapse-container:hover > .collapse,
+        .collapse-container:hover .roll-container {
+            opacity: 1;
+        }
+        .repitem > .collapse,
+        .collapse-container > .collapse {
+            opacity: 1;
+            position: absolute;
+            left: -10px;
+            top: 0px;
+        }
+        display: grid;
+        grid-gap: var(--tiny-gap);
+        font: {size: 12px;family: Arial;weight: normal;};
+
+        grid-template-columns: auto auto auto;
+        grid-template-areas:
+            'title title title'
+            'tots tots tots'
+            'staging slottype slot'
+            'tabs tabs tabs'
+        ;
+
+        .inventory-main-tabs{
+            grid-area: tabs;
+            .inventory-main-tabs-button {
+                @include k.base-button;
+                background-color: lightblue;
+                font-size: 10px;
+            }
+        }            
+        .head-title{
+            grid-area: title;
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .inventory-main-stagingarea {
+            grid-area: staging;
+            text-align: center;
+            width: 476px;
+            .staging-title {
+                width: 100%;
+                font-size: 18px;
+            }
+        }
+        .div-slottype {
+            grid-area: slottype;
+            width: 100px;
+            .slottype-button {
+                @include k.text-button;
+                width: 70px;
+                margin-right: 5px;
+                margin-top: 5px;
+            }
+            .slottype-rowid {
+                width: 90px;
+                margin-right: 5px;
+                margin-top: 5px;
+            }
+        }
+        .div-slot {
+            grid-area: slot;
+            text-align: center;
+            width: 476px;
+            .slot-title {
+                width: 100%;
+                font-size: 18px;
+            }
+        }
+        .div-tots{
+            grid-area: tots;
+            text-align: center;
+            width: 1100px;
+            .div-numitems{
+                text-align: center;
+                .numitems-label{
+                    margin-right: 3px;
+                    margin-top: 5px;
+                    width: 50px;
+                    text-align: right;
+                }
+                .numitems-input{
+                    margin-right: 5px;
+                }
+            }
+            .div-totalweight {
+                text-align: center;
+                .totweight-label{
+                    margin-right: 3px;
+                    margin-top: 5px;
+                    width: 70px;
+                    text-align: right;
+                }
+                .totweight-input{
+                    margin-right: 5px;
+                }
+            }
+            .div-maxweight {
+                text-align: center;
+                .maxweight-label{
+                    margin-right: 3px;
+                    margin-top: 5px;
+                    width: 70px;
+                    text-align: right;
+                }
+                .maxweight-input{
+                    margin-right: 5px;
+                }
+            }
+            .div-coinweight {
+                text-align: center;
+                .coinweight-label{
+                    margin-right: 3px;
+                    margin-top: 5px;
+                    width: 70px;
+                    text-align: right;
+                }
+                .coinweight-input{
+                    margin-right: 5px;
+                }
+            }
+            .div-pp{
+                text-align: center;
+                .coin-pp{
+                }
+            }
+            .div-gp{
+                text-align: center;
+                .coin-gp{
+                }
+            }
+            .div-sp{
+                text-align: center;
+                .coin-sp{
+                }
+            }
+            .div-cp{
+                text-align: center;
+                .coin-cp{
+                }
+            }
+            .coin-label{
+                margin-right: 3px;
+                margin-top: 5px;
+                width: 30px;
+                text-align: center;
+            }
+        }
+    }

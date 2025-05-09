@@ -1,0 +1,89 @@
+.effect-detail-skinny
+    .div-item-details
+        .div-category
+            +text({name:'category',class:'item_category underlined',value:''})
+            +span({'data-i18n':'Category'}).item-head-category
+        .div-weight
+            +number({name:'weight',class:'item_weight boxed',value:0,trigger:{affects:['loot-totweight']}})
+            +span({'data-i18n':'Weight'}).item-head-weight
+        .div-cost
+            +number({name:'cost',class:'item_cost boxed',value:0})
+            +span({'data-i18n':'Cost'}).item-head-cost
+        .div-size
+            +select({name:'size',class:'item_size underlined'})
+                +option({value:'sizeNone','data-i18n':'None'})
+                +option({value:'sizeTiny','data-i18n':'Tiny'})
+                +option({value:'sizeSmall','data-i18n':'Small'})
+                +option({value:'sizeMedium','data-i18n':'Medium'})
+                +option({value:'sizeLarge','data-i18n':'Large'})
+                +option({value:'sizeHuge','data-i18n':'Huge'})
+                +option({value:'sizeGigantic','data-i18n':'Gigantic'})
+            +span({'data-i18n':'Size'}).item-head-size
+        .div-armorvalue
+            +number({name:'armorvalue',class:'item-armorvalue boxed',value:0})
+            +span({'data-i18n':'Armor Value'}).item-head-armorvalue
+        .div-armortype
+            +select({name:'armortype',class:'item-armortype underlined'})
+                +option({value:'armorNone','data-i18n':'None'})
+                +option({value:'armorLight','data-i18n':'Light'})
+                +option({value:'armorMedium','data-i18n':'Medium'})
+                +option({value:'armorHeavy','data-i18n':'Heavy'})
+            +span({'data-i18n':'Armor Type'}).item-head-armortype
+        .div-movetype
+            +select({name:'movetype',class:'item-movetype underlined'})
+                +option({value:'armorNone','data-i18n':'None'})
+                +option({value:'armorLight','data-i18n':'Light'})
+                +option({value:'armorMedium','data-i18n':'Medium'})
+                +option({value:'armorHeavy','data-i18n':'Heavy'})
+            +span({'data-i18n':'Move Type'}).item-head-movetype
+        .div-attackvs
+            +select({name:'attackvs',class:'item-attackvs underlined'})
+                +option({value:'defenseNone','data-i18n':'None'})
+                +option({value:'defenseArmor','data-i18n':'Armor'})
+                +option({value:'defenseDodge','data-i18n':'Dodge'})
+                +option({value:'defenseMental','data-i18n':'Mental'})
+            +span({'data-i18n':'Attack vs'}).item-head-attackvs
+        .div-accmod
+            +number({name:'accmod',class:'item_accmod boxed',value:0})
+            +span({'data-i18n':'Acc Mod'}).item-head-accmod
+        .div-dammod
+            +number({name:'dammod',class:'item_dammod boxed',value:0})
+            +span({'data-i18n':'Dam Mod'}).item-head-dammod
+        .div-basedam
+            +text({name:'basedam',class:'item-basedam underlined',value:''})
+            +span({'data-i18n':'Base Dam'}).item-head-basedam
+        .div-attacktype
+            +select({name:'attacktype',class:'item-attacktype underlined'})
+                +option({value:'attackNone','data-i18n':'None'})
+                +option({value:'attackMelee','data-i18n':'Melee'})
+                +option({value:'attackRanged','data-i18n':'Ranged'})
+                +option({value:'attackThrown','data-i18n':'Thrown'})
+                +option({value:'attackSpell','data-i18n':'Spell'})
+            +span({'data-i18n':'Attack Type'}).item-head-attacktype
+        .div-range
+            +number({name:'range',class:'item-range underlined',value:0})
+            +span({'data-i18n':'Range'}).item-head-range
+        .div-critabove
+            +number({name:'critabove',class:'item_critabove boxed',value:0})
+            +span({'data-i18n':'Crit Above'}).item-head-critabove
+        .div-critmult
+            +number({name:'critmult',class:'item_critmult boxed',value:0})
+            +span({'data-i18n':'Crit Mult'}).item-head-critmult
+        .div-ammotype
+            +select({name:'ammotype',class:'item-ammotype underlined'})
+                +option({value:'ammoNone','data-i18n':'None'})
+                +option({value:'ammoQuiver','data-i18n':'Quiver'})
+                +option({value:'ammoBandelaro','data-i18n':'Bandelaro'})
+            +span({'data-i18n':'Ammo Type'}).item-head-ammotype
+        .div-removeqty
+            +number({name:'removeqty',class:'item-removeqty boxed',value:0})
+            +span({'data-i18n':'Remove Qty'}).item-head-removeqty
+        .div-recoverperc
+            +number({name:'recoverperc',class:'item-recoverperc boxed',value:0})
+            +span({'data-i18n':'Recover %'}).item-head-recoverperc
+        .div-notes
+            +adaptiveTextarea({name:'notes',class:'boxed'})
+            +span({'data-i18n':'Notes'}).item-head-notes
+        .div-effects
+            +adaptiveTextarea({name:'effects',class:'boxed'})
+            +span({'data-i18n':'Effects'}).item-head-effects

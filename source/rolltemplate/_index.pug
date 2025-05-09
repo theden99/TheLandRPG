@@ -1,0 +1,32 @@
++rolltemplate('default')
+  .roll-header
+    +templateConditionalDisplay('name')
+      h3(data-i18n='')
+      h3 {{name}}
+    +characterLink
+  .roll-content
+    +templateConditionalDisplay('roll')
+      .display-row
+        +templateConditionalDisplay('roll_name')
+          h5 {{roll_name}}
+        +templateConditionalDisplay('roll_name','invert')
+          h3(data-i18n='roll')
+        spen.description
+          |{{roll}} 
+          +templateConditionalDisplay('target')
+            span(data-i18n='vs')
+            |{{target}}
+      
++scss('roll').
+  .roll-header{
+    color: white;
+  }
+  .roll-content{
+    .display-row{
+      display:flex;
+      flex-wrap: wrap;
+      gap: var(--half-gap);
+      justify-content:space-betweem;
+      align-items:center;
+    }
+  }

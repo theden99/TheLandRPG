@@ -1,0 +1,337 @@
++tab({name:"skills", container:"section", button:{class:"thelandrpg-tabs-button boxed",'data-i18n':"Skills"}})
+    .thelandrpg-tabs-section-skills
+        +span({'data-i18n':'SKILLS'}).chaosseed-title.paper-background
+        .chaosseed-skills
+            .row-skills-section.paper-background
+                +span({'data-i18n':'Skills'}).row-skills-title                
+                +tabs({name:'chaosseed-skills',defaultActiveTab:'skills-everyday',persistent:false})
+                    include ../sections/skills.pug
+        .chaosseed-traits
+            .div-traits-section.paper-background
+                +span({'data-i18n':'Traits'}).row-traits-title
+                .row-traits-section
+                    .div-traits-header.div-inline
+                        +span({}).addbutton-padding
+                        +span({'data-i18n':'Trait'}).traits-head-trait
+                        +span({'data-i18n':'Rarity'}).traits-head-rarity
+                    .div-traits-rows.div-inline
+                        +customControlFieldset({name:'traits-rows',addClass:''})
+                            +select({name:'traits-trait',class:'row-traits-trait underlined'})
+                                each entry,stat in schemaCore.traits
+                                    +option({value:stat,'data-i18n':entry.displayname})
+                            +select({name:'traits-rarity',class:'row-traits-rarity underlined'})
+                                +option({value:'idCommon','data-i18n':'Common'})
+                                +option({value:'idUnommon','data-i18n':'Uncommon'})
+                                +option({value:'idRare','data-i18n':'Rare'})
+                            +span({}).trashcan-padding
+                            .collapse-container
+                                +collapse('details-collapse')
+                                +span({'data-i18n':'Show Item Details'})
+                                .expanded
+                                .collapsed
+                                    .div-item-details
+                                        .div-traits-desc
+                                            +adaptiveTextarea({name:'traits-desc',class:'boxed'})
+                                            +span({'data-i18n':'Description'}).traits-head-desc
++module.
++scss('sheet').
+    .thelandrpg-tabs-section-skills{
+        .repitem:hover > .collapse, .repitem:hover .roll-container,
+        .collapse-container:hover > .collapse,
+        .collapse-container:hover .roll-container {
+            opacity: 0;
+        }
+        .repitem > .collapse,
+        .collapse-container > .collapse {
+            opacity: 0;
+            position: absolute;
+            left: -10px;
+            top: 0px;
+            //font-size: 0px;
+            pointer-events: none;
+        }
+
+        display: grid;
+        grid-gap: var(--tiny-gap);
+        font: {size: 12px;family: Arial;weight: normal;};
+        width: 1100px;
+
+        grid-template-columns: auto auto;
+        grid-template-areas:
+            'title title'
+            'skills traits'
+        ;
+
+        .chaosseed-title{
+            grid-area: title;
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+            width: 100%;
+        }
+        .chaosseed-traits {
+            .repitem:hover > .collapse, .repitem:hover .roll-container,
+            .collapse-container:hover > .collapse,
+            .collapse-container:hover .roll-container {
+                opacity: 1;
+            }
+            .repitem > .collapse,
+            .collapse-container > .collapse {
+                opacity:  1;
+                position: absolute;
+                left: -10px;
+                top: 0px;
+                pointer-events: auto;
+            }
+            
+            grid-area: traits;
+            width: 355px;
+
+
+            .row-traits-section {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: top;
+                gap: var(--tiny-gap);
+                .div-traits-header{
+                    .traits-head-trait{
+                        margin-right: 3px;
+                        width: 160px;
+                        text-align: center;
+                        background-color: lightskyblue;
+                    }
+                    .traits-head-rarity{
+                        margin-right: 3px;
+                        width: 80px;
+                        text-align: center;
+                        background-color: lightskyblue;
+                    }
+                }
+                .div-traits-rows{
+                    .row-traits-trait{
+                        width: 160px;
+                    }       
+                    .row-traits-rarity {
+                        width: 80px;
+                    }       
+                    .div-item-details {
+                        display: grid;
+                        grid-template-columns: auto;
+                        grid-template-areas : 
+                            'desc'
+                        ;
+                        border: 1px solid var(--borderColor);
+                        .div-traits-desc {
+                            grid-area: desc;
+                            .traits-head-desc {
+                                width: 100%;
+                                background-color: gainsboro;
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+        .chaosseed-skills {
+            grid-area: skills;
+            width: 725px;
+
+            .row-skills-section {
+                display: grid;
+
+                .row-skills-title {
+                    font-size: 14px;
+                    text-align: center;
+                    font-weight: bold;
+                    width: 100%;
+                }
+                .row-skill-header {
+                    text-align: center;
+                    font-weight: bold;
+                    background-color: lightblue;
+                }
+                .row-skill-roller {
+                    width: 120px;
+                    line-height: 0.9em;
+                }
+                .row-skill-rarity {
+                    width: 30px;
+                }
+                .row-skill-total {
+                    text-align: center;
+                    width: 35px;
+                }
+                .row-skill-rank {
+                    text-align: center;
+                    width: 40px;
+                }
+                .row-skill-equipbonus {
+                    text-align: center;
+                    width: 40px;
+                }
+                .row-skill-buffbonus {
+                    text-align: center;
+                    width: 40px;
+                }
+                .row-skill-miscbonus {
+                    text-align: center;
+                    width: 40px;
+                }
+                .row-skill-parentbonus {
+                    text-align: center;
+                    width: 40px;
+                }
+                .row-skill-statbonus {
+                    text-align: center;
+                    width: 40px;
+                }
+                .row-skill-stat {
+                    text-align: center;
+                    width: 55px;
+                }
+                .row-skill-affinity {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-skill-maxrank {
+                    text-align: center;
+                    width: 40px;
+                }
+                .row-skill-ranktitle {
+                    text-align: center;
+                    width: 80px;
+                }
+                .row-skill-nexttitle {
+                    text-align: center;
+                    width: 40px;
+                }
+            }
+
+            .basic-skill {
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-areas:
+                    'title'
+                    'header'
+                    'row'
+                    'row2'
+                ;
+                .basic-skill-title {
+                    grid-area: title;
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 14px;
+                }
+                .basic-skill-row-help {
+                    text-align: left;
+                }
+                .basic-healing-row,
+                .basic-skill-header,
+                .basic-skill-row {
+                    grid-area: row;
+
+                    display: grid;
+                    grid-template-columns: auto;
+                    grid-template-areas:
+                        'roller rarity total rank equipbonus buffbonus miscbonus parentbonus statbonus stat affinity maxrank ranktitle nexttitle'
+                    ;
+                    .basic-skill-row-roller {
+                        grid-area: roller;
+                        width: 100px;
+                    }
+                    .basic-skill-row-name {
+                        grid-area: roller;
+                        width: 100px;
+                        margin-top: 5px;
+                    }
+                    .basic-skill-row-rarity {
+                        grid-area: rarity;
+                        width: 30px;
+                    }
+                    .basic-skill-row-total {
+                        grid-area: total;
+                        width: 40px;
+                    }
+                    .basic-skill-row-rank {
+                        grid-area: rank;
+                        width: 40px;
+                    }
+                    .basic-skill-row-equipbonus {
+                        grid-area: equipbonus;
+                        width: 40px;
+                    }
+                    .basic-skill-row-buffbonus {
+                        grid-area: buffbonus;
+                        width: 40px;
+                    }
+                    .basic-skill-row-miscbonus {
+                        grid-area: miscbonus;
+                        width: 40px;
+                    }
+                    .basic-skill-row-parentbonus {
+                        grid-area: parentbonus;
+                        width: 40px;
+                    }
+                    .basic-skill-row-statbonus {
+                        grid-area: statbonus;
+                        width: 40px;
+                    }
+                    .basic-skill-row-stat {
+                        grid-area: stat;
+                        width: 60px;
+                    }
+                    .basic-skill-row-affinity {
+                        grid-area: affinity;
+                        width: 50px;
+                    }
+                    .basic-skill-row-maxrank {
+                        grid-area: maxrank;
+                        width: 40px;
+                    }
+                    .basic-skill-row-ranktitle {
+                        grid-area: ranktitle;
+                        width: 90px;
+                    }
+                    .basic-skill-row-nexttitle {
+                        grid-area: nexttitle;
+                        width: 40px;
+                    }
+                }
+                .basic-healing-row {
+                    grid-area: row2;
+                }
+                .basic-skill-header {
+                    grid-area: header;
+                    text-align: center;
+                    font-weight: bold;
+                    background-color: lightblue;
+                }
+                .skill-showhelp {
+                    width: 100%;
+                }
+                .div-skill-subskills {
+                    display: grid;
+                    grid-template-columns: auto;
+                    grid-template-areas:
+                        'notes'
+                        'skill3'
+                        'skill2'
+                        'skill'
+                    ;
+                    .skill-subskills-notes {
+                        grid-area: notes;
+                    }
+                    .skill-subskills-skill {
+                        grid-area: skill;
+                    }
+                    .skill-subskills-skill2 {
+                        grid-area: skill2;
+                    }
+                    .skill-subskills-skill3 {
+                        grid-area: skill3;
+                    }
+                }
+            }        
+        }
+    }
