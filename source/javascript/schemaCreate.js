@@ -2735,7 +2735,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idConviction] : getListEntry(idDefault,'Conviction','0','0',
-            'survial is fun',
+            'survial is funnny',
             'survival is the fiction that you will live',
             '',
             {
