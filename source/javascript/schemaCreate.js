@@ -1244,11 +1244,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1269,11 +1264,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1319,11 +1309,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1344,11 +1329,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1369,11 +1349,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1394,11 +1369,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1419,11 +1389,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1444,11 +1409,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1469,11 +1429,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1494,11 +1449,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1519,11 +1469,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1544,11 +1489,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1569,11 +1509,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1594,11 +1529,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1619,11 +1549,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1644,19 +1569,14 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
             idEveryday,
             idCommon,
             [],
-            [idCitySurvival,idDesertSurvival,idForestSurvival],
-            [idAgility,idStrength,idLuck],
+            [idEscape,idFalling,idTumbling],
+            [idAgility],
         ),
         [idEscape] : getListEntry(idDefault,'Escape','0','0',
             'survial is fun',
@@ -1669,11 +1589,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1694,11 +1609,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1719,11 +1629,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1744,11 +1649,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1769,11 +1669,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1794,11 +1689,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1819,11 +1709,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1844,11 +1729,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1869,11 +1749,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1894,11 +1769,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1944,11 +1814,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1969,11 +1834,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -1994,11 +1854,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2019,11 +1874,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2044,11 +1894,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2069,11 +1914,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2094,11 +1934,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2119,11 +1954,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2144,11 +1974,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2194,11 +2019,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2219,11 +2039,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2244,11 +2059,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2269,11 +2079,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2294,11 +2099,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2319,11 +2119,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2344,11 +2139,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2419,11 +2209,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2445,11 +2230,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2470,11 +2250,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2495,11 +2270,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2520,11 +2290,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2545,11 +2310,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2570,11 +2330,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2595,11 +2350,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2620,11 +2370,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2645,11 +2390,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2695,11 +2435,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2720,11 +2455,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2745,11 +2475,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2770,11 +2495,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2842,11 +2562,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2867,11 +2582,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2892,11 +2602,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -2942,11 +2647,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3017,11 +2717,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3042,11 +2737,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3067,11 +2757,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3142,11 +2827,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3167,12 +2847,7 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
-            },
+\            },
             {
             },
             idEveryday,
@@ -3192,11 +2867,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3217,11 +2887,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3242,11 +2907,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3267,11 +2927,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3292,11 +2947,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3317,11 +2967,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3392,11 +3037,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3417,11 +3057,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3442,11 +3077,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3467,11 +3097,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3492,11 +3117,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3517,11 +3137,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3542,11 +3157,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3567,11 +3177,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3592,11 +3197,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3617,11 +3217,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3656,7 +3251,7 @@ const schemaCore = {
             [],
             [idAgility,idDexterity],
         ),
-        [idMountedCombat] : getListEntry(idDefault,'Survival','0','0',
+        [idMountedCombat] : getListEntry(idDefault,'Mounted Combat','0','0',
             'survial is fun',
             'survival is the fiction that you will live',
             '',
@@ -3667,19 +3262,14 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
             idEveryday,
             idUncommon,
+            [idRiding],
             [],
-            [idCitySurvival,idDesertSurvival,idForestSurvival],
-            [idAgility,idStrength,idLuck],
+            [idAgility],
         ),
         [idArialCombat] : getListEntry(idDefault,'Arial Combat','0','0',
             'survial is fun',
@@ -3692,11 +3282,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3742,11 +3327,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3792,11 +3372,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3817,11 +3392,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3842,11 +3412,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3867,11 +3432,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3892,11 +3452,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3917,11 +3472,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3942,11 +3492,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3967,11 +3512,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -3992,11 +3532,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4017,11 +3552,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4042,11 +3572,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4067,11 +3592,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4092,11 +3612,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4117,11 +3632,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4142,11 +3652,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4167,11 +3672,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4192,11 +3692,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4217,11 +3712,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4242,11 +3732,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4267,11 +3752,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4292,11 +3772,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4317,11 +3792,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4342,11 +3812,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4367,11 +3832,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4392,11 +3852,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4417,11 +3872,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4542,11 +3992,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4567,11 +4012,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4592,11 +4032,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4617,11 +4052,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4642,11 +4072,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4667,11 +4092,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4693,11 +4113,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4718,11 +4133,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4743,11 +4153,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4768,11 +4173,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4793,11 +4193,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4818,11 +4213,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4843,11 +4233,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4868,11 +4253,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4893,11 +4273,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4918,11 +4293,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4943,11 +4313,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4968,11 +4333,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -4993,11 +4353,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5018,11 +4373,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5044,11 +4394,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5069,11 +4414,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5094,11 +4434,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5119,11 +4454,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5144,11 +4474,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5169,11 +4494,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5194,11 +4514,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5219,11 +4534,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5244,11 +4554,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5269,11 +4574,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5294,11 +4594,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5319,11 +4614,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5344,11 +4634,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5369,11 +4654,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5394,11 +4674,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5419,11 +4694,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5444,11 +4714,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5469,11 +4734,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5494,11 +4754,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5519,11 +4774,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5544,11 +4794,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5569,11 +4814,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5594,11 +4834,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5619,11 +4854,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5644,11 +4874,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5669,11 +4894,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5694,11 +4914,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5719,11 +4934,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5744,11 +4954,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5769,11 +4974,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5794,11 +4994,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5819,11 +5014,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5844,11 +5034,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5870,11 +5055,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5895,11 +5075,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5920,11 +5095,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5945,11 +5115,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5970,11 +5135,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -5995,11 +5155,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6021,11 +5176,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6046,11 +5196,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6071,11 +5216,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6096,11 +5236,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6121,11 +5256,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6146,11 +5276,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6171,11 +5296,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6196,11 +5316,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6221,11 +5336,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6247,11 +5357,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6272,11 +5377,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6297,11 +5397,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6322,11 +5417,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6347,11 +5437,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6372,11 +5457,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6397,11 +5477,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6422,11 +5497,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6447,11 +5517,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6472,11 +5537,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6497,11 +5557,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6522,11 +5577,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6547,11 +5597,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6572,11 +5617,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6597,11 +5637,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6622,11 +5657,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6647,11 +5677,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6672,11 +5697,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6697,11 +5717,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6722,11 +5737,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6747,11 +5757,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6772,11 +5777,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6797,11 +5797,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6822,11 +5817,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6847,11 +5837,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6872,11 +5857,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6897,11 +5877,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6922,11 +5897,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6947,11 +5917,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6972,11 +5937,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -6997,11 +5957,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -7022,11 +5977,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -7047,11 +5997,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -7072,11 +6017,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -7097,11 +6037,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -7122,11 +6057,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -7147,11 +6077,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -7172,11 +6097,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -7197,11 +6117,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -7222,11 +6137,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -7247,11 +6157,6 @@ const schemaCore = {
                 },
             },
             {
-                [idStat] : {
-                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-                    [idCalc] : idCalcStat,
-                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-                },
             },
             {
             },
@@ -7409,6 +6314,17 @@ Object.keys(theSchema).forEach((theSkill) => {
         const theID = getFieldID(idChaosSeed,idSkills,idSkills,idTotal,theParent);
         addAffect(theSelfID,theID);
     });
+    //create max rank calc
+//                [idMaxRank] : {
+//                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+//                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+//                },
+    //creaet multiple stat calc
+//                [idStat] : {
+//                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
+//                    [idCalc] : idCalcStat,
+//                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
+
     //calcs
     let theCalcs = theSchema[theSkill];
     theCalcs = theCalcs[idCalcs];
@@ -7422,6 +6338,13 @@ Object.keys(theSchema).forEach((theSkill) => {
             addAffect(theSelfID,theID);
         });
     })
+
+    //create max rank func
+                [idMaxRank] : {
+                    [idCalcDesc] : capitalize(idCommandingSpell)+' '+idMaxRank+' cannot excede '+capitalize(idLifeMagic)+' '+idMaxRank,
+                    [idCalc] : idCalcMinOf,
+                    [idCalcParams] : getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,idLifeMagic)+'|'+getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,idCommandingSpell),
+                },
     //funcs
     let theFuncs = theSchema[theSkill];
     theFuncs = theFuncs[idFuncs];
