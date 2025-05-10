@@ -1,13 +1,22 @@
 +tab({name:'battle', container:'article', button:{class:'thelandrpg-tabs-button boxed','data-i18n':'Battle'}})
     .battle-main
         +span({'data-i18n':'TO BATTLE - CRUSH YOUR ENEMIES'}).battle-title.paper-background
-        .battle-spells
-            .battle-spells-section.paper-background
-                +span({'data-i18n':'Spells/Techniques'}).battle-spells-subtitle
-                include _battle-spells.pug
-        .battle-attacks
-            .battle-attacks-section.paper-background
-                +span({'data-i18n':'Attacks'}).battle-attacks-subtitle
+        +tabs({name:'battle-crushthem',defaultActiveTab:'battle-spells',persistent:true})
+            +tab({name:'battle-spells',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Spells'}})
+                .battle-spells
+                    .battle-spells-section.paper-background
+                        +span({'data-i18n':'Spells'}).battle-spells-subtitle
+                        include _battle-spells.pug
+            +tab({name:'battle-techs',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Techniques'}})
+                .battle-techs
+                    .battle-techs-section.paper-background
+                        +span({'data-i18n':'Techniques'}).battle-techs-subtitle
+                        include _battle-spells.pug
+            +tab({name:'battle-attacks',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Attacks'}})
+                .battle-attacks
+                    .battle-attacks-section.paper-background
+                        +span({'data-i18n':'Attacks'}).battle-attacks-subtitle
+                        include _battle-spells.pug
 +module.
 +scss('sheet').
     .battle-main{
@@ -30,10 +39,10 @@
         font: {size: 12px;family: Arial;weight: normal;};
         width: 1100px;
 
-        grid-template-columns: auto auto;
+        grid-template-columns: auto;
         grid-template-areas:
-            'title title'
-            'spells attacks'
+            'title'
+            'buttons'
         ;
 
         .battle-title{
@@ -44,15 +53,15 @@
         }
 
         .battle-spells {
-            grid-area: spells;
-            width: 545px;
+            grid-area: buttons;
+            width: 1050px;
 
             .battle-spells-section {
                 display: grid;
                 grid-template-columns: auto;
                 grid-template-areas: 
                     'title'
-                    'table'
+                    'spells'
                 ;
 
                 .battle-spells-subtitle{
@@ -62,19 +71,53 @@
                     font-weight: bold;
                 }
                 .spells-main {
-                    grid-area: table;
+                    grid-area: spells;
+                }
+            }
+        }
+        .battle-techs {
+            grid-area: buttons;
+            width: 1050px;
+
+            .battle-techs-section {
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-areas: 
+                    'title'
+                    'techs'
+                ;
+
+                .battle-techs-subtitle{
+                    grid-area: title;
+                    font-size: 16px;
+                    text-align: center;
+                    font-weight: bold;
+                }
+                .techs-main {
+                    grid-area: techs;
                 }
             }
         }
         .battle-attacks {
-            grid-area: attacks;
-            width: 545px;
+            grid-area: buttons;
+            width: 1050px;
 
             .battle-attacks-section {
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-areas: 
+                    'title'
+                    'attacks'
+                ;
+
                 .battle-attacks-subtitle{
+                    grid-area: title;
                     font-size: 16px;
                     text-align: center;
                     font-weight: bold;
+                }
+                .attack-main {
+                    grid-area: attacks;
                 }
             }
         }
