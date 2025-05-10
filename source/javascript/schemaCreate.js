@@ -2847,7 +2847,7 @@ const schemaCore = {
                 },
             },
             {
-\            },
+            },
             {
             },
             idEveryday,
@@ -6314,12 +6314,12 @@ Object.keys(theSchema).forEach((theSkill) => {
         const theID = getFieldID(idChaosSeed,idSkills,idSkills,idTotal,theParent);
         addAffect(theSelfID,theID);
     });
-    //create max rank calc
+    //update max rank calc
 //                [idMaxRank] : {
 //                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
 //                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
 //                },
-    //creaet multiple stat calc
+    //update multiple stat calc
 //                [idStat] : {
 //                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
 //                    [idCalc] : idCalcStat,
@@ -6340,11 +6340,11 @@ Object.keys(theSchema).forEach((theSkill) => {
     })
 
     //create max rank func
-                [idMaxRank] : {
-                    [idCalcDesc] : capitalize(idCommandingSpell)+' '+idMaxRank+' cannot excede '+capitalize(idLifeMagic)+' '+idMaxRank,
-                    [idCalc] : idCalcMinOf,
-                    [idCalcParams] : getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,idLifeMagic)+'|'+getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,idCommandingSpell),
-                },
+//                [idMaxRank] : {
+//                    [idCalcDesc] : capitalize(idCommandingSpell)+' '+idMaxRank+' cannot excede '+capitalize(idLifeMagic)+' '+idMaxRank,
+//                    [idCalc] : idCalcMinOf,
+//                    [idCalcParams] : getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,idLifeMagic)+'|'+getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,idCommandingSpell),
+//                },
     //funcs
     let theFuncs = theSchema[theSkill];
     theFuncs = theFuncs[idFuncs];

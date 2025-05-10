@@ -87,47 +87,57 @@
             grid-area: traits;
             width: 355px;
 
-
-            .row-traits-section {
-                display: flex;
-                flex-wrap: wrap;
-                align-items: top;
-                gap: var(--tiny-gap);
-                .div-traits-header{
-                    .traits-head-trait{
-                        margin-right: 3px;
-                        width: 160px;
-                        text-align: center;
-                        background-color: lightskyblue;
-                    }
-                    .traits-head-rarity{
-                        margin-right: 3px;
-                        width: 80px;
-                        text-align: center;
-                        background-color: lightskyblue;
-                    }
+            .div-traits-section {
+                .row-traits-title{
+                    font-size: 14px;
+                    text-align: center;
+                    font-weight: bold;
                 }
-                .div-traits-rows{
-                    .row-traits-trait{
-                        width: 160px;
-                    }       
-                    .row-traits-rarity {
-                        width: 80px;
-                    }       
-                    .div-item-details {
-                        display: grid;
-                        grid-template-columns: auto;
-                        grid-template-areas : 
-                            'desc'
-                        ;
-                        border: 1px solid var(--borderColor);
-                        .div-traits-desc {
-                            grid-area: desc;
-                            .traits-head-desc {
-                                width: 100%;
-                                background-color: gainsboro;
-                            }
+                .row-traits-section {
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: top;
+                    gap: var(--tiny-gap);
+                    .div-traits-header{
+                        .traits-head-trait{
+                            margin-right: 3px;
+                            width: 160px;
+                            text-align: center;
+                            background-color: lightskyblue;
+                            font-weight: bold;
+                        }
+                        .traits-head-rarity{
+                            margin-right: 3px;
+                            width: 80px;
+                            text-align: center;
+                            background-color: lightskyblue;
+                            font-weight: bold;
+                        }
+                    }
+                    .div-traits-rows{
+                        .row-traits-trait{
+                            width: 160px;
+                            font-weight: bold;
+                        }       
+                        .row-traits-rarity {
+                            width: 80px;
+                            font-weight: bold;
+                        }       
+                        .div-item-details {
+                            display: grid;
+                            grid-template-columns: auto;
+                            grid-template-areas : 
+                                'desc'
+                            ;
+                            border: 1px solid var(--borderColor);
+                            .div-traits-desc {
+                                grid-area: desc;
+                                .traits-head-desc {
+                                    width: 100%;
+                                    background-color: gainsboro;
+                                }
 
+                            }
                         }
                     }
                 }
@@ -135,7 +145,7 @@
         }
         .chaosseed-skills {
             grid-area: skills;
-            width: 725px;
+            width: 735px;
 
             .row-skills-section {
                 display: grid;
@@ -188,7 +198,7 @@
                 }
                 .row-skill-stat {
                     text-align: center;
-                    width: 55px;
+                    width: 75px;
                 }
                 .row-skill-affinity {
                     text-align: center;

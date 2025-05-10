@@ -3169,46 +3169,55 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosse
   top: 0px;
   pointer-events: auto;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .row-traits-section {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-title {
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section {
   display: flex;
   flex-wrap: wrap;
   align-items: top;
   gap: var(--tiny-gap);
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .row-traits-section .div-traits-header .traits-head-trait {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-header .traits-head-trait {
   margin-right: 3px;
   width: 160px;
   text-align: center;
   background-color: lightskyblue;
+  font-weight: bold;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .row-traits-section .div-traits-header .traits-head-rarity {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-header .traits-head-rarity {
   margin-right: 3px;
   width: 80px;
   text-align: center;
   background-color: lightskyblue;
+  font-weight: bold;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .row-traits-section .div-traits-rows .row-traits-trait {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .row-traits-trait {
   width: 160px;
+  font-weight: bold;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .row-traits-section .div-traits-rows .row-traits-rarity {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .row-traits-rarity {
   width: 80px;
+  font-weight: bold;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .row-traits-section .div-traits-rows .div-item-details {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .div-item-details {
   display: grid;
   grid-template-columns: auto;
   grid-template-areas: "desc";
   border: 1px solid var(--borderColor);
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .row-traits-section .div-traits-rows .div-item-details .div-traits-desc {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .div-item-details .div-traits-desc {
   grid-area: desc;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .row-traits-section .div-traits-rows .div-item-details .div-traits-desc .traits-head-desc {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .div-item-details .div-traits-desc .traits-head-desc {
   width: 100%;
   background-color: gainsboro;
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-skills {
   grid-area: skills;
-  width: 725px;
+  width: 735px;
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-skills .row-skills-section {
   display: grid;
@@ -3261,7 +3270,7 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosse
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-skills .row-skills-section .row-skill-stat {
   text-align: center;
-  width: 55px;
+  width: 75px;
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-skills .row-skills-section .row-skill-affinity {
   text-align: center;
@@ -3421,11 +3430,61 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosse
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-skills .basic-skill .div-skill-subskills .skill-subskills-skill3 {
   grid-area: skill3;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-battle {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--tiny-gap);
+body .ui-dialog .tab-content .charsheet .battle-main {
+  display: grid;
+  grid-gap: var(--tiny-gap);
+  font-size: 12px;
+  font-family: Arial;
+  font-weight: normal;
+  width: 1100px;
+  grid-template-columns: auto auto;
+  grid-template-areas: "title title" "spells attacks";
+}
+body .ui-dialog .tab-content .charsheet .battle-main .repitem:hover > .collapse, body .ui-dialog .tab-content .charsheet .battle-main .repitem:hover .roll-container,
+body .ui-dialog .tab-content .charsheet .battle-main .collapse-container:hover > .collapse,
+body .ui-dialog .tab-content .charsheet .battle-main .collapse-container:hover .roll-container {
+  opacity: 1;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .repitem > .collapse,
+body .ui-dialog .tab-content .charsheet .battle-main .collapse-container > .collapse {
+  opacity: 1;
+  position: absolute;
+  left: -10px;
+  top: 0px;
+  pointer-events: auto;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-title {
+  grid-area: title;
+  font-size: 24px;
+  text-align: center;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-spells {
+  grid-area: spells;
+  width: 545px;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-spells .battle-spells-section {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-areas: "title" "table";
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-spells .battle-spells-section .battle-spells-subtitle {
+  grid-area: title;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-spells .battle-spells-section .spells-main {
+  grid-area: table;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-attacks {
+  grid-area: attacks;
+  width: 545px;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-attacks .battle-attacks-section .battle-attacks-subtitle {
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
 }
 body .ui-dialog .tab-content .charsheet .inventory-main {
   display: grid;
@@ -3854,6 +3913,72 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-marketloot .the
   margin-top: 5px;
   width: 30px;
   text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-auditor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--tiny-gap);
+}
+body .ui-dialog .tab-content .charsheet .spells-main {
+  width: 540px;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-roller-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-roller {
+  width: 26px;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-name-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-name {
+  width: 140px;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-type-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-type {
+  width: 80px;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-cost-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-cost {
+  width: 40px;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-damage-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-damage {
+  width: 70px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-range-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-range {
+  width: 45px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-duration-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-duration {
+  width: 50px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype {
+  width: 60px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-roller-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-name-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-type-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-cost-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-damage-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-range-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-duration-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype-head {
+  text-align: center;
+  background-color: lightskyblue;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-areas: "desc";
+  border: 1px solid var(--borderColor);
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-spells-desc {
+  grid-area: desc;
 }
 body .ui-dialog .tab-content .charsheet .inventory-skinny-section {
   display: flex;

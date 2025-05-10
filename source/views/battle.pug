@@ -1,25 +1,81 @@
-+tab({name:'battle', container:'article', button:{class:'thelandrpg-tabs-button boxed','data-i18n':'Battle',trigger:{triggeredFuncs:['doTabBattle']}}})
-    .thelandrpg-tabs-section-battle
++tab({name:'battle', container:'article', button:{class:'thelandrpg-tabs-button boxed','data-i18n':'Battle'}})
+    .battle-main
+        +span({'data-i18n':'TO BATTLE - CRUSH YOUR ENEMIES'}).battle-title.paper-background
+        .battle-spells
+            .battle-spells-section.paper-background
+                +span({'data-i18n':'Spells/Techniques'}).battle-spells-subtitle
+                include _battle-spells.pug
+        .battle-attacks
+            .battle-attacks-section.paper-background
+                +span({'data-i18n':'Attacks'}).battle-attacks-subtitle
 +module.
-    const doTabBattle = ({trigger,attributes,sections,casc}) => {
-        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
-
-        const oldTriggerName = trigger.name;
-
-        let newTrigger = trigger;
-        newTrigger.name = 'act_nav-tabs-thelandrpg--effects';
-        k.callFunc('kSwitchTab',{trigger,attributes});
-        //can't do sub-tabs without more research
-        //newTrigger.name = 'act_nav-tabs-inventory-main--inventory-accessory';
-        //k.callFunc('kSwitchTab',{trigger,attributes});
-
-        trigger.name = oldTriggerName;
-    };
-    k.registerFuncs({doTabBattle});
 +scss('sheet').
-    .thelandrpg-tabs-section-battle{
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: var(--tiny-gap);
+    .battle-main{
+        .repitem:hover > .collapse, .repitem:hover .roll-container,
+        .collapse-container:hover > .collapse,
+        .collapse-container:hover .roll-container {
+            opacity: 1;
+        }
+        .repitem > .collapse,
+        .collapse-container > .collapse {
+            opacity:  1;
+            position: absolute;
+            left: -10px;
+            top: 0px;
+            pointer-events: auto;
+        }
+        
+        display: grid;
+        grid-gap: var(--tiny-gap);
+        font: {size: 12px;family: Arial;weight: normal;};
+        width: 1100px;
+
+        grid-template-columns: auto auto;
+        grid-template-areas:
+            'title title'
+            'spells attacks'
+        ;
+
+        .battle-title{
+            grid-area: title;
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .battle-spells {
+            grid-area: spells;
+            width: 545px;
+
+            .battle-spells-section {
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-areas: 
+                    'title'
+                    'table'
+                ;
+
+                .battle-spells-subtitle{
+                    grid-area: title;
+                    font-size: 16px;
+                    text-align: center;
+                    font-weight: bold;
+                }
+                .spells-main {
+                    grid-area: table;
+                }
+            }
+        }
+        .battle-attacks {
+            grid-area: attacks;
+            width: 545px;
+
+            .battle-attacks-section {
+                .battle-attacks-subtitle{
+                    font-size: 16px;
+                    text-align: center;
+                    font-weight: bold;
+                }
+            }
+        }
     }

@@ -1,0 +1,26 @@
++tab({name:'auditor', container:'article', button:{class:'thelandrpg-tabs-button boxed','data-i18n':'Auditor',trigger:{triggeredFuncs:['doTabAuditor']}}})
+    .thelandrpg-tabs-section-auditor
+        +span({'data-i18n':'AUDITOR ONLY'}).chaosseed-title.paper-background
++module.
+    const doTabAuditor = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const oldTriggerName = trigger.name;
+
+        let newTrigger = trigger;
+        newTrigger.name = 'act_nav-tabs-thelandrpg--chaosseed';
+        k.callFunc('kSwitchTab',{trigger,attributes});
+        //can't do sub-tabs without more research
+        //newTrigger.name = 'act_nav-tabs-inventory-main--inventory-accessory';
+        //k.callFunc('kSwitchTab',{trigger,attributes});
+
+        trigger.name = oldTriggerName;
+    };
+    k.registerFuncs({doTabAuditor});
++scss('sheet').
+    .thelandrpg-tabs-section-auditor{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--tiny-gap);
+    }

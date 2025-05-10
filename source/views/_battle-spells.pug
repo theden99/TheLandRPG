@@ -1,0 +1,130 @@
+.spells-main
+    .div-inline
+        +span({}).spells-roller-head
+        +span({'data-i18n':'Name'}).spells-name-head
+        +span({'data-i18n':'Magic Type'}).spells-type-head
+        +span({'data-i18n':'Mana Cost'}).spells-cost-head
+        +span({'data-i18n':'Range'}).spells-range-head
+        +span({'data-i18n':'Heal / Damage'}).spells-damage-head
+        +span({'data-i18n':'Duration'}).spells-duration-head
+        +span({'data-i18n':'Duration Type'}).spells-durationtype-head
+    +customControlFieldset({name:'spells-main-items',addClass:''})
+        .div-inline
+            +roller({name:spells-roller,class:'general-roller row-skill-roller',trigger:{triggeredFuncs:['funcCore']}})
+            +text({name:'spells-spellname',class:'spells-name underlined',value:''})
+            +select({name:'spells-magictype',class:'spells-type'})
+                each entry,stat in schemaCore.spellresists
+                    +option({value:stat,'data-i18n':entry.displayname})
+            +number({name:'spells-manacost',class:'spells-cost boxed'})
+            +select({name:'spells-range',class:'spells-range'})
+                +option({value:0,'data-i18n':'Self'})
+                +option({value:1,'data-i18n':'Touch'})
+                +option({value:2,'data-i18n':'5'})
+                +option({value:3,'data-i18n':'10'})
+                +option({value:4,'data-i18n':'20'})
+                +option({value:5,'data-i18n':'30'})
+                +option({value:6,'data-i18n':'40'})
+                +option({value:7,'data-i18n':'50'})
+                +option({value:8,'data-i18n':'60'})
+                +option({value:9,'data-i18n':'100'})
+                +option({value:10,'data-i18n':'150'})
+                +option({value:11,'data-i18n':'200'})
+            +text({name:'spells-damage',class:'spells-damage boxed'})
+            +select({name:'spells-duration',class:'spells-duration',value:''})
+                +option({value:0,'data-i18n':'Instant'})
+                +option({value:1,'data-i18n':'Sustain'})
+                +option({value:2,'data-i18n':'1'})
+                +option({value:3,'data-i18n':'2'})
+                +option({value:4,'data-i18n':'3'})
+                +option({value:5,'data-i18n':'4'})
+                +option({value:6,'data-i18n':'5'})
+                +option({value:7,'data-i18n':'6'})
+                +option({value:8,'data-i18n':'7'})
+                +option({value:9,'data-i18n':'8'})
+                +option({value:10,'data-i18n':'9'})
+                +option({value:11,'data-i18n':'10'})
+            +select({name:'spells-durationtype',class:'spells-durationtype',value:''})
+                +option({value:0,'data-i18n':'N/A'})
+                +option({value:1,'data-i18n':'Rounds'})
+                +option({value:2,'data-i18n':'Turns'})
+                +option({value:3,'data-i18n':'Seconds'})
+                +option({value:4,'data-i18n':'Minutes'})
+                +option({value:5,'data-i18n':'Hours'})
+                +option({value:6,'data-i18n':'Days'})
+        .div
+            .collapse-container
+                +collapse('spell-desc-collapse')
+                +span({'data-i18n':'Show Description'})
+                .expanded
+                .collapsed
+                    .div-spells-details
+                        .div-spells-desc
+                            +adaptiveTextarea({name:'spells-desc',class:'boxed'})
++module.
++scss('sheet').
+    .spells-main{
+        width: 540px;
+
+        .spells-roller-head,
+        .spells-roller {
+            width: 26px;
+        }
+
+        .spells-name-head,
+        .spells-name{
+            width: 140px;
+        }
+        .spells-type-head,
+        .spells-type{
+            width: 80px;
+        }
+        .spells-cost-head,
+        .spells-cost{
+            width: 40px;
+        }
+        .spells-damage-head,
+        .spells-damage{
+            width: 70px;
+            text-align: center;
+        }
+        .spells-range-head,
+        .spells-range{
+            width: 45px;
+            text-align: center;
+        }
+        .spells-duration-head,
+        .spells-duration{
+            width: 50px;
+            text-align: center;
+        }
+        .spells-durationtype-head,
+        .spells-durationtype{
+            width: 60px;
+            text-align: center;
+        }
+
+        .spells-roller-head,
+        .spells-name-head,
+        .spells-type-head,
+        .spells-cost-head,
+        .spells-damage-head,
+        .spells-range-head,
+        .spells-duration-head,
+        .spells-durationtype-head {
+            text-align: center;
+            background-color: lightskyblue;
+            font-weight: bold;
+        }
+
+        .div-spells-details {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-areas : 
+                'desc'
+            ;
+            border: 1px solid var(--borderColor);
+            .div-spells-desc {
+                grid-area: desc;
+            }
+        }
+    } 
