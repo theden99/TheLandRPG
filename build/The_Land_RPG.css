@@ -4270,7 +4270,7 @@ body .ui-dialog .tab-content .charsheet .attacks-main .attacks-actiontype {
 }
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-attackcat-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-attackcat {
-  width: 100px;
+  width: 60px;
 }
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-weapontype-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-weapontype {
@@ -4282,7 +4282,7 @@ body .ui-dialog .tab-content .charsheet .attacks-main .attacks-attacktype {
 }
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-vs-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-vs {
-  width: 50px;
+  width: 70px;
 }
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-range-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-range {
@@ -4330,11 +4330,11 @@ body .ui-dialog .tab-content .charsheet .attacks-main .attacks-critdamagebonus {
 }
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagetype-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagetype {
-  width: 80px;
+  width: 90px;
 }
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damageclass-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damageclass {
-  width: 80px;
+  width: 90px;
 }
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-name-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-actiontype-head,
