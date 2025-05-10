@@ -371,6 +371,8 @@ const idWaterMagic = 'watermagic';
     const idDrivingWave = 'drivingwave';
     const idEndlessOcean = 'endlessocean';
 const idInnerChi = 'innerchi';
+const idEldritchMagic = 'eldritch';
+const idChaosMagic = 'chaos';
 //martial skills
 const idDoubleAttack = 'doubleattack';
 const idDualWielding = 'dualwielding';
@@ -431,12 +433,20 @@ const idUnarmedCombat = 'unarmedcombat';
     const idPressurePoints = 'pressurepoints';
     const idDeflection = 'deflection';
 //resists
-const idPoison = 'poison';
-const idDisease = 'disease';
-const idMental = 'mental';
 const idBlunt = 'blunt';
 const idPierce = 'pierce';
 const idSlash = 'slash';
+const idAcid = 'acid';
+const idCold = 'cold';
+const idDisease = 'disease';
+const idDoom = 'doom';
+const idIllusion = 'illusion';
+const idInfernal = 'infernal';
+const idLightning = 'lightning';
+const idPoison = 'poison';
+const idPsychic = 'psychic';
+const idSolar = 'solar';
+const idThunder = 'thunder';
 //traits
 const idTrait = 'trait';
 const idHerbalSpirit = 'herbalspirit';
@@ -450,8 +460,8 @@ const capitalize = function(string){
 };
 
 const getFieldID = (iPage,iZone,iTable,iField,iRowID) => {  // <<<------  duplicate in 
-    let theFieldID = '';//iPage;
-    if (iZone!=='') { theFieldID += iZone}; //removed '='
+    let theFieldID = iPage;
+    if (iZone!=='') { theFieldID += '-'+iZone};
     if (iTable!=='') { 
         if (tableIsTemplate.indexOf(iTable)!==(-1)) {
             theFieldID += '-'+iRowID+'-'+iField
@@ -707,7 +717,7 @@ const schemaCore = {
             'https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -718,58 +728,13 @@ const schemaCore = {
         ),
     },
     [idResists] : {
-        [idPoison] : getListEntry(idDefault,'Poison','0','0',
-            'this is short',
-            'this is long',
-            '',
-            {
-                [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
-                    [idKFormula] : '',
-                },
-            },
-            {
-            },
-            {
-            },
-        ),
-        [idDisease] : getListEntry(idDefault,'Disease','0','0',
-            'this is short',
-            'this is long',
-            '',
-            {
-                [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
-                    [idKFormula] : '',
-                },
-            },
-            {
-            },
-            {
-            },
-        ),
-        [idMental] : getListEntry(idDefault,'Mental','0','0',
-            'this is short',
-            'this is long',
-            '',
-            {
-                [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
-                    [idKFormula] : '',
-                },
-            },
-            {
-            },
-            {
-            },
-        ),
         [idBlunt] : getListEntry(idDefault,'Blunt','0','0',
             'this is short',
             'this is long',
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -784,7 +749,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -799,7 +764,172 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idAcid] : getListEntry(idDefault,'Acid','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idCold] : getListEntry(idDefault,'Cold','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idDisease] : getListEntry(idDefault,'Disease','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idDoom] : getListEntry(idDefault,'Doom','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idIllusion] : getListEntry(idDefault,'Illusion','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idInfernal] : getListEntry(idDefault,'Infernal','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idLightning] : getListEntry(idDefault,'Lightning','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idPoison] : getListEntry(idDefault,'Poison','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idPsychic] : getListEntry(idDefault,'Psychic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idSolar] : getListEntry(idDefault,'Solar','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idThunder] : getListEntry(idDefault,'Thunder','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -816,7 +946,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -831,7 +961,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -846,7 +976,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -861,7 +991,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -876,7 +1006,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -891,7 +1021,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -906,7 +1036,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -921,7 +1051,37 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idEldritchMagic] : getListEntry(idDefault,'Eldritch Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idChaosMagic] : getListEntry(idDefault,'Chaos Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -938,7 +1098,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -953,7 +1113,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -968,7 +1128,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -983,7 +1143,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -998,7 +1158,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -1013,7 +1173,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -1028,7 +1188,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -1043,7 +1203,37 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idEldritchMagic] : getListEntry(idDefault,'Eldritch Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idChaosMagic] : getListEntry(idDefault,'Chaos Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -5043,6 +5233,36 @@ const schemaCore = {
             [],
             [idIntelligence],
         ),
+        [idEldritchMagic] : getListEntry(idDefault,'Eldritch Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idChaosMagic] : getListEntry(idDefault,'Chaos Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
     //martial skills
         [idDoubleAttack] : getListEntry(idDefault,'Double Attack','0','0',
             'survial is fun',
@@ -6174,7 +6394,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -6189,7 +6409,7 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '(SUM equipped armor.movepenalty) + ((SUM skill.armor)/2)',
+                    [idFormula] : '',
                     [idKFormula] : '',
                 },
             },
@@ -6314,17 +6534,6 @@ Object.keys(theSchema).forEach((theSkill) => {
         const theID = getFieldID(idChaosSeed,idSkills,idSkills,idTotal,theParent);
         addAffect(theSelfID,theID);
     });
-    //update max rank calc
-//                [idMaxRank] : {
-//                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-//                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
-//                },
-    //update multiple stat calc
-//                [idStat] : {
-//                    [idCalcDesc] : 'Stat is the best of '+capitalize(idAgility)+', '+capitalize(idStrength)+' or '+capitalize(idLuck),
-//                    [idCalc] : idCalcStat,
-//                    [idCalcParams] : getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength)+'|'+getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck),
-
     //calcs
     let theCalcs = theSchema[theSkill];
     theCalcs = theCalcs[idCalcs];
@@ -6338,13 +6547,6 @@ Object.keys(theSchema).forEach((theSkill) => {
             addAffect(theSelfID,theID);
         });
     })
-
-    //create max rank func
-//                [idMaxRank] : {
-//                    [idCalcDesc] : capitalize(idCommandingSpell)+' '+idMaxRank+' cannot excede '+capitalize(idLifeMagic)+' '+idMaxRank,
-//                    [idCalc] : idCalcMinOf,
-//                    [idCalcParams] : getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,idLifeMagic)+'|'+getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,idCommandingSpell),
-//                },
     //funcs
     let theFuncs = theSchema[theSkill];
     theFuncs = theFuncs[idFuncs];
@@ -6358,7 +6560,40 @@ Object.keys(theSchema).forEach((theSkill) => {
             addAffect(theSelfID,theID);
         });
     })
+    //update max rank calc
+    //update multiple stat calc
+    theCalcs = theSchema[theSkill];
+    theCalcs = theCalcs[idCalcs];
+    Object.keys(theCalcs).forEach((theCalcID) => {
+        if (theCalcID===idMaxRank) {
+            theCalcs = theCalcs[theCalcID];
+            theCalcs[idFormula] = '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel);
+            theCalcs[idKFormula] = '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,theSkill)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}';
+        };
+        if (theCalcID===idStat) {
+            theCalcs = theCalcs[theCalcID];
+            const theParams = theCalcs[idCalcParams];
+            const theIDs = parseParamList(theParams);
+            theCalcs[idCalcDesc] = 'Stat is the best of ';
+            theCalcs[idCalcParams] = '';
+            theIDs.forEach((theID) => {
+                theCalcs[idCalcDesc] += capitalize(theID)+',';
+                theCalcs[idCalcParams] += getFieldID(idChaosSeed,idStats,idStats,idTotal,theID)+'|';
+            });
+            //clean up dangling seperator
+            theCalcs[idCalcDesc].slice(0,-1);
+            theCalcs[idCalcParams].slice(0,-1);
+        };
+    });
 });
+
+    //create max rank func
+//                [idMaxRank] : {
+//                    [idCalcDesc] : capitalize(idCommandingSpell)+' '+idMaxRank+' cannot excede '+capitalize(idLifeMagic)+' '+idMaxRank,
+//                    [idCalc] : idCalcMinOf,
+//                    [idCalcParams] : getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,idLifeMagic)+'|'+getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,idCommandingSpell),
+//                },
+//});
 //console.log(JSON.stringify(theAffects,null,4));
 
 // ************************************************************************

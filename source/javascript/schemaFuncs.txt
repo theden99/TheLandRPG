@@ -1,4 +1,4 @@
-const getFieldID = (iPage,iZone,iTable,iField,iRowID) => { 
+const getFieldID = (iPage,iZone,iTable,iField,iRowID) => {  // <<<------  duplicate in 
     let theFieldID = iPage;
     if (iZone!=='') { theFieldID += '-'+iZone};
     if (iTable!=='') { 
@@ -7,9 +7,9 @@ const getFieldID = (iPage,iZone,iTable,iField,iRowID) => {
         } else {
             theFieldID += '-'+iTable;
             if (iRowID!=='') {
-                theFieldID = 'repeating_'+theFieldID+'_'+iRowID+'_' 
+                theFieldID = 'repeating_'+theFieldID+'_'+iRowID+'_'  //specific field
             } else {
-                theFieldID = 'repeating_'+theFieldID+'_$X_'  
+                theFieldID = 'repeating_'+theFieldID+'_$X_'  //used in Affects and KFormula => formula = 'SUM of '+iTable+'.iField' => '(@{'+theFieldID+'})'
             }
             theFieldID += iField;
         }

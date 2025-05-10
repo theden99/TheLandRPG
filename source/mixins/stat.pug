@@ -31,10 +31,12 @@ mixin rowStat(iPage,iZone,iTemplate,iStat)
         - theAffect = [];
         if (sheetAffects[theID])
             - theAffects = sheetAffects[theID];
+        - console.log(theFormula);
         +number({name:theID,class:'boxed',readonly:'',value:theDefault,trigger:{formula:theFormula,affects:theAffects}}).row-stat-total
 
         - theID = getFieldID(iPage,iZone,iTemplate,idMaxStat,iStat);
         - theFormula = theStat.formulas[idMaxStat].kformula;
+        - console.log(theFormula);
         +number({name:theID,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula}}).row-stat-max
 
         - theID = getFieldID(iPage,iZone,iTemplate,idHelpButton,iStat);
