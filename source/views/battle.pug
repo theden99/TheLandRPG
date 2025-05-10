@@ -11,12 +11,12 @@
                 .battle-techs
                     .battle-techs-section.paper-background
                         +span({'data-i18n':'Techniques'}).battle-techs-subtitle
-                        include _battle-spells.pug
+                        include _battle-techs.pug
             +tab({name:'battle-attacks',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Attacks'}})
                 .battle-attacks
                     .battle-attacks-section.paper-background
                         +span({'data-i18n':'Attacks'}).battle-attacks-subtitle
-                        include _battle-spells.pug
+                        include _battle-attacks.pug
 +module.
 +scss('sheet').
     .battle-main{

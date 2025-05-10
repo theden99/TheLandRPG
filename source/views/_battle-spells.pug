@@ -19,7 +19,7 @@
         +span({'data-i18n':'Radius Type'}).spells-radiustype-head
     +customControlFieldset({name:'spells-main-items',addClass:''})
         .div-inline
-            +roller({name:spells-roller,class:'general-roller row-skill-roller',trigger:{triggeredFuncs:['funcCore']}})
+            +roller({name:'spells-roller',class:'general-roller row-skill-roller',trigger:{triggeredFuncs:['funcCore']}})
             +text({name:'spells-spellname',class:'spells-name underlined',value:''})
             +number({name:'spells-level',class:'spells-level boxed'})
             +select({name:'spells-magictype',class:'spells-type'})
@@ -32,9 +32,9 @@
                 +option({value:3,'data-i18n':'Reaction'})
             +number({name:'spells-cost',class:'spells-cost boxed'})
             +select({name:'spells-costtype',class:'spells-costtype'})
-                +option({value:0,'data-i18n':'Health'})
-                +option({value:1,'data-i18n':'Stamina'})
                 +option({value:2,'data-i18n':'Mana'})
+                +option({value:1,'data-i18n':'Stamina'})
+                +option({value:0,'data-i18n':'Health'})
             +select({name:'spells-range',class:'spells-range'})
                 +option({value:0,'data-i18n':'Self'})
                 +option({value:1,'data-i18n':'Touch'})
@@ -58,6 +58,7 @@
                 +option({value:0,'data-i18n':'Health'})
                 +option({value:1,'data-i18n':'Stamina'})
                 +option({value:2,'data-i18n':'Mana'})
+                +option({value:3,'data-i18n':'N/A'})
             +select({name:'spells-duration',class:'spells-duration',value:''})
                 +option({value:0,'data-i18n':'Instant'})
                 +option({value:1,'data-i18n':'Timed'})
@@ -98,7 +99,7 @@
                 +option({value:4,'data-i18n':'Sphere'})
         .div
             .collapse-container
-                +collapse('spell-desc-collapse')
+                +collapse('spells-desc-collapse')
                 +span({'data-i18n':'Show Description'})
                 .expanded
                 .collapsed

@@ -1,0 +1,225 @@
+.techs-main
+    .div-inline
+        +span({}).techs-roller-head
+        +span({'data-i18n':'Name'}).techs-name-head
+        +span({'data-i18n':'Level'}).techs-level-head
+        +span({'data-i18n':'Magic Type'}).techs-magictype-head
+        +span({'data-i18n':'Action Type'}).techs-actiontype-head
+        +span({'data-i18n':'Cost'}).techs-cost-head
+        +span({'data-i18n':'Cost Resource'}).techs-costtype-head
+        +span({'data-i18n':'Range'}).techs-range-head
+        +span({'data-i18n':'Effect'}).techs-effect-head
+        +span({'data-i18n':'Amount'}).techs-amount-head
+        +span({'data-i18n':'Amount Resource'}).techs-amounttype-head
+        +span({'data-i18n':'Duration'}).techs-duration-head
+        +span({'data-i18n':'Duration Amount'}).techs-durationamount-head
+        +span({'data-i18n':'Duration Type'}).techs-durationtype-head
+        +span({'data-i18n':'Condition Type'}).techs-conditiontype-head
+        +span({'data-i18n':'Radius'}).techs-radius-head
+        +span({'data-i18n':'Radius Type'}).techs-radiustype-head
+    +customControlFieldset({name:'techs-main-items',addClass:''})
+        .div-inline
+            +roller({name:'techs-roller',class:'general-roller row-skill-roller',trigger:{triggeredFuncs:['funcCore']}})
+            +text({name:'techs-spellname',class:'techs-name underlined',value:''})
+            +number({name:'techs-level',class:'techs-level boxed'})
+            +select({name:'techs-magictype',class:'techs-type'})
+                each entry,stat in schemaCore.spellresists
+                    +option({value:stat,'data-i18n':entry.displayname})
+            +select({name:'techs-actiontype',class:'techs-actiontype'})
+                +option({value:0,'data-i18n':'Action'})
+                +option({value:1,'data-i18n':'Bonus'})
+                +option({value:2,'data-i18n':'Move'})
+                +option({value:3,'data-i18n':'Reaction'})
+            +number({name:'techs-cost',class:'techs-cost boxed'})
+            +select({name:'techs-costtype',class:'techs-costtype'})
+                +option({value:1,'data-i18n':'Stamina'})
+                +option({value:0,'data-i18n':'Health'})
+                +option({value:2,'data-i18n':'Mana'})
+            +select({name:'techs-range',class:'techs-range'})
+                +option({value:0,'data-i18n':'Self'})
+                +option({value:1,'data-i18n':'Touch'})
+                +option({value:2,'data-i18n':'5'})
+                +option({value:3,'data-i18n':'10'})
+                +option({value:4,'data-i18n':'20'})
+                +option({value:5,'data-i18n':'30'})
+                +option({value:6,'data-i18n':'40'})
+                +option({value:7,'data-i18n':'50'})
+                +option({value:8,'data-i18n':'60'})
+                +option({value:9,'data-i18n':'100'})
+                +option({value:10,'data-i18n':'150'})
+                +option({value:11,'data-i18n':'200'})
+            +select({name:'techs-effect',class:'techs-effect'})
+                +option({value:0,'data-i18n':'Heal'})
+                +option({value:1,'data-i18n':'Damage'})
+                +option({value:2,'data-i18n':'Condition'})
+                +option({value:3,'data-i18n':'Other'})
+            +text({name:'techs-amount',class:'techs-amount boxed'})
+            +select({name:'techs-amounttype',value:3,class:'techs-amounttype'})
+                +option({value:0,'data-i18n':'Health'})
+                +option({value:1,'data-i18n':'Stamina'})
+                +option({value:2,'data-i18n':'Mana'})
+                +option({value:3,'data-i18n':'N/A'})
+            +select({name:'techs-duration',class:'techs-duration',value:''})
+                +option({value:0,'data-i18n':'Instant'})
+                +option({value:1,'data-i18n':'Timed'})
+                +option({value:2,'data-i18n':'Sustain'})
+                +option({value:3,'data-i18n':'Persistant'})
+            +text({name:'techs-durationamount',class:'techs-durationamount boxed'})
+            +select({name:'techs-durationtype',class:'techs-durationtype',value:''})
+                +option({value:0,'data-i18n':'N/A'})
+                +option({value:1,'data-i18n':'Rounds'})
+                +option({value:2,'data-i18n':'Turns'})
+                +option({value:3,'data-i18n':'Seconds'})
+                +option({value:4,'data-i18n':'Minutes'})
+                +option({value:5,'data-i18n':'Hours'})
+                +option({value:6,'data-i18n':'Days'})
+            +select({name:'techs-conditiontype',class:'techs-conditiontype',value:''})
+                +option({value:0,'data-i18n':'N/A'})
+                +option({value:1,'data-i18n':'Befuddled'})
+                +option({value:2,'data-i18n':'Blighted'})
+                +option({value:3,'data-i18n':'Blinded'})
+                +option({value:4,'data-i18n':'Charmed'})
+                +option({value:5,'data-i18n':'Deafened'})
+                +option({value:6,'data-i18n':'Enthralled'})
+                +option({value:7,'data-i18n':'Frightened'})
+                +option({value:8,'data-i18n':'Incapacitated'})
+                +option({value:9,'data-i18n':'Nauseous'})
+                +option({value:10,'data-i18n':'Paralyzed'})
+                +option({value:11,'data-i18n':'Prone'})
+                +option({value:12,'data-i18n':'Slowed'})
+                +option({value:13,'data-i18n':'Unconcious'})
+                +option({value:14,'data-i18n':'Cover'})
+                +option({value:15,'data-i18n':'Grappled'})
+            +text({name:'techs-radius',class:'techs-radius boxed'})
+            +select({name:'techs-radiustype',class:'techs-radiustype',value:''})
+                +option({value:0,'data-i18n':'N/A'})
+                +option({value:1,'data-i18n':'Line'})
+                +option({value:2,'data-i18n':'Cone'})
+                +option({value:3,'data-i18n':'Column'})
+                +option({value:4,'data-i18n':'Sphere'})
+        .div
+            .collapse-container
+                +collapse('techs-desc-collapse')
+                +span({'data-i18n':'Show Description'})
+                .expanded
+                .collapsed
+                    .div-techs-details
+                        .div-techs-desc
+                            +adaptiveTextarea({name:'techs-desc',class:'boxed'})
++module.
++scss('sheet').
+    .techs-main{
+
+        .techs-roller-head,
+        .techs-roller {
+            width: 26px;
+        }
+        .techs-name-head,
+        .techs-name{
+            width: 140px;
+        }
+        .techs-level-head,
+        .techs-level{
+            width: 40px;
+        }
+        .techs-magictype-head,
+        .techs-magictype{
+            width: 80px;
+        }
+        .techs-actiontype-head,
+        .techs-actiontype{
+            width: 60px;
+        }
+        .techs-cost-head,
+        .techs-cost{
+            width: 40px;
+        }
+        .techs-costtype-head,
+        .techs-costtype{
+            width: 60px;
+        }
+        .techs-range-head,
+        .techs-range{
+            width: 45px;
+            text-align: center;
+        }
+        .techs-effect-head,
+        .techs-effect{
+            width: 70px;
+            text-align: center;
+        }
+        .techs-amount-head,
+        .techs-amount{
+            width: 70px;
+            text-align: center;
+        }
+        .techs-amounttype-head,
+        .techs-amounttype{
+            width: 60px;
+            text-align: center;
+        }
+        .techs-duration-head,
+        .techs-duration{
+            width: 65px;
+            text-align: center;
+        }
+        .techs-durationamount-head,
+        .techs-durationamount{
+            width: 55px;
+            text-align: center;
+        }
+        .techs-durationtype-head,
+        .techs-durationtype{
+            width: 60px;
+            text-align: center;
+        }
+        .techs-conditiontype-head,
+        .techs-conditiontype{
+            width: 80px;
+            text-align: center;
+        }
+        .techs-radius-head,
+        .techs-radius{
+            width: 50px;
+            text-align: center;
+        }
+        .techs-radiustype-head,
+        .techs-radiustype{
+            width: 50px;
+            text-align: center;
+        }
+
+        .techs-roller-head,
+        .techs-name-head,
+        .techs-level-head,
+        .techs-magictype-head,
+        .techs-actiontype-head,
+        .techs-cost-head,
+        .techs-costtype-head,
+        .techs-range-head,
+        .techs-effect-head,
+        .techs-amount-head,
+        .techs-amounttype-head,
+        .techs-duration-head,
+        .techs-durationamount-head,
+        .techs-durationtype-head,
+        .techs-conditiontype-head,
+        .techs-radius-head,
+        .techs-radiustype-head {
+            text-align: center;
+            background-color: lightskyblue;
+            font-weight: bold;
+        }
+
+        .div-techs-details {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-areas : 
+                'desc'
+            ;
+            border: 1px solid var(--borderColor);
+            .div-techs-desc {
+                grid-area: desc;
+            }
+        }
+    } 

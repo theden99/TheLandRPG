@@ -1,0 +1,225 @@
+.attacks-main
+    .div-inline
+        +span({}).attacks-roller-head
+        +span({'data-i18n':'Name'}).attacks-name-head
+        +span({'data-i18n':'Level'}).attacks-level-head
+        +span({'data-i18n':'Magic Type'}).attacks-magictype-head
+        +span({'data-i18n':'Action Type'}).attacks-actiontype-head
+        +span({'data-i18n':'Cost'}).attacks-cost-head
+        +span({'data-i18n':'Cost Resource'}).attacks-costtype-head
+        +span({'data-i18n':'Range'}).attacks-range-head
+        +span({'data-i18n':'Effect'}).attacks-effect-head
+        +span({'data-i18n':'Amount'}).attacks-amount-head
+        +span({'data-i18n':'Amount Resource'}).attacks-amounttype-head
+        +span({'data-i18n':'Duration'}).attacks-duration-head
+        +span({'data-i18n':'Duration Amount'}).attacks-durationamount-head
+        +span({'data-i18n':'Duration Type'}).attacks-durationtype-head
+        +span({'data-i18n':'Condition Type'}).attacks-conditiontype-head
+        +span({'data-i18n':'Radius'}).attacks-radius-head
+        +span({'data-i18n':'Radius Type'}).attacks-radiustype-head
+    +customControlFieldset({name:'attacks-main-items',addClass:''})
+        .div-inline
+            +roller({name:'attacks-roller',class:'general-roller row-skill-roller',trigger:{triggeredFuncs:['funcCore']}})
+            +text({name:'attacks-spellname',class:'attacks-name underlined',value:''})
+            +number({name:'attacks-level',class:'attacks-level boxed'})
+            +select({name:'attacks-magictype',class:'attacks-type'})
+                each entry,stat in schemaCore.spellresists
+                    +option({value:stat,'data-i18n':entry.displayname})
+            +select({name:'attacks-actiontype',class:'attacks-actiontype'})
+                +option({value:0,'data-i18n':'Action'})
+                +option({value:1,'data-i18n':'Bonus'})
+                +option({value:2,'data-i18n':'Move'})
+                +option({value:3,'data-i18n':'Reaction'})
+            +number({name:'attacks-cost',class:'attacks-cost boxed'})
+            +select({name:'attacks-costtype',class:'attacks-costtype'})
+                +option({value:2,'data-i18n':'Mana'})
+                +option({value:1,'data-i18n':'Stamina'})
+                +option({value:0,'data-i18n':'Health'})
+            +select({name:'attacks-range',class:'attacks-range'})
+                +option({value:0,'data-i18n':'Self'})
+                +option({value:1,'data-i18n':'Touch'})
+                +option({value:2,'data-i18n':'5'})
+                +option({value:3,'data-i18n':'10'})
+                +option({value:4,'data-i18n':'20'})
+                +option({value:5,'data-i18n':'30'})
+                +option({value:6,'data-i18n':'40'})
+                +option({value:7,'data-i18n':'50'})
+                +option({value:8,'data-i18n':'60'})
+                +option({value:9,'data-i18n':'100'})
+                +option({value:10,'data-i18n':'150'})
+                +option({value:11,'data-i18n':'200'})
+            +select({name:'attacks-effect',class:'attacks-effect'})
+                +option({value:0,'data-i18n':'Heal'})
+                +option({value:1,'data-i18n':'Damage'})
+                +option({value:2,'data-i18n':'Condition'})
+                +option({value:3,'data-i18n':'Other'})
+            +text({name:'attacks-amount',class:'attacks-amount boxed'})
+            +select({name:'attacks-amounttype',class:'attacks-amounttype'})
+                +option({value:0,'data-i18n':'Health'})
+                +option({value:1,'data-i18n':'Stamina'})
+                +option({value:2,'data-i18n':'Mana'})
+                +option({value:3,'data-i18n':'N/A'})
+            +select({name:'attacks-duration',class:'attacks-duration',value:''})
+                +option({value:0,'data-i18n':'Instant'})
+                +option({value:1,'data-i18n':'Timed'})
+                +option({value:2,'data-i18n':'Sustain'})
+                +option({value:3,'data-i18n':'Persistant'})
+            +text({name:'attacks-durationamount',class:'attacks-durationamount boxed'})
+            +select({name:'attacks-durationtype',class:'attacks-durationtype',value:''})
+                +option({value:0,'data-i18n':'N/A'})
+                +option({value:1,'data-i18n':'Rounds'})
+                +option({value:2,'data-i18n':'Turns'})
+                +option({value:3,'data-i18n':'Seconds'})
+                +option({value:4,'data-i18n':'Minutes'})
+                +option({value:5,'data-i18n':'Hours'})
+                +option({value:6,'data-i18n':'Days'})
+            +select({name:'attacks-conditiontype',class:'attacks-conditiontype',value:''})
+                +option({value:0,'data-i18n':'N/A'})
+                +option({value:1,'data-i18n':'Befuddled'})
+                +option({value:2,'data-i18n':'Blighted'})
+                +option({value:3,'data-i18n':'Blinded'})
+                +option({value:4,'data-i18n':'Charmed'})
+                +option({value:5,'data-i18n':'Deafened'})
+                +option({value:6,'data-i18n':'Enthralled'})
+                +option({value:7,'data-i18n':'Frightened'})
+                +option({value:8,'data-i18n':'Incapacitated'})
+                +option({value:9,'data-i18n':'Nauseous'})
+                +option({value:10,'data-i18n':'Paralyzed'})
+                +option({value:11,'data-i18n':'Prone'})
+                +option({value:12,'data-i18n':'Slowed'})
+                +option({value:13,'data-i18n':'Unconcious'})
+                +option({value:14,'data-i18n':'Cover'})
+                +option({value:15,'data-i18n':'Grappled'})
+            +text({name:'attacks-radius',class:'attacks-radius boxed'})
+            +select({name:'attacks-radiustype',class:'attacks-radiustype',value:''})
+                +option({value:0,'data-i18n':'N/A'})
+                +option({value:1,'data-i18n':'Line'})
+                +option({value:2,'data-i18n':'Cone'})
+                +option({value:3,'data-i18n':'Column'})
+                +option({value:4,'data-i18n':'Sphere'})
+        .div
+            .collapse-container
+                +collapse('attacks-desc-collapse')
+                +span({'data-i18n':'Show Description'})
+                .expanded
+                .collapsed
+                    .div-attacks-details
+                        .div-attacks-desc
+                            +adaptiveTextarea({name:'attacks-desc',class:'boxed'})
++module.
++scss('sheet').
+    .attacks-main{
+
+        .attacks-roller-head,
+        .attacks-roller {
+            width: 26px;
+        }
+        .attacks-name-head,
+        .attacks-name{
+            width: 140px;
+        }
+        .attacks-level-head,
+        .attacks-level{
+            width: 40px;
+        }
+        .attacks-magictype-head,
+        .attacks-magictype{
+            width: 80px;
+        }
+        .attacks-actiontype-head,
+        .attacks-actiontype{
+            width: 60px;
+        }
+        .attacks-cost-head,
+        .attacks-cost{
+            width: 40px;
+        }
+        .attacks-costtype-head,
+        .attacks-costtype{
+            width: 60px;
+        }
+        .attacks-range-head,
+        .attacks-range{
+            width: 45px;
+            text-align: center;
+        }
+        .attacks-effect-head,
+        .attacks-effect{
+            width: 70px;
+            text-align: center;
+        }
+        .attacks-amount-head,
+        .attacks-amount{
+            width: 70px;
+            text-align: center;
+        }
+        .attacks-amounttype-head,
+        .attacks-amounttype{
+            width: 60px;
+            text-align: center;
+        }
+        .attacks-duration-head,
+        .attacks-duration{
+            width: 65px;
+            text-align: center;
+        }
+        .attacks-durationamount-head,
+        .attacks-durationamount{
+            width: 55px;
+            text-align: center;
+        }
+        .attacks-durationtype-head,
+        .attacks-durationtype{
+            width: 60px;
+            text-align: center;
+        }
+        .attacks-conditiontype-head,
+        .attacks-conditiontype{
+            width: 80px;
+            text-align: center;
+        }
+        .attacks-radius-head,
+        .attacks-radius{
+            width: 50px;
+            text-align: center;
+        }
+        .attacks-radiustype-head,
+        .attacks-radiustype{
+            width: 50px;
+            text-align: center;
+        }
+
+        .attacks-roller-head,
+        .attacks-name-head,
+        .attacks-level-head,
+        .attacks-magictype-head,
+        .attacks-actiontype-head,
+        .attacks-cost-head,
+        .attacks-costtype-head,
+        .attacks-range-head,
+        .attacks-effect-head,
+        .attacks-amount-head,
+        .attacks-amounttype-head,
+        .attacks-duration-head,
+        .attacks-durationamount-head,
+        .attacks-durationtype-head,
+        .attacks-conditiontype-head,
+        .attacks-radius-head,
+        .attacks-radiustype-head {
+            text-align: center;
+            background-color: lightskyblue;
+            font-weight: bold;
+        }
+
+        .div-attacks-details {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-areas : 
+                'desc'
+            ;
+            border: 1px solid var(--borderColor);
+            .div-attacks-desc {
+                grid-area: desc;
+            }
+        }
+    } 
