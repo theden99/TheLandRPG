@@ -4264,11 +4264,22 @@ body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damageclass-head 
 body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details {
   display: grid;
   grid-template-columns: auto;
-  grid-template-areas: "desc";
+  grid-template-areas: "display-head" "display" "private-head" "private";
   border: 1px solid var(--borderColor);
 }
-body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .div-attacks-desc {
-  grid-area: desc;
+body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-display-head {
+  grid-area: display-head;
+  background-color: lightgray;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-display {
+  grid-area: display;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-private-head {
+  grid-area: private-head;
+  background-color: lightgray;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-private {
+  grid-area: private;
 }
 body .ui-dialog .tab-content .charsheet .inventory-skinny-section {
   display: flex;

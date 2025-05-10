@@ -97,12 +97,14 @@
         .div
             .collapse-container
                 +collapse('attacks-desc-collapse')
-                +span({'data-i18n':'Show Description'})
+                +span({'data-i18n':'Show Notes'})
                 .expanded
                 .collapsed
                     .div-attacks-details
-                        .div-attacks-desc
-                            +adaptiveTextarea({name:'attacks-desc',class:'boxed'})
+                        +span({'data-i18n':'Displayed on Attack'}).attacks-display-head
+                        +adaptiveTextarea({name:'attacks-display',class:'attacks-display boxed'})
+                        +span({'data-i18n':'Private Notes'}).attacks-private-head
+                        +adaptiveTextarea({name:'attacks-private',class:'attacks-private boxed'})
 +module.
 +scss('sheet').
     .attacks-main{
@@ -214,11 +216,25 @@
             display: grid;
             grid-template-columns: auto;
             grid-template-areas : 
-                'desc'
+                'display-head'
+                'display'
+                'private-head'
+                'private'
             ;
             border: 1px solid var(--borderColor);
-            .div-attacks-desc {
-                grid-area: desc;
+            .attacks-display-head {
+                grid-area: display-head;
+                background-color: lightgray;
+            }
+            .attacks-display {
+                grid-area: display;
+            }
+            .attacks-private-head {
+                grid-area: private-head;
+                background-color: lightgray;
+            }
+            .attacks-private {
+                grid-area: private;
             }
         }
     } 
