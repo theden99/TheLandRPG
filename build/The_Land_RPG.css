@@ -3461,7 +3461,6 @@ body .ui-dialog .tab-content .charsheet .battle-main .battle-title {
 }
 body .ui-dialog .tab-content .charsheet .battle-main .battle-spells {
   grid-area: buttons;
-  width: 1050px;
 }
 body .ui-dialog .tab-content .charsheet .battle-main .battle-spells .battle-spells-section {
   display: grid;
@@ -3479,7 +3478,6 @@ body .ui-dialog .tab-content .charsheet .battle-main .battle-spells .battle-spel
 }
 body .ui-dialog .tab-content .charsheet .battle-main .battle-techs {
   grid-area: buttons;
-  width: 1050px;
 }
 body .ui-dialog .tab-content .charsheet .battle-main .battle-techs .battle-techs-section {
   display: grid;
@@ -3497,20 +3495,19 @@ body .ui-dialog .tab-content .charsheet .battle-main .battle-techs .battle-techs
 }
 body .ui-dialog .tab-content .charsheet .battle-main .battle-attacks {
   grid-area: buttons;
-  width: 1050px;
 }
-body .ui-dialog .tab-content .charsheet .battle-main .battle-attacks .battle-techs-section {
+body .ui-dialog .tab-content .charsheet .battle-main .battle-attacks .battle-attacks-section {
   display: grid;
   grid-template-columns: auto;
   grid-template-areas: "title" "attacks";
 }
-body .ui-dialog .tab-content .charsheet .battle-main .battle-attacks .battle-techs-section .battle-attacks-subtitle {
+body .ui-dialog .tab-content .charsheet .battle-main .battle-attacks .battle-attacks-section .battle-attacks-subtitle {
   grid-area: title;
   font-size: 16px;
   text-align: center;
   font-weight: bold;
 }
-body .ui-dialog .tab-content .charsheet .battle-main .battle-attacks .battle-techs-section .attack-main {
+body .ui-dialog .tab-content .charsheet .battle-main .battle-attacks .battle-attacks-section .attack-main {
   grid-area: attacks;
 }
 body .ui-dialog .tab-content .charsheet .inventory-main {
@@ -3947,9 +3944,6 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-auditor {
   align-items: center;
   gap: var(--tiny-gap);
 }
-body .ui-dialog .tab-content .charsheet .spells-main {
-  width: 1050px;
-}
 body .ui-dialog .tab-content .charsheet .spells-main .spells-roller-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-roller {
   width: 26px;
@@ -3958,27 +3952,54 @@ body .ui-dialog .tab-content .charsheet .spells-main .spells-name-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-name {
   width: 140px;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .spells-type-head,
-body .ui-dialog .tab-content .charsheet .spells-main .spells-type {
+body .ui-dialog .tab-content .charsheet .spells-main .spells-level-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-level {
+  width: 40px;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-magictype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-magictype {
   width: 80px;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-actiontype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-actiontype {
+  width: 60px;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .spells-cost-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-cost {
   width: 40px;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .spells-damage-head,
-body .ui-dialog .tab-content .charsheet .spells-main .spells-damage {
-  width: 70px;
-  text-align: center;
+body .ui-dialog .tab-content .charsheet .spells-main .spells-costtype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-costtype {
+  width: 60px;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .spells-range-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-range {
   width: 45px;
   text-align: center;
 }
+body .ui-dialog .tab-content .charsheet .spells-main .spells-effect-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-effect {
+  width: 70px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amount-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amount {
+  width: 70px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amounttype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amounttype {
+  width: 60px;
+  text-align: center;
+}
 body .ui-dialog .tab-content .charsheet .spells-main .spells-duration-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-duration {
-  width: 50px;
+  width: 65px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-durationamount-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-durationamount {
+  width: 55px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype-head,
@@ -3986,14 +4007,38 @@ body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype {
   width: 60px;
   text-align: center;
 }
+body .ui-dialog .tab-content .charsheet .spells-main .spells-conditiontype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-conditiontype {
+  width: 80px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radius-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radius {
+  width: 50px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radiustype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radiustype {
+  width: 50px;
+  text-align: center;
+}
 body .ui-dialog .tab-content .charsheet .spells-main .spells-roller-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-name-head,
-body .ui-dialog .tab-content .charsheet .spells-main .spells-type-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-level-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-magictype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-actiontype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-cost-head,
-body .ui-dialog .tab-content .charsheet .spells-main .spells-damage-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-costtype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-range-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-effect-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amount-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amounttype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-duration-head,
-body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype-head {
+body .ui-dialog .tab-content .charsheet .spells-main .spells-durationamount-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-conditiontype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radius-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radiustype-head {
   text-align: center;
   background-color: lightskyblue;
   font-weight: bold;
@@ -4007,9 +4052,6 @@ body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details {
 body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-spells-desc {
   grid-area: desc;
 }
-body .ui-dialog .tab-content .charsheet .spells-main {
-  width: 1050px;
-}
 body .ui-dialog .tab-content .charsheet .spells-main .spells-roller-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-roller {
   width: 26px;
@@ -4018,27 +4060,54 @@ body .ui-dialog .tab-content .charsheet .spells-main .spells-name-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-name {
   width: 140px;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .spells-type-head,
-body .ui-dialog .tab-content .charsheet .spells-main .spells-type {
+body .ui-dialog .tab-content .charsheet .spells-main .spells-level-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-level {
+  width: 40px;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-magictype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-magictype {
   width: 80px;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-actiontype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-actiontype {
+  width: 60px;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .spells-cost-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-cost {
   width: 40px;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .spells-damage-head,
-body .ui-dialog .tab-content .charsheet .spells-main .spells-damage {
-  width: 70px;
-  text-align: center;
+body .ui-dialog .tab-content .charsheet .spells-main .spells-costtype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-costtype {
+  width: 60px;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .spells-range-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-range {
   width: 45px;
   text-align: center;
 }
+body .ui-dialog .tab-content .charsheet .spells-main .spells-effect-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-effect {
+  width: 70px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amount-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amount {
+  width: 70px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amounttype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amounttype {
+  width: 60px;
+  text-align: center;
+}
 body .ui-dialog .tab-content .charsheet .spells-main .spells-duration-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-duration {
-  width: 50px;
+  width: 65px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-durationamount-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-durationamount {
+  width: 55px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype-head,
@@ -4046,14 +4115,38 @@ body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype {
   width: 60px;
   text-align: center;
 }
+body .ui-dialog .tab-content .charsheet .spells-main .spells-conditiontype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-conditiontype {
+  width: 80px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radius-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radius {
+  width: 50px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radiustype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radiustype {
+  width: 50px;
+  text-align: center;
+}
 body .ui-dialog .tab-content .charsheet .spells-main .spells-roller-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-name-head,
-body .ui-dialog .tab-content .charsheet .spells-main .spells-type-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-level-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-magictype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-actiontype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-cost-head,
-body .ui-dialog .tab-content .charsheet .spells-main .spells-damage-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-costtype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-range-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-effect-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amount-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amounttype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-duration-head,
-body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype-head {
+body .ui-dialog .tab-content .charsheet .spells-main .spells-durationamount-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-conditiontype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radius-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radiustype-head {
   text-align: center;
   background-color: lightskyblue;
   font-weight: bold;
@@ -4067,9 +4160,6 @@ body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details {
 body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-spells-desc {
   grid-area: desc;
 }
-body .ui-dialog .tab-content .charsheet .spells-main {
-  width: 1050px;
-}
 body .ui-dialog .tab-content .charsheet .spells-main .spells-roller-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-roller {
   width: 26px;
@@ -4078,27 +4168,54 @@ body .ui-dialog .tab-content .charsheet .spells-main .spells-name-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-name {
   width: 140px;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .spells-type-head,
-body .ui-dialog .tab-content .charsheet .spells-main .spells-type {
+body .ui-dialog .tab-content .charsheet .spells-main .spells-level-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-level {
+  width: 40px;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-magictype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-magictype {
   width: 80px;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-actiontype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-actiontype {
+  width: 60px;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .spells-cost-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-cost {
   width: 40px;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .spells-damage-head,
-body .ui-dialog .tab-content .charsheet .spells-main .spells-damage {
-  width: 70px;
-  text-align: center;
+body .ui-dialog .tab-content .charsheet .spells-main .spells-costtype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-costtype {
+  width: 60px;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .spells-range-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-range {
   width: 45px;
   text-align: center;
 }
+body .ui-dialog .tab-content .charsheet .spells-main .spells-effect-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-effect {
+  width: 70px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amount-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amount {
+  width: 70px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amounttype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amounttype {
+  width: 60px;
+  text-align: center;
+}
 body .ui-dialog .tab-content .charsheet .spells-main .spells-duration-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-duration {
-  width: 50px;
+  width: 65px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-durationamount-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-durationamount {
+  width: 55px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype-head,
@@ -4106,14 +4223,38 @@ body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype {
   width: 60px;
   text-align: center;
 }
+body .ui-dialog .tab-content .charsheet .spells-main .spells-conditiontype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-conditiontype {
+  width: 80px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radius-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radius {
+  width: 50px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radiustype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radiustype {
+  width: 50px;
+  text-align: center;
+}
 body .ui-dialog .tab-content .charsheet .spells-main .spells-roller-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-name-head,
-body .ui-dialog .tab-content .charsheet .spells-main .spells-type-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-level-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-magictype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-actiontype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-cost-head,
-body .ui-dialog .tab-content .charsheet .spells-main .spells-damage-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-costtype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-range-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-effect-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amount-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-amounttype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-duration-head,
-body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype-head {
+body .ui-dialog .tab-content .charsheet .spells-main .spells-durationamount-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-conditiontype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radius-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-radiustype-head {
   text-align: center;
   background-color: lightskyblue;
   font-weight: bold;

@@ -2,20 +2,39 @@
     .div-inline
         +span({}).spells-roller-head
         +span({'data-i18n':'Name'}).spells-name-head
-        +span({'data-i18n':'Magic Type'}).spells-type-head
-        +span({'data-i18n':'Mana Cost'}).spells-cost-head
+        +span({'data-i18n':'Level'}).spells-level-head
+        +span({'data-i18n':'Magic Type'}).spells-magictype-head
+        +span({'data-i18n':'Action Type'}).spells-actiontype-head
+        +span({'data-i18n':'Cost'}).spells-cost-head
+        +span({'data-i18n':'Cost Resource'}).spells-costtype-head
         +span({'data-i18n':'Range'}).spells-range-head
-        +span({'data-i18n':'Heal / Damage'}).spells-damage-head
+        +span({'data-i18n':'Effect'}).spells-effect-head
+        +span({'data-i18n':'Amount'}).spells-amount-head
+        +span({'data-i18n':'Amount Resource'}).spells-amounttype-head
         +span({'data-i18n':'Duration'}).spells-duration-head
+        +span({'data-i18n':'Duration Amount'}).spells-durationamount-head
         +span({'data-i18n':'Duration Type'}).spells-durationtype-head
+        +span({'data-i18n':'Condition Type'}).spells-conditiontype-head
+        +span({'data-i18n':'Radius'}).spells-radius-head
+        +span({'data-i18n':'Radius Type'}).spells-radiustype-head
     +customControlFieldset({name:'spells-main-items',addClass:''})
         .div-inline
             +roller({name:spells-roller,class:'general-roller row-skill-roller',trigger:{triggeredFuncs:['funcCore']}})
             +text({name:'spells-spellname',class:'spells-name underlined',value:''})
+            +number({name:'spells-level',class:'spells-level boxed'})
             +select({name:'spells-magictype',class:'spells-type'})
                 each entry,stat in schemaCore.spellresists
                     +option({value:stat,'data-i18n':entry.displayname})
-            +number({name:'spells-manacost',class:'spells-cost boxed'})
+            +select({name:'spells-actiontype',class:'spells-actiontype'})
+                +option({value:0,'data-i18n':'Action'})
+                +option({value:1,'data-i18n':'Bonus'})
+                +option({value:2,'data-i18n':'Move'})
+                +option({value:3,'data-i18n':'Reaction'})
+            +number({name:'spells-cost',class:'spells-cost boxed'})
+            +select({name:'spells-costtype',class:'spells-costtype'})
+                +option({value:0,'data-i18n':'Health'})
+                +option({value:1,'data-i18n':'Stamina'})
+                +option({value:2,'data-i18n':'Mana'})
             +select({name:'spells-range',class:'spells-range'})
                 +option({value:0,'data-i18n':'Self'})
                 +option({value:1,'data-i18n':'Touch'})
@@ -29,20 +48,22 @@
                 +option({value:9,'data-i18n':'100'})
                 +option({value:10,'data-i18n':'150'})
                 +option({value:11,'data-i18n':'200'})
-            +text({name:'spells-damage',class:'spells-damage boxed'})
+            +select({name:'spells-effect',class:'spells-effect'})
+                +option({value:0,'data-i18n':'Heal'})
+                +option({value:1,'data-i18n':'Damage'})
+                +option({value:2,'data-i18n':'Condition'})
+                +option({value:3,'data-i18n':'Other'})
+            +text({name:'spells-amount',class:'spells-amount boxed'})
+            +select({name:'spells-amounttype',class:'spells-amounttype'})
+                +option({value:0,'data-i18n':'Health'})
+                +option({value:1,'data-i18n':'Stamina'})
+                +option({value:2,'data-i18n':'Mana'})
             +select({name:'spells-duration',class:'spells-duration',value:''})
                 +option({value:0,'data-i18n':'Instant'})
-                +option({value:1,'data-i18n':'Sustain'})
-                +option({value:2,'data-i18n':'1'})
-                +option({value:3,'data-i18n':'2'})
-                +option({value:4,'data-i18n':'3'})
-                +option({value:5,'data-i18n':'4'})
-                +option({value:6,'data-i18n':'5'})
-                +option({value:7,'data-i18n':'6'})
-                +option({value:8,'data-i18n':'7'})
-                +option({value:9,'data-i18n':'8'})
-                +option({value:10,'data-i18n':'9'})
-                +option({value:11,'data-i18n':'10'})
+                +option({value:1,'data-i18n':'Timed'})
+                +option({value:2,'data-i18n':'Sustain'})
+                +option({value:3,'data-i18n':'Persistant'})
+            +text({name:'spells-durationamount',class:'spells-durationamount boxed'})
             +select({name:'spells-durationtype',class:'spells-durationtype',value:''})
                 +option({value:0,'data-i18n':'N/A'})
                 +option({value:1,'data-i18n':'Rounds'})
@@ -51,6 +72,30 @@
                 +option({value:4,'data-i18n':'Minutes'})
                 +option({value:5,'data-i18n':'Hours'})
                 +option({value:6,'data-i18n':'Days'})
+            +select({name:'spells-conditiontype',class:'spells-conditiontype',value:''})
+                +option({value:0,'data-i18n':'N/A'})
+                +option({value:1,'data-i18n':'Befuddled'})
+                +option({value:2,'data-i18n':'Blighted'})
+                +option({value:3,'data-i18n':'Blinded'})
+                +option({value:4,'data-i18n':'Charmed'})
+                +option({value:5,'data-i18n':'Deafened'})
+                +option({value:6,'data-i18n':'Enthralled'})
+                +option({value:7,'data-i18n':'Frightened'})
+                +option({value:8,'data-i18n':'Incapacitated'})
+                +option({value:9,'data-i18n':'Nauseous'})
+                +option({value:10,'data-i18n':'Paralyzed'})
+                +option({value:11,'data-i18n':'Prone'})
+                +option({value:12,'data-i18n':'Slowed'})
+                +option({value:13,'data-i18n':'Unconcious'})
+                +option({value:14,'data-i18n':'Cover'})
+                +option({value:15,'data-i18n':'Grappled'})
+            +text({name:'spells-radius',class:'spells-radius boxed'})
+            +select({name:'spells-radiustype',class:'spells-radiustype',value:''})
+                +option({value:0,'data-i18n':'N/A'})
+                +option({value:1,'data-i18n':'Line'})
+                +option({value:2,'data-i18n':'Cone'})
+                +option({value:3,'data-i18n':'Column'})
+                +option({value:4,'data-i18n':'Sphere'})
         .div
             .collapse-container
                 +collapse('spell-desc-collapse')
@@ -63,38 +108,63 @@
 +module.
 +scss('sheet').
     .spells-main{
-        width: 1050px;
 
         .spells-roller-head,
         .spells-roller {
             width: 26px;
         }
-
         .spells-name-head,
         .spells-name{
             width: 140px;
         }
-        .spells-type-head,
-        .spells-type{
+        .spells-level-head,
+        .spells-level{
+            width: 40px;
+        }
+        .spells-magictype-head,
+        .spells-magictype{
             width: 80px;
+        }
+        .spells-actiontype-head,
+        .spells-actiontype{
+            width: 60px;
         }
         .spells-cost-head,
         .spells-cost{
             width: 40px;
         }
-        .spells-damage-head,
-        .spells-damage{
-            width: 70px;
-            text-align: center;
+        .spells-costtype-head,
+        .spells-costtype{
+            width: 60px;
         }
         .spells-range-head,
         .spells-range{
             width: 45px;
             text-align: center;
         }
+        .spells-effect-head,
+        .spells-effect{
+            width: 70px;
+            text-align: center;
+        }
+        .spells-amount-head,
+        .spells-amount{
+            width: 70px;
+            text-align: center;
+        }
+        .spells-amounttype-head,
+        .spells-amounttype{
+            width: 60px;
+            text-align: center;
+        }
         .spells-duration-head,
         .spells-duration{
-            width: 50px;
+            width: 65px;
+            text-align: center;
+        }
+        .spells-durationamount-head,
+        .spells-durationamount{
+            width: 55px;
             text-align: center;
         }
         .spells-durationtype-head,
@@ -102,15 +172,39 @@
             width: 60px;
             text-align: center;
         }
+        .spells-conditiontype-head,
+        .spells-conditiontype{
+            width: 80px;
+            text-align: center;
+        }
+        .spells-radius-head,
+        .spells-radius{
+            width: 50px;
+            text-align: center;
+        }
+        .spells-radiustype-head,
+        .spells-radiustype{
+            width: 50px;
+            text-align: center;
+        }
 
         .spells-roller-head,
         .spells-name-head,
-        .spells-type-head,
+        .spells-level-head,
+        .spells-magictype-head,
+        .spells-actiontype-head,
         .spells-cost-head,
-        .spells-damage-head,
+        .spells-costtype-head,
         .spells-range-head,
+        .spells-effect-head,
+        .spells-amount-head,
+        .spells-amounttype-head,
         .spells-duration-head,
-        .spells-durationtype-head {
+        .spells-durationamount-head,
+        .spells-durationtype-head,
+        .spells-conditiontype-head,
+        .spells-radius-head,
+        .spells-radiustype-head {
             text-align: center;
             background-color: lightskyblue;
             font-weight: bold;
