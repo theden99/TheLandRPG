@@ -2,101 +2,98 @@
     .div-inline
         +span({}).attacks-roller-head
         +span({'data-i18n':'Name'}).attacks-name-head
-        +span({'data-i18n':'Level'}).attacks-level-head
-        +span({'data-i18n':'Magic Type'}).attacks-magictype-head
         +span({'data-i18n':'Action Type'}).attacks-actiontype-head
-        +span({'data-i18n':'Cost'}).attacks-cost-head
-        +span({'data-i18n':'Cost Resource'}).attacks-costtype-head
+        +span({'data-i18n':'Attack Category'}).attacks-attackcat-head
+        +span({'data-i18n':'Weapon Type'}).attacks-weapontype-head
+        +span({'data-i18n':'Attack Type'}).attacks-attacktype-head
+        +span({'data-i18n':'vs'}).attacks-vs-head
         +span({'data-i18n':'Range'}).attacks-range-head
-        +span({'data-i18n':'Effect'}).attacks-effect-head
-        +span({'data-i18n':'Amount'}).attacks-amount-head
-        +span({'data-i18n':'Amount Resource'}).attacks-amounttype-head
-        +span({'data-i18n':'Duration'}).attacks-duration-head
-        +span({'data-i18n':'Duration Amount'}).attacks-durationamount-head
-        +span({'data-i18n':'Duration Type'}).attacks-durationtype-head
-        +span({'data-i18n':'Condition Type'}).attacks-conditiontype-head
-        +span({'data-i18n':'Radius'}).attacks-radius-head
-        +span({'data-i18n':'Radius Type'}).attacks-radiustype-head
+        +span({'data-i18n':'Damage'}).attacks-damage-head
+        +span({'data-i18n':'Damage Stat'}).attacks-damagestat-head
+        +span({'data-i18n':'AV Bonus'}).attacks-avbonus-head
+        +span({'data-i18n':'ACC Bonus'}).attacks-accbonus-head
+        +span({'data-i18n':'Damage Bonus'}).attacks-damagebonus-head
+    .div
+        .div-inline
+            +span({}).attacks-roller-head
+            +span({'data-i18n':'Crit Mult'}).attacks-critmult-head
+            +span({'data-i18n':'Crit Bonus'}).attacks-critbonus-head
+            +span({'data-i18n':'Crit Dam Bonus'}).attacks-critdamagebonus-head
+            +span({'data-i18n':'Damage Type'}).attacks-damagetype-head
+            +span({'data-i18n':'Damage Class'}).attacks-damageclass-head
     +customControlFieldset({name:'attacks-main-items',addClass:''})
         .div-inline
-            +roller({name:'attacks-roller',class:'general-roller row-skill-roller',trigger:{triggeredFuncs:['funcCore']}})
-            +text({name:'attacks-spellname',class:'attacks-name underlined',value:''})
-            +number({name:'attacks-level',class:'attacks-level boxed'})
-            +select({name:'attacks-magictype',class:'attacks-type'})
-                each entry,stat in schemaCore.spellresists
-                    +option({value:stat,'data-i18n':entry.displayname})
+            +roller({name:'attacks-roller',class:'general-roller attacks-roller',trigger:{triggeredFuncs:['funcCore']}})
+            +text({name:'attacks-name',class:'attacks-name underlined',value:''})
             +select({name:'attacks-actiontype',class:'attacks-actiontype'})
-                +option({value:0,'data-i18n':'Action'})
+                +option({value:0,'data-i18n':'Combat'})
                 +option({value:1,'data-i18n':'Bonus'})
                 +option({value:2,'data-i18n':'Move'})
                 +option({value:3,'data-i18n':'Reaction'})
-            +number({name:'attacks-cost',class:'attacks-cost boxed'})
-            +select({name:'attacks-costtype',class:'attacks-costtype'})
-                +option({value:2,'data-i18n':'Mana'})
-                +option({value:1,'data-i18n':'Stamina'})
-                +option({value:0,'data-i18n':'Health'})
-            +select({name:'attacks-range',class:'attacks-range'})
-                +option({value:0,'data-i18n':'Self'})
-                +option({value:1,'data-i18n':'Touch'})
-                +option({value:2,'data-i18n':'5'})
-                +option({value:3,'data-i18n':'10'})
-                +option({value:4,'data-i18n':'20'})
-                +option({value:5,'data-i18n':'30'})
-                +option({value:6,'data-i18n':'40'})
-                +option({value:7,'data-i18n':'50'})
-                +option({value:8,'data-i18n':'60'})
-                +option({value:9,'data-i18n':'100'})
-                +option({value:10,'data-i18n':'150'})
-                +option({value:11,'data-i18n':'200'})
-            +select({name:'attacks-effect',class:'attacks-effect'})
-                +option({value:0,'data-i18n':'Heal'})
-                +option({value:1,'data-i18n':'Damage'})
-                +option({value:2,'data-i18n':'Condition'})
-                +option({value:3,'data-i18n':'Other'})
-            +text({name:'attacks-amount',class:'attacks-amount boxed'})
-            +select({name:'attacks-amounttype',class:'attacks-amounttype'})
-                +option({value:0,'data-i18n':'Health'})
-                +option({value:1,'data-i18n':'Stamina'})
-                +option({value:2,'data-i18n':'Mana'})
-                +option({value:3,'data-i18n':'N/A'})
-            +select({name:'attacks-duration',class:'attacks-duration',value:''})
-                +option({value:0,'data-i18n':'Instant'})
-                +option({value:1,'data-i18n':'Timed'})
-                +option({value:2,'data-i18n':'Sustain'})
-                +option({value:3,'data-i18n':'Persistant'})
-            +text({name:'attacks-durationamount',class:'attacks-durationamount boxed'})
-            +select({name:'attacks-durationtype',class:'attacks-durationtype',value:''})
-                +option({value:0,'data-i18n':'N/A'})
-                +option({value:1,'data-i18n':'Rounds'})
-                +option({value:2,'data-i18n':'Turns'})
-                +option({value:3,'data-i18n':'Seconds'})
-                +option({value:4,'data-i18n':'Minutes'})
-                +option({value:5,'data-i18n':'Hours'})
-                +option({value:6,'data-i18n':'Days'})
-            +select({name:'attacks-conditiontype',class:'attacks-conditiontype',value:''})
-                +option({value:0,'data-i18n':'N/A'})
-                +option({value:1,'data-i18n':'Befuddled'})
-                +option({value:2,'data-i18n':'Blighted'})
-                +option({value:3,'data-i18n':'Blinded'})
-                +option({value:4,'data-i18n':'Charmed'})
-                +option({value:5,'data-i18n':'Deafened'})
-                +option({value:6,'data-i18n':'Enthralled'})
-                +option({value:7,'data-i18n':'Frightened'})
-                +option({value:8,'data-i18n':'Incapacitated'})
-                +option({value:9,'data-i18n':'Nauseous'})
-                +option({value:10,'data-i18n':'Paralyzed'})
-                +option({value:11,'data-i18n':'Prone'})
-                +option({value:12,'data-i18n':'Slowed'})
-                +option({value:13,'data-i18n':'Unconcious'})
-                +option({value:14,'data-i18n':'Cover'})
-                +option({value:15,'data-i18n':'Grappled'})
-            +text({name:'attacks-radius',class:'attacks-radius boxed'})
-            +select({name:'attacks-radiustype',class:'attacks-radiustype',value:''})
-                +option({value:0,'data-i18n':'N/A'})
-                +option({value:1,'data-i18n':'Line'})
-                +option({value:2,'data-i18n':'Cone'})
-                +option({value:3,'data-i18n':'Column'})
-                +option({value:4,'data-i18n':'Sphere'})
+                +option({value:4,'data-i18n':'Free'})
+            +select({name:'attacks-attackcat',class:'attacks-attackcat'})
+                +option({value:0,'data-i18n':'Melee'})
+                +option({value:1,'data-i18n':'Thrown'})
+                +option({value:2,'data-i18n':'Range'})
+                +option({value:3,'data-i18n':'Spell'})
+            +select({name:'attacks-weapontype',class:'attacks-weapontype'})
+                +option({value:0,'data-i18n':'Archery'})
+                +option({value:1,'data-i18n':'Axes'})
+                +option({value:2,'data-i18n':'Crossbows'})
+                +option({value:3,'data-i18n':'Hammers'})
+                +option({value:4,'data-i18n':'Maces'})
+                +option({value:5,'data-i18n':'Small Blades'})
+                +option({value:6,'data-i18n':'Spears'})
+                +option({value:7,'data-i18n':'Staves'})
+                +option({value:8,'data-i18n':'Swords'})
+                +option({value:9,'data-i18n':'Shield Bash'})
+                +option({value:10,'data-i18n':'Unarmed Combat'})
+                +option({value:11,'data-i18n':'Air Magic'})
+                +option({value:12,'data-i18n':'Dark Magic'})
+                +option({value:13,'data-i18n':'Death Magic'})
+                +option({value:14,'data-i18n':'Earch Magic'})
+                +option({value:15,'data-i18n':'Fire Magic'})
+                +option({value:16,'data-i18n':'Life Magic'})
+                +option({value:17,'data-i18n':'Light Magic'})
+                +option({value:18,'data-i18n':'Water Magic'})
+            +select({name:'attacks-attacktype',class:'attacks-attacktype'})
+                +option({value:0,'data-i18n':'Standard Attack'})
+                +option({value:1,'data-i18n':'Dual Wield(Main,Non)'})
+                +option({value:2,'data-i18n':'Dual Wield(Main,Small)'})
+                +option({value:3,'data-i18n':'Dual Wield(Off,Non)'})
+                +option({value:4,'data-i18n':'Dual Wield(Off,Small)'})
+                +option({value:5,'data-i18n':'Two Handed'})
+                +option({value:6,'data-i18n':'Keen Shot'})
+                +option({value:7,'data-i18n':'Second Attack'})
+                +option({value:8,'data-i18n':'Third Attack'})
+                +option({value:9,'data-i18n':'Forth Attack'})
+                +option({value:10,'data-i18n':'Fifth Attack'})
+            +select({name:'attacks-vs',class:'attacks-vs'})
+                +option({value:0,'data-i18n':'Armor'})
+                +option({value:0,'data-i18n':'Dodge'})
+                +option({value:0,'data-i18n':'Mental'})
+            +text({name:'attacks-range',class:'attacks-range boxed'})
+            +text({name:'attacks-damaage',class:'attacks-damage boxed'})
+            +select({name:'attacks-damagestat',class:'attacks-damagestat'})
+                each entry,stat in schemaCore.stats
+                    +option({value:stat,'data-i18n':entry.displayname})
+            +text({name:'attacks-avbonus',class:'attacks-avbonus boxed'})
+            +text({name:'attacks-accbonus',class:'attacks-accbonus boxed'})
+            +text({name:'attacks-damagebonus',class:'attacks-damagebonus boxed'})
+        .div
+            .div-inline
+                +span({}).attacks-roller-head
+                +text({name:'attacks-critmult',class:'attacks-critmult boxed'})
+                +text({name:'attacks-critbonus',class:'attacks-critbonus boxed'})
+                +text({name:'attacks-critdamagebonus',class:'attacks-critdamagebonus boxed'})
+                +select({name:'attacks-damagetype',class:'attacks-damagetype'})
+                    +option({value:0,'data-i18n':'Physical'})
+                    each entry,stat in schemaCore.spellresists
+                        +option({value:stat,'data-i18n':entry.displayname})
+                +select({name:'attacks-damagetype',class:'attacks-damagetype'})
+                    +option({value:0,'data-i18n':'None(Basic)'})
+                    each entry,stat in schemaCore.resists
+                        +option({value:stat,'data-i18n':entry.displayname})
         .div
             .collapse-container
                 +collapse('attacks-desc-collapse')
@@ -115,97 +112,99 @@
             width: 26px;
         }
         .attacks-name-head,
-        .attacks-name{
-            width: 140px;
-        }
-        .attacks-level-head,
-        .attacks-level{
-            width: 40px;
-        }
-        .attacks-magictype-head,
-        .attacks-magictype{
-            width: 80px;
+        .attacks-name {
+            width: 180px;
         }
         .attacks-actiontype-head,
-        .attacks-actiontype{
+        .attacks-actiontype {
             width: 60px;
         }
-        .attacks-cost-head,
-        .attacks-cost{
-            width: 40px;
+        .attacks-attackcat-head,
+        .attacks-attackcat{
+            width: 100px;
         }
-        .attacks-costtype-head,
-        .attacks-costtype{
-            width: 60px;
+        .attacks-weapontype-head,
+        .attacks-weapontype{
+            width: 105px;
+        }
+        .attacks-attacktype-head,
+        .attacks-attacktype{
+            width: 135px;
+        }
+        .attacks-vs-head,
+        .attacks-vs {
+            width: 50px;
         }
         .attacks-range-head,
-        .attacks-range{
-            width: 45px;
+        .attacks-range {
+            width: 40px;
             text-align: center;
         }
-        .attacks-effect-head,
-        .attacks-effect{
-            width: 70px;
-            text-align: center;
-        }
-        .attacks-amount-head,
-        .attacks-amount{
-            width: 70px;
-            text-align: center;
-        }
-        .attacks-amounttype-head,
-        .attacks-amounttype{
+        .attacks-damage-head,
+        .attacks-damage {
             width: 60px;
             text-align: center;
         }
-        .attacks-duration-head,
-        .attacks-duration{
-            width: 65px;
-            text-align: center;
-        }
-        .attacks-durationamount-head,
-        .attacks-durationamount{
-            width: 55px;
-            text-align: center;
-        }
-        .attacks-durationtype-head,
-        .attacks-durationtype{
-            width: 60px;
-            text-align: center;
-        }
-        .attacks-conditiontype-head,
-        .attacks-conditiontype{
+        .attacks-damagestat-head,
+        .attacks-damagestat {
             width: 80px;
+        }
+        .attacks-avbonus-head,
+        .attacks-avbonus {
+            width: 40px;
             text-align: center;
         }
-        .attacks-radius-head,
-        .attacks-radius{
-            width: 50px;
+        .attacks-accbonus-head,
+        .attacks-accbonus {
+            width: 40px;
             text-align: center;
         }
-        .attacks-radiustype-head,
-        .attacks-radiustype{
-            width: 50px;
+        .attacks-damagebonus-head,
+        .attacks-damagebonus {
+            width: 60px;
             text-align: center;
+        }
+        .attacks-critmult-head,
+        .attacks-critmult {
+            width: 40px;
+            text-align: center;
+        }
+        .attacks-critbonus-head,
+        .attacks-critbonus {
+            width: 40px;
+            text-align: center;
+        }
+        .attacks-critdamagebonus-head,
+        .attacks-critdamagebonus {
+            width: 40px;
+            text-align: center;
+        }
+        .attacks-damagetype-head,
+        .attacks-damagetype {
+            width: 80px;
+        }
+        .attacks-damageclass-head,
+        .attacks-damageclass {
+            width: 80px;
         }
 
-        .attacks-roller-head,
         .attacks-name-head,
-        .attacks-level-head,
-        .attacks-magictype-head,
         .attacks-actiontype-head,
-        .attacks-cost-head,
-        .attacks-costtype-head,
+        .attacks-attackcat-head,
+        .attacks-weapontype-head,
+        .attacks-attacktype-head,
+        .attacks-vs-head,
         .attacks-range-head,
-        .attacks-effect-head,
-        .attacks-amount-head,
-        .attacks-amounttype-head,
-        .attacks-duration-head,
-        .attacks-durationamount-head,
-        .attacks-durationtype-head,
-        .attacks-conditiontype-head,
-        .attacks-radius-head,
-        .attacks-radiustype-head {
+        .attacks-damage-head,
+        .attacks-damagestat-head,
+        .attacks-avbonus-head,
+        .attacks-accbonus-head,
+        .attacks-damagebonus-head,
+        .attacks-critmult-head,
+        .attacks-critbonus-head,
+        .attacks-critdamagebonus-head,
+        .attacks-damagetype-head,
+        .attacks-damageclass-head {
             text-align: center;
             background-color: lightskyblue;
             font-weight: bold;

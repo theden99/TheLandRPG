@@ -4166,95 +4166,97 @@ body .ui-dialog .tab-content .charsheet .attacks-main .attacks-roller {
 }
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-name-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-name {
-  width: 140px;
-}
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-level-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-level {
-  width: 40px;
-}
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-magictype-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-magictype {
-  width: 80px;
+  width: 180px;
 }
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-actiontype-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-actiontype {
   width: 60px;
 }
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-cost-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-cost {
-  width: 40px;
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-attackcat-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-attackcat {
+  width: 100px;
 }
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-costtype-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-costtype {
-  width: 60px;
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-weapontype-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-weapontype {
+  width: 105px;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-attacktype-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-attacktype {
+  width: 135px;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-vs-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-vs {
+  width: 50px;
 }
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-range-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-range {
-  width: 45px;
+  width: 40px;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-effect-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-effect {
-  width: 70px;
-  text-align: center;
-}
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-amount-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-amount {
-  width: 70px;
-  text-align: center;
-}
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-amounttype-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-amounttype {
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damage-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damage {
   width: 60px;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-duration-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-duration {
-  width: 65px;
-  text-align: center;
-}
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-durationamount-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-durationamount {
-  width: 55px;
-  text-align: center;
-}
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-durationtype-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-durationtype {
-  width: 60px;
-  text-align: center;
-}
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-conditiontype-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-conditiontype {
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagestat-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagestat {
   width: 80px;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-avbonus-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-avbonus {
+  width: 40px;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-radius-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-radius {
-  width: 50px;
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-accbonus-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-accbonus {
+  width: 40px;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-radiustype-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-radiustype {
-  width: 50px;
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagebonus-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagebonus {
+  width: 60px;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-roller-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-critmult-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-critmult {
+  width: 40px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-critbonus-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-critbonus {
+  width: 40px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-critdamagebonus-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-critdamagebonus {
+  width: 40px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagetype-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagetype {
+  width: 80px;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damageclass-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damageclass {
+  width: 80px;
+}
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-name-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-level-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-magictype-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-actiontype-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-cost-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-costtype-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-attackcat-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-weapontype-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-attacktype-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-vs-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-range-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-effect-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-amount-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-amounttype-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-duration-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-durationamount-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-durationtype-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-conditiontype-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-radius-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-radiustype-head {
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damage-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagestat-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-avbonus-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-accbonus-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagebonus-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-critmult-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-critbonus-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-critdamagebonus-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagetype-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damageclass-head {
   text-align: center;
   background-color: lightskyblue;
   font-weight: bold;

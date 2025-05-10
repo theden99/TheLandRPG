@@ -19,17 +19,18 @@
         +span({'data-i18n':'Radius Type'}).spells-radiustype-head
     +customControlFieldset({name:'spells-main-items',addClass:''})
         .div-inline
-            +roller({name:'spells-roller',class:'general-roller row-skill-roller',trigger:{triggeredFuncs:['funcCore']}})
-            +text({name:'spells-spellname',class:'spells-name underlined',value:''})
+            +roller({name:'spells-roller',class:'general-roller spells-roller',trigger:{triggeredFuncs:['funcCore']}})
+            +text({name:'spells-name',class:'spells-name underlined',value:''})
             +number({name:'spells-level',class:'spells-level boxed'})
             +select({name:'spells-magictype',class:'spells-type'})
                 each entry,stat in schemaCore.spellresists
                     +option({value:stat,'data-i18n':entry.displayname})
             +select({name:'spells-actiontype',class:'spells-actiontype'})
-                +option({value:0,'data-i18n':'Action'})
+                +option({value:0,'data-i18n':'Combat'})
                 +option({value:1,'data-i18n':'Bonus'})
                 +option({value:2,'data-i18n':'Move'})
                 +option({value:3,'data-i18n':'Reaction'})
+                +option({value:4,'data-i18n':'Free'})
             +number({name:'spells-cost',class:'spells-cost boxed'})
             +select({name:'spells-costtype',class:'spells-costtype'})
                 +option({value:2,'data-i18n':'Mana'})

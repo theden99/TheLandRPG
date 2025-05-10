@@ -19,17 +19,18 @@
         +span({'data-i18n':'Radius Type'}).techs-radiustype-head
     +customControlFieldset({name:'techs-main-items',addClass:''})
         .div-inline
-            +roller({name:'techs-roller',class:'general-roller row-skill-roller',trigger:{triggeredFuncs:['funcCore']}})
-            +text({name:'techs-spellname',class:'techs-name underlined',value:''})
+            +roller({name:'techs-roller',class:'general-roller techs-roller',trigger:{triggeredFuncs:['funcCore']}})
+            +text({name:'techs-name',class:'techs-name underlined',value:''})
             +number({name:'techs-level',class:'techs-level boxed'})
             +select({name:'techs-magictype',class:'techs-type'})
                 each entry,stat in schemaCore.spellresists
                     +option({value:stat,'data-i18n':entry.displayname})
             +select({name:'techs-actiontype',class:'techs-actiontype'})
-                +option({value:0,'data-i18n':'Action'})
+                +option({value:0,'data-i18n':'Combat'})
                 +option({value:1,'data-i18n':'Bonus'})
                 +option({value:2,'data-i18n':'Move'})
                 +option({value:3,'data-i18n':'Reaction'})
+                +option({value:4,'data-i18n':'Free'})
             +number({name:'techs-cost',class:'techs-cost boxed'})
             +select({name:'techs-costtype',class:'techs-costtype'})
                 +option({value:1,'data-i18n':'Stamina'})
