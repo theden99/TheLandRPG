@@ -3938,6 +3938,102 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-marketloot .the
   width: 30px;
   text-align: center;
 }
+body .ui-dialog .tab-content .charsheet .logs-main {
+  display: grid;
+  grid-gap: var(--tiny-gap);
+  font-size: 12px;
+  font-family: Arial;
+  font-weight: normal;
+  width: 1100px;
+  grid-template-columns: auto;
+  grid-template-areas: "title" "buttons";
+}
+body .ui-dialog .tab-content .charsheet .logs-main .repitem:hover > .collapse, body .ui-dialog .tab-content .charsheet .logs-main .repitem:hover .roll-container,
+body .ui-dialog .tab-content .charsheet .logs-main .collapse-container:hover > .collapse,
+body .ui-dialog .tab-content .charsheet .logs-main .collapse-container:hover .roll-container {
+  opacity: 1;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .repitem > .collapse,
+body .ui-dialog .tab-content .charsheet .logs-main .collapse-container > .collapse {
+  opacity: 1;
+  position: absolute;
+  left: -10px;
+  top: 0px;
+  pointer-events: auto;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-title {
+  grid-area: title;
+  font-size: 24px;
+  text-align: center;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-general {
+  grid-area: buttons;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-general .logs-general-section {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-areas: "title" "general";
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-general .logs-general-section .logs-general-subtitle {
+  grid-area: title;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-general .logs-general-section .logs-general-main {
+  grid-area: general;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-notes {
+  grid-area: buttons;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-notes .logs-notes-section {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-areas: "title" "notes";
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-notes .logs-notes-section .logs-notes-subtitle {
+  grid-area: title;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-notes .logs-notes-section .notes-main {
+  grid-area: notes;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure {
+  grid-area: buttons;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure .logs-adventure-section {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-areas: "title" "adventure";
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure .logs-adventure-section .logs-adventure-subtitle {
+  grid-area: title;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure .logs-adventure-section .logs-adventure-head .logs-adventure-main .adventure-entry {
+  width: 240px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure .logs-adventure-section .logs-adventure-head .logs-adventure-main .adventure-xp {
+  width: 60px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure .logs-adventure-section .logs-adventure-head .logs-adventure-main .adventure-downtime {
+  width: 60px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure .logs-adventure-section .logs-adventure-head .logs-adventure-main .adventure-xp-label,
+body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure .logs-adventure-section .logs-adventure-head .logs-adventure-main .adventure-downtime-label {
+  text-align: center;
+  background-color: lightskyblue;
+  font-weight: bold;
+  width: 120px;
+}
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-auditor {
   display: flex;
   flex-wrap: wrap;
