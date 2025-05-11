@@ -7,7 +7,7 @@
             +span({'data-i18n':'Qty'}).item-head-qty.underlined
             +span({'data-i18n':'Slot'}).item-head-slot.underlined
         .div-inven-items.div-inline
-            +customControlFieldset({name:'inventory-storage-items',addClass:'',trigger:{affects:['inventory-totweight'],triggeredFuncs:['doStorageRemove']}})
+            +customControlFieldset({name:'inventory-storage-items',addClass:'',trigger:{affects:['inventory-totweight'],triggeredFuncs:['doRemoveItem']}})
                 +text({name:'itemname',class:'item_itemname underlined',value:''})
                 +select({name:'slottypeitem',class:'item_slottype underlined'})
                     +option({value:'slottypeArmor','data-i18n':'Armor'})
@@ -23,34 +23,11 @@
                     +option({value:'slotStorageSack','data-i18n':'Sack'})
                     +option({value:'slotStorageWagonMount','data-i18n':'Wagon/Mount'})
                     +option({value:'slotStorageHouseBank','data-i18n':'House/Bank'})
-                +button({name:'unequip-storage-button',type:'action','data-i18n':'Unequip',class:'staging-button',trigger:{triggeredFuncs:['doStorageUnequip']}})
+                +button({name:'unequip-storage-button',type:'action','data-i18n':'Unequip',class:'staging-button',trigger:{triggeredFuncs:['doUnequipItem']}})
                 +text({name:'trashcan-padding',class:'item_padding',readonly:''})
                 +text({name:'slottype',class:'underlined hidden',readonly:''})
                 +collapseItemDetails('inventory-totweight')
 +module.
-    const doStorageRemove = ({trigger,attributes,sections,casc}) => {
-        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
-
-        attributes['inventory-totweight'] = calcTotWeightInventory({trigger,attributes,sections,casc});
-    };
-    k.registerFuncs({doStorageRemove});
-
-    const doStorageUnequip = ({trigger,attributes,sections,casc}) => {
-        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
-
-        const fromSectionID = sectionName+'_'+rowID;
-
-        const toSection = 'repeating_inventory-stagingarea-items';
-        const toSectionID = k.generateRowID(toSection,sections);
-
-        doSectionCopy(attributes,sections,fromSectionID,toSectionID);
-
-        k.removeRepeatingRow(fromSectionID,attributes,sections);
-
-        checkStagingAreaCollapse(attributes,sections);
-    };
-    k.registerFuncs({doStorageUnequip});
-
 +scss('sheet').
     .inventory-storage-section{
         display: flex;

@@ -11,28 +11,28 @@ mixin rowSkillType(iSkillType)
                             +collapseSubskills(idChaosSeed,idSkills,idSkills,skill,entry[idParents])
                         if (entry[idSubSkills].length>0)
                             +collapseSubskills(idChaosSeed,idSkills,idSkills,skill,entry[idSubSkills])
-        +tab({name:'skills-'+iSkillType+'-uncommon', container:'section', button:{class:'thelandrpg-subtab-button','data-i18n':'Uncommon'}})
-            include ../sections/_skills-header.pug
-            each entry,skill in schemaCore.skills
-                if (entry[idSkillType]===iSkillType) && (entry[idRarity]===idUncommon)
-                    +rowSkill(idChaosSeed,idSkills,idSkills,skill)
-                    .div-boxed
-                        +collapseHelp(idChaosSeed,idSkills,idSkills,skill,entry)
-                        if (entry[idParents].length>0)
-                            +collapseSubskills(idChaosSeed,idSkills,idSkills,skill,entry[idParents])
-                        if (entry[idSubSkills].length>0)
-                            +collapseSubskills(idChaosSeed,idSkills,idSkills,skill,entry[idSubSkills])
-        +tab({name:'skills-'+iSkillType+'-rare', container:'section', button:{class:'thelandrpg-subtab-button','data-i18n':'Rare'}})
-            include ../sections/_skills-header.pug
-            each entry,skill in schemaCore.skills
-                if (entry[idSkillType]===iSkillType) && (entry[idRarity]===idRare)
-                    +rowSkill(idChaosSeed,idSkills,idSkills,skill)
-                    .div-boxed
-                        +collapseHelp(idChaosSeed,idSkills,idSkills,skill,entry)
-                        if (entry[idParents].length>0)
-                            +collapseSubskills(idChaosSeed,idSkills,idSkills,skill,entry[idParents])
-                        if (entry[idSubSkills].length>0)
-                            +collapseSubskills(idChaosSeed,idSkills,idSkills,skill,entry[idSubSkills])
+//        +tab({name:'skills-'+iSkillType+'-uncommon', container:'section', button:{class:'thelandrpg-subtab-button','data-i18n':'Uncommon'}})
+//            include ../sections/_skills-header.pug
+//            each entry,skill in schemaCore.skills
+//                if (entry[idSkillType]===iSkillType) && (entry[idRarity]===idUncommon)
+//                    +rowSkill(idChaosSeed,idSkills,idSkills,skill)
+//                    .div-boxed
+//                        +collapseHelp(idChaosSeed,idSkills,idSkills,skill,entry)
+//                        if (entry[idParents].length>0)
+//                            +collapseSubskills(idChaosSeed,idSkills,idSkills,skill,entry[idParents])
+//                        if (entry[idSubSkills].length>0)
+//                            +collapseSubskills(idChaosSeed,idSkills,idSkills,skill,entry[idSubSkills])
+//        +tab({name:'skills-'+iSkillType+'-rare', container:'section', button:{class:'thelandrpg-subtab-button','data-i18n':'Rare'}})
+//            include ../sections/_skills-header.pug
+//            each entry,skill in schemaCore.skills
+//                if (entry[idSkillType]===iSkillType) && (entry[idRarity]===idRare)
+//                    +rowSkill(idChaosSeed,idSkills,idSkills,skill)
+//                    .div-boxed
+//                        +collapseHelp(idChaosSeed,idSkills,idSkills,skill,entry)
+//                        if (entry[idParents].length>0)
+//                            +collapseSubskills(idChaosSeed,idSkills,idSkills,skill,entry[idParents])
+//                        if (entry[idSubSkills].length>0)
+//                            +collapseSubskills(idChaosSeed,idSkills,idSkills,skill,entry[idSubSkills])
 +scss('sheet').
     .div-boxed {
         border-width: 1px;

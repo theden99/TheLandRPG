@@ -60,48 +60,48 @@
                 each entry,stat in schemaCore.combatstats
                     +rowCombatStat(idChaosSeed,idCombatStats,idCombatStats,stat,entry,'row-combat',stat)
                     +collapseHelp(idChaosSeed,idCombatStats,idCombatStats,stat,entry)
-        .chaosseed-resists
-            .row-resists-section.paper-background
-                +span({'data-i18n':'Normal Resistances'}).row-resists-title
-                .div-inline
-                    +span({'data-i18n':'Resist'}).row-resists-noroller.row-resists-header
-                    +span({'data-i18n':'Base'}).row-resists-base.row-resists-header
-                    +span({'data-i18n':'Equip Bonus'}).row-resists-equipbonus.row-resists-header
-                    +span({'data-i18n':'Buff Bonus'}).row-resists-buffbonus.row-resists-header
-                    +span({'data-i18n':'Misc Bonus'}).row-resists-miscbonus.row-resists-header
-                    +span({'data-i18n':'Total'}).row-resists-total.row-resists-header
-                    +span({'data-i18n':''}).column-help.row-resists-header
-                each entry,stat in schemaCore.resists
-                    +rowCombatStat(idChaosSeed,idResists,idResists,stat,entry,'row-resists',idNone,false)
-                    +collapseHelp(idChaosSeed,idResists,idResists,stat,entry)
-        .chaosseed-spellresists
-            .row-resists-section.paper-background
-                +span({'data-i18n':'Spell Resistances'}).row-resists-title
-                .div-inline
-                    +span({'data-i18n':'Spell Resist'}).row-resists-noroller.row-resists-header
-                    +span({'data-i18n':'Base'}).row-resists-base.row-resists-header
-                    +span({'data-i18n':'Equip Bonus'}).row-resists-equipbonus.row-resists-header
-                    +span({'data-i18n':'Buff Bonus'}).row-resists-buffbonus.row-resists-header
-                    +span({'data-i18n':'Misc Bonus'}).row-resists-miscbonus.row-resists-header
-                    +span({'data-i18n':'Total'}).row-resists-total.row-resists-header
-                    +span({'data-i18n':''}).column-help.row-resists-header
-                each entry,stat in schemaCore.spellresists
-                    +rowCombatStat(idChaosSeed,idResists,idResists,stat,entry,'row-resists',idNone,false)
-                    +collapseHelp(idChaosSeed,idResists,idResists,stat,entry)
-        .chaosseed-efficiencies
-            .row-efficiencies-section.paper-background
-                +span({'data-i18n':'Efficiencies'}).row-efficiencies-title
-                .div-inline
-                    +span({'data-i18n':'Efficiency'}).row-efficiencies-noroller.row-efficiencies-header
-                    +span({'data-i18n':'Base'}).row-efficiencies-base.row-efficiencies-header
-                    +span({'data-i18n':'Equip Bonus'}).row-efficiencies-equipbonus.row-efficiencies-header
-                    +span({'data-i18n':'Buff Bonus'}).row-efficiencies-buffbonus.row-efficiencies-header
-                    +span({'data-i18n':'Misc Bonus'}).row-efficiencies-miscbonus.row-efficiencies-header
-                    +span({'data-i18n':'Total'}).row-efficiencies-total.row-efficiencies-header
-                    +span({'data-i18n':''}).column-help.row-efficiencies-header
-                each entry,stat in schemaCore.efficiencies
-                    +rowCombatStat(idChaosSeed,idEfficiencies,idEfficiencies,stat,entry,'row-efficiencies',idNone,false)
-                    +collapseHelp(idChaosSeed,idEfficiencies,idEfficiencies,stat,entry)
+//        .chaosseed-resists
+//            .row-resists-section.paper-background
+//                +span({'data-i18n':'Normal Resistances'}).row-resists-title
+//                .div-inline
+//                    +span({'data-i18n':'Resist'}).row-resists-noroller.row-resists-header
+//                    +span({'data-i18n':'Base'}).row-resists-base.row-resists-header
+//                    +span({'data-i18n':'Equip Bonus'}).row-resists-equipbonus.row-resists-header
+//                    +span({'data-i18n':'Buff Bonus'}).row-resists-buffbonus.row-resists-header
+//                    +span({'data-i18n':'Misc Bonus'}).row-resists-miscbonus.row-resists-header
+//                    +span({'data-i18n':'Total'}).row-resists-total.row-resists-header
+//                    +span({'data-i18n':''}).column-help.row-resists-header
+//                each entry,stat in schemaCore.resists
+//                    +rowCombatStat(idChaosSeed,idResists,idResists,stat,entry,'row-resists',idNone,false)
+//                    +collapseHelp(idChaosSeed,idResists,idResists,stat,entry)
+//        .chaosseed-spellresists
+//            .row-resists-section.paper-background
+//                +span({'data-i18n':'Spell Resistances'}).row-resists-title
+//                .div-inline
+//                    +span({'data-i18n':'Spell Resist'}).row-resists-noroller.row-resists-header
+//                    +span({'data-i18n':'Base'}).row-resists-base.row-resists-header
+//                    +span({'data-i18n':'Equip Bonus'}).row-resists-equipbonus.row-resists-header
+//                    +span({'data-i18n':'Buff Bonus'}).row-resists-buffbonus.row-resists-header
+//                    +span({'data-i18n':'Misc Bonus'}).row-resists-miscbonus.row-resists-header
+//                    +span({'data-i18n':'Total'}).row-resists-total.row-resists-header
+//                    +span({'data-i18n':''}).column-help.row-resists-header
+//                each entry,stat in schemaCore.spellresists
+//                    +rowCombatStat(idChaosSeed,idResists,idResists,stat,entry,'row-resists',idNone,false)
+//                    +collapseHelp(idChaosSeed,idResists,idResists,stat,entry)
+//        .chaosseed-efficiencies
+//            .row-efficiencies-section.paper-background
+//                +span({'data-i18n':'Efficiencies'}).row-efficiencies-title
+//                .div-inline
+//                    +span({'data-i18n':'Efficiency'}).row-efficiencies-noroller.row-efficiencies-header
+//                    +span({'data-i18n':'Base'}).row-efficiencies-base.row-efficiencies-header
+//                    +span({'data-i18n':'Equip Bonus'}).row-efficiencies-equipbonus.row-efficiencies-header
+//                    +span({'data-i18n':'Buff Bonus'}).row-efficiencies-buffbonus.row-efficiencies-header
+//                    +span({'data-i18n':'Misc Bonus'}).row-efficiencies-miscbonus.row-efficiencies-header
+//                    +span({'data-i18n':'Total'}).row-efficiencies-total.row-efficiencies-header
+//                    +span({'data-i18n':''}).column-help.row-efficiencies-header
+//                each entry,stat in schemaCore.efficiencies
+//                    +rowCombatStat(idChaosSeed,idEfficiencies,idEfficiencies,stat,entry,'row-efficiencies',idNone,false)
+//                    +collapseHelp(idChaosSeed,idEfficiencies,idEfficiencies,stat,entry)
 +module.
     const assembleRollField = (attrName,attributes) => {
         let rollString = attributes['character_name'] + ' rolls a ' + `${attrName}` + ' check of [[ 1d100 + ' +  `@{${attrName}-total}` + 'd100 [statd100] - @{target|target1|stat-total} [t1-stat] - @{target|target2|stat-total} [t2-stat] ]] ';

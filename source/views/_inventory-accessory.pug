@@ -6,7 +6,7 @@
             +span({'data-i18n':'Slot'}).item-head-slot.underlined
             +span({'data-i18n':'Qty'}).item-head-qty.underlined
         .div-inven-items.div-inline
-            +customControlFieldset({name:'inventory-accessory-items',addClass:'',trigger:{affects:['inventory-totweight'],triggeredFuncs:['doAccessoryRemove']}})
+            +customControlFieldset({name:'inventory-accessory-items',addClass:'',trigger:{affects:['inventory-totweight'],triggeredFuncs:['doRemoveItem']}})
                 +text({name:'itemname',class:'item_itemname underlined',value:''})
                 +select({name:'slot',class:'item_slot underlined'})
                     +option({value:'slotAccessoryNeck','data-i18n':'Neck'})
@@ -26,34 +26,11 @@
                     +option({value:'slotAccessoryRing7','data-i18n':'Ring-7'})
                     +option({value:'slotAccessoryRing8','data-i18n':'Ring-8'})
                 +number({name:'qty',class:'item_qty boxed',value:1})
-                +button({name:'unequip-accessory-button',type:'action','data-i18n':'Unequip',class:'staging-button',trigger:{triggeredFuncs:['doAccessoryUnequip']}})
+                +button({name:'unequip-accessory-button',type:'action','data-i18n':'Unequip',class:'staging-button',trigger:{triggeredFuncs:['doUnequipItem']}})
                 +text({name:'trashcan-padding',class:'item_padding',readonly:''})
                 +text({name:'slottype',class:'underlined hidden',readonly:''})
                 +collapseItemDetails('inventory-totweight')
 +module.
-    const doAccessoryRemove = ({trigger,attributes,sections,casc}) => {
-        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
-
-        attributes['inventory-totweight'] = calcTotWeightInventory({trigger,attributes,sections,casc});
-    };
-    k.registerFuncs({doAccessoryRemove});
-
-    const doAccessoryUnequip = ({trigger,attributes,sections,casc}) => {
-        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
-
-        const fromSectionID = sectionName+'_'+rowID;
-
-        const toSection = 'repeating_inventory-stagingarea-items';
-        const toSectionID = k.generateRowID(toSection,sections);
-
-        doSectionCopy(attributes,sections,fromSectionID,toSectionID);
-
-        k.removeRepeatingRow(fromSectionID,attributes,sections);
-
-        checkStagingAreaCollapse(attributes,sections);
-    };
-    k.registerFuncs({doAccessoryUnequip});
-
 +scss('sheet').
     .inventory-accessory-section{
         display: flex;

@@ -1272,10 +1272,9 @@ const schemaCore = {
             'https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299',
             {
                 [idBase] : {
-                    [idFormula] : '20 + Agility + (Luck/10) + (SUM of equipped armor value)',
+                    [idFormula] : '20 + Agility + (Luck/10)',
                     [idKFormula] : '20 + @{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility) + '} + ' +
-                                    'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10) +' +
-                                    '(@{repeating_inventory-armor-items_$X_armorvalue})' 
+                                    'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10)'
                     ,
                 },
             },

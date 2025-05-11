@@ -104,7 +104,7 @@
                         include _inventory-discardpile
 +module.
     const calcTotWeightInventory = ({trigger,attributes,sections,casc}) => {
-        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        //const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
         //-const [attrName,sheetName] = parseButtonName2(buttonName);
 
         let totItemWeight = 0;
@@ -329,6 +329,7 @@
                 }
             }
         }
+        attributes['inventory-totweight'] = calcTotWeightInventory({attributes,sections});
 
         return theOk;
     };
@@ -337,8 +338,8 @@
     const doRemoveItem = ({trigger,attributes,sections,casc}) => {
         //const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
-        attributes['inventory-totweight'] = calcTotWeightInventory({trigger,attributes,sections,casc});
         doUnequipItem(trigger,attributes,sections,casc);
+        attributes['inventory-totweight'] = calcTotWeightInventory({trigger,attributes,sections,casc});
     };
     k.registerFuncs({doRemoveItem});
 
@@ -356,6 +357,7 @@
             k.removeRepeatingRow(fromSectionID,attributes,sections);
 
             checkStagingAreaCollapse(attributes,sections);
+            attributes['inventory-totweight'] = calcTotWeightInventory({trigger,attributes,sections,casc});
         } else {
             const theMessage = 'error unequpping '+fromSectionID;
             doLogError(attributes,sections,theMessage);
