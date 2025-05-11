@@ -6,7 +6,7 @@
             +span({'data-i18n':'Slot'}).item-head-slot.underlined
             +span({'data-i18n':'Qty'}).item-head-qty.underlined
         .div-inven-items.div-inline
-            +customControlFieldset({name:'inventory-armor-items',addClass:'',trigger:{affects:['inventory-totweight'],triggeredFuncs:['doArmorRemove']}})
+            +customControlFieldset({name:'inventory-armor-items',addClass:'',trigger:{affects:['inventory-totweight'],triggeredFuncs:['doRemoveItem']}})
                 +text({name:'itemname',class:'item_itemname underlined',value:''})
                 +select({name:'slot',class:'item_slot underlined'})
                     +option({value:'slotArmorHead','data-i18n':'Head'})
@@ -16,35 +16,11 @@
                     +option({value:'slotArmorLegs','data-i18n':'Legs'})
                     +option({value:'slotArmorFeet','data-i18n':'Feet'})
                 +number({name:'qty',class:'item_qty boxed',value:1})
-                +button({name:'unequip-armor-button',type:'action','data-i18n':'Unequip',class:'staging-button',trigger:{triggeredFuncs:['doArmorUnequip']}})
+                +button({name:'unequip-armor-button',type:'action','data-i18n':'Unequip',class:'staging-button',trigger:{triggeredFuncs:['doUnequipItem']}})
                 +text({name:'trashcan-padding',class:'item_padding',readonly:''})
                 +text({name:'slottype',class:'underlined hidden',readonly:''})
                 +collapseItemDetails('inventory-totweight')
 +module.
-    const doArmorRemove = ({trigger,attributes,sections,casc}) => {
-        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
-
-        attributes['inventory-totweight'] = calcTotWeightInventory({trigger,attributes,sections,casc});
-
-    };
-    k.registerFuncs({doArmorRemove});
-
-    const doArmorUnequip = ({trigger,attributes,sections,casc}) => {
-        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
-
-        const fromSectionID = sectionName+'_'+rowID;
-
-        const toSection = 'repeating_inventory-stagingarea-items';
-        const toSectionID = k.generateRowID(toSection,sections);
-
-        doSectionCopy(attributes,sections,fromSectionID,toSectionID);
-
-        k.removeRepeatingRow(fromSectionID,attributes,sections);
-
-        checkStagingAreaCollapse(attributes,sections);
-    };
-    k.registerFuncs({doArmorUnequip});
-
 +scss('sheet').
     .inventory-armor-section{
         display: flex;

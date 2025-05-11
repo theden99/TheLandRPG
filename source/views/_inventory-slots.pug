@@ -73,20 +73,26 @@
         const stagingSection = 'repeating_inventory-stagingarea-items';
         const stagingSectionID = stagingSection+'_'+stagingID;
 
-        const invenSection = getSlotTypeSection(slotsSlotType);
-        const invenSectionID = k.generateRowID(invenSection,sections);
+        //if equip(why it's 1) worked, continue, else log error
+        if (doEquipItem(attributes,sections,stagingSectionID,1)===0) {
+            const invenSection = getSlotTypeSection(slotsSlotType);
+            const invenSectionID = k.generateRowID(invenSection,sections);
 
-        doSectionCopy(attributes,sections,stagingSectionID,invenSectionID);
-        attributes[invenSectionID+'_slottype'] = slotsSlotType;
-        attributes[invenSectionID+'_slot'] = slotsSlot;
+            doSectionCopy(attributes,sections,stagingSectionID,invenSectionID);
+            attributes[invenSectionID+'_slottype'] = slotsSlotType;
+            attributes[invenSectionID+'_slot'] = slotsSlot;
 
-        doSectionRemoveAll(attributes,sections,sectionName);
+            doSectionRemoveAll(attributes,sections,sectionName);
 
-        doSectionDelete(attributes,sections,stagingSectionID);
+            doSectionDelete(attributes,sections,stagingSectionID);
 
-        checkStagingAreaCollapse(attributes,sections);
-        doSlotTypeCollapse(attributes);
-        checkSlotsCollapse(attributes,sections);
+            checkStagingAreaCollapse(attributes,sections);
+            doSlotTypeCollapse(attributes);
+            checkSlotsCollapse(attributes,sections);
+        } else {
+            const theMessage = 'error equipping '+invemSectionID;
+            doLogError(attributes,sections,theMessage);
+        }
     };
     k.registerFuncs({doSlotsEquip});
 +scss('sheet').

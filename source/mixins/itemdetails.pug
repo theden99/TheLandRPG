@@ -41,6 +41,9 @@ mixin collapseItemDetails(iTotWeightFunc)
                         +option({value:'armorMedium','data-i18n':'Medium'})
                         +option({value:'armorHeavy','data-i18n':'Heavy'})
                     +span({'data-i18n':'Move Type'}).item-head-movetype
+                .div-movepen
+                    +number({name:'movepen',class:'item-movepen boxed',value:0})
+                    +span({'data-i18n':'Move Penalty'}).item-head-movepen
                 .div-attackvs
                     +select({name:'attackvs',class:'item-attackvs underlined'})
                         +option({value:'defenseNone','data-i18n':'None'})
@@ -86,11 +89,21 @@ mixin collapseItemDetails(iTotWeightFunc)
                 .div-recoverperc
                     +number({name:'recoverperc',class:'item-recoverperc boxed',value:0})
                     +span({'data-i18n':'Recover %'}).item-head-recoverperc
+                .div-slottypeitem
+                    +select({name:'slottypeitem',class:'item_slottypeitem underlined'})
+                        +option({value:'slottypeArmor','data-i18n':'Armor'})
+                        +option({value:'slottypeWeapon','data-i18n':'Weapon'})
+                        +option({value:'slottypeAccessory','data-i18n':'Accessory'})
+                        +option({value:'slottypeAmmo','data-i18n':'Ammo'})
+                        +option({value:'slottypeBeltPouch','data-i18n':'Belt/Pouch'})
+                        +option({value:'slottypeStorage','data-i18n':'Storage'})
+                        +option({value:'slottypeDiscardPile','data-i18n':'Discard Pile'})
+                    +span({'data-i18n':'Item Slot'}).item-head-slottypeitem
                 .div-notes
                     +adaptiveTextarea({name:'notes',class:'boxed'})
                     +span({'data-i18n':'Notes'}).item-head-notes
                 .div-effects
-                    +adaptiveTextarea({name:'effects',class:'boxed'})
+                    +adaptiveTextarea({name:'effects',class:'boxed',spellcheck:'false'})
                     +span({'data-i18n':'Effects'}).item-head-effects
 +module.
 +scss('sheet').
@@ -99,10 +112,10 @@ mixin collapseItemDetails(iTotWeightFunc)
         grid-template-columns: auto auto auto auto;
         grid-template-areas : 
             'weight1 cost size1 category'
-            'armortype armorvalue movetype .'
+            'armortype armorvalue movetype movepen'
             'attacktype range attackvs critabove'
             'basedam accmod dammod critmult'
-            'ammotype removeqty recoverperc .'
+            'ammotype removeqty recoverperc slottypeitem'
             'notes notes notes notes'
             'effects effects effects effects'
         ;
@@ -188,6 +201,18 @@ mixin collapseItemDetails(iTotWeightFunc)
                 background-color: gainsboro;
             }
             .item-movetype {
+                width: 100%;
+            }
+        }
+        .div-movepen {
+            grid-area: movepen;
+            width: 80px;
+            text-align: center;
+            .item-head-movepen {
+                width: 100%;
+                background-color: gainsboro;
+            }
+            .item-movepen {
                 width: 100%;
             }
         }
@@ -324,8 +349,21 @@ mixin collapseItemDetails(iTotWeightFunc)
                 width: 100%;
             }
         }
+        .div-slottypeitem {
+            grid-area: slottypeitem;
+            width: 80px;
+            text-align: center;
+            .item-head-slottypeitem {
+                width: 100%;
+                background-color: gainsboro;
+            }
+            .item-slottypeitem {
+                width: 100%;
+            }
+        }
         .div-notes {
             grid-area: notes;
+            background-color: gainsboro;
             .item-head-notes {
                 width: 100%;
                 background-color: gainsboro;
@@ -333,6 +371,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-effects {
             grid-area: effects;
+            background-color: gainsboro;
             .item-head-effects {
                 width: 100%;
                 background-color: gainsboro;

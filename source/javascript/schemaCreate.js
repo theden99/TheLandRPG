@@ -717,8 +717,13 @@ const schemaCore = {
             'https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299',
             {
                 [idBase] : {
-                    [idFormula] : '',
-                    [idKFormula] : '',
+                    [idFormula] : '((sum of skill in Light,Medium,Heavy armor)/2)',
+                    [idKFormula] : '(floor(( '+
+                                        '@{'+getFieldID(idChaosSeed,idSkills,idSkills,idTotal,idLightArmor)+'} +' +
+                                        '@{'+getFieldID(idChaosSeed,idSkills,idSkills,idTotal,idMediumArmor)+'} +' +
+                                        '@{'+getFieldID(idChaosSeed,idSkills,idSkills,idTotal,idHeavyArmor)+'} ' +
+                                    ')/2))'
+                    ,
                 },
             },
             {
@@ -1269,8 +1274,8 @@ const schemaCore = {
                 [idBase] : {
                     [idFormula] : '20 + Agility + (Luck/10) + (SUM of equipped armor value)',
                     [idKFormula] : '20 + @{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility) + '} + ' +
-                                    '(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10) +' +
-                                    ''
+                                    'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10) +' +
+                                    '(@{repeating_inventory-armor-items_$X_armorvalue})' 
                     ,
                 },
             },
@@ -1285,9 +1290,11 @@ const schemaCore = {
             'https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299',
             {
                 [idBase] : {
-                    [idFormula] : '(' + capitalize(idMoveTotal) + '/5)',
-                    [idKFormula] : '',
-                },
+                    [idFormula] : '20 + Wisdom + (Luck/10)',
+                    [idKFormula] : '20 + @{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idWisdom) + '} + ' +
+                                    'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10)'
+                    ,
+                }
             },
             {
             },
@@ -1300,8 +1307,10 @@ const schemaCore = {
             'https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299',
             {
                 [idBase] : {
-                    [idFormula] : '(' + capitalize(idMoveTotal) + '/5)',
-                    [idKFormula] : '',
+                    [idFormula] : '20 + Agility + (Luck/10)',
+                    [idKFormula] : '20 + @{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility) + '} + ' +
+                                    'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10)'
+                ,
                 },
             },
             {
@@ -1315,8 +1324,9 @@ const schemaCore = {
             'https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299',
             {
                 [idBase] : {
-                    [idFormula] : '(' + capitalize(idMoveTotal) + '/5)',
-                    [idKFormula] : '',
+                    [idFormula] : 'Constituion*10',
+                    [idKFormula] : '(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idConstitution) + '}*10)'
+                ,
                 },
             },
             {
@@ -1330,8 +1340,9 @@ const schemaCore = {
             'https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299',
             {
                 [idBase] : {
-                    [idFormula] : '(' + capitalize(idMoveTotal) + '/5)',
-                    [idKFormula] : '',
+                    [idFormula] : 'Endurance*10',
+                    [idKFormula] : '(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idEndurance) + '}*10)'
+                ,
                 },
             },
             {
@@ -1345,8 +1356,9 @@ const schemaCore = {
             'https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299',
             {
                 [idBase] : {
-                    [idFormula] : '(' + capitalize(idMoveTotal) + '/5)',
-                    [idKFormula] : '',
+                    [idFormula] : 'Wisdom*10',
+                    [idKFormula] : '(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idWisdom) + '}*10)'
+                ,
                 },
             },
             {
@@ -1360,8 +1372,9 @@ const schemaCore = {
             'https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299',
             {
                 [idBase] : {
-                    [idFormula] : '(' + capitalize(idMoveTotal) + '/5)',
-                    [idKFormula] : '',
+                    [idFormula] : 'Wisdom/3',
+                    [idKFormula] : 'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idWisdom) + '}/3)'
+                ,
                 },
             },
             {
@@ -1375,8 +1388,9 @@ const schemaCore = {
             'https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299',
             {
                 [idBase] : {
-                    [idFormula] : '(' + capitalize(idMoveTotal) + '/5)',
-                    [idKFormula] : '',
+                    [idFormula] : 'Endurance/3',
+                    [idKFormula] : 'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idEndurance) + '}/3)'
+                ,
                 },
             },
             {
@@ -1390,8 +1404,9 @@ const schemaCore = {
             'https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299',
             {
                 [idBase] : {
-                    [idFormula] : '(' + capitalize(idMoveTotal) + '/5)',
-                    [idKFormula] : '',
+                    [idFormula] : 'Constitution/3',
+                    [idKFormula] : 'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idConstitution) + '}/3)'
+                ,
                 },
             },
             {
@@ -2715,7 +2730,7 @@ const schemaCore = {
             idCommon,
             [],
             [idCombatMedic],
-            [idLuck],
+            [idWisdom],
             [idHealing],
         ),
         [idCombatMedic] : getListEntry(idDefault,'Combat Medic','0','0',
@@ -6545,6 +6560,34 @@ theSchema = schemaCore[idSkills];
 Object.keys(theSchema).forEach((theSkill) => {
     theSkills = theSchema[theSkill];
 
+    //update max rank formula
+    theFormulas = theSkills[idFormulas];
+    Object.keys(theFormulas).forEach((theFormulaID) => {
+        if (theFormulaID===idMaxRank) {
+            theFormulas = theFormulas[theFormulaID];
+            theFormulas[idFormula] = '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel);
+            theFormulas[idKFormula] = '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,theSkill)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}';
+        };
+    });
+    //update multiple stat calc
+    theCalcs = theSkills[idCalcs];
+    theStats = theSkills[idStats];
+    Object.keys(theCalcs).forEach((theCalcID) => {
+        if (theCalcID===idStat) {
+            theCalcs = theCalcs[theCalcID];
+            theCalcs[idCalcDesc] = 'Stat is the best of ';
+            theCalcs[idCalcParams] = '';
+            theStats.forEach((theStat) => {
+                theCalcs[idCalcDesc] += capitalize(theStat)+',';
+                theCalcs[idCalcParams] += getFieldID(idChaosSeed,idStats,idStats,idTotal,theStat)+'|';
+            });
+            //clean up dangling seperator
+            theCalcs[idCalcDesc] = theCalcs[idCalcDesc].slice(0,-1);
+            theCalcs[idCalcParams] = theCalcs[idCalcParams].slice(0,-1);
+        };
+    });
+    //the above needs to be BEFORE the rest;
+
     //stats
     theStats = theSkills[idStats];
     theStats.forEach((theStat) => {
@@ -6583,32 +6626,6 @@ Object.keys(theSchema).forEach((theSkill) => {
             addAffect(theSelfID,theID);
         });
     })
-    //update max rank formula
-    theFormulas = theSkills[idFormulas];
-    Object.keys(theFormulas).forEach((theFormulaID) => {
-        if (theFormulaID===idMaxRank) {
-            theFormulas = theFormulas[theFormulaID];
-            theFormulas[idFormula] = '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel);
-            theFormulas[idKFormula] = '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,theSkill)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}';
-        };
-    });
-    //update multiple stat calc
-    theCalcs = theSkills[idCalcs];
-    theStats = theSkills[idStats];
-    Object.keys(theCalcs).forEach((theCalcID) => {
-        if (theCalcID===idStat) {
-            theCalcs = theCalcs[theCalcID];
-            theCalcs[idCalcDesc] = 'Stat is the best of ';
-            theCalcs[idCalcParams] = '';
-            theStats.forEach((theStat) => {
-                theCalcs[idCalcDesc] += capitalize(theStat)+',';
-                theCalcs[idCalcParams] += getFieldID(idChaosSeed,idStats,idStats,idTotal,theStat)+'|';
-            });
-            //clean up dangling seperator
-            theCalcs[idCalcDesc] = theCalcs[idCalcDesc].slice(0,-1);
-            theCalcs[idCalcParams] = theCalcs[idCalcParams].slice(0,-1);
-        };
-    });
 });
     //create max rank func
 //                [idMaxRank] : {

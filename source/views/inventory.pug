@@ -283,6 +283,86 @@
     };
     k.registerFuncs({doSlotTypeLoad});
 
+    const doEquipItem = (attributes,sections,iSectionID,iMult) => {
+        let theArmorValue = attributes[iSectionID+'_armorvalue'];
+        let theMovePen = attributes[iSectionID+'_movepen'];
+        let theEffects = attributes[iSectionID+'_effects'];
+        let theOk = 0; //all ok
+        let theArea = [];
+        let theUpdate = [];
+        let theField = '';
+        let theValue = 0;
+
+        theArmorValue = theArmorValue*iMult;
+        theMovePen = theMovePen*iMult;
+
+        if (theArmorValue!==0) {
+            attributes['chaosseed-combatstats-armorvalue-equipbonus'] += theArmorValue;
+        };
+
+        if (theMovePen!==0) {
+            attributes['chaosseed-movement-movepenalty-equipbonus'] += theMovePen;
+        };
+
+        if (theEffects!=='') {
+            //process each line
+            const lines = theEffects.split('\n');
+            for(var i = 0;i < lines.length;i++) {
+                const theArea = lines[i].split('.');
+                theUpdate = theArea[1].split('+');
+                if (theUpdate.length===0)  {
+                    theUpdate = theArea[1].split('-');
+                };
+
+                if (theUpdate.length>0) {
+                    theField = theUpdate[0];
+                    theValue = parseInt(theUpdate[1])*iMult;
+                } else {
+                    doWriteLog(attributes,sections,'error parsing effects'+theEffects);
+                    theOk = -1;
+                }
+
+                if (theOk===0) {
+                    const theZone = theArea[0];
+                    const theFieldID = getFieldID(idChaosSeed,theZone,theZone,idEquipBonus,theField);
+                    attributes[theFieldID] += theValue;
+                }
+            }
+        }
+
+        return theOk;
+    };
+    k.registerFuncs({doEquipItem});
+
+    const doRemoveItem = ({trigger,attributes,sections,casc}) => {
+        //const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        attributes['inventory-totweight'] = calcTotWeightInventory({trigger,attributes,sections,casc});
+        doUnequipItem(trigger,attributes,sections,casc);
+    };
+    k.registerFuncs({doRemoveItem});
+
+    const doUnequipItem = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const fromSectionID = sectionName+'_'+rowID;
+        //if unequip(why it's -1) worked, remove item, otherwise log error
+        if (doEquipItem(attributes,sections,fromSectionID,-1)===0) {
+            const toSection = 'repeating_inventory-stagingarea-items';
+            const toSectionID = k.generateRowID(toSection,sections);
+
+            doSectionCopy(attributes,sections,fromSectionID,toSectionID);
+
+            k.removeRepeatingRow(fromSectionID,attributes,sections);
+
+            checkStagingAreaCollapse(attributes,sections);
+        } else {
+            const theMessage = 'error unequpping '+fromSectionID;
+            doLogError(attributes,sections,theMessage);
+        }
+    };
+    k.registerFuncs({doUnequipItem});
+
 +scss('sheet').
     .inventory-main{
         .repitem:hover > .collapse, .repitem:hover .roll-container,

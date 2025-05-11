@@ -108,7 +108,7 @@
         newRow[toSectionID+'_itemname'] = attributes[fromSectionID+'_itemname'];
         newRow[toSectionID+'_slottype'] = attributes[fromSectionID+'_slottype'];
         newRow[toSectionID+'_slottypeitem'] = attributes[fromSectionID+'_slottypeitem'];
-        newRow[toSectionID+'_slot'] = attributes[fromSectionID+'_slot'];
+        //newRow[toSectionID+'_slot'] = attributes[fromSectionID+'_slot'];
         newRow[toSectionID+'_qty'] = attributes[fromSectionID+'_qty'];
         newRow[toSectionID+'_category'] = attributes[fromSectionID+'_category'];
         newRow[toSectionID+'_weight'] = attributes[fromSectionID+'_weight'];
@@ -117,6 +117,7 @@
         newRow[toSectionID+'_armorvalue'] = attributes[fromSectionID+'_armorvalue'];
         newRow[toSectionID+'_armortype'] = attributes[fromSectionID+'_armortype'];
         newRow[toSectionID+'_movetype'] = attributes[fromSectionID+'_movetype'];
+        newRow[toSectionID+'_movepen'] = attributes[fromSectionID+'_movepen'];
         newRow[toSectionID+'_attackvs'] = attributes[fromSectionID+'_attackvs'];
         newRow[toSectionID+'_accmod'] = attributes[fromSectionID+'_accmod'];
         newRow[toSectionID+'_dammod'] = attributes[fromSectionID+'_dammod'];
@@ -140,15 +141,24 @@
     }
     k.registerFuncs({doSectionDelete});
 
-    //called when Chaos Seed or Skills tab is presssed.  to make sure max values are populated
     const doSetLevel = ({trigger,attributes,sections,casc}) => {
-        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        //const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
         if (attributes['header-character-level']===0) {
-            k.setAttrs({'header-character-level':1},true);
+            k.setAttrs({'header-character-level' : 1},true,()=>{console.log('set level')});
+            k.setAttrs({'chaosseed-stats-strength-base' : 10},true,()=>{console.log('set strength')});
+            k.setAttrs({'chaosseed-stats-agility-base' : 10},true,()=>{console.log('set agility')});
+            k.setAttrs({'chaosseed-stats-dexterity-base' : 10},true,()=>{console.log('set dexterity')});
+            k.setAttrs({'chaosseed-stats-constitution-base' : 10},true,()=>{console.log('set constitution')});
+            k.setAttrs({'chaosseed-stats-endurance-base' : 10},true,()=>{console.log('set endurance')});
+            k.setAttrs({'chaosseed-stats-intelligence-base' : 10},true,()=>{console.log('set intelligence')});
+            k.setAttrs({'chaosseed-stats-wisdom-base' : 10},true,()=>{console.log('set wisdom')});
+            k.setAttrs({'chaosseed-stats-charisma-base' : 10},true,()=>{console.log('set charisma')});
+            k.setAttrs({'chaosseed-stats-luck-base' : 10},true,()=>{console.log('set luck')});
+
         };
     };
-    k.registerFuncs({doSetLevel});
+    k.registerFuncs({doSetLevel},{type:['opener']});
 
     const doWriteLog = (attributes,sections,iMessage) => {
         const systemSection = 'repeating_system-main-messages';

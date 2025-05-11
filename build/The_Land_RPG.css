@@ -2412,7 +2412,7 @@ body .ui-dialog .tab-content .charsheet .div-subskills {
 body .ui-dialog .tab-content .charsheet .div-item-details {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  grid-template-areas: "weight1 cost size1 category" "armortype armorvalue movetype ." "attacktype range attackvs critabove" "basedam accmod dammod critmult" "ammotype removeqty recoverperc ." "notes notes notes notes" "effects effects effects effects";
+  grid-template-areas: "weight1 cost size1 category" "armortype armorvalue movetype movepen" "attacktype range attackvs critabove" "basedam accmod dammod critmult" "ammotype removeqty recoverperc slottypeitem" "notes notes notes notes" "effects effects effects effects";
   border: 1px solid var(--borderColor);
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-category {
@@ -2497,6 +2497,18 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-movetype .item-he
   background-color: gainsboro;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-movetype .item-movetype {
+  width: 100%;
+}
+body .ui-dialog .tab-content .charsheet .div-item-details .div-movepen {
+  grid-area: movepen;
+  width: 80px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .div-item-details .div-movepen .item-head-movepen {
+  width: 100%;
+  background-color: gainsboro;
+}
+body .ui-dialog .tab-content .charsheet .div-item-details .div-movepen .item-movepen {
   width: 100%;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-attackvs {
@@ -2632,8 +2644,21 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-recoverperc .item
 body .ui-dialog .tab-content .charsheet .div-item-details .div-recoverperc .item-recoverperc {
   width: 100%;
 }
+body .ui-dialog .tab-content .charsheet .div-item-details .div-slottypeitem {
+  grid-area: slottypeitem;
+  width: 80px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .div-item-details .div-slottypeitem .item-head-slottypeitem {
+  width: 100%;
+  background-color: gainsboro;
+}
+body .ui-dialog .tab-content .charsheet .div-item-details .div-slottypeitem .item-slottypeitem {
+  width: 100%;
+}
 body .ui-dialog .tab-content .charsheet .div-item-details .div-notes {
   grid-area: notes;
+  background-color: gainsboro;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-notes .item-head-notes {
   width: 100%;
@@ -2641,6 +2666,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-notes .item-head-
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-effects {
   grid-area: effects;
+  background-color: gainsboro;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-effects .item-head-effects {
   width: 100%;
