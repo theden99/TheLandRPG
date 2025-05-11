@@ -29,7 +29,7 @@ mixin rowSkill(iPage,iZone,iTemplate,iSkill)
             - theID = getFieldID(iPage,iZone,iTemplate,idRankTitle,iSkill);
             - theAffects.push(theID)
         - theID = theTotalID;
-        +number({name:theID,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula,affects:theAffects}}).row-skill-total
+        +number({name:theID,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula,affects:theAffects,calculation:'calcCheck0Rank'}}).row-skill-total
 
         - theID = getFieldID(iPage,iZone,iTemplate,idRank,iSkill);
         - theAffects = [theTotalID,getFieldID(iPage,iZone,iTemplate,idRankTitle,iSkill)];
@@ -53,7 +53,12 @@ mixin rowSkill(iPage,iZone,iTemplate,iSkill)
 
         - theID = getFieldID(iPage,iZone,iTemplate,idAffinity,iSkill);
         - theAffects = getFieldID(iPage,iZone,iTemplate,idMaxRank,iSkill);
-        +text({name:theID,class:'row-skill-affinity',value:idAffinity0,readonly:'',trigger:{affects:theAffects}})
+        +select({name:theID,class:'row-skill-affinity',value:0,trigger:{affects:theAffects}})
+            +option({value:0,'data-i18n':idAffinity0})
+            +option({value:25,'data-i18n':idAffinity25})
+            +option({value:50,'data-i18n':idAffinity50})
+            +option({value:75,'data-i18n':idAffinity75})
+            +option({value:100,'data-i18n':idAffinity100})
 
         - theID = getFieldID(iPage,iZone,iTemplate,idMaxRank,iSkill);
         - theFormula = theSkill.formulas[idMaxRank].kformula;
@@ -107,6 +112,23 @@ mixin rowSkill(iPage,iZone,iTemplate,iSkill)
         return theSkillBonus-theStatBonus;
     };
     k.registerFuncs({calcParentBonus});
+
+    const calcCheck0Rank = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const [thePage,theZone,theSkill,theField] = parseFieldName(buttonName);
+        const theTotalID = getFieldID(idChaosSeed,idSkills,idSkills,idTotal,theSkill);
+        const theTotal = attributes[theTotalID];
+
+        const theRankID = getFieldID(idChaosSeed,idSkills,idSkills,idRank,theSkill);
+        const theRank = attributes[theRankID];
+        if (theRank===0) {
+            return 0;
+        }
+
+        return theTotal;
+    };
+    k.registerFuncs({calcCheck0Rank});
 
     const calcSkillStat = ({trigger,attributes,sections,casc}) => {
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);

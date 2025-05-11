@@ -1,5 +1,84 @@
 +tab({name:"settings", container:"article", button:{class:'thelandrpg-tabs-button boxed','data-i18n':"Settings"}})
+    .thelandrpg-tabs-section-settings
+        +span({'data-i18n':'SETTINGS'}).logs-title.paper-background
+        .logs-general
+            .logs-general-section.paper-background
+                +span({'data-i18n':'System Messages'}).logs-general-subtitle
+                +customControlFieldset({name:'system-main-messages',addClass:''})
+                    .logs-general-main
+                        +adaptiveTextarea({name:'system-message',class:'general-note boxed'})
+        .auditor-password
+            .auditor-password-section.paper-background
+                +span({'data-i18n':'Auditor Password'}).auditor-password-subtitle
+                .auditor-text
+                    +text({name:'auditor-password',value:'enter password',class:'auditor-password-text underlined'})
+
 +scss('sheet').
     .thelandrpg-tabs-section-settings{
+        display: grid;
+        grid-gap: var(--tiny-gap);
+        font: {size: 12px;family: Arial;weight: normal;};
+        width: 1100px;
 
+        grid-template-columns: auto;
+        grid-template-areas:
+            'title'
+            'buttons'
+        ;
+
+        .logs-title{
+            grid-area: title;
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .logs-general {
+            grid-area: buttons;
+
+            .logs-general-section {
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-areas: 
+                    'title'
+                    'general'
+                ;
+
+                .logs-general-subtitle{
+                    grid-area: title;
+                    font-size: 16px;
+                    text-align: center;
+                    font-weight: bold;
+                }
+                .logs-general-main {
+                    grid-area: general;
+                }
+            }
+        }
+
+        .auditor-password {
+            .auditor-password-section {
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-areas: 
+                    'title'
+                    'general'
+                ;
+
+                .auditor-password-subtitle{
+                    grid-area: title;
+                    font-size: 16px;
+                    text-align: center;
+                    font-weight: bold;
+                }
+                .auditor-text {
+                    grid-area: general;
+
+                    text-align: center;
+                    .auditor-password-text {
+                        text-align: center;
+                    }
+                }
+            }
+        }
     }

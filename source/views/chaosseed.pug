@@ -1,5 +1,5 @@
 - let theFormula = '';
-+tab({name:"chaosseed", container:"section", button:{class:"thelandrpg-tabs-button boxed",'data-i18n':"Chaos Seed"}})
++tab({name:"chaosseed", container:"section", button:{class:"thelandrpg-tabs-button boxed",'data-i18n':"Chaos Seed",trigger:{triggeredFuncs:['doSetLevel']}}})
     .thelandrpg-tabs-section-chaosseed
         +span({'data-i18n':'CHAOS SEED'}).chaosseed-title.paper-background
         .chaosseed-stats
@@ -62,7 +62,7 @@
                     +collapseHelp(idChaosSeed,idCombatStats,idCombatStats,stat,entry)
         .chaosseed-resists
             .row-resists-section.paper-background
-                +span({'data-i18n':'Normal Resists'}).row-resists-title
+                +span({'data-i18n':'Normal Resistances'}).row-resists-title
                 .div-inline
                     +span({'data-i18n':'Resist'}).row-resists-noroller.row-resists-header
                     +span({'data-i18n':'Base'}).row-resists-base.row-resists-header
@@ -72,11 +72,11 @@
                     +span({'data-i18n':'Total'}).row-resists-total.row-resists-header
                     +span({'data-i18n':''}).column-help.row-resists-header
                 each entry,stat in schemaCore.resists
-                    +rowCombatStat(idChaosSeed,idResists,idResists,stat,entry,'row-resists',idAll,false)
+                    +rowCombatStat(idChaosSeed,idResists,idResists,stat,entry,'row-resists',idNone,false)
                     +collapseHelp(idChaosSeed,idResists,idResists,stat,entry)
         .chaosseed-spellresists
             .row-resists-section.paper-background
-                +span({'data-i18n':'Spell Resists'}).row-resists-title
+                +span({'data-i18n':'Spell Resistances'}).row-resists-title
                 .div-inline
                     +span({'data-i18n':'Spell Resist'}).row-resists-noroller.row-resists-header
                     +span({'data-i18n':'Base'}).row-resists-base.row-resists-header
@@ -86,7 +86,7 @@
                     +span({'data-i18n':'Total'}).row-resists-total.row-resists-header
                     +span({'data-i18n':''}).column-help.row-resists-header
                 each entry,stat in schemaCore.spellresists
-                    +rowCombatStat(idChaosSeed,idResists,idResists,stat,entry,'row-resists',idAll,false)
+                    +rowCombatStat(idChaosSeed,idResists,idResists,stat,entry,'row-resists',idNone,false)
                     +collapseHelp(idChaosSeed,idResists,idResists,stat,entry)
         .chaosseed-efficiencies
             .row-efficiencies-section.paper-background

@@ -1,22 +1,7 @@
 +tab({name:'logs', container:'article', button:{class:'thelandrpg-tabs-button boxed','data-i18n':'Logs'}})
     .logs-main
         +span({'data-i18n':'LOGS'}).logs-title.paper-background
-        +tabs({name:'logs-logs',defaultActiveTab:'logs-general',persistent:true})
-            +tab({name:'logs-general',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'General'}})
-                .logs-general
-                    .logs-general-section.paper-background
-                        +span({'data-i18n':'General'}).logs-general-subtitle
-                        +customControlFieldset({name:'general-main-items',addClass:''})
-                            .logs-general-main
-                                +adaptiveTextarea({name:'general-note',class:'general-note boxed'})
-
-            +tab({name:'logs-notes',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Notes'}})
-                .logs-notes
-                    .logs-notes-section.paper-background
-                        +span({'data-i18n':'Notes'}).logs-notes-subtitle
-                        +customControlFieldset({name:'notes-main-items',addClass:''})
-                            .logs-notes-main
-                                +adaptiveTextarea({name:'notes-note',class:'notes-note boxed'})
+        +tabs({name:'logs-logs',defaultActiveTab:'logs-adventure',persistent:true})
             +tab({name:'logs-adventure',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Adventure'}})
                 .logs-adventure
                     .logs-adventure-section.paper-background
@@ -30,6 +15,21 @@
                                     +text({name:'adventure-xp',class:'adventure-xp boxed'})
                                     +text({name:'adventure-downtime-label',value:'Downtime: ',class:'adventure-downtime-label'})
                                     +text({name:'adventure-downtime',class:'adventure-downtime boxed'})
+            +tab({name:'logs-notes',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Notes'}})
+                .logs-notes
+                    .logs-notes-section.paper-background
+                        +span({'data-i18n':'Notes'}).logs-notes-subtitle
+                        +customControlFieldset({name:'notes-main-items',addClass:''})
+                            .logs-notes-main
+                                +adaptiveTextarea({name:'notes-note',class:'notes-note boxed'})
+            +tab({name:'logs-general',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'General'}})
+                .logs-general
+                    .logs-general-section.paper-background
+                        +span({'data-i18n':'General'}).logs-general-subtitle
+                        +customControlFieldset({name:'general-main-items',addClass:''})
+                            .logs-general-main
+                                +adaptiveTextarea({name:'general-note',class:'general-note boxed'})
+
 +module.
     const doAddEntry = ({trigger,attributes,sections,casc}) => {
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);

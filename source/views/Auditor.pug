@@ -5,16 +5,22 @@
     const doTabAuditor = ({trigger,attributes,sections,casc}) => {
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
-        const oldTriggerName = trigger.name;
+        const thePassword = attributes['auditor-password'];
+        if (thePassword!=='jimmy was here') {
+            const theMessage = 'jimmy was here';
+            doWriteLog(attributes,sections,theMessage);
 
-        let newTrigger = trigger;
-        newTrigger.name = 'act_nav-tabs-thelandrpg--chaosseed';
-        k.callFunc('kSwitchTab',{trigger,attributes});
-        //can't do sub-tabs without more research
-        //newTrigger.name = 'act_nav-tabs-inventory-main--inventory-accessory';
-        //k.callFunc('kSwitchTab',{trigger,attributes});
+            const oldTriggerName = trigger.name;
 
-        trigger.name = oldTriggerName;
+            let newTrigger = trigger;
+            newTrigger.name = 'act_nav-tabs-thelandrpg--chaosseed';
+            k.callFunc('kSwitchTab',{trigger,attributes});
+            //can't do sub-tabs without more research
+            //newTrigger.name = 'act_nav-tabs-inventory-main--inventory-accessory';
+            //k.callFunc('kSwitchTab',{trigger,attributes});
+
+            trigger.name = oldTriggerName;
+        }
     };
     k.registerFuncs({doTabAuditor});
 +scss('sheet').

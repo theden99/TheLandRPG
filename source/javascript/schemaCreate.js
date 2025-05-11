@@ -1267,8 +1267,11 @@ const schemaCore = {
             'https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299',
             {
                 [idBase] : {
-                    [idFormula] : '(' + capitalize(idMoveTotal) + '/5)',
-                    [idKFormula] : '',
+                    [idFormula] : '20 + Agility + (Luck/10) + (SUM of equipped armor value)',
+                    [idKFormula] : '20 + @{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility) + '} + ' +
+                                    '(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10) +' +
+                                    ''
+                    ,
                 },
             },
             {
@@ -2630,8 +2633,8 @@ const schemaCore = {
             },
             idEveryday,
             idCommon,
-            [idLipReading,idConviction,idScepticism],
             [],
+            [idLipReading,idConviction,idScepticism],
             [idCharisma],
         ),
         [idLipReading] : getListEntry(idDefault,'Lip Reading','0','0',
@@ -2977,8 +2980,8 @@ const schemaCore = {
             },
             idEveryday,
             idCommon,
-            [idSelfAwareness],
             [],
+            [idSelfAwareness],
             [idIntelligence,idWisdom],
         ),
         [idSelfAwareness] : getListEntry(idDefault,'Self Awareness','0','0',
@@ -3022,8 +3025,8 @@ const schemaCore = {
             },
             idEveryday,
             idCommon,
-            [idSearch,idRunicMagic,idZealotry],
             [],
+            [idSearch,idRunicMagic,idZealotry],
             [idIntelligence],
         ),
         [idSearch] : getListEntry(idDefault,'Search','0','0',
@@ -3437,7 +3440,7 @@ const schemaCore = {
             },
             idEveryday,
             idUncommon,
-            [idDriving],
+            [idRiding],
             [],
             [idAgility,idDexterity],
         ),
@@ -3477,7 +3480,7 @@ const schemaCore = {
             },
             idEveryday,
             idRare,
-            [idDriving],
+            [idRiding],
             [],
             [idAgility],
         ),
@@ -3502,7 +3505,7 @@ const schemaCore = {
             },
             idEveryday,
             idRare,
-            [idDriving],
+            [idRiding],
             [],
             [idAgility,idDexterity],
         ),
@@ -4027,8 +4030,8 @@ const schemaCore = {
             },
             idTradeskill,
             idCommon,
-            [idLeatherworking],
             [],
+            [idLeatherworking],
             [idAgility],
         ),
         [idLeatherworking] : getListEntry(idDefault,'Leatherworking','0','0',
@@ -5238,7 +5241,7 @@ const schemaCore = {
             'this is long',
             '',
             {
-                [idBase] : {
+                [idMaxRank] : {
                     [idFormula] : '',
                     [idKFormula] : '',
                 },
@@ -5247,13 +5250,18 @@ const schemaCore = {
             },
             {
             },
+            idMagic,
+            idCommon,
+            [],
+            [],
+            [idIntelligence],
         ),
         [idChaosMagic] : getListEntry(idDefault,'Chaos Magic','0','0',
             'this is short',
             'this is long',
             '',
             {
-                [idBase] : {
+                [idMaxRank] : {
                     [idFormula] : '',
                     [idKFormula] : '',
                 },
@@ -5262,6 +5270,11 @@ const schemaCore = {
             },
             {
             },
+            idMagic,
+            idCommon,
+            [],
+            [],
+            [idIntelligence],
         ),
     //martial skills
         [idDoubleAttack] : getListEntry(idDefault,'Double Attack','0','0',
@@ -5582,8 +5595,8 @@ const schemaCore = {
             },
             idArmorWeapon,
             idCommon,
-            [idDrillShot,idEntanglingShot,idImbueArrow,idStunShot,idDoubleAttack,idDualWielding,idKeenShot,idMartialRage,idMeleeFocus,idTwoHandedWielding],
             [],
+            [idDrillShot,idEntanglingShot,idImbueArrow,idStunShot,idDoubleAttack,idDualWielding,idKeenShot,idMartialRage,idMeleeFocus,idTwoHandedWielding],
             [],
         ),
         [idDrillShot] : getListEntry(idDefault,'Drill Shot','0','0',
@@ -6002,8 +6015,8 @@ const schemaCore = {
             },
             idArmorWeapon,
             idCommon,
-            [idBladeThrowing,idOffHandParry,idJaggedStab,idDoubleAttack,idDualWielding,idKeenShot,idMartialRage,idMeleeFocus,idTwoHandedWielding],
             [],
+            [idBladeThrowing,idOffHandParry,idJaggedStab,idDoubleAttack,idDualWielding,idKeenShot,idMartialRage,idMeleeFocus,idTwoHandedWielding],
             [],
         ),
         [idBladeThrowing] : getListEntry(idDefault,'Blade Throwing','0','0',
@@ -6435,6 +6448,12 @@ const parseParamList = (iFieldName) => {
     return theList;
 };
 
+const parseFieldID = (iFieldID,iFieldNum) => {
+    const theList = iFieldID.split('-');
+    
+    return theList[iFieldNum];
+}
+
 // ************************************************************************
 // process schema to populate Affects
 // ************************************************************************
@@ -6495,9 +6514,6 @@ Object.keys(theSchema).forEach((theStat) => {
     })
 });
 */
-//skills
-theSchema = schemaCore[idSkills];
-Object.keys(theSchema).forEach((theSkill) => {
     /*
     let theFormulas = theSchema[theSkill];
     //formulas
@@ -6518,25 +6534,33 @@ Object.keys(theSchema).forEach((theSkill) => {
         });
     })
     */
+//skills
+let theStats;
+let theSkills;
+let theParents;
+let theCalcs;
+let theFuncs;
+let theFormulas;
+theSchema = schemaCore[idSkills];
+Object.keys(theSchema).forEach((theSkill) => {
+    theSkills = theSchema[theSkill];
+
     //stats
-    let theStats = theSchema[theSkill];
-    theStats = theStats[idStats];
+    theStats = theSkills[idStats];
     theStats.forEach((theStat) => {
         const theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,idStat,theSkill)
         const theID = getFieldID(idChaosSeed,idStats,idStats,idTotal,theStat);
         addAffect(theSelfID,theID);
     });
     //parents
-    let theParents = theSchema[theSkill];
-    theParents = theParents[idParents];
+    theParents = theSkills[idParents];
     theParents.forEach((theParent) => {
         const theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,idParentBonus,theSkill)
         const theID = getFieldID(idChaosSeed,idSkills,idSkills,idTotal,theParent);
         addAffect(theSelfID,theID);
     });
     //calcs
-    let theCalcs = theSchema[theSkill];
-    theCalcs = theCalcs[idCalcs];
+    theCalcs = theSkills[idCalcs];
     Object.keys(theCalcs).forEach((theCalcID) => {
         const theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,theCalcID,theSkill)
         const theCalc = theCalcs[theCalcID];
@@ -6548,8 +6572,7 @@ Object.keys(theSchema).forEach((theSkill) => {
         });
     })
     //funcs
-    let theFuncs = theSchema[theSkill];
-    theFuncs = theFuncs[idFuncs];
+    theFuncs = theSkills[idFuncs];
     Object.keys(theFuncs).forEach((theFuncID) => {
         const theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,theFuncID,theSkill)
         const theFunc = theFuncs[theFuncID];
@@ -6560,33 +6583,33 @@ Object.keys(theSchema).forEach((theSkill) => {
             addAffect(theSelfID,theID);
         });
     })
-    //update max rank calc
-    //update multiple stat calc
-    theCalcs = theSchema[theSkill];
-    theCalcs = theCalcs[idCalcs];
-    Object.keys(theCalcs).forEach((theCalcID) => {
-        if (theCalcID===idMaxRank) {
-            theCalcs = theCalcs[theCalcID];
-            theCalcs[idFormula] = '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel);
-            theCalcs[idKFormula] = '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,theSkill)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}';
+    //update max rank formula
+    theFormulas = theSkills[idFormulas];
+    Object.keys(theFormulas).forEach((theFormulaID) => {
+        if (theFormulaID===idMaxRank) {
+            theFormulas = theFormulas[theFormulaID];
+            theFormulas[idFormula] = '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel);
+            theFormulas[idKFormula] = '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,theSkill)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}';
         };
+    });
+    //update multiple stat calc
+    theCalcs = theSkills[idCalcs];
+    theStats = theSkills[idStats];
+    Object.keys(theCalcs).forEach((theCalcID) => {
         if (theCalcID===idStat) {
             theCalcs = theCalcs[theCalcID];
-            const theParams = theCalcs[idCalcParams];
-            const theIDs = parseParamList(theParams);
             theCalcs[idCalcDesc] = 'Stat is the best of ';
             theCalcs[idCalcParams] = '';
-            theIDs.forEach((theID) => {
-                theCalcs[idCalcDesc] += capitalize(theID)+',';
-                theCalcs[idCalcParams] += getFieldID(idChaosSeed,idStats,idStats,idTotal,theID)+'|';
+            theStats.forEach((theStat) => {
+                theCalcs[idCalcDesc] += capitalize(theStat)+',';
+                theCalcs[idCalcParams] += getFieldID(idChaosSeed,idStats,idStats,idTotal,theStat)+'|';
             });
             //clean up dangling seperator
-            theCalcs[idCalcDesc].slice(0,-1);
-            theCalcs[idCalcParams].slice(0,-1);
+            theCalcs[idCalcDesc] = theCalcs[idCalcDesc].slice(0,-1);
+            theCalcs[idCalcParams] = theCalcs[idCalcParams].slice(0,-1);
         };
     });
 });
-
     //create max rank func
 //                [idMaxRank] : {
 //                    [idCalcDesc] : capitalize(idCommandingSpell)+' '+idMaxRank+' cannot excede '+capitalize(idLifeMagic)+' '+idMaxRank,

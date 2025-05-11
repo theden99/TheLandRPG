@@ -139,3 +139,21 @@
         k.removeRepeatingRow(rowSectionID,attributes,sections);
     }
     k.registerFuncs({doSectionDelete});
+
+    //called when Chaos Seed or Skills tab is presssed.  to make sure max values are populated
+    const doSetLevel = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        if (attributes['header-character-level']===0) {
+            k.setAttrs({'header-character-level':1},true);
+        };
+    };
+    k.registerFuncs({doSetLevel});
+
+    const doWriteLog = (attributes,sections,iMessage) => {
+        const systemSection = 'repeating_system-main-messages';
+        const systemSectionID = k.generateRowID(systemSection,sections);
+
+        attributes[systemSectionID+'_system-message'] = iMessage;
+    };
+    k.registerFuncs({doWriteLog});
