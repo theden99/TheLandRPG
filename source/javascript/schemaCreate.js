@@ -2714,7 +2714,7 @@ const schemaCore = {
         [idHealing] : getListEntry(idDefault,'Healing','0','0',
             'healing is fun',
             'healing is so much fun i can\n hardly believe it',
-            'https://files.d20.io/images/418259312/IRr6MU5n3fch__TqXVUNYg/max.png?1732095184',
+            'https://mlzvw7x3dg3w.i.optimole.com/w:199/h:199/q:mauto/ig:avif/https://www.thelandrpg.com/wp-content/uploads/2023/01/azerin_a_silhouette_of_a_plant_seen_within_the_bounds_of_a_bl_e2b4d6cf-aa38-4668-9424-bafc86b9b52d_3.png',
             {
                 [idMaxRank] : {
                     [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
