@@ -1227,6 +1227,8 @@
 }
 .sheet-rolltemplate-sheet-name .sheet-template .roll-header {
   color: white;
+  text-align: center;
+  background-color: yellow;
 }
 .sheet-rolltemplate-sheet-name .sheet-template .roll-content .display-row {
   display: flex;
@@ -2835,30 +2837,6 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-header .header-details .div-
 body .ui-dialog .tab-content .charsheet .thelandrpg-header .header-details .div-character-image .div-character-id .character-id-label {
   margin-right: 3px;
   margin-top: 5px;
-}
-body .ui-dialog .tab-content .charsheet .thelandrpg-sidebar {
-  display: flex;
-  width: 400px;
-}
-body .ui-dialog .tab-content .charsheet .thelandrpg-sidebar .tabs--sidebar__header {
-  height: 5px;
-}
-body .ui-dialog .tab-content .charsheet .thelandrpg-sidebar .tabs--sidebar__header .tabs__nav-item {
-  display: none;
-}
-body .ui-dialog .tab-content .charsheet .thelandrpg-sidebar .div-info-event {
-  width: 380px;
-}
-body .ui-dialog .tab-content .charsheet .thelandrpg-sidebar .div-info-event .info-header {
-  text-align: center;
-  width: 100%;
-  font-size: 20px;
-  font-weight: bold;
-}
-body .ui-dialog .tab-content .charsheet .thelandrpg-sidebar .div-info-event .info-image {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed {
   display: grid;

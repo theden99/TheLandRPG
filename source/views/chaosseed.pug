@@ -103,36 +103,6 @@
                     +rowCombatStat(idChaosSeed,idEfficiencies,idEfficiencies,stat,entry,'row-efficiencies',idNone,false)
                     +collapseHelp(idChaosSeed,idEfficiencies,idEfficiencies,stat,entry)
 +module.
-    const assembleRollField = (attrName,attributes) => {
-        let rollString = attributes['character_name'] + ' rolls a ' + `${attrName}` + ' check of [[ 1d100 + ' +  `@{${attrName}-total}` + 'd100 [statd100] - @{target|target1|stat-total} [t1-stat] - @{target|target2|stat-total} [t2-stat] ]] ';
-        return rollString;
-    };
-    k.registerFuncs({assembleRollField});
-
-    const assembleRollString = (rollObj,rollStart = '&{template:default}') => {
-        return Object.entries(rollObj)
-            .reduce((str,[field,value]) => {
-                return str + ` {{${field}=${value}}}`;
-            },rollStart);
-    };
-    k.registerFuncs({assembleRollString});
-
-    const actionRoll = async function({trigger,attributes,sections,casc}){
-        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
-        const attrName = parseFieldName(buttonName); // !!!!! points to wrong function. now return page,zone,table,id !!!
-        const rollObj = {
-            roll: assembleRollField(attrName,attributes),  //rolltemplate string
-            name: attributes['character_name'],
-            roll_name: attrName,
-            target: '@{target|target1|character_name} = @{target|target2|character_name}'
-        };
-
-        const rollString = assembleRollString(rollObj);
-        const roll = await startRoll(rollString);
-        finishRoll(roll.rollId);
-    };
-    k.registerFuncs({actionRoll});
-
 +scss('sheet').
     .thelandrpg-tabs-section-chaosseed{
         .repitem:hover > .collapse, .repitem:hover .roll-container,

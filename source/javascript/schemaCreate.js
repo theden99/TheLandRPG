@@ -5001,7 +5001,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idCommon,
             [],
             [idCommandingSpell,idPotentHealing,idRestorativeSpell,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],

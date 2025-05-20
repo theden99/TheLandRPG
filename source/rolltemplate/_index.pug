@@ -2,7 +2,7 @@
   .roll-header
     +templateConditionalDisplay('name')
       h3(data-i18n='')
-      h3 {{name}}
+      h3 {{name}} Check
     +characterLink
   .roll-content
     +templateConditionalDisplay('roll')
@@ -20,6 +20,8 @@
 +scss('roll').
   .roll-header{
     color: white;
+    text-align: center;
+    background-color: yellow;
   }
   .roll-content{
     .display-row{
