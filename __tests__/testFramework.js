@@ -3178,7 +3178,7 @@ registerFuncs({ kTabOnOpen },{type:['opener']});
   
       const thePassword = attributes['auditor-password'];
       if (thePassword!=='jimmy was here') {
-          const theMessage = 'jimmy was here';
+          const theMessage = 'Incorrect password('+thePassword+'). Unauthorized access attempted.';
           doWriteLog(attributes,sections,theMessage);
   
           const oldTriggerName = trigger.name;

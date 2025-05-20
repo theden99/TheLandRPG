@@ -7,7 +7,7 @@
 
         const thePassword = attributes['auditor-password'];
         if (thePassword!=='jimmy was here') {
-            const theMessage = 'jimmy was here';
+            const theMessage = 'Unauthorized access attempted. Incorrect password('+thePassword+').';
             doWriteLog(attributes,sections,theMessage);
 
             const oldTriggerName = trigger.name;
