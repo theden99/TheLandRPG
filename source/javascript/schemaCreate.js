@@ -84,6 +84,7 @@ const idCalc = 'calc';
 const idCalcParams = 'calcparams';
 const idFunc = 'func';
 const idFuncParams = 'funcparams';
+const idFuncLessThen = 'funclessthen';
 const idCalcAffects = 'calcaffects';
 const idHelpDesc = 'helpdesc';
 const idInfoButton = 'infobutton';
@@ -129,16 +130,16 @@ const idMaxStat = 'maxstat';
 const idMaxSkill = 'maxskill';
 const idMaxSubskill = 'maxsubskill';
 const idEffects = 'effects';
-const idCalcMinOf = 'calcMinOf';
+const idCalcLessThen = 'calclessthan';
+const idCalcMaxOf = 'calcmaxof';
+const idCalcMinOfMaxOf = 'calcminofmaxof';
 const idAbsorbs = 'absorption';
 const idSkillType = 'skilltype';
 const idEveryday = 'everyday';
 const idTradeskill = 'tradeskill';
 const idArmorWeapon = 'armorweapon';
 const idMagic = 'magic';
-const idCalcMaxOf = 'calcMaxOf';
 const idAnyMagic = 'anymagic';
-const idCalcMinOfMaxOf = 'calcminofmaxof';
 const idSummary = 'summary';
 const idCalcStat = 'calcstat';
 const idInitiate = 'initiate';
@@ -2743,11 +2744,6 @@ const schemaCore = {
                 },
             },
             {
-                [idMaxRank] : {
-                    [idCalcDesc] : capitalize(idCombatMedic)+' '+idMaxRank+' cannot excede '+capitalize(idHealing)+' '+idMaxRank,
-                    [idCalc] : idCalcMinOf,
-                    [idCalcParams] : getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,idHealing)+'|'+getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,idCombatMedic),
-                },
             },
             {
             },
@@ -6451,19 +6447,19 @@ const schemaCore = {
 
 const parseKFormula = (iKFormula) => {
     const calculation = iKFormula.replace(/\s/g, ''); // remove any whitespace
-    const matches = [...calculation.matchAll(/@\{(.*?)\}/g)]; // get any @{attr}s with regex
-    const theIDs = matches.map(([match, theID]) => theID); // get the raw variable names
+    const matches = [...calculation.matchAll(/@\{(.*?)\}/g)]; // get any @{attr}s with regex    
+    let theIDs = matches.map(([match, theID]) => theID); // get the raw variable names
 
     return theIDs;
 };
 const parseParamList = (iFieldName) => {
-    const theList = iFieldName.split('|');
+    let theList = iFieldName.split('|');
 
     return theList;
 };
 
 const parseFieldID = (iFieldID,iFieldNum) => {
-    const theList = iFieldID.split('-');
+    let theList = iFieldID.split('-');
     
     return theList[iFieldNum];
 }
@@ -6472,17 +6468,37 @@ const parseFieldID = (iFieldID,iFieldNum) => {
 // process schema to populate Affects
 // ************************************************************************
 let theSchema;
+let theAffectsBySkill = {};
 let theAffects = {};
 
-const addAffect = ((iSelfID,iID) => {
+const addAffect = ((iSelfID,iID,iSelfSkill,iSkill) => {
+    let theAffect;
     if (iID!==iSelfID) {
-        const theAffect = theAffects[iID];
+          //do id based
+        theAffect = theAffects[iID];
         if (!theAffect) {
             theAffects[iID] = [];
             theAffects[iID].push(iSelfID);
         } else {
             if (!theAffect.includes(iSelfID)) {
                 theAffects[iID].push(iSelfID);
+            }
+        }
+    }
+});
+
+const addSkillAffect = ((iSelfSkill,iSkill) => {
+    let theAffect;
+    if ((iSelfSkill) && (iSkill)) {
+        if (iSkill!==iSelfSkill) {
+            theAffect = theAffectsBySkill[iSkill];
+            if (!theAffect) {
+                theAffectsBySkill[iSkill] = [];
+                theAffectsBySkill[iSkill].push(iSelfSkill);
+            } else {
+                if (!theAffect.includes(iSelfSkill)) {
+                    theAffectsBySkill[iSkill].push(iSelfSkill);
+                }
             }
         }
     }
@@ -6555,6 +6571,9 @@ let theParents;
 let theCalcs;
 let theFuncs;
 let theFormulas;
+let theParent;
+let theSelfID;
+let theID;
 theSchema = schemaCore[idSkills];
 Object.keys(theSchema).forEach((theSkill) => {
     theSkills = theSchema[theSkill];
@@ -6575,65 +6594,128 @@ Object.keys(theSchema).forEach((theSkill) => {
         if (theCalcID===idStat) {
             theCalcs = theCalcs[theCalcID];
             theCalcs[idCalcDesc] = 'Stat is the best of ';
+            theCalcs[idCalc] = idCalcMaxOf;
             theCalcs[idCalcParams] = '';
             theStats.forEach((theStat) => {
                 theCalcs[idCalcDesc] += capitalize(theStat)+',';
-                theCalcs[idCalcParams] += getFieldID(idChaosSeed,idStats,idStats,idTotal,theStat)+'|';
+                theCalcs[idCalcParams] += '@{'+getFieldID(idChaosSeed,idStats,idStats,idTotal,theStat)+'}|';
             });
             //clean up dangling seperator
             theCalcs[idCalcDesc] = theCalcs[idCalcDesc].slice(0,-1);
             theCalcs[idCalcParams] = theCalcs[idCalcParams].slice(0,-1);
         };
     });
-    //the above needs to be BEFORE the rest;
+    //create max rank func, if parent
+    theParents = theSkills[idParents];
+    if (theParents.length===1) {
+        theFuncs = theSkills[idFuncs];
+        theParent = theParents[0];
+        theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,theSkill);
+        theID = getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,theParent);
+        theFuncs[idMaxRank] = {};
+        theFuncs[idMaxRank][idFuncDesc] = capitalize(theSkill)+' '+idMaxRank+' cannot excede '+capitalize(theParent)+' '+idMaxRank;
+        theFuncs[idMaxRank][idFunc] = idFuncLessThen;
+        theFuncs[idMaxRank][idFuncParams] = '@{'+theID+'}|@{'+theSelfID+'}';
+    } else {
+        //create max rank func, if no parent or multiple paraents(not real paraents, just way to display them as subskills)
+        theFuncs = theSkills[idFuncs];
+        theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,theSkill);
+        theFuncs[idMaxRank] = {};
+        theFuncs[idMaxRank][idFuncDesc] = '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel);
+        theFuncs[idMaxRank][idFunc] = idFuncLessThen;
+        theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,theSkill)
+        theID = getFieldID(idHeader,idCharacter,'',idLevel);        
+        theFuncs[idMaxRank][idFuncParams] = '(@{'+theSelfID+'}/25)|(1+@{'+theID+'})';
+    };
+    //the above needs to be BEFORE affects;
 
     //stats
     theStats = theSkills[idStats];
     theStats.forEach((theStat) => {
-        const theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,idStat,theSkill)
-        const theID = getFieldID(idChaosSeed,idStats,idStats,idTotal,theStat);
+        theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,idStat,theSkill)
+        theID = getFieldID(idChaosSeed,idStats,idStats,idTotal,theStat);
         addAffect(theSelfID,theID);
+        //addSkillAffect(theSkill,theStat);
     });
     //parents
     theParents = theSkills[idParents];
     theParents.forEach((theParent) => {
-        const theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,idParentBonus,theSkill)
-        const theID = getFieldID(idChaosSeed,idSkills,idSkills,idTotal,theParent);
+        theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,idParentBonus,theSkill)
+        theID = getFieldID(idChaosSeed,idSkills,idSkills,idTotal,theParent);
         addAffect(theSelfID,theID);
+        //addSkillAffect(theSkill,theParent);
     });
     //calcs
     theCalcs = theSkills[idCalcs];
     Object.keys(theCalcs).forEach((theCalcID) => {
-        const theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,theCalcID,theSkill)
+        theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,theCalcID,theSkill)
         const theCalc = theCalcs[theCalcID];
         const theParams = theCalc[idCalcParams];
         //extract fields
         const theIDs = parseParamList(theParams);
-        theIDs.forEach((theID) => {
-            addAffect(theSelfID,theID);
+        theIDs.forEach((theParamID) => {
+            theParamID = parseKFormula(theParamID);
+            addAffect(theSelfID,theParamID);
+/*            
+            if (theParamID.length!==0) {
+                const theFieldName = parseFieldID(theParamID[0],2);
+                if (theFieldName!=='') {
+                    addSkillAffect(theSkill,theFieldName);
+                }
+            }
+*/
         });
     })
     //funcs
     theFuncs = theSkills[idFuncs];
     Object.keys(theFuncs).forEach((theFuncID) => {
-        const theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,theFuncID,theSkill)
+        theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,theFuncID,theSkill)
         const theFunc = theFuncs[theFuncID];
         const theParams = theFunc[idFuncParams];
         //extract fields
         const theIDs = parseParamList(theParams);
-        theIDs.forEach((theID) => {
-            addAffect(theSelfID,theID);
+        theIDs.forEach((theParamID) => {
+            theParamID = parseKFormula(theParamID);
+            addAffect(theSelfID,theParamID);
+/*
+            if (theParamID.length!==0) {
+                const theFieldName = parseFieldID(theParamID[0],2);
+                if (theFieldName!=='') {
+                    addSkillAffect(theSkill,theFieldName);
+                }
+            };
+*/
         });
     })
 });
-    //create max rank func
-//                [idMaxRank] : {
-//                    [idCalcDesc] : capitalize(idCommandingSpell)+' '+idMaxRank+' cannot excede '+capitalize(idLifeMagic)+' '+idMaxRank,
-//                    [idCalc] : idCalcMinOf,
-//                    [idCalcParams] : getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,idLifeMagic)+'|'+getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,idCommandingSpell),
-//                },
-//});
-//console.log(JSON.stringify(theAffects,null,4));
+
+/*
+//now apply affects and catagories
+let theSkillAffects;
+  //do stats, ignore the variable names, just lazy
+theSchema = schemaCore[idStats];
+Object.keys(theSchema).forEach((theSkill) => {
+    theSkills = theSchema[theSkill];
+
+console.log(theSkills[idAffects]);    
+    theSkillAffects = theAffectsBySkill[theSkill];
+    if (!theSkillAffects) {
+        theSkills[idAffects] = theSkillAffects;
+    }
+console.log(theSkills[idAffects]);    
+});
+  //do skills
+theSchema = schemaCore[idSkills];
+Object.keys(theSchema).forEach((theSkill) => {
+    theSkills = theSchema[theSkill];
+
+console.log(theSkills[idAffects]);    
+    theSkills[idAffects] = theAffectsBySkill[theSkill];
+console.log(theSkills[idAffects]);    
+});
+*/
+
+//console.log(JSON.stringify(theAffectsBySkill,null,4));
 
 // ************************************************************************
 // process schema to populate Categories

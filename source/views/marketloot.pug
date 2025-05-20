@@ -40,7 +40,7 @@
                 .collapse-container
                     +span({'data-i18n':'Loot'}).collapse-title.paper-background
                     +collapse('loot-collapse')
-                    .div-loot-collapse.collapsed
+                    .div-loot-collapse.expanded
                         .thelandrpg-tabs-section-market
                             .div-tots
                                 .div-tots-section.paper-background.div-inline
@@ -90,7 +90,7 @@
                 .collapse-container
                     +span({'data-i18n':'Market'}).collapse-title.paper-background
                     +collapse('market-collapse')
-                    .div-market-collapse.collapsed
+                    .div-market-collapse.expanded
                         .thelandrpg-tabs-section-market
                             .div-tots
                                 .div-tots-section.paper-background.div-inline
@@ -140,7 +140,7 @@
                 .collapse-container
                     +span({'data-i18n':'Auction House'}).collapse-title.paper-background
                     +collapse('auctionhouse-collapse')
-                    .div-aucitonhouse-collapse.collapsed
+                    .div-aucitonhouse-collapse.expanded
                         .thelandrpg-tabs-section-market
                             .div-tots
                                 .div-tots-section.paper-background.div-inline
@@ -273,8 +273,6 @@
                 doSectionDelete(attributes,sections,fromSectionID);
             });
         };
-
-        checkStagingAreaCollapse(attributes,sections);
     };
     k.registerFuncs({doLootLootAll});
     
@@ -293,8 +291,6 @@
                 doSectionDelete(attributes,sections,fromSectionID);
             });
         };
-
-        checkStagingAreaCollapse(attributes,sections);
     };
     k.registerFuncs({doMarketBuyAll});
     
@@ -313,8 +309,6 @@
                 doSectionDelete(attributes,sections,fromSectionID);
             });
         };
-
-        checkStagingAreaCollapse(attributes,sections);
     };
     k.registerFuncs({doAuctionHouseBidAll});
     

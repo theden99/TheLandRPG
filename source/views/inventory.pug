@@ -37,7 +37,7 @@
             .inventory-main-stagingarea.paper-background
                 .collapse-container
                     +collapse('stagingarea-collapse')
-                    .div-slot-collapse.collapsed
+                    .div-slot-collapse.expanded
                         +span({'data-i18n':'STAGING AREA'}).staging-title
                         include _inventory-stagingarea
         .div-slottype
@@ -139,17 +139,6 @@
         return totWeight;
     };
     k.registerFuncs({calcTotWeightInventory});
-
-    const checkStagingAreaCollapse = (attributes,sections) => {
-        if (sections['repeating_inventory-stagingarea-items']) {
-            if (sections['repeating_inventory-stagingarea-items'].length > 0) {
-                attributes['stagingarea-collapse'] = 1;
-            } else {
-                attributes['stagingarea-collapse'] = 0;
-            }
-        }
-    }
-    k.registerFuncs({checkStagingAreaCollapse});
 
     const checkSlotsCollapse = (attributes,sections) => {
         if (sections['repeating_inventory-slots-items']) {
@@ -356,7 +345,6 @@
 
             k.removeRepeatingRow(fromSectionID,attributes,sections);
 
-            checkStagingAreaCollapse(attributes,sections);
             attributes['inventory-totweight'] = calcTotWeightInventory({trigger,attributes,sections,casc});
         } else {
             const theMessage = 'error unequpping '+fromSectionID;

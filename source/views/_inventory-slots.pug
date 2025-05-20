@@ -73,6 +73,8 @@
         const stagingSection = 'repeating_inventory-stagingarea-items';
         const stagingSectionID = stagingSection+'_'+stagingID;
 
+        doAPIActivityMessage(stagingSectionID+'_itemname','Processing equip...','Done with equip')
+
         //if equip(why it's 1) worked, continue, else log error
         if (doEquipItem(attributes,sections,stagingSectionID,1)===0) {
             const invenSection = getSlotTypeSection(slotsSlotType);
