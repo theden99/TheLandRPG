@@ -224,3 +224,85 @@
         finishRoll(roll.rollId);
     };
     k.registerFuncs({funcCore});
+
+    const getMagicTypeTotal = (iMagicType) => {
+        let theId='';
+
+        if (iMagicType==='airmagic') {
+            theId =  'chaosseed-skills-airmagic-total';
+        } else if (iMagicType==='darkmagic') {
+            theId = 'chaosseed-skills-darkmargic-total';
+        } else if (iMagicType==='deathmagic') {
+            theId =  'chaosseed-skills-deathmagic-total';
+        } else if (iMagicType==='earthmagic') {
+            theId = 'chaosseed-skills-earthmagic-total';
+        } else if (iMagicType==='firemagic') {
+            theId = 'chaosseed-skills-firemagic-total';
+        }  else if (iMagicType==='lifemagic') {
+            theId = 'chaosseed-skills-lifemagic-total';
+        } else if (iMagicType==='lightmagic') {
+            theId = 'chaosseed-skills-lightmagic-total';
+        } else if (iMagicType==='watermagic') {
+            theId = 'chaosseed-skills-watermagic-total';
+        } else if (iMagicType==='eldritchmagic') {
+            theId = 'chaosseed-skills-eldritchmagic-total';
+        }  else if (iMagicType==='chaosmagic') {
+            theId = 'chaosseed-skills-chaosmagic-total';
+        }
+
+        return theId;
+    }
+
+    const funcSpells = async function({trigger,attributes,sections,casc}){
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const powerCard = attributes[sectionName+'_'+rowID+'_spells-powercard'];
+        //console.log(sectionName);
+        //console.log(rowID)
+        //console.log(buttonName);
+        //console.log(powerCard);
+
+        if (powerCard!=='') {
+            theAPICall = powerCard;
+        } else {
+            //default card
+            const theSectionId = sectionName+'_'+rowID+'_';
+            const theName = attributes[theSectionId+'spells-name'];
+            const theMagicType = attributes[theSectionId+'spells-magictype'];
+            const theLevel = attributes[theSectionId+'spells-level'];
+            const theActionType = attributes[theSectionId+'spells-actiontype'];
+            const theCostLine = attributes[theSectionId+'spells-costtype']+' '+attributes[theSectionId+'spells-cost'];
+            const theMagicTypeTotal = attributes[getMagicTypeTotal(theMagicType)];
+            let theRadiusLine = '1 creature';
+            if (attributes[theSectionId+'spells-radius']!=='') {
+                theRadiusLine = attributes[theSectionId+'spells-radius']+' feet in a '+attributes[theSectionId+'spells-radiustype']
+            };
+            let theRangeLine = attributes[theSectionId+'spells-range'];
+            if ((theRangeLine!=='Self') && (theRangeLine!=='Touch')) {
+                theRangeLine = 'The target must be within '+theRangeLine+' feet.';
+            }
+            const theVs = attributes[theSectionId+'spells-vs'];
+            let theDurationLine = attributes[theSectionId+'spells-duration'];
+            if (theDurationLine==='Timed') {
+                theDurationLine = attributes[theSectionId+'spells-durationamount']+' '+attributes[theSectionId+'spells-durationtype'];
+            }
+            const theEffects = attributes[theSectionId+'spells-effects'];
+            const theDesc = attributes[theSectionId+'spells-desc'];
+            theAPICall = '!power {{ '+
+            ' --name|'+theName+
+            ' --leftsub|'+theMagicType+' '+theLevel+' ◆ '+theActionType+
+            ' --rightsub|'+theCostLine+
+            ' --Attack|[[ 1d100 + '+theMagicTypeTotal+' + floor(@{selected|chaosseed-stats-luck-total}/10) ]] vs '+theVs+
+            ' --On Hit|the target takes [[2d8+floor(@{selected|chaosseed-stats-wisdom-total}/5)+floor(@{selected|chaosseed-stats-luck-total}/10)]]  damage'+
+            ' --Critical Chance|the target takes  [[2d8+floor(@{selected|chaosseed-stats-wisdom-total}/5)+floor(@{selected|chaosseed-stats-luck-total}/10)]] extra damage'+
+            ' --Area|'+theRadiusLine+
+            ' --Range|'+theRangeLine+
+            ' --Duration|'+theDurationLine+
+            ' --Effect|'+theEffects+
+            ' --Caster|//@{selected|character_name} '+theDesc+'//'+
+            '}} ';
+        };
+
+        const roll = await startRoll(theAPICall);
+        finishRoll(roll.rollId);
+    };
+    k.registerFuncs({funcSpells});

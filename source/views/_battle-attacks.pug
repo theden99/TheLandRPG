@@ -23,7 +23,7 @@
             +span({'data-i18n':'Damage Class'}).attacks-damageclass-head
     +customControlFieldset({name:'attacks-main-items',addClass:''})
         .div-inline
-            +roller({name:'attacks-roller',class:'general-roller attacks-roller',trigger:{triggeredFuncs:['funcCore']}})
+            +roller({name:'attacks-roller',class:'general-roller attacks-roller',trigger:{triggeredFuncs:['funcTechs']}})
             +text({name:'attacks-name',class:'attacks-name underlined',value:''})
             +select({name:'attacks-actiontype',class:'attacks-actiontype'})
                 +option({value:0,'data-i18n':'Combat'})
@@ -97,7 +97,7 @@
         .div
             .collapse-container
                 +collapse('attacks-desc-collapse')
-                +span({'data-i18n':'Show Notes'})
+                +span({'data-i18n':'Show Details'})
                 .expanded
                 .collapsed
                     .div-attacks-details

@@ -101,12 +101,16 @@
         .div
             .collapse-container
                 +collapse('techs-desc-collapse')
-                +span({'data-i18n':'Show Description'})
+                +span({'data-i18n':'Show Details'})
                 .expanded
                 .collapsed
                     .div-techs-details
-                        .div-techs-desc
-                            +adaptiveTextarea({name:'techs-desc',class:'boxed'})
+                        +span({'data-i18n':'Description'}).techs-desc-head
+                        +adaptiveTextarea({name:'techs-desc',class:'techs-desc boxed'})
+                        +span({'data-i18n':'Effects'}).techs-effects-head
+                        +adaptiveTextarea({name:'techs-effects',class:'techs-effects boxed'})
+                        +span({'data-i18n':'Power Card'}).techs-powercard-head
+                        +adaptiveTextarea({name:'techs-powercard',class:'techs-powercard boxed'})
 +module.
 +scss('sheet').
     .techs-main{
@@ -216,11 +220,34 @@
             display: grid;
             grid-template-columns: auto;
             grid-template-areas : 
+                'desc-head'
                 'desc'
+                'effects-head'
+                'effects'
+                'powercard-head'
+                'powercard'
             ;
             border: 1px solid var(--borderColor);
-            .div-techs-desc {
+            .techs-desc-head {
+                grid-area: desc-head;
+                background-color: lightgray;
+            }
+            .techs-desc {
                 grid-area: desc;
+            }
+            .techs-effects-head {
+                grid-area: effects-head;
+                background-color: lightgray;
+            }
+            .techs-effects {
+                grid-area: effects;
+            }
+            .techs-powercard-head {
+                grid-area: powercard-head;
+                background-color: lightgray;
+            }
+            .techs-powercard {
+                grid-area: powercard;
             }
         }
     } 
