@@ -145,17 +145,19 @@
         //const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
         if (attributes['header-character-level']===0) {
-            k.setAttrs({'header-character-level' : 1},true,()=>{console.log('set level')});
-            k.setAttrs({'chaosseed-stats-strength-base' : 10},true,()=>{console.log('set strength')});
-            k.setAttrs({'chaosseed-stats-agility-base' : 10},true,()=>{console.log('set agility')});
-            k.setAttrs({'chaosseed-stats-dexterity-base' : 10},true,()=>{console.log('set dexterity')});
-            k.setAttrs({'chaosseed-stats-constitution-base' : 10},true,()=>{console.log('set constitution')});
-            k.setAttrs({'chaosseed-stats-endurance-base' : 10},true,()=>{console.log('set endurance')});
-            k.setAttrs({'chaosseed-stats-intelligence-base' : 10},true,()=>{console.log('set intelligence')});
-            k.setAttrs({'chaosseed-stats-wisdom-base' : 10},true,()=>{console.log('set wisdom')});
-            k.setAttrs({'chaosseed-stats-charisma-base' : 10},true,()=>{console.log('set charisma')});
-            k.setAttrs({'chaosseed-stats-luck-base' : 10},true,()=>{console.log('set luck')});
-
+            k.setAttrs(
+            {
+                'header-character-level' : 1,
+                'chaosseed-stats-strength-base' : 10,
+                'chaosseed-stats-agility-base' : 10,
+                'chaosseed-stats-dexterity-base' : 10,
+                'chaosseed-stats-constitution-base' : 10,
+                'chaosseed-stats-endurance-base' : 10,
+                'chaosseed-stats-intelligence-base' : 10,
+                'chaosseed-stats-wisdom-base' : 10,
+                'chaosseed-stats-charisma-base' : 10,
+                'chaosseed-stats-luck-base' : 10
+            },true,()=>{console.log('set luck')});
         };
     };
     k.registerFuncs({doSetLevel},{type:['opener']});
@@ -195,27 +197,30 @@
 
     const funcCore = async function({trigger,attributes,sections,casc}){
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
-        //console.log('section: '+sectionName);
-        //console.log('rowID: '+rowID);
-        //console.log('buttonName: '+buttonName);
         const attrName = buttonName.replace('-roller-action','-total');
         const zoneName = parseFieldId(attrName)[1]; //chaosseed-stats-agility-total, get stats
         const fieldName = parseFieldId(attrName)[2]; //chaosseed-stats-agility-total, get agility
         const displayName = schemaCore[zoneName][fieldName].displayname;
-        //console.log('attrName: '+attrName);
-        //console.log('zoneName: '+zoneName);
-        //console.log('fieldName: '+fieldName);
-        //console.log('displayName: '+displayName);
-        const rollObj = {
-            roll: assembleRollField(attrName,displayName,attributes),  //rolltemplate string
-            roll_name: attributes['character_name'],
-            name: displayName,
-            target: ''
-        };
 
-        const rollString = assembleRollString(rollObj);
-        const roll = await startRoll(rollString);
+        //const rollObj = {
+            //roll: assembleRollField(attrName,displayName,attributes),  //rolltemplate string
+            //roll_name: attributes['character_name'],
+            //name: displayName,
+            //target: ''
+        //};
+
+        //const rollString = assembleRollString(rollObj);
+        //const roll = await startRoll(rollString);
+        //finishRoll(roll.rollId);
+
+        //stats and skills
+        let theAPICall = '!power {{ --name|'+displayName+' --leftsub|@{selected|character_name} --Stat Check:|[[ 1d100 + @{selected|'+attrName+'} ]] }}';
+        if (fieldName==='combatspeed') {
+            //inititive
+            theAPICall = '!power {{ --name|'+displayName+' --leftsub|@{selected|character_name} --Stat Check:|[[ [TRKR] 1d100 + @{selected|'+attrName+'} ]] }}';
+        }
+
+        const roll = await startRoll(theAPICall);
         finishRoll(roll.rollId);
     };
     k.registerFuncs({funcCore});
-

@@ -1226,16 +1226,17 @@
   margin: var(--inlineRollImportantMargin);
 }
 .sheet-rolltemplate-default .sheet-template .sheet-roll-header {
-  color: white;
+  text-color: white;
   text-align: center;
-  background-color: yellow;
+  background-color: gainsboro;
 }
 .sheet-rolltemplate-default .sheet-template .sheet-roll-content .display-row {
   display: flex;
   flex-wrap: wrap;
   gap: var(--half-gap);
-  justify-content: space-betweem;
-  align-items: center;
+  font-size: 24px;
+  background-color: cyan;
+  text-align: center;
 }
 
 .div-inline {
@@ -5490,7 +5491,7 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs {
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs .tabs--thelandrpg__header {
   height: 45px;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window {
+body .ui-dialog .tab-content .charsheet .roll20-main {
   display: grid;
   gap: var(--half-gap);
   grid-template-columns: 1100px 650px;
@@ -5500,16 +5501,16 @@ body .ui-dialog .tab-content .charsheet .roll20-window {
   font-family: Arial;
   font-weight: bold;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .thelandrpg-header {
+body .ui-dialog .tab-content .charsheet .roll20-main .thelandrpg-header {
   grid-area: headerx;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .thelandrpg-tabs {
+body .ui-dialog .tab-content .charsheet .roll20-main .thelandrpg-tabs {
   grid-area: tabsx;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .thelandrpg-sidebar {
+body .ui-dialog .tab-content .charsheet .roll20-main .thelandrpg-sidebar {
   grid-area: sidebarx;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .paper-background {
+body .ui-dialog .tab-content .charsheet .roll20-main .paper-background {
   border: var(--half-gap) solid transparent;
   border-image-source: url(https://t4.ftcdn.net/jpg/05/39/78/15/240_F_539781530_9kVln7bwkJTpsq91scLQT74pWHz4ALLO.jpg);
   border-image-slice: 40 fill;
@@ -5519,12 +5520,12 @@ body .ui-dialog .tab-content .charsheet .roll20-window .paper-background {
   border-image-size: cover;
   filter: drop-shadow(rgba(0, 0, 0, 0.16) 0px 3px 6px) drop-shadow(rgba(0, 0, 0, 0.23) 0px 3px 6px);
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .parchment-background {
+body .ui-dialog .tab-content .charsheet .roll20-main .parchment-background {
   background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/ADnD_1E_Revised/images/back2.jpg");
   background-repeat: repeat;
   overflow: visible;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .base-button {
+body .ui-dialog .tab-content .charsheet .roll20-main .base-button {
   background-color: rgba(220, 220, 220, 0.2);
   border-radius: 5px;
   box-shadow: 0 2px 4px black;
@@ -5535,17 +5536,17 @@ body .ui-dialog .tab-content .charsheet .roll20-window .base-button {
   backdrop-filter: blur(1px);
   overflow: hidden;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .base-button:is(:hover, :focus) {
+body .ui-dialog .tab-content .charsheet .roll20-main .base-button:is(:hover, :focus) {
   background-color: rgba(133, 133, 133, 0.5019607843);
   box-shadow: 0 4px 6px black;
   backdrop-filter: blur(2px);
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .base-button:active {
+body .ui-dialog .tab-content .charsheet .roll20-main .base-button:active {
   background-color: #858585;
   box-shadow: 0 1px 2px black;
   backdrop-filter: blur(0px);
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .text-button {
+body .ui-dialog .tab-content .charsheet .roll20-main .text-button {
   padding: 5px 7px;
   background-color: rgba(220, 220, 220, 0.2);
   border-radius: 5px;
@@ -5557,17 +5558,17 @@ body .ui-dialog .tab-content .charsheet .roll20-window .text-button {
   backdrop-filter: blur(1px);
   overflow: hidden;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .text-button:is(:hover, :focus) {
+body .ui-dialog .tab-content .charsheet .roll20-main .text-button:is(:hover, :focus) {
   background-color: rgba(133, 133, 133, 0.5019607843);
   box-shadow: 0 4px 6px black;
   backdrop-filter: blur(2px);
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .text-button:active {
+body .ui-dialog .tab-content .charsheet .roll20-main .text-button:active {
   background-color: #858585;
   box-shadow: 0 1px 2px black;
   backdrop-filter: blur(0px);
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .thelandrpg-tabs-button {
+body .ui-dialog .tab-content .charsheet .roll20-main .thelandrpg-tabs-button {
   padding: 5px 7px;
   background-color: rgba(220, 220, 220, 0.2);
   border-radius: 5px;
@@ -5580,17 +5581,17 @@ body .ui-dialog .tab-content .charsheet .roll20-window .thelandrpg-tabs-button {
   overflow: hidden;
   background-color: lightblue;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .thelandrpg-tabs-button:is(:hover, :focus) {
+body .ui-dialog .tab-content .charsheet .roll20-main .thelandrpg-tabs-button:is(:hover, :focus) {
   background-color: rgba(133, 133, 133, 0.5019607843);
   box-shadow: 0 4px 6px black;
   backdrop-filter: blur(2px);
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .thelandrpg-tabs-button:active {
+body .ui-dialog .tab-content .charsheet .roll20-main .thelandrpg-tabs-button:active {
   background-color: #858585;
   box-shadow: 0 1px 2px black;
   backdrop-filter: blur(0px);
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .thelandrpg-subtab-button {
+body .ui-dialog .tab-content .charsheet .roll20-main .thelandrpg-subtab-button {
   background-color: rgba(220, 220, 220, 0.2);
   border-radius: 5px;
   box-shadow: 0 2px 4px black;
@@ -5603,50 +5604,50 @@ body .ui-dialog .tab-content .charsheet .roll20-window .thelandrpg-subtab-button
   background-color: lightblue;
   font-size: 10px;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .thelandrpg-subtab-button:is(:hover, :focus) {
+body .ui-dialog .tab-content .charsheet .roll20-main .thelandrpg-subtab-button:is(:hover, :focus) {
   background-color: rgba(133, 133, 133, 0.5019607843);
   box-shadow: 0 4px 6px black;
   backdrop-filter: blur(2px);
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .thelandrpg-subtab-button:active {
+body .ui-dialog .tab-content .charsheet .roll20-main .thelandrpg-subtab-button:active {
   background-color: #858585;
   box-shadow: 0 1px 2px black;
   backdrop-filter: blur(0px);
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .items-header-addbuttongap {
+body .ui-dialog .tab-content .charsheet .roll20-main .items-header-addbuttongap {
   width: 23px;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .items-header-header {
+body .ui-dialog .tab-content .charsheet .roll20-main .items-header-header {
   margin-right: 3px;
   text-align: center;
   background-color: lightskyblue;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .boxed {
+body .ui-dialog .tab-content .charsheet .roll20-main .boxed {
   border: 1px solid var(--borderColor);
   border-radius: 0;
   box-sizing: border-box;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .adaptive--text {
+body .ui-dialog .tab-content .charsheet .roll20-main .adaptive--text {
   min-height: 1.6rem;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .k-active-button {
+body .ui-dialog .tab-content .charsheet .roll20-main .k-active-button {
   background-color: silver;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .tabs__nav-item {
+body .ui-dialog .tab-content .charsheet .roll20-main .tabs__nav-item {
   padding: 5px 5px;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .repcontainer {
+body .ui-dialog .tab-content .charsheet .roll20-main .repcontainer {
   gap: var(--tiny-gap);
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .repitem > .collapse:before,
-body .ui-dialog .tab-content .charsheet .roll20-window .collapse-container > .collapse:before {
+body .ui-dialog .tab-content .charsheet .roll20-main .repitem > .collapse:before,
+body .ui-dialog .tab-content .charsheet .roll20-main .collapse-container > .collapse:before {
   content: "y";
   font-family: pictos;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .roller:before {
+body .ui-dialog .tab-content .charsheet .roll20-main .roller:before {
   content: "";
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .roller {
+body .ui-dialog .tab-content .charsheet .roll20-main .roller {
   display: flex;
   align-items: center;
   gap: 26px;
@@ -5658,32 +5659,32 @@ body .ui-dialog .tab-content .charsheet .roll20-window .roller {
   border-style: none;
   background-color: transparent;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .button-help:before {
+body .ui-dialog .tab-content .charsheet .roll20-main .button-help:before {
   content: "?";
   font-family: pictos;
   font-size: 16px;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .button-help {
+body .ui-dialog .tab-content .charsheet .roll20-main .button-help {
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .column-help {
+body .ui-dialog .tab-content .charsheet .roll20-main .column-help {
   width: 20px;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .button-info:before {
+body .ui-dialog .tab-content .charsheet .roll20-main .button-info:before {
   content: "i";
   font-family: pictos;
   font-size: 16px;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .button-info {
+body .ui-dialog .tab-content .charsheet .roll20-main .button-info {
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .column-info {
+body .ui-dialog .tab-content .charsheet .roll20-main .column-info {
   width: 20px;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .addbutton-padding {
+body .ui-dialog .tab-content .charsheet .roll20-main .addbutton-padding {
   width: 20px;
 }
-body .ui-dialog .tab-content .charsheet .roll20-window .trashcan-padding {
+body .ui-dialog .tab-content .charsheet .roll20-main .trashcan-padding {
   width: 23px;
 }
 body.sheet-darkmode {
