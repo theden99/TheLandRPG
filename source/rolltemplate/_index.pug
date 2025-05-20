@@ -1,4 +1,4 @@
-+rolltemplate('default')
++templateWrapper('default')
   .roll-header
     +templateConditionalDisplay('name')
       h3(data-i18n='')
@@ -18,12 +18,12 @@
             |{{target}}
       
 +scss('roll').
-  .roll-header{
+  .sheet-roll-header{
     color: white;
     text-align: center;
     background-color: yellow;
   }
-  .roll-content{
+  .sheet-roll-content{
     .display-row{
       display:flex;
       flex-wrap: wrap;
