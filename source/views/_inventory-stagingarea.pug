@@ -4,15 +4,16 @@
         +span({'data-i18n':'Name'}).item-head-itemname.underlined
         +span({'data-i18n':'Item Type'}).item-head-slottype.underlined
         +span({'data-i18n':'Qty'}).item-head-qty.underlined
-        +span({'data-i18n':'Type'}).item-head-slottype.underlined
+        +span({'data-i18n':'Equip Slot'}).item-head-slottype.underlined
     .div-inven-items.div-inline
         +customControlFieldset({name:'inventory-stagingarea-items',addClass:''})
             +text({name:'itemname',class:'item_itemname underlined',value:''})
             +select({name:'slottypeitem',class:'item_slottype underlined'})
-                +option({value:'slottypeArmor','data-i18n':'Armor'})
-                +option({value:'slottypeWeapon','data-i18n':'Weapon'})
-                +option({value:'slottypeAccessory','data-i18n':'Accessory'})
-                +option({value:'slottypeAmmo','data-i18n':'Ammo'})
+                +option({value:'slottypearmor','data-i18n':'Armor'})
+                +option({value:'slottypeweapon','data-i18n':'Weapon'})
+                +option({value:'slottypeaccessory','data-i18n':'Accessory'})
+                +option({value:'slottypeammo','data-i18n':'Ammo'})
+                +option({value:'slottypegeneral','data-i18n':'General'})
             +number({name:'qty',class:'item_qty boxed',value:1})
             +select({name:'slottype',class:'item_slottype underlined'})
                 +option({value:'slottypeArmor','data-i18n':'Armor'})
@@ -21,7 +22,7 @@
                 +option({value:'slottypeAmmo','data-i18n':'Ammo'})
                 +option({value:'slottypeBeltPouch','data-i18n':'Belt/Pouch'})
                 +option({value:'slottypeStorage','data-i18n':'Storage'})
-                +option({value:'slottypeDiscardPile','data-i18n':'Discard Pile'})
+                +option({value:'slottypeDiscardpile','data-i18n':'Discard Pile'})
             +button({name:'equip-staging-button',type:'action','data-i18n':'Equip',class:'staging-button',trigger:{triggeredFuncs:['doStagingEquip']}})
             +text({name:'trashcan-padding',class:'item_padding',readonly:''})
             +collapseItemDetails('inventory-totweight')
@@ -48,6 +49,7 @@
         }
         attributes['storage-collapse'] = 1;
         attributes['discardpile-collapse'] = 1;
+
     };
     k.registerFuncs({doStagingEquip});
 +scss('sheet').
@@ -89,6 +91,7 @@
         .div-inven-items{
             .staging-button{
                 @include k.base-button;
+                background-color: lightskyblue;
                 width: 30px;
             }
             .item_padding{

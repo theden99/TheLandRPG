@@ -60,7 +60,7 @@
             +number({name:'qty',class:'item_qty boxed',value:0})
             +button({name:'equip-slots-button',type:'action','data-i18n':'Equip',class:'staging-button',trigger:{triggeredFuncs:['doSlotsEquip']}})
             +text({name:'trashcan-padding',class:'item_padding',readonly:''})
-            +text({name:'slottype',class:'underlined hidden',readonly:''})
+            //+text({name:'slottype',class:'underlined hidden',readonly:''})
             +collapseItemDetails('inventory-totweight')
 +module.
     const doSlotsEquip = ({trigger,attributes,sections,casc}) => {
@@ -78,15 +78,20 @@
         //if equip(why it's 1) worked, continue, else log error
         if (doEquipItem(attributes,sections,stagingSectionID,1)===0) {
             const invenSection = getSlotTypeSection(slotsSlotType);
+            //console.log('getslottypesection');
             const invenSectionID = k.generateRowID(invenSection,sections);
+            //console.log('generate id');
 
             doSectionCopy(attributes,sections,stagingSectionID,invenSectionID);
             attributes[invenSectionID+'_slottype'] = slotsSlotType;
             attributes[invenSectionID+'_slot'] = slotsSlot;
+            //console.log('copy');
 
             doSectionRemoveAll(attributes,sections,sectionName);
+            //console.log('remove all');
 
             doSectionDelete(attributes,sections,stagingSectionID);
+            //console.log('delete');
 
             //checkStagingAreaCollapse(attributes,sections);
             doSlotTypeCollapse(attributes);
@@ -136,6 +141,7 @@
         .div-inven-items{
             .staging-button{
                 @include k.base-button;
+                background-color: lightskyblue;
             }
             .item_padding{
                 width: 10px;

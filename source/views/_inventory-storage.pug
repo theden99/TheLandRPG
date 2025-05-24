@@ -26,7 +26,7 @@
                 +button({name:'unequip-storage-button',type:'action','data-i18n':'Unequip',class:'staging-button',trigger:{triggeredFuncs:['doUnequipItem']}})
                 +text({name:'trashcan-padding',class:'item_padding',readonly:''})
                 +text({name:'slottype',class:'underlined hidden',readonly:''})
-                +collapseItemDetails('inventory-totweight')
+                +collapseItemDetails('inventory-storage')
 +module.
 +scss('sheet').
     .inventory-storage-section{
@@ -34,7 +34,7 @@
         flex-wrap: wrap;
         align-items: top;
         gap: var(--tiny-gap);
-        width: 460px;
+        width: 560px;
         .div-item-header{
             .item-head-addbuttongap{
                 width: 23px;
@@ -67,6 +67,7 @@
         .div-inven-items{
             .staging-button{
                 @include k.base-button;
+                background-color: lightskyblue;
             }
             .item_padding{
                 width: 10px;

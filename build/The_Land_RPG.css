@@ -3592,6 +3592,7 @@ body .ui-dialog .tab-content .charsheet .inventory-main .div-slottype .slottype-
   transition-timing-function: ease-out;
   backdrop-filter: blur(1px);
   overflow: hidden;
+  background-color: lightblue;
   width: 70px;
   margin-right: 5px;
   margin-top: 5px;
@@ -4204,7 +4205,7 @@ body .ui-dialog .tab-content .charsheet .spells-main .spells-radiustype-head {
 body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details {
   display: grid;
   grid-template-columns: auto;
-  grid-template-areas: "desc-head" "desc" "effects-head" "effects" "powercard-head" "powercard";
+  grid-template-areas: "desc-head" "desc" "spelleffect-head" "spelleffect" "effects-section" "powercard-head" "powercard";
   border: 1px solid var(--borderColor);
 }
 body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-desc-head {
@@ -4214,11 +4215,67 @@ body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells
 body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-desc {
   grid-area: desc;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-effects-head {
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-spelleffect-head {
+  grid-area: spelleffect-head;
+  background-color: lightgray;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-spelleffect {
+  grid-area: spelleffect;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-effects-section {
+  grid-area: effects-section;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-effects-section .spells-effects-head {
   grid-area: effects-head;
   background-color: lightgray;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-effects {
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-effects-section .spells-effects-apply {
+  grid-area: apply;
+  background-color: rgba(220, 220, 220, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px black;
+  border-width: 0;
+  transition-property: box-shadow, backdrop-filter;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+  backdrop-filter: blur(1px);
+  overflow: hidden;
+  background-color: lightskyblue;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-effects-section .spells-effects-apply:is(:hover, :focus) {
+  background-color: rgba(133, 133, 133, 0.5019607843);
+  box-shadow: 0 4px 6px black;
+  backdrop-filter: blur(2px);
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-effects-section .spells-effects-apply:active {
+  background-color: #858585;
+  box-shadow: 0 1px 2px black;
+  backdrop-filter: blur(0px);
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-effects-section .spells-effects-remove {
+  grid-area: remove;
+  background-color: rgba(220, 220, 220, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px black;
+  border-width: 0;
+  transition-property: box-shadow, backdrop-filter;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+  backdrop-filter: blur(1px);
+  overflow: hidden;
+  background-color: lightskyblue;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-effects-section .spells-effects-remove:is(:hover, :focus) {
+  background-color: rgba(133, 133, 133, 0.5019607843);
+  box-shadow: 0 4px 6px black;
+  backdrop-filter: blur(2px);
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-effects-section .spells-effects-remove:active {
+  background-color: #858585;
+  box-shadow: 0 1px 2px black;
+  backdrop-filter: blur(0px);
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-effects-section .spells-effects {
   grid-area: effects;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells-powercard-head {
@@ -4393,6 +4450,7 @@ body .ui-dialog .tab-content .charsheet .inventory-skinny-section .div-inven-ite
   transition-timing-function: ease-out;
   backdrop-filter: blur(1px);
   overflow: hidden;
+  background-color: lightskyblue;
   width: 30px;
 }
 body .ui-dialog .tab-content .charsheet .inventory-skinny-section .div-inven-items .staging-button:is(:hover, :focus) {
@@ -4464,6 +4522,7 @@ body .ui-dialog .tab-content .charsheet .inventory-skinny-section .div-inven-ite
   transition-timing-function: ease-out;
   backdrop-filter: blur(1px);
   overflow: hidden;
+  background-color: lightskyblue;
 }
 body .ui-dialog .tab-content .charsheet .inventory-skinny-section .div-inven-items .staging-button:is(:hover, :focus) {
   background-color: rgba(133, 133, 133, 0.5019607843);
@@ -4845,7 +4904,7 @@ body .ui-dialog .tab-content .charsheet .inventory-storage-section {
   flex-wrap: wrap;
   align-items: top;
   gap: var(--tiny-gap);
-  width: 460px;
+  width: 560px;
 }
 body .ui-dialog .tab-content .charsheet .inventory-storage-section .div-item-header .item-head-addbuttongap {
   width: 23px;
@@ -4884,6 +4943,7 @@ body .ui-dialog .tab-content .charsheet .inventory-storage-section .div-inven-it
   transition-timing-function: ease-out;
   backdrop-filter: blur(1px);
   overflow: hidden;
+  background-color: lightskyblue;
 }
 body .ui-dialog .tab-content .charsheet .inventory-storage-section .div-inven-items .staging-button:is(:hover, :focus) {
   background-color: rgba(133, 133, 133, 0.5019607843);

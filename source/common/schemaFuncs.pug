@@ -108,7 +108,7 @@
         newRow[toSectionID+'_itemname'] = attributes[fromSectionID+'_itemname'];
         newRow[toSectionID+'_slottype'] = attributes[fromSectionID+'_slottype'];
         newRow[toSectionID+'_slottypeitem'] = attributes[fromSectionID+'_slottypeitem'];
-        //newRow[toSectionID+'_slot'] = attributes[fromSectionID+'_slot'];
+        newRow[toSectionID+'_slot'] = attributes[fromSectionID+'_slot'];
         newRow[toSectionID+'_qty'] = attributes[fromSectionID+'_qty'];
         newRow[toSectionID+'_category'] = attributes[fromSectionID+'_category'];
         newRow[toSectionID+'_weight'] = attributes[fromSectionID+'_weight'];
@@ -177,22 +177,47 @@
         finishRoll(roll.rollId);
     };
 
+    const ApplyEffects = (attributes,iEffects,iMult) => {
+        let theOk = 0; //all ok
+        let theArea = [];
+        let theUpdate = [];
+        let theField = '';
+        let theValue = 0;
+        let theEffects = iEffects;
+
+        if ((theEffects) && (theEffects!=='')) {
+            //process each line
+            const lines = theEffects.split('\n');
+            for(var i = 0;i < lines.length;i++) {
+                const theArea = lines[i].split('.');
+                theUpdate = theArea[1].split('+');
+                if (theUpdate.length===0)  {
+                    theUpdate = theArea[1].split('-');
+                };
+
+                if (theUpdate.length>0) {
+                    theField = theUpdate[0];
+                    theValue = parseInt(theUpdate[1])*iMult;
+                } else {
+                    doWriteLog(attributes,sections,'error parsing effects'+theEffects);
+                    theOk = -1;
+                }
+
+                if (theOk===0) {
+                    const theZone = theArea[0];
+                    const theFieldID = getFieldID(idChaosSeed,theZone,theZone,idEquipBonus,theField);
+                    attributes[theFieldID] += theValue;
+                }
+            }
+        }
+
+        return theOk;
+    }
+
     const parseFieldId = (iFieldId) => {
         const theFields = iFieldId.split('-');
 
         return theFields;
-    };
-
-    const assembleRollField = (attrName,displayName,attributes) => {
-        let rollString = 'Skill Check: [[ 1d100 ]] ';
-        return rollString;
-    };
-
-    const assembleRollString = (rollObj,rollStart = '&{template:default}') => {
-        return Object.entries(rollObj)
-            .reduce((str,[field,value]) => {
-                return str + ` {{${field}=${value}}}`;
-            },rollStart);
     };
 
     const funcCore = async function({trigger,attributes,sections,casc}){
@@ -256,6 +281,7 @@
     const funcSpells = async function({trigger,attributes,sections,casc}){
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
         const powerCard = attributes[sectionName+'_'+rowID+'_spells-powercard'];
+        let theAPICall = '';
         //console.log(sectionName);
         //console.log(rowID)
         //console.log(buttonName);
@@ -267,7 +293,7 @@
             //default card
             const theSectionId = sectionName+'_'+rowID+'_';
             const theName = attributes[theSectionId+'spells-name'];
-            const theMagicType = attributes[theSectionId+'spells-magictype'];
+            const theMagicType = schemaCore[idSkills][attributes[theSectionId+'spells-magictype']].displayname;
             const theLevel = attributes[theSectionId+'spells-level'];
             const theActionType = attributes[theSectionId+'spells-actiontype'];
             const theCostLine = attributes[theSectionId+'spells-costtype']+' '+attributes[theSectionId+'spells-cost'];
@@ -278,27 +304,47 @@
             };
             let theRangeLine = attributes[theSectionId+'spells-range'];
             if ((theRangeLine!=='Self') && (theRangeLine!=='Touch')) {
-                theRangeLine = 'The target must be within '+theRangeLine+' feet.';
+                theRangeLine = 'Target must be within '+theRangeLine+' feet.';
             }
             const theVs = attributes[theSectionId+'spells-vs'];
+            const theAmount = attributes[theSectionId+'spells-amount'];
+            const theAmountType = attributes[theSectionId+'spells-amounttype'];
             let theDurationLine = attributes[theSectionId+'spells-duration'];
             if (theDurationLine==='Timed') {
                 theDurationLine = attributes[theSectionId+'spells-durationamount']+' '+attributes[theSectionId+'spells-durationtype'];
             }
-            const theEffects = attributes[theSectionId+'spells-effects'];
             const theDesc = attributes[theSectionId+'spells-desc'];
             theAPICall = '!power {{ '+
             ' --name|'+theName+
             ' --leftsub|'+theMagicType+' '+theLevel+' ◆ '+theActionType+
             ' --rightsub|'+theCostLine+
-            ' --Attack|[[ 1d100 + '+theMagicTypeTotal+' + floor(@{selected|chaosseed-stats-luck-total}/10) ]] vs '+theVs+
-            ' --On Hit|the target takes [[2d8+floor(@{selected|chaosseed-stats-wisdom-total}/5)+floor(@{selected|chaosseed-stats-luck-total}/10)]]  damage'+
-            ' --Critical Chance|the target takes  [[2d8+floor(@{selected|chaosseed-stats-wisdom-total}/5)+floor(@{selected|chaosseed-stats-luck-total}/10)]] extra damage'+
-            ' --Area|'+theRadiusLine+
-            ' --Range|'+theRangeLine+
-            ' --Duration|'+theDurationLine+
-            ' --Effect|'+theEffects+
-            ' --Caster|//@{selected|character_name} '+theDesc+'//'+
+            ' --Attack|[[ 1d100 + '+theMagicTypeTotal+' + floor(@{selected|chaosseed-stats-luck-total}/10) ]] vs '+theVs;
+
+            if (theAmount!=='') {
+                theAPICall += 
+                    ' --On Hit|Target takes [['+theAmount+'+floor(@{selected|chaosseed-stats-wisdom-total}/5)+floor(@{selected|chaosseed-stats-luck-total}/10)]] '+theAmountType+' damage'+
+                    ' --Critical Chance|Target takes  [['+theAmount+'+floor(@{selected|chaosseed-stats-wisdom-total}/5)+floor(@{selected|chaosseed-stats-luck-total}/10)]] extra '+theAmountType+' damage';
+            };
+
+            theAPICall += 
+                ' --Area|'+theRadiusLine;
+
+            theAPICall += 
+                ' --Range|'+theRangeLine;
+
+            theAPICall += 
+                ' --Duration|'+theDurationLine;
+
+            if (attributes[theSectionId+'spells-conditiontype']!=='N/A') {
+                theAPICall += 
+                    ' --Effect|'+attributes[theSectionId+'spells-conditiontype'];
+            };
+
+            theAPICall += 
+                ' --Spell Desc|'+attributes[theSectionId+'spells-spelleffect'];
+
+            theAPICall += 
+                ' --Caster|//@{selected|character_name} '+theDesc+'//';
             '}} ';
         };
 
@@ -306,3 +352,75 @@
         finishRoll(roll.rollId);
     };
     k.registerFuncs({funcSpells});
+
+    const funcAttacks = async function({trigger,attributes,sections,casc}){
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        let theAPICall = '';
+        const theSectionId = sectionName+'_'+rowID+'_';
+
+        const theName = attributes[theSectionId+'attacks-name'];
+        const theCharName = attributes['character_name'];
+        const theActionType = attributes[theSectionId+'attacks-actiontype'];
+        const theRange = attributes[theSectionId+'attacks-range'];
+        const theAccStatTot = attributes['chaosseed-stats-'+attributes[theSectionId+'attacks-attackcat']+'-total'];
+        const theSkillTot = attributes['chaosseed-skills-'+attributes[theSectionId+'attacks-weapontype']+'-total'];
+        const theSkillRank = attributes['chaosseed-skills-'+attributes[theSectionId+'attacks-weapontype']+'-rank'];
+        const theAccLine = theAccStatTot
+            +'+'+theSkillTot
+            +'+'+attributes[theSectionId+'attacks-accbonus']
+            +'-'+attributes[theSectionId+'attacks-attacktype']
+            ;
+        const theVs = attributes[theSectionId+'attacks-vs'];
+        const theDamageStatTot = attributes['chaosseed-stats-'+attributes[theSectionId+'attacks-damagestat']+'-total'];
+        const theDamageLine = '[[ '+attributes[theSectionId+'attacks-damage']
+            +'+floor('+theDamageStatTot+'/5)'
+            +'+'+attributes[theSectionId+'attacks-damagebonus']
+            +' ]]'
+            ;
+        const theCritLine = 'If the check is [[50 -'
+            +attributes[theSectionId+'attacks-critbonus']
+            +'-floor('+attributes['chaosseed-skills-anatomy-total']+'/10)'
+            +' ]] or more than needed, it takes an additional [[ '
+            +attributes[theSectionId+'attacks-damage']
+            +'+floor('+theDamageStatTot+'/5)'
+            +'+'+attributes[theSectionId+'attacks-damagebonus']
+            +'+'+attributes[theSectionId+'attacks-critdamagebonus']
+            +'+floor('+theSkillRank+'/2)'
+            +' ]] '
+            +attributes[theSectionId+'attacks-damagetype']
+            +' ('+attributes[theSectionId+'attacks-damageclass']+') damage'
+            ;
+        const theDisplay = attributes[theSectionId+'attacks-display'];
+
+        theAPICall = '!power {{'+
+            ' --name|'+theName+
+            ' --leftsub|'+theCharName+
+            ' --rightsub|'+theActionType+' (range: '+theRange+' ft)'+
+            ' --Accuracy Check:|[[ 1d100 + '+theAccLine+' ]] vs. '+theVs+
+            ' --Damage:|'+theDamageLine+
+            ' --Critical Chance:| '+theCritLine+
+            ' --Notes:|'+theDisplay
+            ;
+
+        const roll = await startRoll(theAPICall);
+        finishRoll(roll.rollId);
+    };
+    k.registerFuncs({funcAttacks});
+
+//<button type="roll" value="
+//        !power {{
+//               --name|@{selected|primaryname}  
+//               --leftsub|@{selected|cname} 
+//               --rightsub|@{PrimaryAction} (range: @{selected|primaryrange} ft)
+//               --Accuracy Check:|[[ 1d100 + (@{selected|PrimaryType} + @{selected|PrimaryTypeW} + 
+// @{selected|primaryaccbonus} - @{selected|PrimaryAttack}) ]] vs. @{selected|primaryaccvs}  
+//               --Damage:|[[ @{selected|primarydamage} + @{selected|primarydamagestat}  + 
+// @{selected|primarydamagebonus} ]] @{selected|primarydamagetype} @{selected|primaryclass}  Damage  
+//               --Critical Chance:| If the check is [[ 50 - @{selected|primarycritbonus} - 
+// floor((@{selected|rkAnatomy} + @{selected|skAnatomy})/10)) ]] or more than needed, 
+// it takes an additional [[ @{selected|primarydamage} + @{selected|primarycritdambonus} + 
+// @{selected|primarydamagestat} + @{selected|primarydamageranks} + @{selected|primarydamagebonus} ]] 
+// @{selected|primarydamagetype} @{selected|primaryclass}  Damage    
+//               --Notes:|@{selected|primarynotes}  
+//            }}" class="btn ui-draggable">
+//            </button>

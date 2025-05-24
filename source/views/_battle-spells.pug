@@ -111,13 +111,35 @@
                 .expanded
                 .collapsed
                     .div-spells-details
-                        +span({'data-i18n':'Description'}).spells-desc-head
-                        +adaptiveTextarea({name:'spells-desc',class:'spells-desc boxed'})
-                        +span({'data-i18n':'Effects'}).spells-effects-head
-                        +adaptiveTextarea({name:'spells-effects',class:'spells-effects boxed'})
+                        +span({'data-i18n':'Caster Says'}).spells-desc-head
+                        +adaptiveTextarea({name:'spells-desc',class:'spells-spelleffect boxed'})
+                        +span({'data-i18n':'Spell Description'}).spells-spelleffect-head
+                        +adaptiveTextarea({name:'spells-spelleffect',class:'spells-spelleffect boxed'})
+                        .spells-effects-section
+                            +span({'data-i18n':'Effects'}).spells-effects-head
+                            +button({name:'spells-effects-apply',type:'action',class:'spells-effects-apply','data-i18n':'Apply',trigger:{triggeredFuncs:['doEffectsApply']}})
+                            +button({name:'spells-effects-remove',type:'action',class:'spells-effects-remove','data-i18n':'Remove',trigger:{triggeredFuncs:['doEffectsRemove']}})
+                            +adaptiveTextarea({name:'spells-effects',class:'spells-effects boxed'})
                         +span({'data-i18n':'Power Card'}).spells-powercard-head
                         +adaptiveTextarea({name:'spells-powercard',class:'spells-powercard boxed'})
 +module.
+    const doEffectsApply = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const theEffects = attributes[sectionName+'_'+rowID+'_spells-effects'];
+
+        ApplyEffects(attributes,theEffects,1);
+    };
+    k.registerFuncs({doEffectsApply});
+
+    const doEffectsRemove = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const theEffects = attributes[sectionName+'_'+rowID+'_spells-effects'];
+
+        ApplyEffects(attributes,theEffects,-1);
+    };
+    k.registerFuncs({doEffectsRemove});
 +scss('sheet').
     .spells-main{
 
@@ -234,8 +256,9 @@
             grid-template-areas : 
                 'desc-head'
                 'desc'
-                'effects-head'
-                'effects'
+                'spelleffect-head'
+                'spelleffect'
+                'effects-section'
                 'powercard-head'
                 'powercard'
             ;
@@ -247,12 +270,33 @@
             .spells-desc {
                 grid-area: desc;
             }
-            .spells-effects-head {
-                grid-area: effects-head;
+            .spells-spelleffect-head {
+                grid-area: spelleffect-head;
                 background-color: lightgray;
             }
-            .spells-effects {
-                grid-area: effects;
+            .spells-spelleffect {
+                grid-area: spelleffect;
+            }
+            .spells-effects-section {
+                grid-area: effects-section;
+
+                .spells-effects-head {
+                    grid-area: effects-head;
+                    background-color: lightgray;
+                }
+                .spells-effects-apply {
+                    grid-area: apply;
+                    @include k.base-button;
+                    background-color: lightskyblue;
+                }
+                .spells-effects-remove {
+                    grid-area: remove;
+                    @include k.base-button;
+                    background-color: lightskyblue;
+                }
+                .spells-effects {
+                    grid-area: effects;
+                }
             }
             .spells-powercard-head {
                 grid-area: powercard-head;

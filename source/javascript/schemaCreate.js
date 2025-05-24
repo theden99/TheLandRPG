@@ -2729,7 +2729,7 @@ const schemaCore = {
             idEveryday,
             idCommon,
             [],
-            [idCombatMedic],
+            [idCombatMedic,idHygiene,idNecromancy,idAnatomy],
             [idWisdom],
             [idHealing],
         ),
@@ -4306,7 +4306,7 @@ const schemaCore = {
         ),
 //metamagic skills
         [idAimedCasting] : getListEntry(idDefault,'Aimed Casting','0','0',
-            'survial is fun',
+            'No description on website',
             'survival is the fiction that you will live',
             '',
             {
@@ -4326,7 +4326,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idAnchoredCasting] : getListEntry(idDefault,'Anchored Casting','0','0',
-            'survial is fun',
+            'Anchored Casting turns the battlefield into a dynamic trap, allowing the caster to lay magical ambushes with precision and foresight.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4346,7 +4346,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idDistantCasting] : getListEntry(idDefault,'Distant Casting','0','0',
-            'survial is fun',
+            'When space itself bends to a caster’s will, distance becomes a trivial obstacle. Distant Spell extends the reach of magic beyond its natural bounds, making the farthest target feel as though they stand within arm’s length.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4366,7 +4366,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idDurableCasting] : getListEntry(idDefault,'Durable Casting','0','0',
-            'survial is fun',
+            'For spellcasters who seek to leave a lasting impression, Durable Casting extends the life of their magic, keeping its effects active far beyond their natural span.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4386,7 +4386,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idEchoCasting] : getListEntry(idDefault,'Echo Casting','0','0',
-            'survial is fun',
+            'Echo Casting imbues a spell with the power to ripple through time, creating a delayed second effect that resonates with the original casting.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4406,7 +4406,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idEfficientTeleportation] : getListEntry(idDefault,'Efficient Teleportation','0','0',
-            'survial is fun',
+            'Efficient Teleportation refines the art of instant movement, granting casters unparalleled control over space and distance.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4426,7 +4426,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idFocusedCasting] : getListEntry(idDefault,'Focused Casting','0','0',
-            'survial is fun',
+            'The caster’s gaze sharpens, their mind honing in on the delicate threads of magic as if weaving them into a masterpiece.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4446,7 +4446,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idGeomentricCasting] : getListEntry(idDefault,'Geomentric Casting','0','0',
-            'survial is fun',
+            'For those who see the battlefield as a canvas, Geometric Casting allows spells to paint with broader strokes.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4466,7 +4466,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idPreciseCasting] : getListEntry(idDefault,'Precise Casting','0','0',
-            'survial is fun',
+            'The mark of a careful and considerate spellcaster, Precise Casting is the art of threading magic through the chaos of battle without harming allies.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4486,7 +4486,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idQuickCasting] : getListEntry(idDefault,'Quick Casting','0','0',
-            'survial is fun',
+            'When time is of the essence, some spellcasters learn to compress their incantations into the span of a breath, wielding magic with blistering speed.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4506,7 +4506,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idReboundedSpell] : getListEntry(idDefault,'Rebounded Spell','0','0',
-            'survial is fun',
+            'Rebounded Spell grants a caster the uncanny ability to turn failure into opportunity, redirecting wayward magic toward a new target.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4526,7 +4526,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idSplitCasting] : getListEntry(idDefault,'Split Casting','0','0',
-            'survial is fun',
+            'Like a bowstring loosing two arrows in perfect harmony, Split Casting is a feat of magical dexterity, splitting a single thread of energy into two.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4546,7 +4546,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idStillCasting] : getListEntry(idDefault,'Still Casting','0','0',
-            'survial is fun',
+            'No description on website',
             'survival is the fiction that you will live',
             '',
             {
@@ -4566,7 +4566,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idTranquilCasting] : getListEntry(idDefault,'Tranquil Casting','0','0',
-            'survial is fun',
+            'Tranquil Casting transforms the act of spellcasting into a silent and serene art, enabling casters to wield their magic with unparalleled subtlety.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4587,7 +4587,7 @@ const schemaCore = {
         ),
 //magic skills
         [idAirMagic] : getListEntry(idDefault,'Air Magic','0','0',
-            'survial is fun',
+            'Air magic harnesses the power of the skies, commanding the wind, thunder, and lightning. Practitioners of this magic can summon storms, manipulate currents to buffet enemies, or strike with bolts of electricity. Air magic is known for its swiftness and unpredictability, embodying freedom and raw energy.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4607,7 +4607,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idConcusiveShock] : getListEntry(idDefault,'Concusive Shock','0','0',
-            'survial is fun',
+            'Concussive Shock channels the raw force of storms into devastating precision, making “thunder” and “lightning” Air Magic spells deadlier than ever.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4627,7 +4627,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idDrivingWind] : getListEntry(idDefault,'Driving Wind','0','0',
-            'survial is fun',
+            'Driving Wind embodies the relentless force of the air, enhancing the caster’s mastery over Air spells and their ability to manipulate foes on the battlefield.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4647,7 +4647,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idAerialBoost] : getListEntry(idDefault,'Aerial Boost','0','0',
-            'survial is fun',
+            'No description on website',
             'survival is the fiction that you will live',
             '',
             {
@@ -4667,7 +4667,7 @@ const schemaCore = {
             [idAirMagic],
         ),
         [idDarkMagic] : getListEntry(idDefault,'Dark Magic','0','0',
-            'survial is fun',
+            'Dark magic draws power from the shadows, weaving illusions, hiding truths, and striking from unseen places. It manipulates fear, stealth, and obscurity, making it as subtle as it is dangerous. While often maligned, Dark magic represents the necessity of secrecy and the power of the unknown.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4687,7 +4687,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idClingingShadow] : getListEntry(idDefault,'Clinging Shadow','0','0',
-            'survial is fun',
+            'Clinging Shadow infuses Dark Magic with an unsettling, oppressive force that lingers long after the spell is cast.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4707,7 +4707,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idInfernalEssence] : getListEntry(idDefault,'Infernal Essence','0','0',
-            'survial is fun',
+            'Infernal Essence channels the corrupting, shadowy power of Dark Magic, fortifying the caster’s resistance against Light-based attacks and enhancing their own offensive power against those aligned with the forces of light.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4727,7 +4727,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idPersistantShadow] : getListEntry(idDefault,'Persistant Shadow','0','0',
-            'survial is fun',
+            'Persistent Shadow taps into the subtle and oppressive nature of Dark Magic, using shadows to cloud the target’s senses and make them vulnerable to further strikes.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4747,7 +4747,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idDeathMagic] : getListEntry(idDefault,'Death Magic','0','0',
-            'survial is fun',
+            'Death magic taps into the finality of life, drawing upon necrotic and infernal energies to decay, drain, or destroy. Practitioners can summon undead, sap life force, or unravel the essence of their enemies. This magic is feared for its associations with mortality and the unknown, though it holds a grim utility.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4767,7 +4767,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idLifeLeech] : getListEntry(idDefault,'Life Leech','0','0',
-            'survial is fun',
+            'Life Leech taps into the dark, necrotic energies of Death Magic, allowing the caster to siphon life from their enemies as they deal devastating damage.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4787,7 +4787,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idStrongFears] : getListEntry(idDefault,'Strong Fears','0','0',
-            'survial is fun',
+            'Strong Fears enhances the caster’s ability to instill terror in their foes through the power of Death Magic.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4807,7 +4807,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idPotentPoison] : getListEntry(idDefault,'Potent Poison','0','0',
-            'survial is fun',
+            'Potent Poison amplifies the lethality of Death Magic by enhancing the caster’s ability to inflict ongoing poison damage.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4827,7 +4827,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idEarthMagic] : getListEntry(idDefault,'Earth Magic','0','0',
-            'survial is fun',
+            'Earth magic draws strength from the solidity of stone and soil, channeling the stability and destructive force of the land itself. This magic can shape terrain, summon barriers, or unleash acidic attacks that corrode enemies. Earth magic is often tied to resilience and unyielding power, rooted in the physical world.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4847,7 +4847,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idCausticCling] : getListEntry(idDefault,'Caustic Cling','0','0',
-            'survial is fun',
+            'Caustic Cling enhances the corrosive power of Earth Magic, ensuring that its acid-based spells bite deep and linger long after their initial impact.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4867,7 +4867,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idDenseEarth] : getListEntry(idDefault,'Dense Earth','0','0',
-            'survial is fun',
+            'Dense Earth channels the steadfast and protective nature of the earth itself, bolstering defensive spells and enhancing the caster’s efficiency.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4887,7 +4887,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idSiesmicMagic] : getListEntry(idDefault,'Siesmic Magic','0','0',
-            'survial is fun',
+            'Seismic Magic taps into the raw, tremor-inducing power of the earth, amplifying the caster’s offensive capabilities and disrupting their enemies’ mobility.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4907,7 +4907,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idFireMagic] : getListEntry(idDefault,'Fire Magic','0','0',
-            'survial is fun',
+            'Fire magic commands the destructive and transformative power of flames. It is a magic of intensity, capable of burning foes to ash or bringing warmth and renewal. While fire magic is often seen as wild and aggressive, it also symbolizes passion and creation through destruction.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4927,7 +4927,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idAfterburn] : getListEntry(idDefault,'Afterburn','0','0',
-            'survial is fun',
+            'No description given on website',
             'survival is the fiction that you will live',
             '',
             {
@@ -4947,7 +4947,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idBlazingHeat] : getListEntry(idDefault,'Blazing Heat','0','0',
-            'survial is fun',
+            'Blazing Heat taps into the intense, radiant power of the sun, allowing the caster to infuse their Fire Magic with a searing Solar (Light) energy.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4967,7 +4967,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idFierryBurst] : getListEntry(idDefault,'Fierry Burst','0','0',
-            'survial is fun',
+            'Fiery Burst unleashes the explosive nature of Fire Magic, amplifying both the precision and destructive reach of the caster’s attacks.',
             'survival is the fiction that you will live',
             '',
             {
@@ -4987,7 +4987,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idLifeMagic] : getListEntry(idDefault,'Life Magic','0','0',
-            'survial is fun',
+            'Life magic is the essence of vitality and growth, weaving celestial energies to heal wounds, compel loyalty, or invigorate allies. It is the counterpoint to Death magic, often seen as a source of hope and renewal. Yet, its power to compel and control reveals its subtler, more dangerous edge.',
             'survival is the fiction that you will live',
             '',
             {
@@ -5007,7 +5007,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idCommandingSpell] : getListEntry(idDefault,'Commanding Spell','0','0',
-            'survial is fun',
+            'Commanding Spell enhances the caster’s ability to manipulate and control others through Compulsion Magic. ',
             'survival is the fiction that you will live',
             '',
             {
@@ -5027,7 +5027,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idPotentHealing] : getListEntry(idDefault,'Potent Healing','0','0',
-            'survial is fun',
+            'Potent Healing focuses on enhancing the caster’s ability to restore life and resist harm.',
             'survival is the fiction that you will live',
             '',
             {
@@ -5047,7 +5047,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idRestorativeSpell] : getListEntry(idDefault,'Restorative Spell','0','0',
-            'survial is fun',
+            'Restorative Spell enhances the caster’s proficiency with Life spells, making them more effective at healing and alleviating harmful conditions.',
             'survival is the fiction that you will live',
             '',
             {
@@ -5067,7 +5067,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idLightMagic] : getListEntry(idDefault,'Light Magic','0','0',
-            'survial is fun',
+            'Light magic channels radiant energy, illuminating darkness and burning away corruption. It is a force of purity, capable of blinding enemies or shielding allies. Practitioners of light magic are often seen as champions of justice and truth, wielding the brilliance of the divine.',
             'survival is the fiction that you will live',
             '',
             {
@@ -5087,7 +5087,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idSolarEssence] : getListEntry(idDefault,'Solar Essence','0','0',
-            'survial is fun',
+            'olar Essence harnesses the radiant power of light to bolster the caster’s defenses and sharpen their attacks against the forces of darkness.',
             'survival is the fiction that you will live',
             '',
             {
@@ -5107,7 +5107,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idBurningRadiance] : getListEntry(idDefault,'Burning Radiance','0','0',
-            'survial is fun',
+            'Blistering Radiance channels the intense, searing power of Light Magic, making every spell cast a blinding and punishing force.',
             'survival is the fiction that you will live',
             '',
             {
@@ -5127,7 +5127,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idPersistantLight] : getListEntry(idDefault,'Persistant Light','0','0',
-            'survial is fun',
+            'Persistent Light taps into the enduring power of Light Magic, ensuring that each strike not only shines brightly but also creates an unrelenting beacon that guides future attacks.',
             'survival is the fiction that you will live',
             '',
             {
@@ -5147,7 +5147,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idWaterMagic] : getListEntry(idDefault,'Water Magic','0','0',
-            'survial is fun',
+            'Water magic flows with grace and adaptability, manipulating rivers, seas, and ice. It allows practitioners to drown their foes, freeze the battlefield, or shape water into protective shields. Water magic embodies change and balance, as it can soothe or devastate with equal ease.',
             'survival is the fiction that you will live',
             '',
             {
@@ -5167,7 +5167,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idJaggedIce] : getListEntry(idDefault,'Jagged Ice','0','0',
-            'survial is fun',
+            'Jagged Ice sharpens the frigid power of Water Magic, making the caster’s spells as deadly as they are precise.',
             'survival is the fiction that you will live',
             '',
             {
@@ -5187,7 +5187,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idDrivingWave] : getListEntry(idDefault,'Driving Wave','0','0',
-            'survial is fun',
+            'Driving Wave empowers the caster to channel the relentless force of water, enhancing both the precision and the impact of their spells.',
             'survival is the fiction that you will live',
             '',
             {
@@ -5207,7 +5207,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idEndlessOcean] : getListEntry(idDefault,'Endless Oceanm','0','0',
-            'survial is fun',
+            'Endless Ocean grants the caster a deep connection to the boundless power of water, allowing them to thrive where others struggle.',
             'survival is the fiction that you will live',
             '',
             {
@@ -5227,7 +5227,7 @@ const schemaCore = {
             [idIntelligence],
         ),
         [idInnerChi] : getListEntry(idDefault,'Inner Chi','0','0',
-            'survial is fun',
+            'Inner Chi is the art of channeling mana inward, enhancing the body and mind rather than producing external effects. Practitioners use this discipline to heighten their physical prowess, sharpen their reflexes, and bolster their resilience.',
             'survival is the fiction that you will live',
             '',
             {
@@ -5322,7 +5322,7 @@ const schemaCore = {
             {
             },
             idMartial,
-            idCommon,
+            idUncommon,
             [],
             [],
             [],
