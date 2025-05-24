@@ -93,15 +93,15 @@
             +tabs({name:'inventory-main',defaultActiveTab:'inventory-equipped',persistent:false})
                 +tab({name:"inventory-equipped", container:"article", button:{class:'inventory-main-tabs-button boxed','data-i18n':"Equipped"}})
                     +tabs({name:'inventory-equipped-tabs',defaultActiveTab:'inventory-armor',persistent:false})
-                        include _inventory-armor
-                        include _inventory-weapon
-                        include _inventory-accessory
-                        include _inventory-ammo
-                        include _inventory-beltpouch
+                        +inventory-items('armor',0)
+                        +inventory-items('weapon',0)
+                        +inventory-items('accessory',0)
+                        +inventory-items('ammo',0)
+                        +inventory-items('beltpouch',1)
                 +tab({name:"inventory-storage1", container:"article", button:{class:'inventory-main-tabs-button boxed','data-i18n':"Storage"}})
                     +tabs({name:'inventory-storage-tabs',defaultActiveTab:'inventory-storage',persistent:false})
-                        include _inventory-storage
-                        include _inventory-discardpile
+                        +inventory-items('storage',1)
+                        +inventory-items('discardpile',0)
 +module.
     const calcTotWeightInventory = ({trigger,attributes,sections,casc}) => {
         //const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
@@ -298,8 +298,9 @@
     };
     k.registerFuncs({doEquipItem});
 
+    //should no longer be accessible. removing delete button
     const doRemoveItem = ({trigger,attributes,sections,casc}) => {
-        //const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
         doUnequipItem({trigger,attributes,sections,casc});
         attributes['inventory-totweight'] = calcTotWeightInventory({trigger,attributes,sections,casc});

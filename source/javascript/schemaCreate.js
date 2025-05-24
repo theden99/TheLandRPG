@@ -4664,7 +4664,7 @@ const schemaCore = {
             idUncommon,
             [idAirMagic],
             [],
-            [idAirMagic],
+            [idIntelligence],
         ),
         [idDarkMagic] : getListEntry(idDefault,'Dark Magic','0','0',
             'Dark magic draws power from the shadows, weaving illusions, hiding truths, and striking from unseen places. It manipulates fear, stealth, and obscurity, making it as subtle as it is dangerous. While often maligned, Dark magic represents the necessity of secrecy and the power of the unknown.',
