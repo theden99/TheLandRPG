@@ -3,11 +3,12 @@ mixin inventory-items(iTableName,iIsStorage)
     +tab({name:theTableName, container:"article", button:{class:'inventory-main-tabs-button boxed','data-i18n':iTableName}})
         .inventory-storage-section
             .div-item-header.div-inline
-                //+span({}).item-head-addbuttongap
+                +span({}).item-head-addbuttongap
                 +span({'data-i18n':'Name'}).item-head-itemname.underlined
                 +span({'data-i18n':'Item Type'}).item-head-slottype.underlined
                 +span({'data-i18n':'Qty'}).item-head-qty.underlined
                 +span({'data-i18n':'Slot'}).item-head-slot.underlined
+                +span({'data-i18n':'Equipped'}).item-head-equipped.underlined
             .div-inven-items.div-inline
                 +customControlFieldset({name:theTableName+'-items',addClass:'',trigger:{triggeredFuncs:['doRemoveItem']}})
                     +text({name:'itemname',class:'item_itemname underlined',value:''})
@@ -61,28 +62,79 @@ mixin inventory-items(iTableName,iIsStorage)
                         +option({value:'slotStorageWagonMount','data-i18n':'Wagon/Mount'})
                         +option({value:'slotStorageHouseBank','data-i18n':'House/Bank'})
                         +option({value:'slotDiscardPile','data-i18n':'Discard Pile'})
-                    +button({name:'unequip-storage-button',type:'action','data-i18n':'Unequip',class:'staging-button',trigger:{triggeredFuncs:['doUnequipItem']}})
+                    +select({name:'isequipped',class:'item_equipped underlined',readonly:''})
+                        +option({value:0,'data-i18n':'No'})
+                        +option({value:1,'data-i18n':'Yes'})
+                    +button({name:'equip-storage-button',type:'action','data-i18n':'Equip',class:'staging-button',trigger:{triggeredFuncs:['doEquip']}})
+                    +button({name:'unequip-storage-button',type:'action','data-i18n':'Unequip',class:'staging-button',trigger:{triggeredFuncs:['doUnequip']}})
                     +text({name:'trashcan-padding',class:'item_padding',readonly:''})
                     +text({name:'slottype',class:'underlined hidden',readonly:''})
                     +collapseItemDetails('inventory-totweight')
 +module.
+    const doEquipItem = (attributes,sections,iSectionID,iMult) => {
+        let theArmorValue = attributes[iSectionID+'_armorvalue'];
+        let theMovePen = attributes[iSectionID+'_movepen'];
+        let theEffects = attributes[iSectionID+'_effects'];
+
+        theArmorValue = theArmorValue*iMult;
+        theMovePen = theMovePen*iMult;
+
+        if (theArmorValue!==0) {
+            attributes['chaosseed-combatstats-armorvalue-equipbonus'] += theArmorValue;
+        };
+
+        if (theMovePen!==0) {
+            attributes['chaosseed-movement-movepenalty-equipbonus'] += theMovePen;
+        };
+
+        const theOk = ApplyEffects(attributes,theEffects,iMult);
+
+        return theOk;
+    };
+    k.registerFuncs({doEquipItem});
+
+    const doEquip = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const theSectionID = sectionName+'_'+rowID;
+        const bOk = doEquipItem(attributes,sections,theSectionID,1);
+        if (bOk===0) {
+            attributes[theSectionID+'_isequipped'] = 1;
+        } else {
+            const theMessage = 'error equipping '+theSectionID;
+            doLogError(attributes,sections,theMessage);
+        };
+    };
+    k.registerFuncs({doEquip});
+
+    const doUnequip = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const theSectionID = sectionName+'_'+rowID;
+        const bOk = doEquipItem(attributes,sections,theSectionID,-1);
+        if (bOk===0) {
+            attributes[theSectionID+'_isequipped'] = 0;
+        } else {
+            const theMessage = 'error equipping '+theSectionID;
+            doLogError(attributes,sections,theMessage);
+        };
+    };
+    k.registerFuncs({doUnequip});
+
+    const doRemoveItem = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        calcTotWeightInventory({trigger,attributes,sections,casc});
+    };
+    k.registerFuncs({doRemoveItem});
+
 +scss('sheet').
     .inventory-storage-section{
-        .repcontrol-button--add,
-        .repcontrol_del {
-            opacity: 0;
-            position: absolute;
-            left: 0px;
-            top: 0px;
-            font-size: 0px;
-            pointer-events: none;
-        }
-
         display: flex;
         flex-wrap: wrap;
         align-items: top;
         gap: var(--tiny-gap);
-        width: 560px;
+        width: 760px;
         .div-item-header{
             .item-head-addbuttongap{
                 width: 23px;
@@ -111,6 +163,12 @@ mixin inventory-items(iTableName,iIsStorage)
                 text-align: center;
                 background-color: lightskyblue;
             }
+            .item-head-equipped{
+                margin-right: 3px;
+                width: 70px;
+                text-align: center;
+                background-color: lightskyblue;
+            }
         }
         .div-inven-items{
             .staging-button{
@@ -131,6 +189,9 @@ mixin inventory-items(iTableName,iIsStorage)
             }       
             .item_qty{
                 width: 40px;
+            }       
+            .item_equipped{
+                width: 70px;
             }       
         }
     }

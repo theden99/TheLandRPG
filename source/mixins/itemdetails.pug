@@ -89,16 +89,6 @@ mixin collapseItemDetails(iTotWeightFunc)
                 .div-recoverperc
                     +number({name:'recoverperc',class:'item-recoverperc boxed',value:0})
                     +span({'data-i18n':'Recover %'}).item-head-recoverperc
-                .div-slottypeitem
-                    +select({name:'slottype',class:'item_slottypeitem underlined'})
-                        +option({value:'slottypeArmor','data-i18n':'Armor'})
-                        +option({value:'slottypeWeapon','data-i18n':'Weapon'})
-                        +option({value:'slottypeAccessory','data-i18n':'Accessory'})
-                        +option({value:'slottypeAmmo','data-i18n':'Ammo'})
-                        +option({value:'slottypeBeltPouch','data-i18n':'Belt/Pouch'})
-                        +option({value:'slottypeStorage','data-i18n':'Storage'})
-                        +option({value:'slottypeDiscardPile','data-i18n':'Discard Pile'})
-                    +span({'data-i18n':'Item Slot'}).item-head-slottypeitem
                 .div-notes
                     +adaptiveTextarea({name:'notes',class:'boxed'})
                     +span({'data-i18n':'Notes'}).item-head-notes
@@ -115,7 +105,7 @@ mixin collapseItemDetails(iTotWeightFunc)
             'armortype armorvalue movetype movepen'
             'attacktype range attackvs critabove'
             'basedam accmod dammod critmult'
-            'ammotype removeqty recoverperc slottypeitem'
+            'ammotype removeqty recoverperc .'
             'notes notes notes notes'
             'effects effects effects effects'
         ;
