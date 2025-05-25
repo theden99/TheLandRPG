@@ -4601,7 +4601,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idCommon,
+            idUncommon,
             [],
             [idConcusiveShock,idDrivingWind,idAerialBoost,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
@@ -4621,7 +4621,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idAirMagic],
             [],
             [idIntelligence],
@@ -4641,7 +4641,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idAirMagic],
             [],
             [idIntelligence],
@@ -4661,7 +4661,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idAirMagic],
             [],
             [idIntelligence],
@@ -4681,7 +4681,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idCommon,
+            idUncommon,
             [],
             [idPersistantShadow,idClingingShadow,idInfernalEssence,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
@@ -4701,7 +4701,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idDarkMagic],
             [],
             [idIntelligence],
@@ -4721,7 +4721,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idDarkMagic],
             [],
             [idIntelligence],
@@ -4741,7 +4741,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idDarkMagic],
             [],
             [idIntelligence],
@@ -4761,7 +4761,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idCommon,
+            idUncommon,
             [],
             [idLifeLeech,idStrongFears,idPotentPoison,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
@@ -4781,7 +4781,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idDeathMagic],
             [],
             [idIntelligence],
@@ -4801,7 +4801,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idDeathMagic],
             [],
             [idIntelligence],
@@ -4821,7 +4821,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idDeathMagic],
             [],
             [idIntelligence],
@@ -4841,7 +4841,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idCommon,
+            idUncommon,
             [],
             [idCausticCling,idDenseEarth,idSiesmicMagic,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
@@ -4861,7 +4861,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idEarthMagic],
             [],
             [idIntelligence],
@@ -4881,7 +4881,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idEarthMagic],
             [],
             [idIntelligence],
@@ -4901,7 +4901,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idEarthMagic],
             [],
             [idIntelligence],
@@ -4921,7 +4921,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idCommon,
+            idUncommon,
             [],
             [idAfterburn,idBlazingHeat,idFierryBurst,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
@@ -4941,7 +4941,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idFireMagic],
             [],
             [idIntelligence],
@@ -4961,7 +4961,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idFireMagic],
             [],
             [idIntelligence],
@@ -4981,7 +4981,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idFireMagic],
             [],
             [idIntelligence],
@@ -5001,7 +5001,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idCommon,
+            idUncommon,
             [],
             [idCommandingSpell,idPotentHealing,idRestorativeSpell,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
@@ -5021,7 +5021,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idLifeMagic],
             [],
             [idIntelligence],
@@ -5041,7 +5041,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idLifeMagic],
             [],
             [idIntelligence],
@@ -5061,7 +5061,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idLifeMagic],
             [],
             [idIntelligence],
@@ -5081,7 +5081,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idCommon,
+            idUncommon,
             [],
             [idSolarEssence,idBurningRadiance,idPersistantLight,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
@@ -5101,7 +5101,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idLightMagic],
             [],
             [idIntelligence],
@@ -5121,7 +5121,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idLightMagic],
             [],
             [idIntelligence],
@@ -5141,7 +5141,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idLightMagic],
             [],
             [idIntelligence],
@@ -5161,7 +5161,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idCommon,
+            idUncommon,
             [],
             [idJaggedIce,idDrivingWave,idEndlessOcean,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
@@ -5181,7 +5181,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idWaterMagic],
             [],
             [idIntelligence],
@@ -5201,7 +5201,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idWaterMagic],
             [],
             [idIntelligence],
@@ -5221,7 +5221,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idUncommon,
+            idRare,
             [idWaterMagic],
             [],
             [idIntelligence],
@@ -5241,7 +5241,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idCommon,
+            idUncommon,
             [],
             [],
             [idIntelligence],
@@ -5261,7 +5261,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idCommon,
+            idUncommon,
             [],
             [],
             [idIntelligence],
@@ -5281,7 +5281,7 @@ const schemaCore = {
             {
             },
             idMagic,
-            idCommon,
+            idUncommon,
             [],
             [],
             [idIntelligence],

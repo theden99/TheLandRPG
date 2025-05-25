@@ -127,7 +127,7 @@ mixin rowSkill(iPage,iZone,iTemplate,iSkill)
 
         const theRankID = getFieldID(idChaosSeed,idSkills,idSkills,idRank,theSkill);
         const theRank = attributes[theRankID];
-        if (theRank===0) {
+        if ((theRank===0) && (schemaCore.skills[theSkill].rarity!==idCommon)) {
             return 0;
         }
 
