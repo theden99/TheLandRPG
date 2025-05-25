@@ -64,6 +64,7 @@
             +collapseItemDetails('inventory-totweight')
 +module.
     const doSlotsEquip = ({trigger,attributes,sections,casc}) => {
+        let bOk = 0; //all good
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
         const slotsSlotType = attributes[sectionName+'_'+rowID+'_slottype'];
@@ -75,8 +76,12 @@
 
         doAPIActivityMessage(stagingSectionID+'_itemname','Processing equip...','Done with equip')
 
-        //if equip(why it's 1) worked, continue, else log error
-        if (doEquipItem(attributes,sections,stagingSectionID,1)===0) {
+        if ((theStorageType.includes(slotsSlot))) {
+            bOk = 0; //don't equip, just copy
+        } else {
+            bOk = doEquipItem(attributes,sections,stagingSectionID,1);
+        }
+        if (bOk===0) {
             const invenSection = getSlotTypeSection(slotsSlotType);
             //console.log('getslottypesection');
             const invenSectionID = k.generateRowID(invenSection,sections);

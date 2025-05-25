@@ -4,6 +4,19 @@
     const sp_weight = 0.2;
     const cp_weight = 0.1;
 
+    const theStorageType = [
+        'slotAmmoQuiver',
+        'slotAmmoBandelero',
+        'slotBeltPouchBelt',
+        'slotBeltPouchPouch1',
+        'slotBeltPouchPouch2',
+        'slotStorageBackpack',
+        'slotStorageSack',
+        'slotStorageWagonMount',
+        'slotStorageHouseBank',
+        'slotDiscardPile'
+    ];
+
     const getFieldID = (iPage,iZone,iTable,iField,iRowID) => {  // <<<------  duplicate in 
         let theFieldID = iPage;
         if (iZone!=='') { theFieldID += '-'+iZone};
@@ -173,8 +186,8 @@
     const doAPIActivityMessage = async function(iItemId,iMessageStart,iMessageDone){
         const theAPICall = '!activityMessage '+iItemId+'|'+iMessageStart+'|'+iMessageDone;
 
-        const roll = await startRoll(theAPICall);
-        finishRoll(roll.rollId);
+        //const roll = await startRoll(theAPICall);
+        //finishRoll(roll.rollId);
     };
 
     const ApplyEffects = (attributes,iEffects,iMult) => {

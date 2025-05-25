@@ -96,12 +96,12 @@
                         +inventory-items('armor',0)
                         +inventory-items('weapon',0)
                         +inventory-items('accessory',0)
-                        +inventory-items('ammo',0)
+                        +inventory-items('ammo',1)
                         +inventory-items('beltpouch',1)
                 +tab({name:"inventory-storage1", container:"article", button:{class:'inventory-main-tabs-button boxed','data-i18n':"Storage"}})
                     +tabs({name:'inventory-storage-tabs',defaultActiveTab:'inventory-storage',persistent:false})
                         +inventory-items('storage',1)
-                        +inventory-items('discardpile',0)
+                        +inventory-items('discardpile',1)
 +module.
     const calcTotWeightInventory = ({trigger,attributes,sections,casc}) => {
         //const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
@@ -109,13 +109,13 @@
         //console.log('calcTotWeightInventory');
 
         let totItemWeight = 0;
-        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeArmor'));
-        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeWeapon'));
-        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeAccessory'));
-        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeAmmo'));
-        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeBeltPouch'));
-        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeStorage'));
-        totItemWeight = totItemWeight + calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeDiscardPile'));
+        totItemWeight += calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeArmor'));
+        totItemWeight += calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeWeapon'));
+        totItemWeight += calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeAccessory'));
+        totItemWeight += calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeAmmo'));
+        totItemWeight += calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeBeltPouch'));
+        totItemWeight += calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeStorage'));
+        totItemWeight += calcSectionWeight(attributes,sections,getSlotTypeSection('slottypeDiscardPile'));
 
         let totWeight = 0;
         totWeight = calcCoinWeight(
@@ -127,13 +127,13 @@
         totWeight = Number.parseFloat(totWeight).toFixed(2);
 
         let totItems = 0;
-        totItems = totItems + sections[getSlotTypeSection('slottypeArmor')].length;
-        totItems = totItems + sections[getSlotTypeSection('slottypeWeapon')].length;
-        totItems = totItems + sections[getSlotTypeSection('slottypeAccessory')].length;
-        totItems = totItems + sections[getSlotTypeSection('slottypeAmmo')].length;
-        totItems = totItems + sections[getSlotTypeSection('slottypeBeltPouch')].length;
-        totItems = totItems + sections[getSlotTypeSection('slottypeStorage')].length;
-        totItems = totItems + sections[getSlotTypeSection('slottypeDiscardPile')].length;
+        totItems += sections[getSlotTypeSection('slottypeArmor')].length;
+        totItems += sections[getSlotTypeSection('slottypeWeapon')].length;
+        totItems += sections[getSlotTypeSection('slottypeAccessory')].length;
+        totItems += sections[getSlotTypeSection('slottypeAmmo')].length;
+        totItems += sections[getSlotTypeSection('slottypeBeltPouch')].length;
+        totItems += sections[getSlotTypeSection('slottypeStorage')].length;
+        totItems += sections[getSlotTypeSection('slottypeDiscardPile')].length;
 
         attributes['inventory-numitems'] = totItems;
 
@@ -313,8 +313,14 @@
         //console.log(buttonName.slice(0,10));
 
         const fromSectionID = sectionName+'_'+rowID;
-        //if unequip(why it's -1) worked, remove item, otherwise log error
-        if (doEquipItem(attributes,sections,fromSectionID,-1)===0) {
+
+        const slotsSlot = attributes[fromSectionID+'_slot'];
+        if ((theStorageType.includes(slotsSlot))) {
+            bOk = 0; //don't unequip, just copy
+        } else {
+            bOk = doEquipItem(attributes,sections,fromSectionID,-1);
+        }
+        if (bOk===0) {
             const toSection = 'repeating_inventory-stagingarea-items';
             const toSectionID = k.generateRowID(toSection,sections);
 

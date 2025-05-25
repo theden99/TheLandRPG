@@ -9,7 +9,7 @@ mixin inventory-items(iTableName,iIsStorage)
                 +span({'data-i18n':'Qty'}).item-head-qty.underlined
                 +span({'data-i18n':'Slot'}).item-head-slot.underlined
             .div-inven-items.div-inline
-                +customControlFieldset({name:theTableName+'-items',addClass:'',trigger:{affects:['inventory-totweight'],triggeredFuncs:['doRemoveItem']}})
+                +customControlFieldset({name:theTableName+'-items',addClass:'',trigger:{triggeredFuncs:['doRemoveItem']}})
                     +text({name:'itemname',class:'item_itemname underlined',value:''})
                     +select({name:'slottypeitem',class:'item_slottype underlined'})
                         +option({value:'slottypeArmor','data-i18n':'Armor'})
@@ -19,7 +19,7 @@ mixin inventory-items(iTableName,iIsStorage)
                         +option({value:'slottypeBeltPouch','data-i18n':'Belt/Pouch'})
                         +option({value:'slottypeStorage','data-i18n':'Storage'})
                         +option({value:'slottypeDiscardPile','data-i18n':'Discard Pile'})
-                    +number({name:'qty',class:'item_qty boxed',value:1})
+                    +number({name:'qty',class:'item_qty boxed',value:1,trigger:{affects:['inventory-totweight']}})
                     +select({name:'slot',class:'item_slot underlined'})
                         +option({value:'slotArmorHead','data-i18n':'Head'})
                         +option({value:'slotArmorBody','data-i18n':'Body'})
@@ -64,7 +64,7 @@ mixin inventory-items(iTableName,iIsStorage)
                     +button({name:'unequip-storage-button',type:'action','data-i18n':'Unequip',class:'staging-button',trigger:{triggeredFuncs:['doUnequipItem']}})
                     +text({name:'trashcan-padding',class:'item_padding',readonly:''})
                     +text({name:'slottype',class:'underlined hidden',readonly:''})
-                    +collapseItemDetails(theTableName)
+                    +collapseItemDetails('inventory-totweight')
 +module.
 +scss('sheet').
     .inventory-storage-section{
