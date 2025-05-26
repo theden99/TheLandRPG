@@ -2644,6 +2644,7 @@ registerFuncs({ kTabOnOpen },{type:['opener']});
               theRangeLine = 'Target must be within '+theRangeLine+' feet.';
           }
           const theVs = attributes[theSectionId+'spells-vs'];
+          const theEffect = attributes[theSectionId+'spells-effect']
           const theAmount = attributes[theSectionId+'spells-amount'];
           const theAmountType = attributes[theSectionId+'spells-amounttype'];
           let theDurationLine = attributes[theSectionId+'spells-duration'];
@@ -2654,14 +2655,21 @@ registerFuncs({ kTabOnOpen },{type:['opener']});
           theAPICall = '!power {{ '+
           ' --name|'+theName+
           ' --leftsub|'+theMagicType+' '+theLevel+' ◆ '+theActionType+
-          ' --rightsub|'+theCostLine+
-          ' --Attack|[[ 1d100 + @{selected|chaosseed-combatvalues-spellacc-total} + '+theMagicTypeAcc+' ]] vs '+theVs;
+          ' --rightsub|'+theCostLine;
   
-          if (theAmount!=='') {
+          if (theVs!=='N/A') {
+              theAPICall +=
+                  ' --Attack|[[ 1d100 + @{selected|chaosseed-combatvalues-spellacc-total} [Magic Acc] + '+theMagicTypeAcc+' [Skill] ]] vs '+theVs;
+              if (theAmount!=='') {
+                  theAPICall += 
+                      ' --On Hit|Target takes [['+theAmount+'+@{selected|chaosseed-combatvalues-spelldamage-total} [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] ]] '+theAmountType+' '+theEffect+
+                      ' --Critical Chance|Target takes  [['+theAmount+'+@{selected|chaosseed-combatvalues-spelldamage-total} [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] ]] extra '+theAmountType+' '+theEffect;
+              };
+          } else {
               theAPICall += 
-                  ' --On Hit|Target takes [['+theAmount+'+@{selected|chaosseed-combatvalues-spelldamage-total} +'+theMagicTypeDamage+']] '+theAmountType+' damage'+
-                  ' --Critical Chance|Target takes  [['+theAmount+'+@{selected|chaosseed-combatvalues-spelldamage-total} +'+theMagicTypeDamage+']] extra '+theAmountType+' damage';
+                  ' --On Cast|Target takes [['+theAmount+'+@{selected|chaosseed-combatvalues-spelldamage-total} [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] ]] '+theAmountType+' '+theEffect;
           };
+  
   
           theAPICall += 
               ' --Area|'+theRadiusLine;
