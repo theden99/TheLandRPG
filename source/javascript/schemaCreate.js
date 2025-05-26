@@ -157,6 +157,7 @@ const id0Str = '0';
 const idSpellResists = 'spellresists';
 const idMetaMagic = 'metamagic';
 const idMartial = 'martial';
+const idCombatValues = 'combatvalues';
 //stats
 const idStrength = 'strength';
 const idAgility = 'agility';
@@ -448,13 +449,22 @@ const idPoison = 'poison';
 const idPsychic = 'psychic';
 const idSolar = 'solar';
 const idThunder = 'thunder';
+//combat values
+const idMeleeDamage = 'meleedamage';
+const idThrownDamage = 'throwndamage';
+const idRangedDamage = 'rangeddamage';
+const idSpellDamage = 'spelldamage';
+const idMeleeAcc = 'meleeacc';
+const idThrownAcc = 'thrownacc';
+const idRangedAcc = 'rangedacc';
+const idSpellAcc = 'spellacc';
 //traits
 const idTrait = 'trait';
 const idHerbalSpirit = 'herbalspirit';
 const idMeleeWeaponProdigy = 'meleeweaponprodigy';
 
 
-const tableIsTemplate = [idStats,idMovement,idCombatStats,idSkills,idResists,idSpellResists,idEfficiencies];
+const tableIsTemplate = [idStats,idMovement,idCombatStats,idSkills,idResists,idSpellResists,idEfficiencies,idCombatValues];
 
 const capitalize = function(string){
     return string.replace(/(?:^|\s+|\/)[a-z]/ig,(letter)=>letter.toUpperCase());
@@ -1258,7 +1268,7 @@ const schemaCore = {
                 [idBase] : {
                     [idFormula] : '15 + ' + capitalize(idAgility) + ' + (' + capitalize(idLuck) + '/10) + ' + capitalize(idCelerity),
                     [idKFormula] : '15 + @{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility) + '} + ' + 
-                                    '(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10) +' +
+                                    'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10) +' +
                                     '@{' + getFieldID(idChaosSeed,idSkills,idSkills,idTotal,idCelerity) + '}',
                 },
             },
@@ -1388,8 +1398,8 @@ const schemaCore = {
             'https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299',
             {
                 [idBase] : {
-                    [idFormula] : 'Endurance/3',
-                    [idKFormula] : 'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idEndurance) + '}/3)'
+                    [idFormula] : 'Endurance score per round, when there is time to rest',
+                    [idKFormula] : '@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idEndurance) + '}'
                 ,
                 },
             },
@@ -1404,8 +1414,8 @@ const schemaCore = {
             'https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299',
             {
                 [idBase] : {
-                    [idFormula] : 'Constitution/3',
-                    [idKFormula] : 'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idConstitution) + '}/3)'
+                    [idFormula] : 'Constitution per hour.  Twice that when resting.',
+                    [idKFormula] : '@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idConstitution) + '}'
                 ,
                 },
             },
@@ -6408,6 +6418,132 @@ const schemaCore = {
             [idUnarmedCombat],
             [],
             [],
+        ),
+    },
+    [idCombatValues] : {
+        [idMeleeDamage] : getListEntry(idDefault,'Melee Damage','0','0',
+            'Damage with a melee weapon',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : capitalize(idStrength)+ '/5',
+                    [idKFormula] : '(floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength) + '}/5))'
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idMeleeAcc] : getListEntry(idDefault,'Melee Acc','0','0',
+            'Accurancy with a melee weapon',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : capitalize(idDexterity) + ' + (' + capitalize(idLuck) + '/10)',
+                    [idKFormula] : '@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idDexterity) + '} + ' + 
+                                    '(floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10))',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idThrownDamage] : getListEntry(idDefault,'Thrown Damage','0','0',
+            'Damage with a thrown weapon',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : capitalize(idStrength) + '/5',
+                    [idKFormula] : '(floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idStrength) + '}/5))'
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idThrownAcc] : getListEntry(idDefault,'Thrown Acc','0','0',
+            'Accuracy with a thrown weapon',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : capitalize(idAgility) + ' + (' + capitalize(idLuck) + '/10)',
+                    [idKFormula] : '@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility) + '} + ' + 
+                                    'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10)',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idRangedDamage] : getListEntry(idDefault,'Ranged Damage','0','0',
+            'Damage with a ranged weapon',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : capitalize(idDexterity) + '/5',
+                    [idKFormula] : '(floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idDexterity) + '}/5))'
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idRangedAcc] : getListEntry(idDefault,'Ranged Acc','0','0',
+            'Accuracy with a ranged weapon',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : capitalize(idAgility) + ' + (' + capitalize(idLuck) + '/10)',
+                    [idKFormula] : '@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility) + '} + ' + 
+                                    '(floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10))',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idSpellDamage] : getListEntry(idDefault,'Spell Damage','0','0',
+            'Damage with a spell',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : capitalize(idWisdom) + '/5',
+                    [idKFormula] : '(floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idWisdom) + '}/5))'
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idSpellAcc] : getListEntry(idDefault,'Spell Acc','0','0',
+            'Accuracy with a spell',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : capitalize(idIntelligence) + ' + (' + capitalize(idLuck) + '/10)',
+                    [idKFormula] : '@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idIntelligence) + '} + ' + 
+                                    'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10)',
+                },
+            },
+            {
+            },
+            {
+            },
         ),
     },
     [idTraits] : {

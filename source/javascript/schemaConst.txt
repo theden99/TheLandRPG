@@ -73,6 +73,7 @@ const idCalc = 'calc';
 const idCalcParams = 'calcparams';
 const idFunc = 'func';
 const idFuncParams = 'funcparams';
+const idFuncLessThen = 'funclessthen';
 const idCalcAffects = 'calcaffects';
 const idHelpDesc = 'helpdesc';
 const idInfoButton = 'infobutton';
@@ -118,16 +119,16 @@ const idMaxStat = 'maxstat';
 const idMaxSkill = 'maxskill';
 const idMaxSubskill = 'maxsubskill';
 const idEffects = 'effects';
-const idCalcMinOf = 'calcMinOf';
+const idCalcLessThen = 'calclessthan';
+const idCalcMaxOf = 'calcmaxof';
+const idCalcMinOfMaxOf = 'calcminofmaxof';
 const idAbsorbs = 'absorption';
 const idSkillType = 'skilltype';
 const idEveryday = 'everyday';
 const idTradeskill = 'tradeskill';
 const idArmorWeapon = 'armorweapon';
 const idMagic = 'magic';
-const idCalcMaxOf = 'calcMaxOf';
 const idAnyMagic = 'anymagic';
-const idCalcMinOfMaxOf = 'calcminofmaxof';
 const idSummary = 'summary';
 const idCalcStat = 'calcstat';
 const idInitiate = 'initiate';
@@ -145,6 +146,7 @@ const id0Str = '0';
 const idSpellResists = 'spellresists';
 const idMetaMagic = 'metamagic';
 const idMartial = 'martial';
+const idCombatValues = 'combatvalues';
 //stats
 const idStrength = 'strength';
 const idAgility = 'agility';
@@ -436,10 +438,19 @@ const idPoison = 'poison';
 const idPsychic = 'psychic';
 const idSolar = 'solar';
 const idThunder = 'thunder';
+//combat values
+const idMeleeDamage = 'meleedamage';
+const idThrownDamage = 'throwndamage';
+const idRangedDamage = 'rangeddamage';
+const idSpellDamage = 'spelldamage';
+const idMeleeAcc = 'meleeacc';
+const idThrownAcc = 'thrownacc';
+const idRangedAcc = 'rangedacc';
+const idSpellAcc = 'spellacc';
 //traits
 const idTrait = 'trait';
 const idHerbalSpirit = 'herbalspirit';
 const idMeleeWeaponProdigy = 'meleeweaponprodigy';
 
 
-const tableIsTemplate = [idStats,idMovement,idCombatStats,idSkills,idResists,idSpellResists,idEfficiencies];
+const tableIsTemplate = [idStats,idMovement,idCombatStats,idSkills,idResists,idSpellResists,idEfficiencies,idCombatValues];

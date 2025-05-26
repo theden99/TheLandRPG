@@ -73,6 +73,7 @@
 - const idCalcParams = 'calcparams';
 - const idFunc = 'func';
 - const idFuncParams = 'funcparams';
+- const idFuncLessThen = 'funclessthen';
 - const idCalcAffects = 'calcaffects';
 - const idHelpDesc = 'helpdesc';
 - const idInfoButton = 'infobutton';
@@ -118,16 +119,16 @@
 - const idMaxSkill = 'maxskill';
 - const idMaxSubskill = 'maxsubskill';
 - const idEffects = 'effects';
-- const idCalcMinOf = 'calcMinOf';
+- const idCalcLessThen = 'calclessthan';
+- const idCalcMaxOf = 'calcmaxof';
+- const idCalcMinOfMaxOf = 'calcminofmaxof';
 - const idAbsorbs = 'absorption';
 - const idSkillType = 'skilltype';
 - const idEveryday = 'everyday';
 - const idTradeskill = 'tradeskill';
 - const idArmorWeapon = 'armorweapon';
 - const idMagic = 'magic';
-- const idCalcMaxOf = 'calcMaxOf';
 - const idAnyMagic = 'anymagic';
-- const idCalcMinOfMaxOf = 'calcminofmaxof';
 - const idSummary = 'summary';
 - const idCalcStat = 'calcstat';
 - const idInitiate = 'initiate';
@@ -145,6 +146,7 @@
 - const idSpellResists = 'spellresists';
 - const idMetaMagic = 'metamagic';
 - const idMartial = 'martial';
+- const idCombatValues = 'combatvalues';
 - //stats
 - const idStrength = 'strength';
 - const idAgility = 'agility';
@@ -436,13 +438,22 @@
 - const idPsychic = 'psychic';
 - const idSolar = 'solar';
 - const idThunder = 'thunder';
+- //combat values
+- const idMeleeDamage = 'meleedamage';
+- const idThrownDamage = 'throwndamage';
+- const idRangedDamage = 'rangeddamage';
+- const idSpellDamage = 'spelldamage';
+- const idMeleeAcc = 'meleeacc';
+- const idThrownAcc = 'thrownacc';
+- const idRangedAcc = 'rangedacc';
+- const idSpellAcc = 'spellacc';
 - //traits
 - const idTrait = 'trait';
 - const idHerbalSpirit = 'herbalspirit';
 - const idMeleeWeaponProdigy = 'meleeweaponprodigy';
 - 
 - 
-- const tableIsTemplate = [idStats,idMovement,idCombatStats,idSkills,idResists,idSpellResists,idEfficiencies];
+- const tableIsTemplate = [idStats,idMovement,idCombatStats,idSkills,idResists,idSpellResists,idEfficiencies,idCombatValues];
 - 
 
 - 
@@ -1608,7 +1619,7 @@
                 "formulas": {
                     "base": {
                         "formula": "15 + Agility + (Luck/10) + Celerity",
-                        "kformula": "15 + @{chaosseed-stats-agility-total} + (@{chaosseed-stats-luck-total}/10) +@{chaosseed-skills-celerity-total}"
+                        "kformula": "15 + @{chaosseed-stats-agility-total} + floor(@{chaosseed-stats-luck-total}/10) +@{chaosseed-skills-celerity-total}"
                     }
                 },
                 "calcs": {},
@@ -1807,8 +1818,8 @@
                 "infourl": "https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299",
                 "formulas": {
                     "base": {
-                        "formula": "Endurance/3",
-                        "kformula": "floor(@{chaosseed-stats-endurance-total}/3)"
+                        "formula": "Endurance score per round, when there is time to rest",
+                        "kformula": "@{chaosseed-stats-endurance-total}"
                     }
                 },
                 "calcs": {},
@@ -1832,8 +1843,8 @@
                 "infourl": "https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299",
                 "formulas": {
                     "base": {
-                        "formula": "Constitution/3",
-                        "kformula": "floor(@{chaosseed-stats-constitution-total}/3)"
+                        "formula": "Constitution per hour.  Twice that when resting.",
+                        "kformula": "@{chaosseed-stats-constitution-total}"
                     }
                 },
                 "calcs": {},
@@ -10753,6 +10764,208 @@
                 "parents": [
                     "unarmedcombat"
                 ],
+                "subskills": [],
+                "stats": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            }
+        },
+        "combatvalues": {
+            "meleedamage": {
+                "roller": "default",
+                "displayname": "Melee Damage",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "Damage with a melee weapon",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "Strength/5",
+                        "kformula": "(floor(@{chaosseed-stats-strength-total}/5))"
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "meleeacc": {
+                "roller": "default",
+                "displayname": "Melee Acc",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "Accurancy with a melee weapon",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "Dexterity + (Luck/10)",
+                        "kformula": "@{chaosseed-stats-dexterity-total} + (floor(@{chaosseed-stats-luck-total}/10))"
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "throwndamage": {
+                "roller": "default",
+                "displayname": "Thrown Damage",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "Damage with a thrown weapon",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "Strength/5",
+                        "kformula": "(floor(@{chaosseed-stats-strength-total}/5))"
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "thrownacc": {
+                "roller": "default",
+                "displayname": "Thrown Acc",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "Accuracy with a thrown weapon",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "Agility + (Luck/10)",
+                        "kformula": "@{chaosseed-stats-agility-total} + floor(@{chaosseed-stats-luck-total}/10)"
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "rangeddamage": {
+                "roller": "default",
+                "displayname": "Ranged Damage",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "Damage with a ranged weapon",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "Dexterity/5",
+                        "kformula": "(floor(@{chaosseed-stats-dexterity-total}/5))"
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "rangedacc": {
+                "roller": "default",
+                "displayname": "Ranged Acc",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "Accuracy with a ranged weapon",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "Agility + (Luck/10)",
+                        "kformula": "@{chaosseed-stats-agility-total} + (floor(@{chaosseed-stats-luck-total}/10))"
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "spelldamage": {
+                "roller": "default",
+                "displayname": "Spell Damage",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "Damage with a spell",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "Wisdom/5",
+                        "kformula": "(floor(@{chaosseed-stats-wisdom-total}/5))"
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "spellacc": {
+                "roller": "default",
+                "displayname": "Spell Acc",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "Accuracy with a spell",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "Intelligence + (Luck/10)",
+                        "kformula": "@{chaosseed-stats-intelligence-total} + floor(@{chaosseed-stats-luck-total}/10)"
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
                 "subskills": [],
                 "stats": [],
                 "effects": [],

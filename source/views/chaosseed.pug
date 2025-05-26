@@ -60,6 +60,18 @@
                 each entry,stat in schemaCore.combatstats
                     +rowCombatStat(idChaosSeed,idCombatStats,idCombatStats,stat,entry,'row-combat',stat)
                     +collapseHelp(idChaosSeed,idCombatStats,idCombatStats,stat,entry)
+                +span({'data-i18n':'Current'}).row-combat-curtitle
+                .div-inline
+                    +span({'data-i18n':'Health:'}).row-combat-curhealth-head
+                    +number({name:'curhealth',class:'boxed',value:0}).row-combat-curhealth
+                    +span({'data-i18n':'Stamina:'}).row-combat-curmana-head
+                    +number({name:'curstamina',class:'boxed',value:0}).row-combat-curstamina
+                    +span({'data-i18n':'Mana:'}).row-combat-curmana-head
+                    +number({name:'curmana',class:'boxed',value:0}).row-combat-curmana
+                .div-inline
+                    +roller({name:'full-resources','data-i18n':'Full Resources',class:'general-roller row-combat-fullbutton',trigger:{triggeredFuncs:['doFullResources']}})
+                    +roller({name:'regen-stamina','data-i18n':'Regen Stamina',class:'general-roller row-combat-staminabutton',trigger:{triggeredFuncs:['doRegenStamina']}})
+                    +roller({name:'regen-mana','data-i18n':'Regen Mana',class:'general-roller row-combat-manabutton',trigger:{triggeredFuncs:['doRegenMana']}})
         .chaosseed-resists
             .row-resists-section.paper-background
                 +span({'data-i18n':'Normal Resistances'}).row-resists-title
@@ -102,7 +114,69 @@
                 each entry,stat in schemaCore.efficiencies
                     +rowCombatStat(idChaosSeed,idEfficiencies,idEfficiencies,stat,entry,'row-efficiencies',idNone,false)
                     +collapseHelp(idChaosSeed,idEfficiencies,idEfficiencies,stat,entry)
+        .chaosseed-combatvalues
+            .row-combatvalues-section.paper-background
+                +span({'data-i18n':'Combat Values'}).row-combatvalues-title
+                .div-inline
+                    +span({'data-i18n':'Combat Value'}).row-combatvalues-noroller.row-combatvalues-header
+                    +span({'data-i18n':'Base'}).row-combatvalues-base.row-combatvalues-header
+                    +span({'data-i18n':'Equip Bonus'}).row-combatvalues-equipbonus.row-combatvalues-header
+                    +span({'data-i18n':'Buff Bonus'}).row-combatvalues-buffbonus.row-combatvalues-header
+                    +span({'data-i18n':'Misc Bonus'}).row-combatvalues-miscbonus.row-combatvalues-header
+                    +span({'data-i18n':'Total'}).row-combatvalues-total.row-combatvalues-header
+                    +span({'data-i18n':''}).column-help.row-combatvalues-header
+                each entry,stat in schemaCore.combatvalues
+                    +rowCombatStat(idChaosSeed,idCombatValues,idCombatValues,stat,entry,'row-combatvalues',idNone,false)
+                    +collapseHelp(idChaosSeed,idCombatValues,idCombatValues,stat,entry)
 +module.
+    const doFullResources = async function({trigger,attributes,sections,casc}){
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        //<button type="roll" name="sheet-Full sheet-Heal" value="
+        //!setattr --sel --health|[[ (@{selected|constitution}*10) + @{selected|HealthVBonus} ]]
+        //!setattr --sel --stamina|[[ (@{selected|endurance}*10) + @{selected|StaminaVBonus} ]]
+        //!setattr --sel --mana|[[ (@{selected|wisdom}*10) + @{selected|ManaVBonus} ]] 
+        //!setattr --sel --chealth|%health% --cstamina|%stamina% --cmana|%mana%" 
+        //class="btn ui-draggable">Full Heal</button>        
+        let theAPICall = '';
+        let roll;
+
+        theAPICall = '!setattr --sel --curhealth|[[ (@{selected|chaosseed-stats-constitution-total}*10) ]] ';
+        roll = await startRoll(theAPICall);
+        finishRoll(roll.rollId);
+
+        theAPICall = '!setattr --sel --curstamina|[[ (@{selected|chaosseed-stats-endurance-total}*10)]] ';
+        roll = await startRoll(theAPICall);
+        finishRoll(roll.rollId);
+
+        theAPICall = '!setattr --sel --curmana|[[ (@{selected|chaosseed-stats-wisdom-total}*10)]] ';
+        roll = await startRoll(theAPICall);
+        finishRoll(roll.rollId);
+    };
+    k.registerFuncs({doFullResources});
+
+    const doRegenStamina = async function({trigger,attributes,sections,casc}){
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const theAPICall = '!setattr --sel --curstamina|[[ @{selected|curstamina} + @{selected|chaosseed-stats-endurance-total} ]]';
+
+        const roll = await startRoll(theAPICall);
+        finishRoll(roll.rollId);
+    };
+    k.registerFuncs({doRegenStamina});
+    
+    const doRegenMana = async function({trigger,attributes,sections,casc}){
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        //<button type="roll" name="sheet-Turn sheet-Start" value="
+        //!setattr --sel --cmana|[[ @{selected|cmana} + (floor(@{selected|wisdom})/3)]]" 
+        //class="btn ui-draggable">Turn Start</button>        
+        const theAPICall = '!setattr --sel --curmana|[[ @{selected|curmana} + (floor(@{selected|chaosseed-stats-wisdom-total}/3)) ]]';
+
+        const roll = await startRoll(theAPICall);
+        finishRoll(roll.rollId);
+    };
+    k.registerFuncs({doRegenMana});    
 +scss('sheet').
     .thelandrpg-tabs-section-chaosseed{
         .repitem:hover > .collapse, .repitem:hover .roll-container,
@@ -128,6 +202,7 @@
         grid-template-columns: auto auto auto auto auto auto;
         grid-template-areas:
             'title title title'
+            'stats combatvalues combat'
             'stats movement combat'
             'stats movement combat'
             'resists spellresists efficiencies'
@@ -233,6 +308,47 @@
                 .row-combat-total {
                     text-align: center;
                     width: 45px;
+                }
+
+                .row-combat-curtitle {
+                    text-align: center;
+                    font-weight: bold;
+                    background-color: lightblue;
+                    width: 100%;
+                }
+                .row-combat-curhealth-head {
+                    text-align: right;
+                    padding: 5px;
+                    width: 70px;
+                }
+                .row-combat-curhealth {
+                    width: 40px;
+                }
+                .row-combat-curmana-head {
+                    text-align: right;
+                    padding: 5px;
+                    width: 55px;
+                }
+                .row-combat-curmana {
+                    width: 40px;
+                }
+                .row-combat-curstamina-head {
+                    text-align: right;
+                    padding: 5px;
+                    width: 70px;
+                }
+                .row-combat-curstamina {
+                    width: 40px;
+                }
+
+                .row-combat-fullbutton {
+                    width: 120px;
+                }
+                .row-combat-staminabutton {
+                    width: 120px;
+                }
+                .row-combat-manabutton {
+                    width: 120px;
                 }
             }
         }
@@ -395,6 +511,52 @@
                     width: 45px;
                 }
                 .row-efficiencies-total {
+                    text-align: center;
+                    width: 45px;
+                }
+            }
+        }
+
+        .chaosseed-combatvalues {
+            grid-area: combatvalues;
+            width: 360px;
+            
+            .row-combatvalues-section {
+                display: grid;
+
+                .row-combatvalues-title {
+                    font-size: 14px;
+                    text-align: center;
+                    font-weight: bold;
+                }
+                .row-combatvalues-header {
+                    text-align: center;
+                    font-weight: bold;
+                    background-color: lightblue;
+                }
+                .row-combatvalues-roller {
+                    width: 110px;
+                }
+                .row-combatvalues-noroller {
+                    width: 110px;
+                }
+                .row-combatvalues-base {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-combatvalues-equipbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-combatvalues-buffbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-combatvalues-miscbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-combatvalues-total {
                     text-align: center;
                     width: 45px;
                 }

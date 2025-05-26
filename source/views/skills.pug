@@ -1,9 +1,16 @@
+- let theK = '';
 +tab({name:"skills", container:"section", button:{class:"thelandrpg-tabs-button boxed",'data-i18n':"Skills"}})
     .thelandrpg-tabs-section-skills
         +span({'data-i18n':'SKILLS'}).chaosseed-title.paper-background
         .chaosseed-skills
             .row-skills-section.paper-background
-                +span({'data-i18n':'Skills'}).row-skills-title                
+                .div-inline
+                    +span({'data-i18n':'Total Skills:'}).row-skills-title
+                    - theK = '(0 '; //placeholder
+                    each entry,skill in schemaCore.skills
+                        - theK += '+ @{'+getFieldID(idChaosSeed,idSkills,idSkills,idRank,skill)+'} ';
+                    - theK += ')';
+                    +number({name:getFieldID(idChaosSeed,idSkills,idSkills,idRank,idTotal),class:'',readonly:'',value:0,trigger:{formula:theK}}).row-skills-base
                 +tabs({name:'chaosseed-skills',defaultActiveTab:'skills-everyday',persistent:false})
                     include ../sections/skills.pug
         .chaosseed-traits
@@ -152,9 +159,14 @@
 
                 .row-skills-title {
                     font-size: 14px;
-                    text-align: center;
+                    text-align: right;
                     font-weight: bold;
-                    width: 100%;
+                    width: 450;
+                }
+                .row-skills-base {
+                    font-size: 14px;
+                    font-weight: bold;
+                    width: 60;
                 }
                 .row-skill-header {
                     text-align: center;
