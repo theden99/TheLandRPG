@@ -26,6 +26,10 @@
             +select({name:'spells-magictype',class:'spells-type'})
                 each entry,stat in schemaCore.spellresists
                     +option({value:stat,'data-i18n':entry.displayname})
+                    each skill in schemaCore.skills[stat].subskillsprime
+                        +option({value:skill,'data-i18n':schemaCore.skills[skill].displayname})
+                each skill in listMetamagicSkills
+                    +option({value:skill,'data-i18n':schemaCore.skills[skill].displayname})
             +select({name:'spells-actiontype',class:'spells-actiontype'})
                 +option({value:'Combat','data-i18n':'Combat'})
                 +option({value:'Bonus','data-i18n':'Bonus'})

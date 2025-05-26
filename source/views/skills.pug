@@ -5,7 +5,7 @@
         .chaosseed-skills
             .row-skills-section.paper-background
                 .div-inline
-                    +span({'data-i18n':'Total Skills:'}).row-skills-title
+                    +span({'data-i18n':'Total Ranks:'}).row-skills-title
                     - theK = '(0 '; //placeholder
                     each entry,skill in schemaCore.skills
                         - theK += '+ @{'+getFieldID(idChaosSeed,idSkills,idSkills,idRank,skill)+'} ';

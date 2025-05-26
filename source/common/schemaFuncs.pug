@@ -278,29 +278,13 @@
     k.registerFuncs({funcCore});
 
     const getMagicTypeTotal = (iMagicType) => {
-        let theId='';
+        const theId = 'chaosseed-skills-'+iMagicType+'-total';
 
-        if (iMagicType==='airmagic') {
-            theId =  'chaosseed-skills-airmagic-total';
-        } else if (iMagicType==='darkmagic') {
-            theId = 'chaosseed-skills-darkmargic-total';
-        } else if (iMagicType==='deathmagic') {
-            theId =  'chaosseed-skills-deathmagic-total';
-        } else if (iMagicType==='earthmagic') {
-            theId = 'chaosseed-skills-earthmagic-total';
-        } else if (iMagicType==='firemagic') {
-            theId = 'chaosseed-skills-firemagic-total';
-        }  else if (iMagicType==='lifemagic') {
-            theId = 'chaosseed-skills-lifemagic-total';
-        } else if (iMagicType==='lightmagic') {
-            theId = 'chaosseed-skills-lightmagic-total';
-        } else if (iMagicType==='watermagic') {
-            theId = 'chaosseed-skills-watermagic-total';
-        } else if (iMagicType==='eldritchmagic') {
-            theId = 'chaosseed-skills-eldritchmagic-total';
-        }  else if (iMagicType==='chaosmagic') {
-            theId = 'chaosseed-skills-chaosmagic-total';
-        }
+        return theId;
+    }
+
+    const getMagicTypeStatBonus = (iMagicType) => {
+        const theId = 'chaosseed-skills-'+iMagicType+'-statbonus';
 
         return theId;
     }
@@ -324,7 +308,10 @@
             const theLevel = attributes[theSectionId+'spells-level'];
             const theActionType = attributes[theSectionId+'spells-actiontype'];
             const theCostLine = attributes[theSectionId+'spells-costtype']+' '+attributes[theSectionId+'spells-cost'];
-            const theMagicTypeTotal = attributes[getMagicTypeTotal(theMagicType)];
+            const theMagicTypeTotal = attributes[getMagicTypeTotal(attributes[theSectionId+'spells-magictype'])];
+            const theMagicTypeStatBonus = attributes[getMagicTypeStatBonus(attributes[theSectionId+'spells-magictype'])];
+            const theMagicTypeAcc = theMagicTypeTotal-theMagicTypeStatBonus; //rank+bonuses
+            const theMagicTypeDamage = Math.floor(theMagicTypeAcc/5); //rank+bonuses/5
             let theRadiusLine = '1 creature';
             if (attributes[theSectionId+'spells-radius']!=='') {
                 theRadiusLine = attributes[theSectionId+'spells-radius']+' feet in a '+attributes[theSectionId+'spells-radiustype']
@@ -345,12 +332,12 @@
             ' --name|'+theName+
             ' --leftsub|'+theMagicType+' '+theLevel+' ◆ '+theActionType+
             ' --rightsub|'+theCostLine+
-            ' --Attack|[[ 1d100 + '+theMagicTypeTotal+' + floor(@{selected|chaosseed-stats-luck-total}/10) ]] vs '+theVs;
+            ' --Attack|[[ 1d100 + @{selected|chaosseed-combatvalues-spellacc-total} + '+theMagicTypeAcc+' ]] vs '+theVs;
 
             if (theAmount!=='') {
                 theAPICall += 
-                    ' --On Hit|Target takes [['+theAmount+'+floor(@{selected|chaosseed-stats-wisdom-total}/5)+floor(@{selected|chaosseed-stats-luck-total}/10)]] '+theAmountType+' damage'+
-                    ' --Critical Chance|Target takes  [['+theAmount+'+floor(@{selected|chaosseed-stats-wisdom-total}/5)+floor(@{selected|chaosseed-stats-luck-total}/10)]] extra '+theAmountType+' damage';
+                    ' --On Hit|Target takes [['+theAmount+'+@{selected|chaosseed-combatvalues-spelldamage-total} +'+theMagicTypeDamage+']] '+theAmountType+' damage'+
+                    ' --Critical Chance|Target takes  [['+theAmount+'+@{selected|chaosseed-combatvalues-spelldamage-total} +'+theMagicTypeDamage+']] extra '+theAmountType+' damage';
             };
 
             theAPICall += 

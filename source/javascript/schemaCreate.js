@@ -463,8 +463,13 @@ const idTrait = 'trait';
 const idHerbalSpirit = 'herbalspirit';
 const idMeleeWeaponProdigy = 'meleeweaponprodigy';
 
+const idSubskillsPrime = 'subskillsprime';
 
 const tableIsTemplate = [idStats,idMovement,idCombatStats,idSkills,idResists,idSpellResists,idEfficiencies,idCombatValues];
+
+const listMartialSkills = [idDoubleAttack,idDualWielding,idKeenShot,idMartialRage,idMeleeFocus,idTwoHandedWielding];
+const listMetamagicSkills = [idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting];
+
 
 const capitalize = function(string){
     return string.replace(/(?:^|\s+|\/)[a-z]/ig,(letter)=>letter.toUpperCase());
@@ -510,7 +515,7 @@ const getFieldID = (iPage,iZone,iTable,iField,iRowID) => {  // <<<------  duplic
 };
 
 const getListEntry = (iRoller,iDisplayName,iDefault,iDecimals,iShortDesc,iInfoDesc,iInfoURL,iFormulas,iCalcs,iFuncs,
-                      iSkillType=idNA,iRarity=idCommon,iParents=[],iSubskills=[],iStats=[],iEffects=[]) => {
+                      iSkillType=idNA,iRarity=idCommon,iParents=[],iSubskills=[],iStats=[],iSubskillsPrime=[],iEffects=[]) => {
     const theEntry = {
         [idRoller] : iRoller,
         [idDisplayName] : iDisplayName,
@@ -527,6 +532,7 @@ const getListEntry = (iRoller,iDisplayName,iDefault,iDecimals,iShortDesc,iInfoDe
         [idParents] : iParents,
         [idSubSkills] : iSubskills,
         [idStats] : iStats,
+        [idSubskillsPrime] : iSubskillsPrime,
         [idEffects] : iEffects, //applies these effects -> effectIDs
         //to be populated when doing processing of schema
         [idAffects] : [], //using KFormula and CalcAffects -> fills the trigger{affects:}
@@ -1432,8 +1438,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idAgriculture)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -1457,8 +1463,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1477,8 +1483,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1497,8 +1503,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1522,8 +1528,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idAlchemy)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -1542,8 +1548,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1562,8 +1568,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idAnimalEmpathy)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -1582,8 +1588,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1602,8 +1608,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1622,8 +1628,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1642,8 +1648,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1662,8 +1668,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idAthletics)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -1682,8 +1688,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1702,8 +1708,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1722,8 +1728,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1742,8 +1748,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1762,8 +1768,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1782,8 +1788,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idBalance)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -1802,8 +1808,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1822,8 +1828,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1842,8 +1848,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1862,8 +1868,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idBrewing)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -1882,8 +1888,6 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -1902,8 +1906,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idConcentration)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -1922,8 +1926,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1942,8 +1946,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1962,8 +1966,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -1982,8 +1986,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idConstruction)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -2002,8 +2006,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2027,8 +2031,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2047,8 +2051,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2057,8 +2061,8 @@ const schemaCore = {
             },
             idTradeskill,
             idUncommon,
+            [idConstruction],
             [],
-            [idCitySurvival,idDesertSurvival,idForestSurvival],
             [idWisdom],
         ),
         [idConversation] : getListEntry(idDefault,'Conversation','0','0',
@@ -2067,8 +2071,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idConversation)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -2087,8 +2091,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2107,8 +2111,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2127,8 +2131,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2147,8 +2151,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idCooking)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -2167,8 +2171,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idDeception)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -2187,8 +2191,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2207,8 +2211,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2232,8 +2236,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2252,8 +2256,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idEnchanting)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -2272,9 +2276,9 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
-                },
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                }
             },
             {
             },
@@ -2292,8 +2296,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idEntertain)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -2312,8 +2316,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2332,8 +2336,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2352,8 +2356,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2372,8 +2376,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2397,8 +2401,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2422,8 +2426,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2443,8 +2447,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idFishing)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -2463,8 +2467,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2483,8 +2487,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idFletching)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -2503,8 +2507,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idFortitude)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -2523,8 +2527,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2543,8 +2547,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2563,8 +2567,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2583,8 +2587,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idGambling)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -2603,8 +2607,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2623,8 +2627,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2648,8 +2652,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idGatherInformation)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -2668,8 +2672,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2688,8 +2692,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2708,8 +2712,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2728,8 +2732,8 @@ const schemaCore = {
             'https://mlzvw7x3dg3w.i.optimole.com/w:199/h:199/q:mauto/ig:avif/https://www.thelandrpg.com/wp-content/uploads/2023/01/azerin_a_silhouette_of_a_plant_seen_within_the_bounds_of_a_bl_e2b4d6cf-aa38-4668-9424-bafc86b9b52d_3.png',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idHealing)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idHealing)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -2741,6 +2745,7 @@ const schemaCore = {
             [],
             [idCombatMedic,idHygiene,idNecromancy,idAnatomy],
             [idWisdom],
+            [],
             [idHealing],
         ),
         [idCombatMedic] : getListEntry(idDefault,'Combat Medic','0','0',
@@ -2749,8 +2754,8 @@ const schemaCore = {
             'https://files.d20.io/images/418259312/IRr6MU5n3fch__TqXVUNYg/max.png?1732095184',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idCombatMedic)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2762,6 +2767,7 @@ const schemaCore = {
             [idHealing],
             [],
             [idLuck],
+            [],
             [idCombatMedic],
         ),
         [idHygiene] : getListEntry(idDefault,'Hygiene','0','0',
@@ -2770,8 +2776,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2790,8 +2796,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2810,8 +2816,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2830,8 +2836,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idHerbLore)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -2855,8 +2861,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2875,8 +2881,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2900,8 +2906,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idInstillFear)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -2925,8 +2931,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2945,8 +2951,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2965,8 +2971,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -2985,8 +2991,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idIntuition)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -3010,8 +3016,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3035,8 +3041,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idInvestigation)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -3055,8 +3061,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3075,8 +3081,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3095,8 +3101,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3115,8 +3121,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idMetaGaming)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -3135,8 +3141,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3155,8 +3161,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3175,8 +3181,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idPerception)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -3195,8 +3201,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3220,8 +3226,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3245,8 +3251,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3265,8 +3271,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idPuzzleSolving)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -3285,8 +3291,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idResearch)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -3305,8 +3311,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3325,8 +3331,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3345,8 +3351,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3365,8 +3371,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3385,8 +3391,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3405,8 +3411,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3425,8 +3431,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idRiding)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -3445,8 +3451,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3470,8 +3476,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3490,8 +3496,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3510,8 +3516,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3535,8 +3541,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSailing)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -3555,8 +3561,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3580,8 +3586,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idScavenging)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -3600,8 +3606,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idScribing)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -3620,8 +3626,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3640,8 +3646,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSmithing)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -3660,8 +3666,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3680,8 +3686,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3700,8 +3706,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3720,8 +3726,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3740,8 +3746,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idStealth)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -3760,8 +3766,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3780,8 +3786,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3800,8 +3806,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -3820,8 +3826,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3840,8 +3846,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3860,8 +3866,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3880,9 +3886,9 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
-                },
+                    [idFormula] : '',
+                    [idKFormula] : '',
+               },
             },
             {
             },
@@ -3900,8 +3906,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3920,8 +3926,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3940,8 +3946,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3960,8 +3966,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -3980,8 +3986,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4000,8 +4006,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4020,8 +4026,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4040,8 +4046,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idTailoring)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4060,8 +4066,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4080,8 +4086,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idWeaving)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4100,8 +4106,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idThievery)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4125,8 +4131,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4150,8 +4156,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4175,8 +4181,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idTrade)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4200,8 +4206,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4220,8 +4226,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4240,8 +4246,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4260,8 +4266,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idTraps)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4280,8 +4286,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4300,8 +4306,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4321,8 +4327,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idAimedCasting)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4341,8 +4347,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idAnchoredCasting)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4361,8 +4367,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idDistantCasting)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4381,8 +4387,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idDurableCasting)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4401,8 +4407,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idEchoCasting)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4421,8 +4427,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idEfficientTeleportation)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4441,8 +4447,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idFocusedCasting)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4461,8 +4467,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idGeomentricCasting)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4481,8 +4487,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idPreciseCasting)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4501,8 +4507,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idQuickCasting)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4521,8 +4527,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idReboundedSpell)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4541,8 +4547,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSplitCasting)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4561,8 +4567,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idStillCasting)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4581,8 +4587,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idTranquilCasting)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4602,8 +4608,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idAirMagic)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4615,6 +4621,7 @@ const schemaCore = {
             [],
             [idConcusiveShock,idDrivingWind,idAerialBoost,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
+            [idConcusiveShock,idDrivingWind,idAerialBoost],
         ),
         [idConcusiveShock] : getListEntry(idDefault,'Concusive Shock','0','0',
             'Concussive Shock channels the raw force of storms into devastating precision, making “thunder” and “lightning” Air Magic spells deadlier than ever.',
@@ -4622,8 +4629,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4642,8 +4649,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4662,8 +4669,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4682,8 +4689,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idDarkMagic)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4695,6 +4702,7 @@ const schemaCore = {
             [],
             [idPersistantShadow,idClingingShadow,idInfernalEssence,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
+            [idPersistantShadow,idClingingShadow,idInfernalEssence],
         ),
         [idClingingShadow] : getListEntry(idDefault,'Clinging Shadow','0','0',
             'Clinging Shadow infuses Dark Magic with an unsettling, oppressive force that lingers long after the spell is cast.',
@@ -4702,8 +4710,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4722,8 +4730,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4742,8 +4750,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4762,8 +4770,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idDeathMagic)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4775,6 +4783,7 @@ const schemaCore = {
             [],
             [idLifeLeech,idStrongFears,idPotentPoison,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
+            [idLifeLeech,idStrongFears,idPotentPoison],
         ),
         [idLifeLeech] : getListEntry(idDefault,'Life Leech','0','0',
             'Life Leech taps into the dark, necrotic energies of Death Magic, allowing the caster to siphon life from their enemies as they deal devastating damage.',
@@ -4782,8 +4791,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4802,8 +4811,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4822,8 +4831,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4842,8 +4851,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idEarthMagic)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4855,6 +4864,7 @@ const schemaCore = {
             [],
             [idCausticCling,idDenseEarth,idSiesmicMagic,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
+            [idCausticCling,idDenseEarth,idSiesmicMagic],
         ),
         [idCausticCling] : getListEntry(idDefault,'Caustic Cling','0','0',
             'Caustic Cling enhances the corrosive power of Earth Magic, ensuring that its acid-based spells bite deep and linger long after their initial impact.',
@@ -4862,8 +4872,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4882,8 +4892,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4902,8 +4912,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4922,8 +4932,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idFireMagic)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -4935,6 +4945,7 @@ const schemaCore = {
             [],
             [idAfterburn,idBlazingHeat,idFierryBurst,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
+            [idAfterburn,idBlazingHeat,idFierryBurst],
         ),
         [idAfterburn] : getListEntry(idDefault,'Afterburn','0','0',
             'No description given on website',
@@ -4942,8 +4953,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4962,8 +4973,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -4982,8 +4993,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -5002,8 +5013,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idLifeMagic)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5015,6 +5026,7 @@ const schemaCore = {
             [],
             [idCommandingSpell,idPotentHealing,idRestorativeSpell,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
+            [idCommandingSpell,idPotentHealing,idRestorativeSpell],
         ),
         [idCommandingSpell] : getListEntry(idDefault,'Commanding Spell','0','0',
             'Commanding Spell enhances the caster’s ability to manipulate and control others through Compulsion Magic. ',
@@ -5022,8 +5034,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -5042,8 +5054,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -5062,8 +5074,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5082,8 +5094,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idLightMagic)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5095,6 +5107,7 @@ const schemaCore = {
             [],
             [idSolarEssence,idBurningRadiance,idPersistantLight,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
+            [idSolarEssence,idBurningRadiance,idPersistantLight],
         ),
         [idSolarEssence] : getListEntry(idDefault,'Solar Essence','0','0',
             'olar Essence harnesses the radiant power of light to bolster the caster’s defenses and sharpen their attacks against the forces of darkness.',
@@ -5102,8 +5115,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -5122,8 +5135,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -5142,8 +5155,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -5162,8 +5175,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idWaterMagic)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5175,6 +5188,7 @@ const schemaCore = {
             [],
             [idJaggedIce,idDrivingWave,idEndlessOcean,idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting],
             [idIntelligence],
+            [idJaggedIce,idDrivingWave,idEndlessOcean],
         ),
         [idJaggedIce] : getListEntry(idDefault,'Jagged Ice','0','0',
             'Jagged Ice sharpens the frigid power of Water Magic, making the caster’s spells as deadly as they are precise.',
@@ -5182,8 +5196,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -5202,8 +5216,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -5222,8 +5236,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {
@@ -5242,8 +5256,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idInnerChi)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5262,8 +5276,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '',
-                    [idKFormula] : '',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idEldritchMagic)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5282,8 +5296,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '',
-                    [idKFormula] : '',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idChaosMagic)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5303,8 +5317,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idDoubleAttack)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5323,8 +5337,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idDualWielding)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5343,8 +5357,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idKeenShot)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5363,8 +5377,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idMartialRage)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5383,8 +5397,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idMeleeFocus)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5403,8 +5417,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idTwoHandedWielding)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5424,8 +5438,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idLightArmor)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5444,8 +5458,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idGraceInCombat)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5464,8 +5478,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idMediumArmor)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5484,8 +5498,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idDenseScales)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5504,8 +5518,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idHeavyArmor)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5524,8 +5538,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idMentalArmor)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5544,8 +5558,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idUnarmoedDefense)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5564,8 +5578,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idShields)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5584,8 +5598,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idShieldBash)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5605,8 +5619,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idArchery)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5625,8 +5639,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idDrillShot)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5645,8 +5659,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idEntanglingShot)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5665,8 +5679,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idImbueArrow)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5685,8 +5699,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idStunShot)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5705,8 +5719,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idAxes)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5725,8 +5739,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idCleavingSlice)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5745,8 +5759,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idHeadChop)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5765,8 +5779,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idJaggedSlice)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5785,8 +5799,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idCrossbows)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5805,8 +5819,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idPiercingBolt)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5825,8 +5839,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idPenetratingStrike)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5845,8 +5859,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idScatterShot)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5865,8 +5879,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idHammers)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5885,8 +5899,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idOverheadSmash)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5905,8 +5919,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idHammerThrow)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5925,8 +5939,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idLowSweep)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5945,8 +5959,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idMaces)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5965,8 +5979,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idBellRinger)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -5985,8 +5999,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idKneeBreaker)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6005,8 +6019,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idFullSwing)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6025,8 +6039,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSmallBlades)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6045,8 +6059,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idBladeThrowing)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6065,8 +6079,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idOffHandParry)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6085,8 +6099,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idJaggedStab)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6105,8 +6119,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSpears)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6125,8 +6139,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idFirstStrike)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6145,8 +6159,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idOverextend)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6165,8 +6179,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSpearThrowing)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6185,8 +6199,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idStaves)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6205,8 +6219,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idImprovedTrip)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6225,8 +6239,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idMultiHit)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6245,8 +6259,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idShaftDefense)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6265,8 +6279,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSwords)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6285,8 +6299,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idDualStrike)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6305,8 +6319,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idJaggedSlash)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6325,8 +6339,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSwordRebuke)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6345,8 +6359,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idUnarmedCombat)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6365,8 +6379,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idBoneBreaker)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6385,8 +6399,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idPressurePoints)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6405,8 +6419,8 @@ const schemaCore = {
             '',
             {
                 [idMaxRank] : {
-                    [idFormula] : '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
-                    [idKFormula] : '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idSurvival)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
+                    [idFormula] : '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel),
+                    [idKFormula] : '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,idDeflection)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}',
                 },
             },
             {
@@ -6714,15 +6728,18 @@ theSchema = schemaCore[idSkills];
 Object.keys(theSchema).forEach((theSkill) => {
     theSkills = theSchema[theSkill];
 
+
+/*
     //update max rank formula
     theFormulas = theSkills[idFormulas];
     Object.keys(theFormulas).forEach((theFormulaID) => {
-        if (theFormulaID===idMaxRank) {
+        if ((theFormulaID===idMaxRank) && (theSkills.rarity===idCommon)) {
             theFormulas = theFormulas[theFormulaID];
-            theFormulas[idFormula] = '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel);
-            theFormulas[idKFormula] = '1 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,theSkill)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}';
+            theFormulas[idFormula] = '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel);
+            theFormulas[idKFormula] = '2 + (@{'+getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,theSkill)+'}/25) + @{'+getFieldID(idHeader,idCharacter,'',idLevel)+'}';
         };
     });
+
     //update multiple stat calc
     theCalcs = theSkills[idCalcs];
     theStats = theSkills[idStats];
@@ -6757,13 +6774,14 @@ Object.keys(theSchema).forEach((theSkill) => {
         theFuncs = theSkills[idFuncs];
         theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,theSkill);
         theFuncs[idMaxRank] = {};
-        theFuncs[idMaxRank][idFuncDesc] = '1 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel);
+        theFuncs[idMaxRank][idFuncDesc] = '2 + ('+capitalize(idAffinity)+'/25) + '+capitalize(idLevel);
         theFuncs[idMaxRank][idFunc] = idFuncLessThen;
         theSelfID = getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,theSkill)
         theID = getFieldID(idHeader,idCharacter,'',idLevel);        
         theFuncs[idMaxRank][idFuncParams] = '(@{'+theSelfID+'}/25)|(1+@{'+theID+'})';
     };
     //the above needs to be BEFORE affects;
+*/
 
     //stats
     theStats = theSkills[idStats];
@@ -6781,6 +6799,7 @@ Object.keys(theSchema).forEach((theSkill) => {
         addAffect(theSelfID,theID);
         //addSkillAffect(theSkill,theParent);
     });
+/*
     //calcs
     theCalcs = theSkills[idCalcs];
     Object.keys(theCalcs).forEach((theCalcID) => {
@@ -6792,14 +6811,6 @@ Object.keys(theSchema).forEach((theSkill) => {
         theIDs.forEach((theParamID) => {
             theParamID = parseKFormula(theParamID);
             addAffect(theSelfID,theParamID);
-/*            
-            if (theParamID.length!==0) {
-                const theFieldName = parseFieldID(theParamID[0],2);
-                if (theFieldName!=='') {
-                    addSkillAffect(theSkill,theFieldName);
-                }
-            }
-*/
         });
     })
     //funcs
@@ -6813,16 +6824,9 @@ Object.keys(theSchema).forEach((theSkill) => {
         theIDs.forEach((theParamID) => {
             theParamID = parseKFormula(theParamID);
             addAffect(theSelfID,theParamID);
-/*
-            if (theParamID.length!==0) {
-                const theFieldName = parseFieldID(theParamID[0],2);
-                if (theFieldName!=='') {
-                    addSkillAffect(theSkill,theFieldName);
-                }
-            };
-*/
         });
     })
+*/
 });
 
 /*

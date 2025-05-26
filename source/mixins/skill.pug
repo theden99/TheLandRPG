@@ -68,7 +68,7 @@ mixin rowSkill(iPage,iZone,iTemplate,iSkill)
                 - theSection = theSection[idMaxRank];
                 - theSection = theSection[idCalc]
                 - theCalc = [theSection];
-        +number({name:theID,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula/*,calculation:theCalc*/}}).row-skill-maxrank
+        +number({name:theID,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula}}).row-skill-maxrank
 
         - theID = getFieldID(iPage,iZone,iTemplate,idRankTitle,iSkill);
         - theValue = capitalize(idNovice);
@@ -113,6 +113,16 @@ mixin rowSkill(iPage,iZone,iTemplate,iSkill)
         if (theBonus<0) {
             theBonus = 0;
         }
+
+        //also set MaxRank
+        theParents = schemaCore.skills[theTemplate].parents;
+        if (theParents.length>0) {
+            const theParentSkill = theParents[0];
+            const theRanks = getFieldID(idChaosSeed,idSkills,idSkills,idRank,theParentSkill);
+            const theMiscBonus = getFieldID(idChaosSeed,idSkills,idSkills,idMiscBonus,theParentSkill);
+            const theMaxRank = getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,theTemplate);
+            attributes[theMaxRank] = attributes[theRanks]+attributes[theMiscBonus];
+        };
 
         return theBonus;
     };
