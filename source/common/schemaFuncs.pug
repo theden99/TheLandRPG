@@ -175,15 +175,15 @@
             k.setAttrs(
             {
                 'header-character-level' : 1,
-                'chaosseed-stats-strength-base' : 10,
-                'chaosseed-stats-agility-base' : 10,
-                'chaosseed-stats-dexterity-base' : 10,
-                'chaosseed-stats-constitution-base' : 10,
-                'chaosseed-stats-endurance-base' : 10,
-                'chaosseed-stats-intelligence-base' : 10,
-                'chaosseed-stats-wisdom-base' : 10,
-                'chaosseed-stats-charisma-base' : 10,
-                'chaosseed-stats-luck-base' : 10
+                'chaosseed-stats-strength-base' : 0,
+                'chaosseed-stats-agility-base' : 0,
+                'chaosseed-stats-dexterity-base' : 0,
+                'chaosseed-stats-constitution-base' : 0,
+                'chaosseed-stats-endurance-base' : 0,
+                'chaosseed-stats-intelligence-base' : 0,
+                'chaosseed-stats-wisdom-base' : 0,
+                'chaosseed-stats-charisma-base' : 0,
+                'chaosseed-stats-luck-base' : 0
             },true,()=>{console.log('set luck2')});
         };
     };
@@ -343,8 +343,10 @@
                         ' --Critical Chance|Target takes  [['+theAmount+'+@{selected|chaosseed-combatvalues-spelldamage-total} [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] ]] extra '+theAmountType+' '+theEffect;
                 };
             } else {
+               if (theAmount!=='') {
                 theAPICall += 
                     ' --On Cast|Target takes [['+theAmount+'+@{selected|chaosseed-combatvalues-spelldamage-total} [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] ]] '+theAmountType+' '+theEffect;
+                };
             };
 
 
@@ -413,6 +415,7 @@
             +' ('+attributes[theSectionId+'attacks-damageclass']+') damage'
             ;
         const theDisplay = attributes[theSectionId+'attacks-display'];
+        const theCostLine = attributes[theSectionId+'attacks-cost']+' '+attributes[theSectionId+'attacks-resource'];
 
         theAPICall = '!power {{'+
             ' --name|'+theName+
@@ -420,7 +423,8 @@
             ' --rightsub|'+theActionType+' (range: '+theRange+' ft)'+
             ' --Accuracy Check:|[[ 1d100 + '+theAccLine+' ]] vs. '+theVs+
             ' --Damage:|'+theDamageLine+
-            ' --Critical Chance:| '+theCritLine+
+            ' --Critical Chance:|'+theCritLine+
+            ' --Cost:|'+theCostLine+
             ' --Notes:|'+theDisplay
             ;
 

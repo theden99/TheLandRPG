@@ -16,7 +16,7 @@ mixin collapseItemDetails(iTotWeightFunc)
                     +span({'data-i18n':'Cost'}).item-head-cost
                 .div-size
                     +select({name:'size',class:'item_size underlined'})
-                        +option({value:'sizeNone','data-i18n':'None'})
+                        +option({value:'sizeNA','data-i18n':'N/A'})
                         +option({value:'sizeTiny','data-i18n':'Tiny'})
                         +option({value:'sizeSmall','data-i18n':'Small'})
                         +option({value:'sizeMedium','data-i18n':'Medium'})
@@ -29,24 +29,17 @@ mixin collapseItemDetails(iTotWeightFunc)
                     +span({'data-i18n':'Armor Value'}).item-head-armorvalue
                 .div-armortype
                     +select({name:'armortype',class:'item-armortype underlined'})
-                        +option({value:'armorNone','data-i18n':'None'})
+                        +option({value:'armorNA','data-i18n':'N/A'})
                         +option({value:'armorLight','data-i18n':'Light'})
                         +option({value:'armorMedium','data-i18n':'Medium'})
                         +option({value:'armorHeavy','data-i18n':'Heavy'})
                     +span({'data-i18n':'Armor Type'}).item-head-armortype
-                .div-movetype
-                    +select({name:'movetype',class:'item-movetype underlined'})
-                        +option({value:'armorNone','data-i18n':'None'})
-                        +option({value:'armorLight','data-i18n':'Light'})
-                        +option({value:'armorMedium','data-i18n':'Medium'})
-                        +option({value:'armorHeavy','data-i18n':'Heavy'})
-                    +span({'data-i18n':'Move Type'}).item-head-movetype
                 .div-movepen
                     +number({name:'movepen',class:'item-movepen boxed',value:0})
                     +span({'data-i18n':'Move Penalty'}).item-head-movepen
                 .div-attackvs
                     +select({name:'attackvs',class:'item-attackvs underlined'})
-                        +option({value:'defenseNone','data-i18n':'None'})
+                        +option({value:'defenseNA','data-i18n':'N/A'})
                         +option({value:'defenseArmor','data-i18n':'Armor'})
                         +option({value:'defenseDodge','data-i18n':'Dodge'})
                         +option({value:'defenseMental','data-i18n':'Mental'})
@@ -62,7 +55,7 @@ mixin collapseItemDetails(iTotWeightFunc)
                     +span({'data-i18n':'Base Dam'}).item-head-basedam
                 .div-attacktype
                     +select({name:'attacktype',class:'item-attacktype underlined'})
-                        +option({value:'attackNone','data-i18n':'None'})
+                        +option({value:'attackNA','data-i18n':'N/A'})
                         +option({value:'attackMelee','data-i18n':'Melee'})
                         +option({value:'attackRanged','data-i18n':'Ranged'})
                         +option({value:'attackThrown','data-i18n':'Thrown'})
@@ -74,14 +67,12 @@ mixin collapseItemDetails(iTotWeightFunc)
                 .div-critabove
                     +number({name:'critabove',class:'item_critabove boxed',value:0})
                     +span({'data-i18n':'Crit Above'}).item-head-critabove
-                .div-critmult
-                    +number({name:'critmult',class:'item_critmult boxed',value:0})
-                    +span({'data-i18n':'Crit Mult'}).item-head-critmult
                 .div-ammotype
                     +select({name:'ammotype',class:'item-ammotype underlined'})
-                        +option({value:'ammoNone','data-i18n':'None'})
-                        +option({value:'ammoQuiver','data-i18n':'Quiver'})
-                        +option({value:'ammoBandelaro','data-i18n':'Bandelaro'})
+                        +option({value:'ammoNone','data-i18n':'N/A'})
+                        +option({value:'ammoArrow','data-i18n':'Arrow'})
+                        +option({value:'ammoBolt','data-i18n':'Bolt'})
+                        +option({value:'ammoThrown','data-i18n':'Thrown'})
                     +span({'data-i18n':'Ammo Type'}).item-head-ammotype
                 .div-removeqty
                     +number({name:'removeqty',class:'item-removeqty boxed',value:0})
@@ -90,11 +81,26 @@ mixin collapseItemDetails(iTotWeightFunc)
                     +number({name:'recoverperc',class:'item-recoverperc boxed',value:0})
                     +span({'data-i18n':'Recover %'}).item-head-recoverperc
                 .div-notes
-                    +adaptiveTextarea({name:'notes',class:'boxed'})
                     +span({'data-i18n':'Notes'}).item-head-notes
+                    +adaptiveTextarea({name:'notes',class:'boxed'})
                 .div-effects
-                    +adaptiveTextarea({name:'effects',class:'boxed',spellcheck:'false'})
                     +span({'data-i18n':'Effects'}).item-head-effects
+                    +adaptiveTextarea({name:'effects',class:'boxed',spellcheck:'false'})
+                .div-weapontype
+                    +select({name:'weapontype',class:'item-weapontype underlined'})
+                        +option({value:'na','data-i18n':'N/A'})
+                        +option({value:'archery','data-i18n':'Archery'})
+                        +option({value:'axes','data-i18n':'Axes'})
+                        +option({value:'crossbows','data-i18n':'Crossbows'})
+                        +option({value:'hammers','data-i18n':'Hammers'})
+                        +option({value:'maces','data-i18n':'Maces'})
+                        +option({value:'smallblades','data-i18n':'Small Blades'})
+                        +option({value:'spears','data-i18n':'Spears'})
+                        +option({value:'staves','data-i18n':'Staves'})
+                        +option({value:'swords','data-i18n':'Swords'})
+                        +option({value:'shieldbash','data-i18n':'Shield Bash'})
+                        +option({value:'unarmedcombat','data-i18n':'Unarmed Combat'})
+                    +span({'data-i18n':'Weapon Type'}).item-head-weapontype
 +module.
 +scss('sheet').
     .div-item-details {
@@ -102,9 +108,9 @@ mixin collapseItemDetails(iTotWeightFunc)
         grid-template-columns: auto auto auto auto;
         grid-template-areas : 
             'weight1 cost size1 category'
-            'armortype armorvalue movetype movepen'
-            'attacktype range attackvs critabove'
-            'basedam accmod dammod critmult'
+            'armortype armorvalue movepen .'
+            'attacktype weapontype range attackvs'
+            'basedam accmod dammod critabove'
             'ammotype removeqty recoverperc .'
             'notes notes notes notes'
             'effects effects effects effects'
@@ -179,18 +185,6 @@ mixin collapseItemDetails(iTotWeightFunc)
                 background-color: gainsboro;
             }
             .item-armortype {
-                width: 100%;
-            }
-        }
-        .div-movetype {
-            grid-area: movetype;
-            width: 80px;
-            text-align: center;
-            .item-head-movetype {
-                width: 100%;
-                background-color: gainsboro;
-            }
-            .item-movetype {
                 width: 100%;
             }
         }
@@ -291,18 +285,6 @@ mixin collapseItemDetails(iTotWeightFunc)
                 width: 100%;
             }
         }
-        .div-critmult {
-            grid-area: critmult;
-            width: 80px;
-            text-align: center;
-            .item-head-critmult {
-                width: 100%;
-                background-color: gainsboro;
-            }
-            .item_critmult {
-                width: 100%;
-            }
-        }
         .div-ammotype {
             grid-area: ammotype;
             width: 80px;
@@ -365,6 +347,18 @@ mixin collapseItemDetails(iTotWeightFunc)
             .item-head-effects {
                 width: 100%;
                 background-color: gainsboro;
+            }
+        }
+        .div-weapontype {
+            grid-area: weapontype;
+            width: 80px;
+            text-align: center;
+            .item-head-weapontype {
+                width: 100%;
+                background-color: gainsboro;
+            }
+            .item-weapontype {
+                width: 100%;
             }
         }
     }

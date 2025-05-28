@@ -16,11 +16,13 @@
     .div
         .div-inline
             +span({}).attacks-roller-head
-            +span({'data-i18n':'Crit Mult'}).attacks-critmult-head
+            +span({'data-i18n':'Crit Above'}).attacks-critabove-head
             +span({'data-i18n':'Crit Bonus'}).attacks-critbonus-head
             +span({'data-i18n':'Crit Dam Bonus'}).attacks-critdamagebonus-head
             +span({'data-i18n':'Damage Type'}).attacks-damagetype-head
             +span({'data-i18n':'Damage Class'}).attacks-damageclass-head
+            +span({'data-i18n':'Attack Cost'}).attacks-cost-head
+            +span({'data-i18n':'Attack Resource'}).attacks-resource-head
     +customControlFieldset({name:'attacks-main-items',addClass:''})
         .div-inline
             +roller({name:'attacks-roller',class:'general-roller attacks-roller',trigger:{triggeredFuncs:['funcAttacks']}})
@@ -48,16 +50,6 @@
                 +option({value:'swords','data-i18n':'Swords'})
                 +option({value:'shieldbash','data-i18n':'Shield Bash'})
                 +option({value:'unarmedcombat','data-i18n':'Unarmed Combat'})
-                +option({value:'airmagic','data-i18n':'Air Magic'})
-                +option({value:'darkmagic','data-i18n':'Dark Magic'})
-                +option({value:'deathmagic','data-i18n':'Death Magic'})
-                +option({value:'earthmagic','data-i18n':'Earth Magic'})
-                +option({value:'firemagic','data-i18n':'Fire Magic'})
-                +option({value:'lifemagic','data-i18n':'Life Magic'})
-                +option({value:'lightmagic','data-i18n':'Light Magic'})
-                +option({value:'watermagic','data-i18n':'Water Magic'})
-                +option({value:'eldritchmagic','data-i18n':'Eldritch Magic'})
-                +option({value:'chaosmagic','data-i18n':'Chaos Magic'})
             +select({name:'attacks-attacktype',class:'attacks-attacktype'})
                 +option({value:0,'data-i18n':'Standard Attack'})
                 +option({value:'25+@{chaosseed-skills-dualwield-total}','data-i18n':'Dual Wield(Main,Non)'})
@@ -86,7 +78,7 @@
         .div
             .div-inline
                 +span({}).attacks-roller-head
-                +text({name:'attacks-critmult',value:'0',class:'attacks-critmult boxed'})
+                +text({name:'attacks-critabove',value:'0',class:'attacks-critabove boxed'})
                 +text({name:'attacks-critbonus',value:'0',class:'attacks-critbonus boxed'})
                 +text({name:'attacks-critdamagebonus',value:'0',class:'attacks-critdamagebonus boxed'})
                 +select({name:'attacks-damagetype',class:'attacks-damagetype'})
@@ -97,6 +89,11 @@
                     +option({value:'Basic','data-i18n':'None(Basic)'})
                     each entry,stat in schemaCore.resists
                         +option({value:capitalize(stat),'data-i18n':entry.displayname})
+                +number({name:'attacks-cost',class:'attacks-cost boxed'})
+                +select({name:'attacks-resource',class:'attacks-resource'})
+                    +option({value:'Stamina','data-i18n':'Stamina'})
+                    +option({value:'Mana','data-i18n':'Mana'})
+                    +option({value:'Health','data-i18n':'Health'})
         .div
             .collapse-container
                 +collapse('attacks-desc-collapse')
@@ -169,8 +166,8 @@
             width: 60px;
             text-align: center;
         }
-        .attacks-critmult-head,
-        .attacks-critmult {
+        .attacks-critabove-head,
+        .attacks-critabove {
             width: 40px;
             text-align: center;
         }
@@ -192,6 +189,14 @@
         .attacks-damageclass {
             width: 90px;
         }
+        .attacks-cost-head,
+        .attacks-cost {
+            width: 40px;
+        }
+        .attacks-resource-head,
+        .attacks-resource {
+            width: 60px;
+        }
 
         .attacks-name-head,
         .attacks-actiontype-head,
@@ -205,11 +210,13 @@
         .attacks-avbonus-head,
         .attacks-accbonus-head,
         .attacks-damagebonus-head,
-        .attacks-critmult-head,
+        .attacks-critabove-head,
         .attacks-critbonus-head,
         .attacks-critdamagebonus-head,
         .attacks-damagetype-head,
-        .attacks-damageclass-head {
+        .attacks-damageclass-head,
+        .attacks-cost-head,
+        .attacks-resource-head {
             text-align: center;
             background-color: lightskyblue;
             font-weight: bold;

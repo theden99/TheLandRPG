@@ -11,10 +11,14 @@
                                 .logs-adventure-main
                                     +text({name:'adventure-entry',class:'adventure-entry underlined'})
                                     +adaptiveTextarea({name:'adventure-note',class:'adventure-note boxed'})
-                                    +text({name:'adventure-xp-label',value:'XP: ',class:'adventure-xp-label'})
+                                    +text({name:'adventure-xp-label',readonly:'',value:'XP: ',class:'adventure-xp-label'})
                                     +text({name:'adventure-xp',class:'adventure-xp boxed'})
-                                    +text({name:'adventure-downtime-label',value:'Downtime: ',class:'adventure-downtime-label'})
+                                    +text({name:'adventure-downtime-label',readonly:'',value:'Downtime: ',class:'adventure-downtime-label'})
                                     +text({name:'adventure-downtime',class:'adventure-downtime boxed'})
+                                    +text({name:'adventure-skillpoints-label',readonly:'',value:'Skill Points: ',class:'adventure-skillpoints-label'})
+                                    +text({name:'adventure-skillpoints',class:'adventure-skillpoints boxed'})
+                                    +text({name:'adventure-statpoints-label',readonly:'',value:'Stat Points: ',class:'adventure-statpoints-label'})
+                                    +text({name:'adventure-statpoints',class:'adventure-statpoints boxed'})
             +tab({name:'logs-notes',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Notes'}})
                 .logs-notes
                     .logs-notes-section.paper-background
@@ -152,8 +156,18 @@
                             width: 60px;
                             text-align: center;                        
                         }
+                        .adventure-skillpoints {
+                            width: 60px;
+                            text-align: center;                        
+                        }
+                        .adventure-statpoints {
+                            width: 60px;
+                            text-align: center;                        
+                        }
 
                         .adventure-xp-label,
+                        .adventure-skillpoints-label,
+                        .adventure-statpoints-label,
                         .adventure-downtime-label {
                             text-align: center;
                             background-color: lightskyblue;

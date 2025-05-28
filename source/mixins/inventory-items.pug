@@ -97,13 +97,15 @@ mixin inventory-items(iTableName,iIsStorage)
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
         const theSectionID = sectionName+'_'+rowID;
-        const bOk = doEquipItem(attributes,sections,theSectionID,1);
-        if (bOk===0) {
-            attributes[theSectionID+'_isequipped'] = 1;
-        } else {
-            const theMessage = 'error equipping '+theSectionID;
-            doLogError(attributes,sections,theMessage);
-        };
+        if (attributes[theSectionID+'_isequipped']===0) {
+            const bOk = doEquipItem(attributes,sections,theSectionID,1);
+            if (bOk===0) {
+                attributes[theSectionID+'_isequipped'] = 1;
+            } else {
+                const theMessage = 'error equipping '+theSectionID;
+                doLogError(attributes,sections,theMessage);
+            };
+        };''
     };
     k.registerFuncs({doEquip});
 
@@ -111,12 +113,14 @@ mixin inventory-items(iTableName,iIsStorage)
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
         const theSectionID = sectionName+'_'+rowID;
-        const bOk = doEquipItem(attributes,sections,theSectionID,-1);
-        if (bOk===0) {
-            attributes[theSectionID+'_isequipped'] = 0;
-        } else {
-            const theMessage = 'error equipping '+theSectionID;
-            doLogError(attributes,sections,theMessage);
+        if (attributes[theSectionID+'_isequipped']===1) {
+            const bOk = doEquipItem(attributes,sections,theSectionID,-1);
+            if (bOk===0) {
+                attributes[theSectionID+'_isequipped'] = 0;
+            } else {
+                const theMessage = 'error equipping '+theSectionID;
+                doLogError(attributes,sections,theMessage);
+            };
         };
     };
     k.registerFuncs({doUnequip});

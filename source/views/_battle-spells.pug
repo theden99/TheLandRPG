@@ -18,6 +18,17 @@
         +span({'data-i18n':'Condition Type'}).spells-conditiontype-head
         +span({'data-i18n':'Radius'}).spells-radius-head
         +span({'data-i18n':'Radius Type'}).spells-radiustype-head
+    .div
+        .div-inline
+            +span({'data-i18n':'AV Bonus'}).attacks-avbonus-head
+            +span({'data-i18n':'ACC Bonus'}).attacks-accbonus-head
+            +span({'data-i18n':'Damage Bonus'}).attacks-damagebonus-head
+            +span({}).attacks-roller-head
+            +span({'data-i18n':'Crit Above'}).attacks-critabove-head
+            +span({'data-i18n':'Crit Bonus'}).attacks-critbonus-head
+            +span({'data-i18n':'Crit Dam Bonus'}).attacks-critdamagebonus-head
+            +span({'data-i18n':'Damage Type'}).attacks-damagetype-head
+            +span({'data-i18n':'Damage Class'}).attacks-damageclass-head
     +customControlFieldset({name:'spells-main-items',addClass:''})
         .div-inline
             +roller({name:'spells-roller',class:'general-roller spells-roller',trigger:{triggeredFuncs:['funcSpells']}})
@@ -110,6 +121,23 @@
                 +option({value:'Dome','data-i18n':'Dome'})
                 +option({value:'Sphere','data-i18n':'Sphere'})
         .div
+            .div-inline
+                +span({}).attacks-roller-head
+                +text({name:'attacks-avbonus',value:'0',class:'attacks-avbonus boxed'})
+                +text({name:'attacks-accbonus',value:'0',class:'attacks-accbonus boxed'})
+                +text({name:'attacks-damagebonus',value:'0',class:'attacks-damagebonus boxed'})
+                +text({name:'attacks-critabove',value:'0',class:'attacks-critabove boxed'})
+                +text({name:'attacks-critbonus',value:'0',class:'attacks-critbonus boxed'})
+                +text({name:'attacks-critdamagebonus',value:'0',class:'attacks-critdamagebonus boxed'})
+                +select({name:'attacks-damagetype',class:'attacks-damagetype'})
+                    +option({value:'Physical','data-i18n':'Physical'})
+                    each entry,stat in schemaCore.spellresists
+                        +option({value:capitalize(stat),'data-i18n':entry.displayname})
+                +select({name:'attacks-damageclass',class:'attacks-damageclass'})
+                    +option({value:'basic','data-i18n':'None(Basic)'})
+                    each entry,stat in schemaCore.resists
+                        +option({value:capitalize(stat),'data-i18n':entry.displayname})
+        .div
             .collapse-container
                 +collapse('spells-desc-collapse')
                 +span({'data-i18n':'Show Details'})
@@ -124,6 +152,9 @@
                             +span({'data-i18n':'Effects'}).spells-effects-head
                             +button({name:'spells-effects-apply',type:'action',class:'spells-effects-apply','data-i18n':'Apply',trigger:{triggeredFuncs:['doEffectsApply']}})
                             +button({name:'spells-effects-remove',type:'action',class:'spells-effects-remove','data-i18n':'Remove',trigger:{triggeredFuncs:['doEffectsRemove']}})
+                            +select({name:'spells-effects-applied',readonly:'',class:'spells-effects-applied',value:0})
+                                +option({value:0,'data-i18n':'Not Applied'})
+                                +option({value:1,'data-i18n':'Applied'})
                             +adaptiveTextarea({name:'spells-effects',class:'spells-effects boxed'})
                         +span({'data-i18n':'Power Card'}).spells-powercard-head
                         +adaptiveTextarea({name:'spells-powercard',class:'spells-powercard boxed'})
@@ -133,7 +164,11 @@
 
         const theEffects = attributes[sectionName+'_'+rowID+'_spells-effects'];
 
-        ApplyEffects(attributes,theEffects,1);
+        if (attributes[sectionName+'_'+rowID+'_spells-effects-applied']===0) {
+            ApplyEffects(attributes,theEffects,1);
+            attributes[sectionName+'_'+rowID+'_spells-effects-applied'] = 1;
+        };
+
     };
     k.registerFuncs({doEffectsApply});
 
@@ -142,7 +177,10 @@
 
         const theEffects = attributes[sectionName+'_'+rowID+'_spells-effects'];
 
-        ApplyEffects(attributes,theEffects,-1);
+        if (attributes[sectionName+'_'+rowID+'_spells-effects-applied']===1) {
+            ApplyEffects(attributes,theEffects,-1);
+            attributes[sectionName+'_'+rowID+'_spells-effects-applied'] = 0;
+        };
     };
     k.registerFuncs({doEffectsRemove});
 +scss('sheet').
@@ -231,6 +269,44 @@
             width: 50px;
             text-align: center;
         }
+        .attacks-avbonus-head,
+        .attacks-avbonus {
+            width: 40px;
+            text-align: center;
+        }
+        .attacks-accbonus-head,
+        .attacks-accbonus {
+            width: 40px;
+            text-align: center;
+        }
+        .attacks-damagebonus-head,
+        .attacks-damagebonus {
+            width: 60px;
+            text-align: center;
+        }
+        .attacks-critabove-head,
+        .attacks-critabove {
+            width: 40px;
+            text-align: center;
+        }
+        .attacks-critbonus-head,
+        .attacks-critbonus {
+            width: 40px;
+            text-align: center;
+        }
+        .attacks-critdamagebonus-head,
+        .attacks-critdamagebonus {
+            width: 40px;
+            text-align: center;
+        }
+        .attacks-damagetype-head,
+        .attacks-damagetype {
+            width: 90px;
+        }
+        .attacks-damageclass-head,
+        .attacks-damageclass {
+            width: 90px;
+        }
 
         .spells-roller-head,
         .spells-name-head,
@@ -249,7 +325,15 @@
         .spells-durationtype-head,
         .spells-conditiontype-head,
         .spells-radius-head,
-        .spells-radiustype-head {
+        .spells-radiustype-head,
+        .attacks-avbonus-head,
+        .attacks-accbonus-head,
+        .attacks-damagebonus-head,
+        .attacks-critabove-head,
+        .attacks-critbonus-head,
+        .attacks-critdamagebonus-head,
+        .attacks-damagetype-head,
+        .attacks-damageclass-head {
             text-align: center;
             background-color: lightskyblue;
             font-weight: bold;
@@ -288,16 +372,21 @@
                 .spells-effects-head {
                     grid-area: effects-head;
                     background-color: lightgray;
+                    width: 20%;
                 }
                 .spells-effects-apply {
                     grid-area: apply;
                     @include k.base-button;
                     background-color: lightskyblue;
+                    width: 60px;
+                    text-align: center;
                 }
                 .spells-effects-remove {
                     grid-area: remove;
                     @include k.base-button;
                     background-color: lightskyblue;
+                    width: 60px;
+                    text-align:center;
                 }
                 .spells-effects {
                     grid-area: effects;

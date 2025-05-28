@@ -12,7 +12,28 @@
                 +span({'data-i18n':'Auditor Password'}).auditor-password-subtitle
                 .auditor-text
                     +text({name:'auditor-password',value:'enter password',class:'auditor-password-text underlined'})
+        .settings-charids
+            .charids-section.paper-background
+                +span({'data-i18n':'Character IDs'}).section-title
+                +roller({name:'setcharids-button','data-i18n':'Set Character Id',class:'general-roller thelandrpg-subtab-button setcharids-button',trigger:{triggeredFuncs:['doSetCharIds']}})
+                .div-inline
+                    +span({}).addbutton-padding
+                    +span({'data-i18n':'Name'}).charids-name-head
+                    +span({'data-i18n':'ID'}).charids-id-head
+                +customControlFieldset({name:'settings-charids',addClass:''})
+                    .div-inline
+                        +text({name:'charids-rows-name',value:'',class:'underlined'}).charids-name
+                        +text({name:'charids-rows-id',value:'',class:'underlined'}).charids-id
++module.
+    const doSetCharIds = async function({trigger,attributes,sections,casc}){
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
+        const theAPICall = '!tlrpg --setcharid '+attributes['character_name'];
+
+        const roll = await startRoll(theAPICall);
+        finishRoll(roll.rollId);
+    };
+    k.registerFuncs({doSetCharIds});    
 +scss('sheet').
     .thelandrpg-tabs-section-settings{
         display: grid;
@@ -78,6 +99,58 @@
                     .auditor-password-text {
                         text-align: center;
                     }
+                }
+            }
+        }
+
+        .settings-charids {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto,8);
+            grid-template-areas: 
+                '. . . button button . . .'
+                '. . . other other . . .'
+                '. . . name-head id-head . . .'
+                '. . . name id . . .'
+            ;
+            
+            .charids-section {
+                grid-area: button;
+
+                text-align: center;
+                .section-title {
+                    font-size: 16px;
+                    text-align: center;
+                    font-weight: bold;
+                }
+                .setcharids-button {
+                    background-color: lightblue;
+                    font-size: 16px;
+                    text-align: center;
+                    font-weight: bold;
+                    width:100%;
+                }
+                .charids-name {
+                    grid-area: name;
+                    width: 160px;
+                }
+                .charids-id {
+                    grid-area: id;
+                    width: 160px;
+                }
+                .charids-name-head {
+                    grid-area: name-head;
+                    width: 160px;
+                    text-align: center;
+                    background-color: lightskyblue;
+                    font-weight: bold;
+                }
+                .charids-id-head {
+                    grid-area: id-head;
+                    width: 160px;
+                    text-align: center;
+                    background-color: lightskyblue;
+                    font-weight: bold;
                 }
             }
         }

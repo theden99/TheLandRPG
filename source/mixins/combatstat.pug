@@ -25,11 +25,11 @@ mixin rowCombatStat(iPage,iZone,iTemplate,iStat,iEntry,iClassPrefix,iRoller)
 
         - theID = getFieldID(iPage,iZone,iTemplate,idEquipBonus,iStat);
         - theFormula += '@{'+theID+'} +';
-        +number({name:theID,class:'boxed '+iClassPrefix+'-equipbonus',value:0,trigger:{affects:[theTotalID]}})
+        +number({name:theID,class:'boxed '+iClassPrefix+'-equipbonus',value:0,readonly:'',trigger:{affects:[theTotalID]}})
 
         - theID = getFieldID(iPage,iZone,iTemplate,idBuffBonus,iStat);
         - theFormula += '@{'+theID+'} +';
-        +number({name:theID,class:'boxed '+iClassPrefix+'-buffbonus',value:0,trigger:{affects:[theTotalID]}})
+        +number({name:theID,class:'boxed '+iClassPrefix+'-buffbonus',value:0,readonly:'',trigger:{affects:[theTotalID]}})
 
         - theID = getFieldID(iPage,iZone,iTemplate,idMiscBonus,iStat);
         - theFormula += '@{'+theID+'}';

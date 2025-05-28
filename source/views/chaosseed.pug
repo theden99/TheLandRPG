@@ -40,10 +40,10 @@
                     +collapseHelp(idChaosSeed,idMovement,idMovement,stat,entry)
                 .div-inline
                     +span({'data-i18n':'Move'}).row-move-move-text
-                    - theFormula = 'floor(@{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovementSpeed) + '} + @{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovePenalty) + '})';
+                    - theFormula = 'floor(@{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovementSpeed) + '})';
                     +number({name:idMoveTotal,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula}}).row-move-total
                     +span({'data-i18n':'Feet'}).row-move-feet-text
-                    - theFormula = 'floor((@{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovementSpeed) + '} + @{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovePenalty) + '})/ 5)';
+                    - theFormula = 'floor(@{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovementSpeed) + '}/ 5)';
                     +number({name:idMoveSquares,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula}}).row-move-squares
                     +span({'data-i18n':'Squares'}).row-move-squares-text
         .chaosseed-combat
@@ -88,9 +88,9 @@
                     +collapseHelp(idChaosSeed,idResists,idResists,stat,entry)
         .chaosseed-spellresists
             .row-resists-section.paper-background
-                +span({'data-i18n':'Spell Resistances'}).row-resists-title
+                +span({'data-i18n':'Magic Resistances'}).row-resists-title
                 .div-inline
-                    +span({'data-i18n':'Spell Resist'}).row-resists-noroller.row-resists-header
+                    +span({'data-i18n':'Resist'}).row-resists-noroller.row-resists-header
                     +span({'data-i18n':'Base'}).row-resists-base.row-resists-header
                     +span({'data-i18n':'Equip Bonus'}).row-resists-equipbonus.row-resists-header
                     +span({'data-i18n':'Buff Bonus'}).row-resists-buffbonus.row-resists-header
@@ -102,7 +102,7 @@
                     +collapseHelp(idChaosSeed,idResists,idResists,stat,entry)
         .chaosseed-efficiencies
             .row-efficiencies-section.paper-background
-                +span({'data-i18n':'Efficiencies'}).row-efficiencies-title
+                +span({'data-i18n':'Magic Efficiencies'}).row-efficiencies-title
                 .div-inline
                     +span({'data-i18n':'Efficiency'}).row-efficiencies-noroller.row-efficiencies-header
                     +span({'data-i18n':'Base'}).row-efficiencies-base.row-efficiencies-header
@@ -132,25 +132,9 @@
     const doFullResources = async function({trigger,attributes,sections,casc}){
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
-        //<button type="roll" name="sheet-Full sheet-Heal" value="
-        //!setattr --sel --health|[[ (@{selected|constitution}*10) + @{selected|HealthVBonus} ]]
-        //!setattr --sel --stamina|[[ (@{selected|endurance}*10) + @{selected|StaminaVBonus} ]]
-        //!setattr --sel --mana|[[ (@{selected|wisdom}*10) + @{selected|ManaVBonus} ]] 
-        //!setattr --sel --chealth|%health% --cstamina|%stamina% --cmana|%mana%" 
-        //class="btn ui-draggable">Full Heal</button>        
-        let theAPICall = '';
-        let roll;
+        const theAPICall = '!tlrpg --charid '+attributes['header-character-id']+' --full';
 
-        theAPICall = '!setattr --sel --curhealth|[[ (@{selected|chaosseed-stats-constitution-total}*10) ]] ';
-        roll = await startRoll(theAPICall);
-        finishRoll(roll.rollId);
-
-        theAPICall = '!setattr --sel --curstamina|[[ (@{selected|chaosseed-stats-endurance-total}*10)]] ';
-        roll = await startRoll(theAPICall);
-        finishRoll(roll.rollId);
-
-        theAPICall = '!setattr --sel --curmana|[[ (@{selected|chaosseed-stats-wisdom-total}*10)]] ';
-        roll = await startRoll(theAPICall);
+        const roll = await startRoll(theAPICall);
         finishRoll(roll.rollId);
     };
     k.registerFuncs({doFullResources});
@@ -158,7 +142,7 @@
     const doRegenStamina = async function({trigger,attributes,sections,casc}){
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
-        const theAPICall = '!setattr --sel --curstamina|[[ @{selected|curstamina} + @{selected|chaosseed-stats-endurance-total} ]]';
+        const theAPICall = '!tlrpg --charid '+attributes['header-character-id']+' --stamina';
 
         const roll = await startRoll(theAPICall);
         finishRoll(roll.rollId);
@@ -168,10 +152,7 @@
     const doRegenMana = async function({trigger,attributes,sections,casc}){
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
-        //<button type="roll" name="sheet-Turn sheet-Start" value="
-        //!setattr --sel --cmana|[[ @{selected|cmana} + (floor(@{selected|wisdom})/3)]]" 
-        //class="btn ui-draggable">Turn Start</button>        
-        const theAPICall = '!setattr --sel --curmana|[[ @{selected|curmana} + (floor(@{selected|chaosseed-stats-wisdom-total}/3)) ]]';
+        const theAPICall = '!tlrpg --charid '+attributes['header-character-id']+' --mana';
 
         const roll = await startRoll(theAPICall);
         finishRoll(roll.rollId);
@@ -343,12 +324,15 @@
 
                 .row-combat-fullbutton {
                     width: 120px;
+                    background-color: lightblue;
                 }
                 .row-combat-staminabutton {
                     width: 120px;
+                    background-color: lightblue;
                 }
                 .row-combat-manabutton {
                     width: 120px;
+                    background-color: lightblue;
                 }
             }
         }

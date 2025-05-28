@@ -17,11 +17,11 @@ mixin rowStat(iPage,iZone,iTemplate,iStat)
 
         - theID = getFieldID(iPage,iZone,iTemplate,idEquipBonus,iStat);
         - theFormula += '@{'+theID+'} +';
-        +number({name:theID,class:'boxed',value:0,trigger:{affects:[theTotalID]}}).row-stat-equipbonus
+        +number({name:theID,class:'boxed',value:0,readonly:'',trigger:{affects:[theTotalID]}}).row-stat-equipbonus
 
         - theID = getFieldID(iPage,iZone,iTemplate,idBuffBonus,iStat);
         - theFormula += '@{'+theID+'} +';
-        +number({name:theID,class:'boxed',value:0,trigger:{affects:[theTotalID]}}).row-stat-buffbonus
+        +number({name:theID,class:'boxed',value:0,readonly:'',trigger:{affects:[theTotalID]}}).row-stat-buffbonus
 
         - theID = getFieldID(iPage,iZone,iTemplate,idMiscBonus,iStat);
         - theFormula += '@{'+theID+'}';
