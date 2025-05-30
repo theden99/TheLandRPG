@@ -11,18 +11,6 @@
         +span({'data-i18n':'Damage'}).attacks-damage-head
         +span({'data-i18n':'ACC Bonus'}).attacks-accbonus-head
         +span({'data-i18n':'Damage Bonus'}).attacks-damagebonus-head
-    .div
-        .div-inline
-            +span({}).attacks-roller-head
-            +span({'data-i18n':'Crit Above'}).attacks-critabove-head
-            +span({'data-i18n':'Crit Bonus'}).attacks-critbonus-head
-            +span({'data-i18n':'Crit Dam Bonus'}).attacks-critdamagebonus-head
-            +span({'data-i18n':'Damage Type'}).attacks-damagetype-head
-            +span({'data-i18n':'Damage Class'}).attacks-damageclass-head
-            +span({'data-i18n':'Attack Cost'}).attacks-cost-head
-            +span({'data-i18n':'Attack Resource'}).attacks-resource-head
-            +span({'data-i18n':'# Attacks'}).attacks-numattacks-head
-            +span({'data-i18n':'# of Targets'}).attacks-numtargets-head
     +customControlFieldset({name:'attacks-main-items',addClass:''})
         .div-inline
             +roller({name:'attacks-roller',class:'general-roller attacks-roller',trigger:{triggeredFuncs:['funcAttacks']}})
@@ -71,37 +59,51 @@
             +text({name:'attacks-accbonus',value:'0',class:'attacks-accbonus boxed'})
             +text({name:'attacks-damagebonus',value:'0',class:'attacks-damagebonus boxed'})
         .div
-            .div-inline
-                +span({}).attacks-roller-head
-                +text({name:'attacks-critabove',value:'0',class:'attacks-critabove boxed'})
-                +text({name:'attacks-critbonus',value:'0',class:'attacks-critbonus boxed'})
-                +text({name:'attacks-critdamagebonus',value:'0',class:'attacks-critdamagebonus boxed'})
-                +select({name:'attacks-damagetype',class:'attacks-damagetype'})
-                    +option({value:'Physical','data-i18n':'Physical'})
-                    each entry,stat in schemaCore.spellresists
-                        +option({value:capitalize(stat),'data-i18n':entry.displayname})
-                +select({name:'attacks-damageclass',class:'attacks-damageclass'})
-                    +option({value:'Basic','data-i18n':'None(Basic)'})
-                    each entry,stat in schemaCore.resists
-                        +option({value:capitalize(stat),'data-i18n':entry.displayname})
-                +number({name:'attacks-cost',class:'attacks-cost boxed'})
-                +select({name:'attacks-resource',class:'attacks-resource'})
-                    +option({value:'Stamina','data-i18n':'Stamina'})
-                    +option({value:'Mana','data-i18n':'Mana'})
-                    +option({value:'Health','data-i18n':'Health'})
-                +number({name:'attacks-numattacks',value:'0',class:'attacks-numattacks boxed'})
-                +number({name:'attacks-numtargets',value:'0',class:'attacks-numtargets boxed'})
-        .div
             .collapse-container
                 +collapse('attacks-desc-collapse')
                 +span({'data-i18n':'Show Details'})
                 .expanded
                 .collapsed
                     .div-attacks-details
-                        +span({'data-i18n':'Displayed on Attack'}).attacks-display-head
-                        +adaptiveTextarea({name:'attacks-display',class:'attacks-display boxed'})
-                        +span({'data-i18n':'Private Notes'}).attacks-private-head
-                        +adaptiveTextarea({name:'attacks-private',class:'attacks-private boxed'})
+                        .div-critabove
+                            +text({name:'attacks-critabove',value:'0',class:'attacks-critabove boxed'})
+                            +span({'data-i18n':'Crit Above'}).attacks-critabove-head
+                        .div-critbonus
+                            +text({name:'attacks-critbonus',value:'0',class:'attacks-critbonus boxed'})
+                            +span({'data-i18n':'Crit Bonus'}).attacks-critbonus-head
+                        .div-critdamagebonus
+                            +text({name:'attacks-critdamagebonus',value:'0',class:'attacks-critdamagebonus boxed'})
+                            +span({'data-i18n':'Crit Dam Bonus'}).attacks-critdamagebonus-head
+                        .div-damagetype
+                            +select({name:'attacks-damagetype',class:'attacks-damagetype underlined'})
+                                +option({value:'Physical','data-i18n':'Physical'})
+                                each entry,stat in schemaCore.spellresists
+                                    +option({value:capitalize(stat),'data-i18n':entry.displayname})
+                            +span({'data-i18n':'Damage Type'}).attacks-damagetype-head
+                        .div-damageclass
+                            +select({name:'attacks-damageclass',class:'attacks-damageclass underlined'})
+                                +option({value:'Basic','data-i18n':'None(Basic)'})
+                                each entry,stat in schemaCore.resists
+                                    +option({value:capitalize(stat),'data-i18n':entry.displayname})
+                            +span({'data-i18n':'Damage Class'}).attacks-damageclass-head
+                        .div-cost
+                            +number({name:'attacks-cost',class:'attacks-cost boxed'})
+                            +span({'data-i18n':'Attack Cost'}).attacks-cost-head
+                        .div-resource
+                            +select({name:'attacks-resource',class:'attacks-resource underlined'})
+                                +option({value:'Stamina','data-i18n':'Stamina'})
+                                +option({value:'Mana','data-i18n':'Mana'})
+                                +option({value:'Health','data-i18n':'Health'})
+                            +span({'data-i18n':'Attack Resource'}).attacks-resource-head
+                        .div-numtargets
+                            +number({name:'attacks-numtargets',value:'0',class:'attacks-numtargets boxed'})
+                            +span({'data-i18n':'# of Targets'}).attacks-numtargets-head
+                        .div-display
+                            +span({'data-i18n':'Displayed on Attack'}).attacks-display-head
+                            +adaptiveTextarea({name:'attacks-display',class:'attacks-display boxed'})
+                        .div-private
+                            +span({'data-i18n':'Private Notes'}).attacks-private-head
+                            +adaptiveTextarea({name:'attacks-private',class:'attacks-private boxed'})
                         .attacks-effects-section
                             +span({'data-i18n':'Effects'}).attacks-effects-head
                             +button({name:'attacks-effects-apply',type:'action',class:'attacks-effects-apply','data-i18n':'Apply',trigger:{triggeredFuncs:['doEffectsApply']}})
@@ -110,8 +112,9 @@
                                 +option({value:0,'data-i18n':'Not Applied'})
                                 +option({value:1,'data-i18n':'Applied'})
                             +adaptiveTextarea({name:'attacks-effects',class:'attacks-effects boxed'})
-                        +span({'data-i18n':'Power Card'}).attacks-powercard-head
-                        +adaptiveTextarea({name:'attacks-powercard',class:'attacks-powercard boxed'})
+                        .div-powercard
+                            +span({'data-i18n':'Power Card'}).attacks-powercard-head
+                            +adaptiveTextarea({name:'attacks-powercard',class:'attacks-powercard boxed'})
 +module.
 +scss('sheet').
     .attacks-main{
@@ -164,46 +167,8 @@
             width: 60px;
             text-align: center;
         }
-        .attacks-critabove-head,
-        .attacks-critabove {
-            width: 40px;
-            text-align: center;
-        }
-        .attacks-critbonus-head,
-        .attacks-critbonus {
-            width: 40px;
-            text-align: center;
-        }
-        .attacks-critdamagebonus-head,
-        .attacks-critdamagebonus {
-            width: 40px;
-            text-align: center;
-        }
-        .attacks-damagetype-head,
-        .attacks-damagetype {
-            width: 90px;
-        }
-        .attacks-damageclass-head,
-        .attacks-damageclass {
-            width: 90px;
-        }
-        .attacks-cost-head,
-        .attacks-cost {
-            width: 40px;
-        }
-        .attacks-resource-head,
-        .attacks-resource {
-            width: 60px;
-        }
-        .attacks-numattacks-head,
-        .attacks-numattacks {
-            width: 50px;
-        }
-        .attacks-numtargets-head,
-        .attacks-numtargets {
-            width: 50px;
-        }
 
+        .attacks-roller-head,
         .attacks-name-head,
         .attacks-actiontype-head,
         .attacks-attackcat-head,
@@ -213,16 +178,7 @@
         .attacks-range-head,
         .attacks-damage-head,
         .attacks-accbonus-head,
-        .attacks-damagebonus-head,
-        .attacks-critabove-head,
-        .attacks-critbonus-head,
-        .attacks-critdamagebonus-head,
-        .attacks-damagetype-head,
-        .attacks-damageclass-head,
-        .attacks-cost-head,
-        .attacks-resource-head,
-        .attacks-numattacks-head,
-        .attacks-numtargets-head {
+        .attacks-damagebonus-head{
             background-color: lightblue;
             font-weight: bold;
             text-align: center;
@@ -230,30 +186,132 @@
 
         .div-attacks-details {
             display: grid;
-            grid-template-columns: auto;
+            grid-template-columns: repeat(auto,4);
             grid-template-areas : 
-                'display-head'
-                'display'
-                'private-head'
-                'private'
-                'effects-section'
-                'powercard-head'
-                'powercard'
+                'critabove critbonus critdamagebonus numtargets'
+                'damagetype damageclass cost resource'
+                'display-head display-head display-head display-head'
+                'display display display display'
+                'private-head private-head private-head private-head'
+                'private private private private' 
+                'effects-section effects-section effects-section effects-section'
+                'powercard-head powercard-head powercard-head powercard-head'
+                'powercard powercard powercard powercard'
             ;
             border: 1px solid var(--borderColor);
-            .attacks-display-head {
+
+            .div-critabove {
+                grid-area: critabove;
+                width: 65px;
+                text-align: center;
+                .attacks-critabove-head {
+                    background-color: gainsboro;
+                }
+                .attacks-critabove {
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+            .div-critbonus {
+                grid-area: critbonus;
+                width: 65px;
+                text-align: center;
+                .attacks-critbonus-head {
+                    background-color: gainsboro;
+                }
+                .attacks-critbonus {
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+            .div-critdamagebonus {
+                grid-area: critdamagebonus;
+                width: 65px;
+                text-align: center;
+                .attacks-critdamagebonus-head {
+                    background-color: gainsboro;
+                }
+                .attacks-critdamagebonus {
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+            .div-damagetype {
+                grid-area: damagetype;
+                width: 90px;
+                text-align: center;
+                .attacks-damagetype-head {
+                    background-color: gainsboro;
+                }
+                .attacks-damagetype {
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+            .div-damageclass {
+                grid-area: damageclass;
+                width: 90px;
+                text-align: center;
+                .attacks-damageclass-head {
+                    background-color: gainsboro;
+                }
+                .attacks-damageclass {
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+            .div-cost {
+                grid-area: cost;
+                width: 65px;
+                text-align: center;
+                .attacks-cost-head {
+                    background-color: gainsboro;
+                }
+                .attacks-cost {
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+            .div-resource {
+                grid-area: resource;
+                width: 65px;
+                text-align: center;
+                .attacks-resource-head {
+                    background-color: gainsboro;
+                }
+                .attacks-resource {
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+            .div-numtargets {
+                grid-area: numtargets;
+                width: 65px;
+                text-align: center;
+                .attacks-numtargets-head {
+                    background-color: gainsboro;
+                }
+                .attacks-numtargets {
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+
+            .div-display {
                 grid-area: display-head;
-                background-color: lightgray;
+                .attacks-display-head {
+                    background-color: lightgray;
+                }
+                .attacks-display {
+                }
             }
-            .attacks-display {
-                grid-area: display;
-            }
-            .attacks-private-head {
+            .div-private {
                 grid-area: private-head;
-                background-color: lightgray;
-            }
-            .attacks-private {
-                grid-area: private;
+                .attacks-private-head {
+                    background-color: lightgray;
+                }
+                .attacks-private {
+                }
             }
             .attacks-effects-section {
                 grid-area: effects-section;
@@ -281,12 +339,14 @@
                     grid-area: effects;
                 }
             }
-            .attacks-powercard-head {
-                grid-area: powercard-head;
-                background-color: lightgray;
-            }
-            .attacks-powercard {
+            .div-powercard {
                 grid-area: powercard;
+                .attacks-powercard-head {
+                    grid-area: powercard-head;
+                    background-color: lightgray;
+                }
+                .attacks-powercard {
+                }
             }
         }
     } 

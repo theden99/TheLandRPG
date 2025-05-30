@@ -310,13 +310,15 @@
             const theActionType = attributes[theSectionId+'spells-actiontype'];
             const theCostLine = attributes[theSectionId+'spells-costtype']+' '+attributes[theSectionId+'spells-cost'];
             let theMagicTypeTotal = attributes[getMagicTypeTotal(attributes[theSectionId+'spells-magictype'])];
+            let theMagicTypeRank = attributes['chaosseed-skills-'+attributes[theSectionId+'spells-magictype']+'-rank'];
             let theMagicTypeStatBonus = attributes[getMagicTypeStatBonus(attributes[theSectionId+'spells-magictype'])];
             if (attributes[theSectionId+'spells-subskill']!=='NA') {
                 theMagicTypeTotal = attributes[getMagicTypeTotal(attributes[theSectionId+'spells-subskill'])];
+                theMagicTypeRank = attributes['chaosseed-skills-'+attributes[theSectionId+'spells-subskill']+'-rank'];
                 theMagicTypeStatBonus = attributes[getMagicTypeStatBonus(attributes[theSectionId+'spells-subskill'])];
             };
             const theMagicTypeAcc = theMagicTypeTotal-theMagicTypeStatBonus; //rank+bonuses - stat bonus already added to global spell acc/damage
-            const theMagicTypeDamage = Math.floor(theMagicTypeAcc/5); //rank+bonuses/5
+            const theMagicTypeDamage = Math.floor(theMagicTypeRank/5); //rank+bonuses/5
             const theMagicEfficencyDamage = Math.floor(attributes['chaosseed-efficiencies-'+attributes[theSectionId+'spells-magictype']+'-total']/25);
             let theRadiusLine = '1 creature';
             if (attributes[theSectionId+'spells-radius']!=='') {
@@ -370,7 +372,7 @@
 
             if (attributes[theSectionId+'spells-conditiontype']!=='N/A') {
                 theAPICall += 
-                    ' --Effect|'+attributes[theSectionId+'spells-conditiontype'];
+                    ' --Condition|'+attributes[theSectionId+'spells-conditiontype'];
             };
 
             theAPICall += 
@@ -408,17 +410,20 @@
         const theVs = attributes[theSectionId+'attacks-vs'];
         const theDamageLine = '[[ '+attributes[theSectionId+'attacks-damage']
             +' [Base Dam] + '+theDamageStatTot
+            +' ['+attributes[theSectionId+'attacks-attackcat']+' Bonus] + '+(theSkillRank/5)
             +' [Skill Dam] + '+attributes[theSectionId+'attacks-damagebonus']
             +' [Dam Bonus] ]]'
             ;
+        const theAnatomyBonus = Math.floor(attributes['chaosseed-skills-anatomy-rank']/10);
+        const theCritSkillBonus = Math.floor(theSkillRank/2);
         const theCritLine = 'If the check is [['+attributes[theSectionId+'attacks-critabove']+' -'
-            +' floor('+attributes['chaosseed-skills-anatomy-total']+'/10)'
+            +' '+theAnatomyBonus
             +' [Anatomy Bonus] ]] or more than needed, it takes an additional [[ '
             +attributes[theSectionId+'attacks-damage']
             +' [Base Dam] + '+theDamageStatTot
             +' [Skill Dam] + '+attributes[theSectionId+'attacks-damagebonus']
             +' [Dam Bonus] + '+attributes[theSectionId+'attacks-critdamagebonus']
-            +' [Crit Dam Bonus] + floor('+theSkillRank+'/2)'
+            +' [Crit Dam Bonus] + '+theCritSkillBonus
             +' [Crit Skill Bonus] ]] '
             +attributes[theSectionId+'attacks-damagetype']
             +' ('+attributes[theSectionId+'attacks-damageclass']+') damage'

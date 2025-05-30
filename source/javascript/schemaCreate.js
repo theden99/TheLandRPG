@@ -1306,9 +1306,10 @@ const schemaCore = {
             'https://files.d20.io/images/429024424/_nOuK8lqx6W8T83h2muphw/max.png?1739606299',
             {
                 [idBase] : {
-                    [idFormula] : '20 + Wisdom + (Luck/10)',
+                    [idFormula] : '20 + Wisdom + (Luck/10) + Self Awareness',
                     [idKFormula] : '20 + @{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idWisdom) + '} + ' +
-                                    'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10)'
+                                    'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10) + '+
+                                    '@{'+getFieldID(idChaosSeed,idSkills,idSkills,idTotal,idSelfAwareness)+'}'
                     ,
                 }
             },

@@ -33,7 +33,7 @@ on('chat:message',function(msg){
             }, {});
     };
 
-    function myGetAttrByName(iCharId,iAttrName) {
+    function doGetAttrByName(iCharId,iAttrName) {
         var theAttr = findObjs({
                                 type: 'attribute',
                                 characterid: iCharId,
@@ -59,7 +59,7 @@ on('chat:message',function(msg){
         log(theChars);
         theChars.forEach(theChar => {
             if (theCharName===theChar.name) {
-                const theCharId = myGetAttrByName(theChar.id,'header-character-id');
+                const theCharId = doGetAttrByName(theChar.id,'header-character-id');
                 const theIdField = findObjs({ type: 'attribute', characterid: theChar.id, name: 'header-character-id' })[0];
                 theIdField.set('current',theChar.id);
             };
@@ -69,21 +69,21 @@ on('chat:message',function(msg){
     function doResources(iParams) {
         const theCharId = iParams[paramCharId];
 
+        const curMana = parseInt(doGetAttrByName(theCharId,'curmana'));
+        const curStamina = parseInt(doGetAttrByName(theCharId,'curstamina'));
+        const curHealth = parseInt(doGetAttrByName(theCharId,'curhealth'));
+
+        const maxMana = parseInt(doGetAttrByName(theCharId,'chaosseed-combatstats-mana-total'));
+        const maxStamina = parseInt(doGetAttrByName(theCharId,'chaosseed-combatstats-stamina-total'));
+        const maxHealth = parseInt(doGetAttrByName(theCharId,'chaosseed-combatstats-health-total'));
+
+        const regenMana = parseInt(doGetAttrByName(theCharId,'chaosseed-combatstats-manaregen-total'));
+        const regenStamina = parseInt(doGetAttrByName(theCharId,'chaosseed-combatstats-staminaregen-total'));
+        const regenHealth = parseInt(doGetAttrByName(theCharId,'chaosseed-combatstats-healthregen-total'));
+
         let attrMana = findObjs({ type: 'attribute', characterid: theCharId, name: 'curmana' })[0];
         let attrStamina = findObjs({ type: 'attribute', characterid: theCharId, name: 'curstamina' })[0];
         let attrHealth = findObjs({ type: 'attribute', characterid: theCharId, name: 'curhealth' })[0];
-
-        const curMana = parseInt(myGetAttrByName(theCharId,'curmana'));
-        const curStamina = parseInt(myGetAttrByName(theCharId,'curstamina'));
-        const curHealth = parseInt(myGetAttrByName(theCharId,'curhealth'));
-
-        const maxMana = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-mana-total'));
-        const maxStamina = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-stamina-total'));
-        const maxHealth = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-health-total'));
-
-        const regenMana = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-manaregen-total'));
-        const regenStamina = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-staminaregen-total'));
-        const regenHealth = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-healthregen-total'));
 
             //add mana regen to mana
         if (iParams[paramRegenMana]) {
