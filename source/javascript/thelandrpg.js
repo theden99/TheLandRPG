@@ -49,68 +49,76 @@ on('chat:message',function(msg){
         return theAttr.get('current');
     };
 
+    function doSetCharId(iParams) {
+        const characters = findObjs({type:'character'});
+        const theChars = characters.map(theChar => {
+            return {'id':theChar.get('id'),'name':theChar.get('name')};
+        });
+        const theCharName = iParams[paramSetCharId];
+        log(theCharName);
+        log(theChars);
+        theChars.forEach(theChar => {
+            if (theCharName===theChar.name) {
+                const theCharId = myGetAttrByName(theChar.id,'header-character-id');
+                const theIdField = findObjs({ type: 'attribute', characterid: theChar.id, name: 'header-character-id' })[0];
+                theIdField.set('current',theChar.id);
+            };
+        });
+    };
+    
+    function doResources(iParams) {
+        const theCharId = iParams[paramCharId];
+
+        let attrMana = findObjs({ type: 'attribute', characterid: theCharId, name: 'curmana' })[0];
+        let attrStamina = findObjs({ type: 'attribute', characterid: theCharId, name: 'curstamina' })[0];
+        let attrHealth = findObjs({ type: 'attribute', characterid: theCharId, name: 'curhealth' })[0];
+
+        const curMana = parseInt(myGetAttrByName(theCharId,'curmana'));
+        const curStamina = parseInt(myGetAttrByName(theCharId,'curstamina'));
+        const curHealth = parseInt(myGetAttrByName(theCharId,'curhealth'));
+
+        const maxMana = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-mana-total'));
+        const maxStamina = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-stamina-total'));
+        const maxHealth = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-health-total'));
+
+        const regenMana = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-manaregen-total'));
+        const regenStamina = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-staminaregen-total'));
+        const regenHealth = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-healthregen-total'));
+
+            //add mana regen to mana
+        if (iParams[paramRegenMana]) {
+            attrMana.set('current',curMana+regenMana);
+        };
+
+            //add stamina regen to stamina
+        if (iParams[paramRegenStamina]) {
+            attrStamina.set('current',curStamina+regenStamina);
+        };
+
+            //add stamina regen to stamina
+        if (iParams[paramRegenHealth]) {
+            attrHealth.set('current',curHealth+regenHealth);
+        };
+
+            //reset to full resources
+        if (iParams[paramFullResources]) {
+            log('setting:'+maxMana+'/'+maxStamina+'/'+maxHealth);
+            attrMana.set('current',maxMana);
+            attrStamina.set('current',maxStamina);
+            attrHealth.set('current',maxHealth);
+        };
+    }
+
     if (msg.type=='api' && msg.content.indexOf('!tlrpg')==0){
         let theParams = parseParams(msg.content);
         log(theParams);
 
         //set Ids for all chars
         if (theParams[paramSetCharId]) {
-            const characters = findObjs({type:'character'});
-            const theChars = characters.map(theChar => {
-                return {'id':theChar.get('id'),'name':theChar.get('name')};
-            });
-            const theCharName = theParams[paramSetCharId];
-            log(theCharName);
-            log(theChars);
-            theChars.forEach(theChar => {
-                if (theCharName===theChar.name) {
-                    const theCharId = myGetAttrByName(theChar.id,'header-character-id');
-                    const theIdField = findObjs({ type: 'attribute', characterid: theChar.id, name: 'header-character-id' })[0];
-                    theIdField.set('current',theChar.id);
-                };
-            });
+            doSetCharId(theParams);
         } else {
             if (theParams[paramCharId]) {
-                const theCharId = theParams[paramCharId];
-
-                let attrMana = findObjs({ type: 'attribute', characterid: theCharId, name: 'curmana' })[0];
-                let attrStamina = findObjs({ type: 'attribute', characterid: theCharId, name: 'curstamina' })[0];
-                let attrHealth = findObjs({ type: 'attribute', characterid: theCharId, name: 'curhealth' })[0];
-
-                const curMana = parseInt(myGetAttrByName(theCharId,'curmana'));
-                const curStamina = parseInt(myGetAttrByName(theCharId,'curstamina'));
-                const curHealth = parseInt(myGetAttrByName(theCharId,'curhealth'));
-
-                const maxMana = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-mana-total'));
-                const maxStamina = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-stamina-total'));
-                const maxHealth = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-health-total'));
-
-                const regenMana = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-manaregen-total'));
-                const regenStamina = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-staminaregen-total'));
-                const regenHealth = parseInt(myGetAttrByName(theCharId,'chaosseed-combatstats-healthregen-total'));
-
-                    //add mana regen to mana
-                if (theParams[paramRegenMana]) {
-                    attrMana.set('current',curMana+regenMana);
-                };
-
-                    //add stamina regen to stamina
-                if (theParams[paramRegenStamina]) {
-                    attrStamina.set('current',curStamina+regenStamina);
-                };
-
-                    //add stamina regen to stamina
-                if (theParams[paramRegenHealth]) {
-                    attrHealth.set('current',curHealth+regenHealth);
-                };
-
-                    //reset to full resources
-                if (theParams[paramFullResources]) {
-                    log('setting:'+maxMana+'/'+maxStamina+'/'+maxHealth);
-                    attrMana.set('current',maxMana);
-                    attrStamina.set('current',maxStamina);
-                    attrHealth.set('current',maxHealth);
-                };
+                doResources(theParams);
             } else {
                 log('no --charid found');
             };

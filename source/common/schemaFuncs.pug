@@ -266,10 +266,10 @@
         //finishRoll(roll.rollId);
 
         //stats and skills
-        let theAPICall = '!power {{ --name|'+displayName+' --leftsub|@{selected|character_name} --Stat Check:|[[ 1d100 + @{selected|'+attrName+'} ]] }}';
+        let theAPICall = '!power {{ --name|'+displayName+' --leftsub|@{character_name} --Stat Check:|[[ 1d100 + @{'+attrName+'} ]] }}';
         if (fieldName==='combatspeed') {
             //inititive
-            theAPICall = '!power {{ --name|'+displayName+' --leftsub|@{selected|character_name} --Stat Check:|[[ [TRKR] 1d100 + @{selected|'+attrName+'} ]] }}';
+            theAPICall = '!power {{ --name|'+displayName+' --leftsub|@{character_name} --Stat Check:|[[ [TRKR] 1d100 + @{'+attrName+'} ]] }}';
         }
 
         const roll = await startRoll(theAPICall);
@@ -305,13 +305,19 @@
             const theSectionId = sectionName+'_'+rowID+'_';
             const theName = attributes[theSectionId+'spells-name'];
             const theMagicType = schemaCore[idSkills][attributes[theSectionId+'spells-magictype']].displayname;
+            const theSubskill = attributes[theSectionId+'spells-subskill'];
             const theLevel = attributes[theSectionId+'spells-level'];
             const theActionType = attributes[theSectionId+'spells-actiontype'];
             const theCostLine = attributes[theSectionId+'spells-costtype']+' '+attributes[theSectionId+'spells-cost'];
-            const theMagicTypeTotal = attributes[getMagicTypeTotal(attributes[theSectionId+'spells-magictype'])];
-            const theMagicTypeStatBonus = attributes[getMagicTypeStatBonus(attributes[theSectionId+'spells-magictype'])];
-            const theMagicTypeAcc = theMagicTypeTotal-theMagicTypeStatBonus; //rank+bonuses
+            let theMagicTypeTotal = attributes[getMagicTypeTotal(attributes[theSectionId+'spells-magictype'])];
+            let theMagicTypeStatBonus = attributes[getMagicTypeStatBonus(attributes[theSectionId+'spells-magictype'])];
+            if (attributes[theSectionId+'spells-subskill']!=='NA') {
+                theMagicTypeTotal = attributes[getMagicTypeTotal(attributes[theSectionId+'spells-subskill'])];
+                theMagicTypeStatBonus = attributes[getMagicTypeStatBonus(attributes[theSectionId+'spells-subskill'])];
+            };
+            const theMagicTypeAcc = theMagicTypeTotal-theMagicTypeStatBonus; //rank+bonuses - stat bonus already added to global spell acc/damage
             const theMagicTypeDamage = Math.floor(theMagicTypeAcc/5); //rank+bonuses/5
+            const theMagicEfficencyDamage = Math.floor(attributes['chaosseed-efficiencies-'+attributes[theSectionId+'spells-magictype']+'-total']/25);
             let theRadiusLine = '1 creature';
             if (attributes[theSectionId+'spells-radius']!=='') {
                 theRadiusLine = attributes[theSectionId+'spells-radius']+' feet in a '+attributes[theSectionId+'spells-radiustype']
@@ -336,16 +342,19 @@
 
             if (theVs!=='N/A') {
                 theAPICall +=
-                    ' --Attack|[[ 1d100 + @{selected|chaosseed-combatvalues-spellacc-total} [Magic Acc] + '+theMagicTypeAcc+' [Skill] ]] vs '+theVs;
+                    ' --Attack|[[ 1d100 + @{chaosseed-combatvalues-spellacc-total} [Magic Acc] + '+theMagicTypeAcc+' [Skill] ]] vs '+theVs;
                 if (theAmount!=='') {
                     theAPICall += 
-                        ' --On Hit|Target takes [['+theAmount+'+@{selected|chaosseed-combatvalues-spelldamage-total} [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] ]] '+theAmountType+' '+theEffect+
-                        ' --Critical Chance|Target takes  [['+theAmount+'+@{selected|chaosseed-combatvalues-spelldamage-total} [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] ]] extra '+theAmountType+' '+theEffect;
+                        ' --On Hit|Target takes [['+theAmount+'+@{chaosseed-combatvalues-spelldamage-total} [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] + '+
+                        theMagicEfficencyDamage+' [Eff Dam] ]] '+theAmountType+' '+theEffect+
+                        ' --Critical Chance|Target takes  [['+theAmount+'+@{chaosseed-combatvalues-spelldamage-total} [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] + '+
+                        theMagicEfficencyDamage+' [Eff Dam] ]] extra '+theAmountType+' '+theEffect;
                 };
             } else {
                if (theAmount!=='') {
                 theAPICall += 
-                    ' --On Cast|Target takes [['+theAmount+'+@{selected|chaosseed-combatvalues-spelldamage-total} [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] ]] '+theAmountType+' '+theEffect;
+                    ' --On Cast|Target takes [['+theAmount+'+@{chaosseed-combatvalues-spelldamage-total} [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] + '+
+                    theMagicEfficencyDamage+' [Eff Dam] ]] '+theAmountType+' '+theEffect;
                 };
             };
 
@@ -368,7 +377,7 @@
                 ' --Spell Desc|'+attributes[theSectionId+'spells-spelleffect'];
 
             theAPICall += 
-                ' --Caster|//@{selected|character_name} '+theDesc+'//';
+                ' --Caster|//@{character_name} '+theDesc+'//';
             '}} ';
         };
 
@@ -386,31 +395,31 @@
         const theCharName = attributes['character_name'];
         const theActionType = attributes[theSectionId+'attacks-actiontype'];
         const theRange = attributes[theSectionId+'attacks-range'];
-        const theAccStatTot = attributes['chaosseed-stats-'+attributes[theSectionId+'attacks-attackcat']+'-total'];
+        const theAccStatTot = attributes['chaosseed-combatvalues-'+attributes[theSectionId+'attacks-attackcat']+'acc-total'];
+        const theDamageStatTot = attributes['chaosseed-combatvalues-'+attributes[theSectionId+'attacks-attackcat']+'damage-total'];
         const theSkillTot = attributes['chaosseed-skills-'+attributes[theSectionId+'attacks-weapontype']+'-total'];
         const theSkillRank = attributes['chaosseed-skills-'+attributes[theSectionId+'attacks-weapontype']+'-rank'];
         const theAccLine = theAccStatTot
-            +'+'+theSkillTot
-            +'+'+attributes[theSectionId+'attacks-accbonus']
-            +'-'+attributes[theSectionId+'attacks-attacktype']
+            +' ['+attributes[theSectionId+'attacks-attackcat']+' Bonus] + '+theSkillTot
+            +' [Skill Bonus] + '+attributes[theSectionId+'attacks-accbonus']
+            +' [Acc Bonus] - '+attributes[theSectionId+'attacks-attacktype']
+            +' [Attack Penalty]'
             ;
         const theVs = attributes[theSectionId+'attacks-vs'];
-        const theDamageStatTot = attributes['chaosseed-stats-'+attributes[theSectionId+'attacks-damagestat']+'-total'];
         const theDamageLine = '[[ '+attributes[theSectionId+'attacks-damage']
-            +'+floor('+theDamageStatTot+'/5)'
-            +'+'+attributes[theSectionId+'attacks-damagebonus']
-            +' ]]'
+            +' [Base Dam] + '+theDamageStatTot
+            +' [Skill Dam] + '+attributes[theSectionId+'attacks-damagebonus']
+            +' [Dam Bonus] ]]'
             ;
-        const theCritLine = 'If the check is [[50 -'
-            +attributes[theSectionId+'attacks-critbonus']
-            +'-floor('+attributes['chaosseed-skills-anatomy-total']+'/10)'
-            +' ]] or more than needed, it takes an additional [[ '
+        const theCritLine = 'If the check is [['+attributes[theSectionId+'attacks-critabove']+' -'
+            +' floor('+attributes['chaosseed-skills-anatomy-total']+'/10)'
+            +' [Anatomy Bonus] ]] or more than needed, it takes an additional [[ '
             +attributes[theSectionId+'attacks-damage']
-            +'+floor('+theDamageStatTot+'/5)'
-            +'+'+attributes[theSectionId+'attacks-damagebonus']
-            +'+'+attributes[theSectionId+'attacks-critdamagebonus']
-            +'+floor('+theSkillRank+'/2)'
-            +' ]] '
+            +' [Base Dam] + '+theDamageStatTot
+            +' [Skill Dam] + '+attributes[theSectionId+'attacks-damagebonus']
+            +' [Dam Bonus] + '+attributes[theSectionId+'attacks-critdamagebonus']
+            +' [Crit Dam Bonus] + floor('+theSkillRank+'/2)'
+            +' [Crit Skill Bonus] ]] '
             +attributes[theSectionId+'attacks-damagetype']
             +' ('+attributes[theSectionId+'attacks-damageclass']+') damage'
             ;
@@ -433,20 +442,3 @@
     };
     k.registerFuncs({funcAttacks});
 
-//<button type="roll" value="
-//        !power {{
-//               --name|@{selected|primaryname}  
-//               --leftsub|@{selected|cname} 
-//               --rightsub|@{PrimaryAction} (range: @{selected|primaryrange} ft)
-//               --Accuracy Check:|[[ 1d100 + (@{selected|PrimaryType} + @{selected|PrimaryTypeW} + 
-// @{selected|primaryaccbonus} - @{selected|PrimaryAttack}) ]] vs. @{selected|primaryaccvs}  
-//               --Damage:|[[ @{selected|primarydamage} + @{selected|primarydamagestat}  + 
-// @{selected|primarydamagebonus} ]] @{selected|primarydamagetype} @{selected|primaryclass}  Damage  
-//               --Critical Chance:| If the check is [[ 50 - @{selected|primarycritbonus} - 
-// floor((@{selected|rkAnatomy} + @{selected|skAnatomy})/10)) ]] or more than needed, 
-// it takes an additional [[ @{selected|primarydamage} + @{selected|primarycritdambonus} + 
-// @{selected|primarydamagestat} + @{selected|primarydamageranks} + @{selected|primarydamagebonus} ]] 
-// @{selected|primarydamagetype} @{selected|primaryclass}  Damage    
-//               --Notes:|@{selected|primarynotes}  
-//            }}" class="btn ui-draggable">
-//            </button>

@@ -5,9 +5,6 @@ mixin collapseItemDetails(iTotWeightFunc)
         .expanded
         .collapsed
             .div-item-details
-                .div-category
-                    +text({name:'category',class:'item_category underlined',value:''})
-                    +span({'data-i18n':'Category'}).item-head-category
                 .div-weight
                     +number({name:'weight',class:'item_weight boxed',value:0,trigger:{affects:[iTotWeightFunc]}})
                     +span({'data-i18n':'Weight'}).item-head-weight
@@ -37,13 +34,6 @@ mixin collapseItemDetails(iTotWeightFunc)
                 .div-movepen
                     +number({name:'movepen',class:'item-movepen boxed',value:0})
                     +span({'data-i18n':'Move Penalty'}).item-head-movepen
-                .div-attackvs
-                    +select({name:'attackvs',class:'item-attackvs underlined'})
-                        +option({value:'defenseNA','data-i18n':'N/A'})
-                        +option({value:'defenseArmor','data-i18n':'Armor'})
-                        +option({value:'defenseDodge','data-i18n':'Dodge'})
-                        +option({value:'defenseMental','data-i18n':'Mental'})
-                    +span({'data-i18n':'Attack vs'}).item-head-attackvs
                 .div-accmod
                     +number({name:'accmod',class:'item_accmod boxed',value:0})
                     +span({'data-i18n':'Acc Mod'}).item-head-accmod
@@ -53,20 +43,18 @@ mixin collapseItemDetails(iTotWeightFunc)
                 .div-basedam
                     +text({name:'basedam',class:'item-basedam underlined',value:''})
                     +span({'data-i18n':'Base Dam'}).item-head-basedam
-                .div-attacktype
-                    +select({name:'attacktype',class:'item-attacktype underlined'})
-                        +option({value:'attackNA','data-i18n':'N/A'})
-                        +option({value:'attackMelee','data-i18n':'Melee'})
-                        +option({value:'attackRanged','data-i18n':'Ranged'})
-                        +option({value:'attackThrown','data-i18n':'Thrown'})
-                        +option({value:'attackSpell','data-i18n':'Spell'})
-                    +span({'data-i18n':'Attack Type'}).item-head-attacktype
                 .div-range
                     +number({name:'range',class:'item-range underlined',value:0})
                     +span({'data-i18n':'Range'}).item-head-range
                 .div-critabove
                     +number({name:'critabove',class:'item_critabove boxed',value:0})
                     +span({'data-i18n':'Crit Above'}).item-head-critabove
+                .div-critaccmod
+                    +number({name:'critaccmod',class:'item_critaccmod boxed',value:0})
+                    +span({'data-i18n':'Crit Acc Mod'}).item-head-critaccmod
+                .div-critdammod
+                    +number({name:'critdammod',class:'item_critdammod boxed',value:0})
+                    +span({'data-i18n':'Crit Dam Mod'}).item-head-critdammod
                 .div-ammotype
                     +select({name:'ammotype',class:'item-ammotype underlined'})
                         +option({value:'ammoNone','data-i18n':'N/A'})
@@ -105,20 +93,21 @@ mixin collapseItemDetails(iTotWeightFunc)
 +scss('sheet').
     .div-item-details {
         display: grid;
-        grid-template-columns: auto auto auto auto;
+        grid-template-columns: auto auto auto;
         grid-template-areas : 
-            'weight1 cost size1 category'
-            'armortype armorvalue movepen .'
-            'attacktype weapontype range attackvs'
-            'basedam accmod dammod critabove'
-            'ammotype removeqty recoverperc .'
-            'notes notes notes notes'
-            'effects effects effects effects'
+            'weight1 cost size1'
+            'armortype armorvalue movepen '
+            'weapontype range .'
+            'basedam accmod dammod'
+            'critabove critaccmod critdammod'
+            'ammotype removeqty recoverperc'
+            'notes notes notes'
+            'effects effects effects'
         ;
         border: 1px solid var(--borderColor);
         .div-category {
             grid-area: category;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-category{
                 background-color: gainsboro;
@@ -130,7 +119,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-weight {
             grid-area: weight1;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-weight{
                 width: 100%;
@@ -142,7 +131,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-cost {
             grid-area: cost;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-cost{
                 width: 100%;
@@ -154,7 +143,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-size {
             grid-area: size1;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-size{
                 width: 100%;
@@ -166,7 +155,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-armorvalue{
             grid-area: armorvalue;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-armorvalue {
                 width: 100%;
@@ -178,7 +167,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-armortype {
             grid-area: armortype;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-armortype {
                 width: 100%;
@@ -190,7 +179,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-movepen {
             grid-area: movepen;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-movepen {
                 width: 100%;
@@ -202,7 +191,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-attackvs {
             grid-area: attackvs;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-attackvs {
                 width: 100%;
@@ -214,7 +203,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-accmod {
             grid-area: accmod;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-accmod {
                 width: 100%;
@@ -226,7 +215,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-dammod {
             grid-area: dammod;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-dammod {
                 width: 100%;
@@ -238,7 +227,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-basedam {
             grid-area: basedam;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-basedam {
                 width: 100%;
@@ -251,7 +240,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-attacktype {
             grid-area: attacktype;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-attacktype {
                 width: 100%;
@@ -263,7 +252,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-range {
             grid-area: range;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-range {
                 width: 100%;
@@ -275,7 +264,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-critabove {
             grid-area: critabove;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-critabove {
                 width: 100%;
@@ -285,9 +274,33 @@ mixin collapseItemDetails(iTotWeightFunc)
                 width: 100%;
             }
         }
+        .div-critaccmod {
+            grid-area: critaccmod;
+            width: 100px;
+            text-align: center;
+            .item-head-critaccmod {
+                width: 100%;
+                background-color: gainsboro;
+            }
+            .item_critaccmod {
+                width: 100%;
+            }
+        }
+        .div-critdammod {
+            grid-area: critdammod;
+            width: 100px;
+            text-align: center;
+            .item-head-critdammod {
+                width: 100%;
+                background-color: gainsboro;
+            }
+            .item_critdammod {
+                width: 100%;
+            }
+        }
         .div-ammotype {
             grid-area: ammotype;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-ammotype {
                 width: 100%;
@@ -299,7 +312,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-removeqty {
             grid-area: removeqty;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-removeqty {
                 width: 100%;
@@ -311,7 +324,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-recoverperc {
             grid-area: recoverperc;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-recoverperc {
                 width: 100%;
@@ -323,7 +336,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-slottypeitem {
             grid-area: slottypeitem;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-slottypeitem {
                 width: 100%;
@@ -351,7 +364,7 @@ mixin collapseItemDetails(iTotWeightFunc)
         }
         .div-weapontype {
             grid-area: weapontype;
-            width: 80px;
+            width: 100px;
             text-align: center;
             .item-head-weapontype {
                 width: 100%;

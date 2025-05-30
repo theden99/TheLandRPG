@@ -2414,13 +2414,13 @@ body .ui-dialog .tab-content .charsheet .div-subskills {
 }
 body .ui-dialog .tab-content .charsheet .div-item-details {
   display: grid;
-  grid-template-columns: auto auto auto auto;
-  grid-template-areas: "weight1 cost size1 category" "armortype armorvalue movepen ." "attacktype range attackvs weapontype" "basedam accmod dammod critabove" "ammotype removeqty recoverperc ." "notes notes notes notes" "effects effects effects effects";
+  grid-template-columns: auto auto auto;
+  grid-template-areas: "weight1 cost size1" "armortype armorvalue movepen " "weapontype range ." "basedam accmod dammod" "critabove critaccmod critdammod" "ammotype removeqty recoverperc" "notes notes notes" "effects effects effects";
   border: 1px solid var(--borderColor);
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-category {
   grid-area: category;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-category .item-head-category {
@@ -2432,7 +2432,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-category .item_ca
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-weight {
   grid-area: weight1;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-weight .item-head-weight {
@@ -2444,7 +2444,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-weight .item_weig
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-cost {
   grid-area: cost;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-cost .item-head-cost {
@@ -2456,7 +2456,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-cost .item_cost {
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-size {
   grid-area: size1;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-size .item-head-size {
@@ -2468,7 +2468,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-size .item_size {
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-armorvalue {
   grid-area: armorvalue;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-armorvalue .item-head-armorvalue {
@@ -2480,7 +2480,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-armorvalue .item-
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-armortype {
   grid-area: armortype;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-armortype .item-head-armortype {
@@ -2492,7 +2492,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-armortype .item-a
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-movepen {
   grid-area: movepen;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-movepen .item-head-movepen {
@@ -2504,7 +2504,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-movepen .item-mov
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-attackvs {
   grid-area: attackvs;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-attackvs .item-head-attackvs {
@@ -2516,7 +2516,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-attackvs .item-at
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-accmod {
   grid-area: accmod;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-accmod .item-head-accmod {
@@ -2528,7 +2528,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-accmod .item_accm
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-dammod {
   grid-area: dammod;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-dammod .item-head-dammod {
@@ -2540,7 +2540,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-dammod .item_damm
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-basedam {
   grid-area: basedam;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-basedam .item-head-basedam {
@@ -2553,7 +2553,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-basedam .item-bas
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-attacktype {
   grid-area: attacktype;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-attacktype .item-head-attacktype {
@@ -2565,7 +2565,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-attacktype .item-
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-range {
   grid-area: range;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-range .item-head-range {
@@ -2577,7 +2577,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-range .item-range
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-critabove {
   grid-area: critabove;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-critabove .item-head-critabove {
@@ -2587,9 +2587,33 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-critabove .item-h
 body .ui-dialog .tab-content .charsheet .div-item-details .div-critabove .item_critabove {
   width: 100%;
 }
+body .ui-dialog .tab-content .charsheet .div-item-details .div-critaccmod {
+  grid-area: critaccmod;
+  width: 100px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .div-item-details .div-critaccmod .item-head-critaccmod {
+  width: 100%;
+  background-color: gainsboro;
+}
+body .ui-dialog .tab-content .charsheet .div-item-details .div-critaccmod .item_critaccmod {
+  width: 100%;
+}
+body .ui-dialog .tab-content .charsheet .div-item-details .div-critdammod {
+  grid-area: critdammod;
+  width: 100px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .div-item-details .div-critdammod .item-head-critdammod {
+  width: 100%;
+  background-color: gainsboro;
+}
+body .ui-dialog .tab-content .charsheet .div-item-details .div-critdammod .item_critdammod {
+  width: 100%;
+}
 body .ui-dialog .tab-content .charsheet .div-item-details .div-ammotype {
   grid-area: ammotype;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-ammotype .item-head-ammotype {
@@ -2601,7 +2625,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-ammotype .item-am
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-removeqty {
   grid-area: removeqty;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-removeqty .item-head-removeqty {
@@ -2613,7 +2637,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-removeqty .item-r
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-recoverperc {
   grid-area: recoverperc;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-recoverperc .item-head-recoverperc {
@@ -2625,7 +2649,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-recoverperc .item
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-slottypeitem {
   grid-area: slottypeitem;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-slottypeitem .item-head-slottypeitem {
@@ -2653,7 +2677,7 @@ body .ui-dialog .tab-content .charsheet .div-item-details .div-effects .item-hea
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-weapontype {
   grid-area: weapontype;
-  width: 80px;
+  width: 100px;
   text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .div-item-details .div-weapontype .item-head-weapontype {
@@ -2677,25 +2701,25 @@ body .ui-dialog .tab-content .charsheet .inventory-storage-section .div-item-hea
   margin-right: 3px;
   width: 120px;
   text-align: center;
-  background-color: lightskyblue;
+  background-color: lightblue;
 }
 body .ui-dialog .tab-content .charsheet .inventory-storage-section .div-item-header .item-head-slottype {
   margin-right: 3px;
   width: 90px;
   text-align: center;
-  background-color: lightskyblue;
+  background-color: lightblue;
 }
 body .ui-dialog .tab-content .charsheet .inventory-storage-section .div-item-header .item-head-slot {
   margin-right: 3px;
   width: 90px;
   text-align: center;
-  background-color: lightskyblue;
+  background-color: lightblue;
 }
 body .ui-dialog .tab-content .charsheet .inventory-storage-section .div-item-header .item-head-qty {
   margin-right: 3px;
   width: 40px;
   text-align: center;
-  background-color: lightskyblue;
+  background-color: lightblue;
 }
 body .ui-dialog .tab-content .charsheet .inventory-storage-section .div-item-header .item-head-equipped {
   margin-right: 3px;
@@ -2713,7 +2737,7 @@ body .ui-dialog .tab-content .charsheet .inventory-storage-section .div-inven-it
   transition-timing-function: ease-out;
   backdrop-filter: blur(1px);
   overflow: hidden;
-  background-color: lightskyblue;
+  background-color: lightblue;
 }
 body .ui-dialog .tab-content .charsheet .inventory-storage-section .div-inven-items .staging-button:is(:hover, :focus) {
   background-color: rgba(133, 133, 133, 0.5019607843);
@@ -3345,14 +3369,14 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosse
   margin-right: 3px;
   width: 160px;
   text-align: center;
-  background-color: lightskyblue;
+  background-color: lightblue;
   font-weight: bold;
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-header .traits-head-rarity {
   margin-right: 3px;
   width: 80px;
   text-align: center;
-  background-color: lightskyblue;
+  background-color: lightblue;
   font-weight: bold;
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .row-traits-trait {
@@ -3602,7 +3626,7 @@ body .ui-dialog .tab-content .charsheet .battle-main {
   font-size: 12px;
   font-family: Arial;
   font-weight: normal;
-  width: 1200px;
+  width: 1100px;
   grid-template-columns: auto;
   grid-template-areas: "title" "buttons";
 }
@@ -4044,14 +4068,14 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-settings .setti
   grid-area: name-head;
   width: 160px;
   text-align: center;
-  background-color: lightskyblue;
+  background-color: lightblue;
   font-weight: bold;
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-settings .settings-charids .charids-section .charids-id-head {
   grid-area: id-head;
   width: 160px;
   text-align: center;
-  background-color: lightskyblue;
+  background-color: lightblue;
   font-weight: bold;
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-auditor {
@@ -4074,6 +4098,10 @@ body .ui-dialog .tab-content .charsheet .spells-main .spells-level {
 }
 body .ui-dialog .tab-content .charsheet .spells-main .spells-magictype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-magictype {
+  width: 100px;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-subskill-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-subskill {
   width: 125px;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .spells-actiontype-head,
@@ -4143,48 +4171,48 @@ body .ui-dialog .tab-content .charsheet .spells-main .spells-radiustype {
   width: 50px;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-avbonus-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-avbonus {
+body .ui-dialog .tab-content .charsheet .spells-main .spells-accbonus-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-accbonus {
   width: 40px;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-accbonus-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-accbonus {
-  width: 40px;
-  text-align: center;
-}
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-damagebonus-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-damagebonus {
+body .ui-dialog .tab-content .charsheet .spells-main .spells-damagebonus-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-damagebonus {
   width: 60px;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-critabove-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-critabove {
+body .ui-dialog .tab-content .charsheet .spells-main .spells-critabove-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-critabove {
   width: 40px;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-critbonus-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-critbonus {
+body .ui-dialog .tab-content .charsheet .spells-main .spells-critbonus-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-critbonus {
   width: 40px;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-critdamagebonus-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-critdamagebonus {
+body .ui-dialog .tab-content .charsheet .spells-main .spells-critdamagebonus-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-critdamagebonus {
   width: 40px;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-damagetype-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-damagetype {
+body .ui-dialog .tab-content .charsheet .spells-main .spells-damagetype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-damagetype {
   width: 90px;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-damageclass-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-damageclass {
+body .ui-dialog .tab-content .charsheet .spells-main .spells-damageclass-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-damageclass {
   width: 90px;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-numtargets-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-numtargets {
+  width: 50px;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .spells-roller-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-name-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-level-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-magictype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-subskill-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-actiontype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-cost-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-costtype-head,
@@ -4199,16 +4227,16 @@ body .ui-dialog .tab-content .charsheet .spells-main .spells-durationtype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-conditiontype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-radius-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-radiustype-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-avbonus-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-accbonus-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-damagebonus-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-critabove-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-critbonus-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-critdamagebonus-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-damagetype-head,
-body .ui-dialog .tab-content .charsheet .spells-main .attacks-damageclass-head {
+body .ui-dialog .tab-content .charsheet .spells-main .spells-accbonus-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-damagebonus-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-critabove-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-critbonus-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-critdamagebonus-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-damagetype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-damageclass-head,
+body .ui-dialog .tab-content .charsheet .spells-main .spells-numtargets-head {
   text-align: center;
-  background-color: lightskyblue;
+  background-color: lightblue;
   font-weight: bold;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details {
@@ -4250,7 +4278,7 @@ body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells
   transition-timing-function: ease-out;
   backdrop-filter: blur(1px);
   overflow: hidden;
-  background-color: lightskyblue;
+  background-color: lightblue;
   width: 60px;
   text-align: center;
 }
@@ -4275,7 +4303,7 @@ body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .spells
   transition-timing-function: ease-out;
   backdrop-filter: blur(1px);
   overflow: hidden;
-  background-color: lightskyblue;
+  background-color: lightblue;
   width: 60px;
   text-align: center;
 }
@@ -4337,15 +4365,6 @@ body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damage {
   width: 60px;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagestat-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagestat {
-  width: 80px;
-}
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-avbonus-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-avbonus {
-  width: 40px;
-  text-align: center;
-}
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-accbonus-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-accbonus {
   width: 40px;
@@ -4387,6 +4406,14 @@ body .ui-dialog .tab-content .charsheet .attacks-main .attacks-resource-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-resource {
   width: 60px;
 }
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-numattacks-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-numattacks {
+  width: 50px;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-numtargets-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-numtargets {
+  width: 50px;
+}
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-name-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-actiontype-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-attackcat-head,
@@ -4395,8 +4422,6 @@ body .ui-dialog .tab-content .charsheet .attacks-main .attacks-attacktype-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-vs-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-range-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damage-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagestat-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-avbonus-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-accbonus-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagebonus-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-critabove-head,
@@ -4405,15 +4430,17 @@ body .ui-dialog .tab-content .charsheet .attacks-main .attacks-critdamagebonus-h
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagetype-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damageclass-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-cost-head,
-body .ui-dialog .tab-content .charsheet .attacks-main .attacks-resource-head {
-  text-align: center;
-  background-color: lightskyblue;
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-resource-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-numattacks-head,
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-numtargets-head {
+  background-color: lightblue;
   font-weight: bold;
+  text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details {
   display: grid;
   grid-template-columns: auto;
-  grid-template-areas: "display-head" "display" "private-head" "private";
+  grid-template-areas: "display-head" "display" "private-head" "private" "effects-section" "powercard-head" "powercard";
   border: 1px solid var(--borderColor);
 }
 body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-display-head {
@@ -4429,6 +4456,74 @@ body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .atta
 }
 body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-private {
   grid-area: private;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-effects-section {
+  grid-area: effects-section;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-effects-section .attacks-effects-head {
+  grid-area: effects-head;
+  background-color: lightgray;
+  width: 20%;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-effects-section .attacks-effects-apply {
+  grid-area: apply;
+  background-color: rgba(220, 220, 220, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px black;
+  border-width: 0;
+  transition-property: box-shadow, backdrop-filter;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+  backdrop-filter: blur(1px);
+  overflow: hidden;
+  background-color: lightblue;
+  width: 60px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-effects-section .attacks-effects-apply:is(:hover, :focus) {
+  background-color: rgba(133, 133, 133, 0.5019607843);
+  box-shadow: 0 4px 6px black;
+  backdrop-filter: blur(2px);
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-effects-section .attacks-effects-apply:active {
+  background-color: #858585;
+  box-shadow: 0 1px 2px black;
+  backdrop-filter: blur(0px);
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-effects-section .attacks-effects-remove {
+  grid-area: remove;
+  background-color: rgba(220, 220, 220, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px black;
+  border-width: 0;
+  transition-property: box-shadow, backdrop-filter;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+  backdrop-filter: blur(1px);
+  overflow: hidden;
+  background-color: lightblue;
+  width: 60px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-effects-section .attacks-effects-remove:is(:hover, :focus) {
+  background-color: rgba(133, 133, 133, 0.5019607843);
+  box-shadow: 0 4px 6px black;
+  backdrop-filter: blur(2px);
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-effects-section .attacks-effects-remove:active {
+  background-color: #858585;
+  box-shadow: 0 1px 2px black;
+  backdrop-filter: blur(0px);
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-effects-section .attacks-effects {
+  grid-area: effects;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-powercard-head {
+  grid-area: powercard-head;
+  background-color: lightgray;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .div-attacks-details .attacks-powercard {
+  grid-area: powercard;
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs {
   width: 1010px;

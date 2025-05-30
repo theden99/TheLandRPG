@@ -4,39 +4,43 @@
         +span({'data-i18n':'Name'}).spells-name-head
         +span({'data-i18n':'Level'}).spells-level-head
         +span({'data-i18n':'Magic Type'}).spells-magictype-head
+        +span({'data-i18n':'Subskill'}).spells-subskill-head
         +span({'data-i18n':'Action Type'}).spells-actiontype-head
         +span({'data-i18n':'Cost'}).spells-cost-head
         +span({'data-i18n':'Cost Resource'}).spells-costtype-head
         +span({'data-i18n':'Range'}).spells-range-head
         +span({'data-i18n':'vs'}).spells-vs-head
         +span({'data-i18n':'Effect'}).spells-effect-head
-        +span({'data-i18n':'Amount'}).spells-amount-head
-        +span({'data-i18n':'Amount Resource'}).spells-amounttype-head
-        +span({'data-i18n':'Duration'}).spells-duration-head
-        +span({'data-i18n':'Duration Amount'}).spells-durationamount-head
-        +span({'data-i18n':'Duration Type'}).spells-durationtype-head
-        +span({'data-i18n':'Condition Type'}).spells-conditiontype-head
-        +span({'data-i18n':'Radius'}).spells-radius-head
-        +span({'data-i18n':'Radius Type'}).spells-radiustype-head
+        +span({'data-i18n':'Damage/ Heal'}).spells-amount-head
+        +span({'data-i18n':'Dam/Heal Resource'}).spells-amounttype-head
+        +span({'data-i18n':'# of Targets'}).spells-numtargets-head
     .div
         .div-inline
-            +span({'data-i18n':'AV Bonus'}).attacks-avbonus-head
-            +span({'data-i18n':'ACC Bonus'}).attacks-accbonus-head
-            +span({'data-i18n':'Damage Bonus'}).attacks-damagebonus-head
-            +span({}).attacks-roller-head
-            +span({'data-i18n':'Crit Above'}).attacks-critabove-head
-            +span({'data-i18n':'Crit Bonus'}).attacks-critbonus-head
-            +span({'data-i18n':'Crit Dam Bonus'}).attacks-critdamagebonus-head
-            +span({'data-i18n':'Damage Type'}).attacks-damagetype-head
-            +span({'data-i18n':'Damage Class'}).attacks-damageclass-head
+            +span({}).spells-roller-head
+            +span({'data-i18n':'Duration'}).spells-duration-head
+            +span({'data-i18n':'Duration Amount'}).spells-durationamount-head
+            +span({'data-i18n':'Duration Type'}).spells-durationtype-head
+            +span({'data-i18n':'Condition Type'}).spells-conditiontype-head
+            +span({'data-i18n':'Radius'}).spells-radius-head
+            +span({'data-i18n':'Radius Type'}).spells-radiustype-head
+            +span({'data-i18n':'ACC Bonus'}).spells-accbonus-head
+            +span({'data-i18n':'Damage Bonus'}).spells-damagebonus-head
+            +span({'data-i18n':'Crit Above'}).spells-critabove-head
+            +span({'data-i18n':'Crit Bonus'}).spells-critbonus-head
+            +span({'data-i18n':'Crit Dam Bonus'}).spells-critdamagebonus-head
+            +span({'data-i18n':'Damage Type'}).spells-damagetype-head
+            +span({'data-i18n':'Damage Class'}).spells-damageclass-head
     +customControlFieldset({name:'spells-main-items',addClass:''})
         .div-inline
             +roller({name:'spells-roller',class:'general-roller spells-roller',trigger:{triggeredFuncs:['funcSpells']}})
             +text({name:'spells-name',class:'spells-name underlined',value:''})
             +number({name:'spells-level',class:'spells-level boxed'})
-            +select({name:'spells-magictype',class:'spells-type'})
+            +select({name:'spells-magictype',class:'spells-magictype'})
                 each entry,stat in schemaCore.spellresists
                     +option({value:stat,'data-i18n':entry.displayname})
+            +select({name:'spells-subskill',class:'spells-subskill'})
+                +option({value:'NA','data-i18n':'N/A'})
+                each entry,stat in schemaCore.spellresists
                     each skill in schemaCore.skills[stat].subskillsprime
                         +option({value:skill,'data-i18n':schemaCore.skills[skill].displayname})
                 each skill in listMetamagicSkills
@@ -81,59 +85,59 @@
                 +option({value:'Stamina','data-i18n':'Stamina'})
                 +option({value:'Mana','data-i18n':'Mana'})
                 +option({value:'N/A','data-i18n':'N/A'})
-            +select({name:'spells-duration',class:'spells-duration',value:''})
-                +option({value:'Instant','data-i18n':'Instant'})
-                +option({value:'Timed','data-i18n':'Timed'})
-                +option({value:'Sustain','data-i18n':'Sustain'})
-                +option({value:'Persistant','data-i18n':'Persistant'})
-            +text({name:'spells-durationamount',class:'spells-durationamount boxed'})
-            +select({name:'spells-durationtype',class:'spells-durationtype',value:''})
-                +option({value:'N/A','data-i18n':'N/A'})
-                +option({value:'Rounds','data-i18n':'Rounds'})
-                +option({value:'Turns','data-i18n':'Turns'})
-                +option({value:'Seconds','data-i18n':'Seconds'})
-                +option({value:'Minutes','data-i18n':'Minutes'})
-                +option({value:'Hours','data-i18n':'Hours'})
-                +option({value:'Days','data-i18n':'Days'})
-            +select({name:'spells-conditiontype',class:'spells-conditiontype',value:''})
-                +option({value:'N/A','data-i18n':'N/A'})
-                +option({value:'Befuddled','data-i18n':'Befuddled'})
-                +option({value:'Blighted','data-i18n':'Blighted'})
-                +option({value:'Blinded','data-i18n':'Blinded'})
-                +option({value:'Charmed','data-i18n':'Charmed'})
-                +option({value:'Deafened','data-i18n':'Deafened'})
-                +option({value:'Enthralled','data-i18n':'Enthralled'})
-                +option({value:'Frightened','data-i18n':'Frightened'})
-                +option({value:'Incapacitated','data-i18n':'Incapacitated'})
-                +option({value:'Nauseous','data-i18n':'Nauseous'})
-                +option({value:'Paralyzed','data-i18n':'Paralyzed'})
-                +option({value:'Prone','data-i18n':'Prone'})
-                +option({value:'Slowed','data-i18n':'Slowed'})
-                +option({value:'Unconcious','data-i18n':'Unconcious'})
-                +option({value:'Cover','data-i18n':'Cover'})
-                +option({value:'Grappled','data-i18n':'Grappled'})
-            +text({name:'spells-radius',class:'spells-radius boxed'})
-            +select({name:'spells-radiustype',class:'spells-radiustype',value:''})
-                +option({value:'N/A','data-i18n':'N/A'})
-                +option({value:'Line','data-i18n':'Line'})
-                +option({value:'Cone','data-i18n':'Cone'})
-                +option({value:'Column','data-i18n':'Column'})
-                +option({value:'Dome','data-i18n':'Dome'})
-                +option({value:'Sphere','data-i18n':'Sphere'})
+            +number({name:'attacks-numtargets',value:'0',class:'attacks-numtargets boxed'})
         .div
             .div-inline
-                +span({}).attacks-roller-head
-                +text({name:'attacks-avbonus',value:'0',class:'attacks-avbonus boxed'})
-                +text({name:'attacks-accbonus',value:'0',class:'attacks-accbonus boxed'})
-                +text({name:'attacks-damagebonus',value:'0',class:'attacks-damagebonus boxed'})
-                +text({name:'attacks-critabove',value:'0',class:'attacks-critabove boxed'})
-                +text({name:'attacks-critbonus',value:'0',class:'attacks-critbonus boxed'})
-                +text({name:'attacks-critdamagebonus',value:'0',class:'attacks-critdamagebonus boxed'})
-                +select({name:'attacks-damagetype',class:'attacks-damagetype'})
+                +span({}).spells-roller
+                +select({name:'spells-duration',class:'spells-duration',value:''})
+                    +option({value:'Instant','data-i18n':'Instant'})
+                    +option({value:'Timed','data-i18n':'Timed'})
+                    +option({value:'Sustain','data-i18n':'Sustain'})
+                    +option({value:'Persistant','data-i18n':'Persistant'})
+                +text({name:'spells-durationamount',class:'spells-durationamount boxed'})
+                +select({name:'spells-durationtype',class:'spells-durationtype',value:''})
+                    +option({value:'N/A','data-i18n':'N/A'})
+                    +option({value:'Rounds','data-i18n':'Rounds'})
+                    +option({value:'Turns','data-i18n':'Turns'})
+                    +option({value:'Seconds','data-i18n':'Seconds'})
+                    +option({value:'Minutes','data-i18n':'Minutes'})
+                    +option({value:'Hours','data-i18n':'Hours'})
+                    +option({value:'Days','data-i18n':'Days'})
+                +select({name:'spells-conditiontype',class:'spells-conditiontype',value:''})
+                    +option({value:'N/A','data-i18n':'N/A'})
+                    +option({value:'Befuddled','data-i18n':'Befuddled'})
+                    +option({value:'Blighted','data-i18n':'Blighted'})
+                    +option({value:'Blinded','data-i18n':'Blinded'})
+                    +option({value:'Charmed','data-i18n':'Charmed'})
+                    +option({value:'Deafened','data-i18n':'Deafened'})
+                    +option({value:'Enthralled','data-i18n':'Enthralled'})
+                    +option({value:'Frightened','data-i18n':'Frightened'})
+                    +option({value:'Incapacitated','data-i18n':'Incapacitated'})
+                    +option({value:'Nauseous','data-i18n':'Nauseous'})
+                    +option({value:'Paralyzed','data-i18n':'Paralyzed'})
+                    +option({value:'Prone','data-i18n':'Prone'})
+                    +option({value:'Slowed','data-i18n':'Slowed'})
+                    +option({value:'Unconcious','data-i18n':'Unconcious'})
+                    +option({value:'Cover','data-i18n':'Cover'})
+                    +option({value:'Grappled','data-i18n':'Grappled'})
+                +text({name:'spells-radius',class:'spells-radius boxed'})
+                +select({name:'spells-radiustype',class:'spells-radiustype',value:''})
+                    +option({value:'N/A','data-i18n':'N/A'})
+                    +option({value:'Line','data-i18n':'Line'})
+                    +option({value:'Cone','data-i18n':'Cone'})
+                    +option({value:'Column','data-i18n':'Column'})
+                    +option({value:'Dome','data-i18n':'Dome'})
+                    +option({value:'Sphere','data-i18n':'Sphere'})
+                +text({name:'spells-accbonus',value:'0',class:'spells-accbonus boxed'})
+                +text({name:'spells-damagebonus',value:'0',class:'spells-damagebonus boxed'})
+                +text({name:'spells-critabove',value:'0',class:'spells-critabove boxed'})
+                +text({name:'spells-critbonus',value:'0',class:'spells-critbonus boxed'})
+                +text({name:'spells-critdamagebonus',value:'0',class:'spells-critdamagebonus boxed'})
+                +select({name:'spells-damagetype',class:'spells-damagetype'})
                     +option({value:'Physical','data-i18n':'Physical'})
                     each entry,stat in schemaCore.spellresists
                         +option({value:capitalize(stat),'data-i18n':entry.displayname})
-                +select({name:'attacks-damageclass',class:'attacks-damageclass'})
+                +select({name:'spells-damageclass',class:'spells-damageclass'})
                     +option({value:'basic','data-i18n':'None(Basic)'})
                     each entry,stat in schemaCore.resists
                         +option({value:capitalize(stat),'data-i18n':entry.displayname})
@@ -144,7 +148,7 @@
                 .expanded
                 .collapsed
                     .div-spells-details
-                        +span({'data-i18n':'Caster Says'}).spells-desc-head
+                        +span({'data-i18n':'Caster'}).spells-desc-head
                         +adaptiveTextarea({name:'spells-desc',class:'spells-spelleffect boxed'})
                         +span({'data-i18n':'Spell Description'}).spells-spelleffect-head
                         +adaptiveTextarea({name:'spells-spelleffect',class:'spells-spelleffect boxed'})
@@ -200,6 +204,10 @@
         }
         .spells-magictype-head,
         .spells-magictype{
+            width: 100px;
+        }
+        .spells-subskill-head,
+        .spells-subskill{
             width: 125px;
         }
         .spells-actiontype-head,
@@ -269,49 +277,49 @@
             width: 50px;
             text-align: center;
         }
-        .attacks-avbonus-head,
-        .attacks-avbonus {
+        .spells-accbonus-head,
+        .spells-accbonus {
             width: 40px;
             text-align: center;
         }
-        .attacks-accbonus-head,
-        .attacks-accbonus {
-            width: 40px;
-            text-align: center;
-        }
-        .attacks-damagebonus-head,
-        .attacks-damagebonus {
+        .spells-damagebonus-head,
+        .spells-damagebonus {
             width: 60px;
             text-align: center;
         }
-        .attacks-critabove-head,
-        .attacks-critabove {
+        .spells-critabove-head,
+        .spells-critabove {
             width: 40px;
             text-align: center;
         }
-        .attacks-critbonus-head,
-        .attacks-critbonus {
+        .spells-critbonus-head,
+        .spells-critbonus {
             width: 40px;
             text-align: center;
         }
-        .attacks-critdamagebonus-head,
-        .attacks-critdamagebonus {
+        .spells-critdamagebonus-head,
+        .spells-critdamagebonus {
             width: 40px;
             text-align: center;
         }
-        .attacks-damagetype-head,
-        .attacks-damagetype {
+        .spells-damagetype-head,
+        .spells-damagetype {
             width: 90px;
         }
-        .attacks-damageclass-head,
-        .attacks-damageclass {
+        .spells-damageclass-head,
+        .spells-damageclass {
             width: 90px;
+        }
+        .spells-numtargets-head,
+        .spells-numtargets {
+            width: 50px;
         }
 
         .spells-roller-head,
         .spells-name-head,
         .spells-level-head,
         .spells-magictype-head,
+        .spells-subskill-head,
         .spells-actiontype-head,
         .spells-cost-head,
         .spells-costtype-head,
@@ -326,16 +334,16 @@
         .spells-conditiontype-head,
         .spells-radius-head,
         .spells-radiustype-head,
-        .attacks-avbonus-head,
-        .attacks-accbonus-head,
-        .attacks-damagebonus-head,
-        .attacks-critabove-head,
-        .attacks-critbonus-head,
-        .attacks-critdamagebonus-head,
-        .attacks-damagetype-head,
-        .attacks-damageclass-head {
+        .spells-accbonus-head,
+        .spells-damagebonus-head,
+        .spells-critabove-head,
+        .spells-critbonus-head,
+        .spells-critdamagebonus-head,
+        .spells-damagetype-head,
+        .spells-damageclass-head,
+        .spells-numtargets-head {
             text-align: center;
-            background-color: lightskyblue;
+            background-color: lightblue;
             font-weight: bold;
         }
 
@@ -377,14 +385,14 @@
                 .spells-effects-apply {
                     grid-area: apply;
                     @include k.base-button;
-                    background-color: lightskyblue;
+                    background-color: lightblue;
                     width: 60px;
                     text-align: center;
                 }
                 .spells-effects-remove {
                     grid-area: remove;
                     @include k.base-button;
-                    background-color: lightskyblue;
+                    background-color: lightblue;
                     width: 60px;
                     text-align:center;
                 }

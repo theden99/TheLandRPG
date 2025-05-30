@@ -9,8 +9,6 @@
         +span({'data-i18n':'vs'}).attacks-vs-head
         +span({'data-i18n':'Range'}).attacks-range-head
         +span({'data-i18n':'Damage'}).attacks-damage-head
-        +span({'data-i18n':'Damage Stat'}).attacks-damagestat-head
-        +span({'data-i18n':'AV Bonus'}).attacks-avbonus-head
         +span({'data-i18n':'ACC Bonus'}).attacks-accbonus-head
         +span({'data-i18n':'Damage Bonus'}).attacks-damagebonus-head
     .div
@@ -23,6 +21,8 @@
             +span({'data-i18n':'Damage Class'}).attacks-damageclass-head
             +span({'data-i18n':'Attack Cost'}).attacks-cost-head
             +span({'data-i18n':'Attack Resource'}).attacks-resource-head
+            +span({'data-i18n':'# Attacks'}).attacks-numattacks-head
+            +span({'data-i18n':'# of Targets'}).attacks-numtargets-head
     +customControlFieldset({name:'attacks-main-items',addClass:''})
         .div-inline
             +roller({name:'attacks-roller',class:'general-roller attacks-roller',trigger:{triggeredFuncs:['funcAttacks']}})
@@ -34,10 +34,10 @@
                 +option({value:'Reaction','data-i18n':'Reaction'})
                 +option({value:'Free','data-i18n':'Free'})
             +select({name:'attacks-attackcat',class:'attacks-attackcat'})
-                +option({value:'dexterity','data-i18n':'Melee'})
-                +option({value:'strength','data-i18n':'Thrown'})
-                +option({value:'agility','data-i18n':'Range'})
-                +option({value:'intelligence','data-i18n':'Spell'})
+                +option({value:'melee','data-i18n':'Melee'})
+                +option({value:'thrown','data-i18n':'Thrown'})
+                +option({value:'range','data-i18n':'Range'})
+                +option({value:'spell','data-i18n':'Spell'})
             +select({name:'attacks-weapontype',class:'attacks-weapontype'})
                 +option({value:'archery','data-i18n':'Archery'})
                 +option({value:'axes','data-i18n':'Axes'})
@@ -68,11 +68,6 @@
                 +option({value:'mental','data-i18n':'Mental'})
             +number({name:'attacks-range',class:'attacks-range boxed'})
             +text({name:'attacks-damage',value:'0',class:'attacks-damage boxed'})
-            +select({name:'attacks-damagestat',class:'attacks-damagestat'})
-                +option({value:'strength','data-i18n':'Strength'})
-                +option({value:'dexterity','data-i18n':'Dexterity'})
-                +option({value:'wisdom','data-i18n':'Wisdom'})
-            +text({name:'attacks-avbonus',value:'0',class:'attacks-avbonus boxed'})
             +text({name:'attacks-accbonus',value:'0',class:'attacks-accbonus boxed'})
             +text({name:'attacks-damagebonus',value:'0',class:'attacks-damagebonus boxed'})
         .div
@@ -94,6 +89,8 @@
                     +option({value:'Stamina','data-i18n':'Stamina'})
                     +option({value:'Mana','data-i18n':'Mana'})
                     +option({value:'Health','data-i18n':'Health'})
+                +number({name:'attacks-numattacks',value:'0',class:'attacks-numattacks boxed'})
+                +number({name:'attacks-numtargets',value:'0',class:'attacks-numtargets boxed'})
         .div
             .collapse-container
                 +collapse('attacks-desc-collapse')
@@ -105,6 +102,16 @@
                         +adaptiveTextarea({name:'attacks-display',class:'attacks-display boxed'})
                         +span({'data-i18n':'Private Notes'}).attacks-private-head
                         +adaptiveTextarea({name:'attacks-private',class:'attacks-private boxed'})
+                        .attacks-effects-section
+                            +span({'data-i18n':'Effects'}).attacks-effects-head
+                            +button({name:'attacks-effects-apply',type:'action',class:'attacks-effects-apply','data-i18n':'Apply',trigger:{triggeredFuncs:['doEffectsApply']}})
+                            +button({name:'attacks-effects-remove',type:'action',class:'attacks-effects-remove','data-i18n':'Remove',trigger:{triggeredFuncs:['doEffectsRemove']}})
+                            +select({name:'attacks-effects-applied',readonly:'',class:'attacks-effects-applied',value:0})
+                                +option({value:0,'data-i18n':'Not Applied'})
+                                +option({value:1,'data-i18n':'Applied'})
+                            +adaptiveTextarea({name:'attacks-effects',class:'attacks-effects boxed'})
+                        +span({'data-i18n':'Power Card'}).attacks-powercard-head
+                        +adaptiveTextarea({name:'attacks-powercard',class:'attacks-powercard boxed'})
 +module.
 +scss('sheet').
     .attacks-main{
@@ -145,15 +152,6 @@
         .attacks-damage-head,
         .attacks-damage {
             width: 60px;
-            text-align: center;
-        }
-        .attacks-damagestat-head,
-        .attacks-damagestat {
-            width: 80px;
-        }
-        .attacks-avbonus-head,
-        .attacks-avbonus {
-            width: 40px;
             text-align: center;
         }
         .attacks-accbonus-head,
@@ -197,6 +195,14 @@
         .attacks-resource {
             width: 60px;
         }
+        .attacks-numattacks-head,
+        .attacks-numattacks {
+            width: 50px;
+        }
+        .attacks-numtargets-head,
+        .attacks-numtargets {
+            width: 50px;
+        }
 
         .attacks-name-head,
         .attacks-actiontype-head,
@@ -206,8 +212,6 @@
         .attacks-vs-head,
         .attacks-range-head,
         .attacks-damage-head,
-        .attacks-damagestat-head,
-        .attacks-avbonus-head,
         .attacks-accbonus-head,
         .attacks-damagebonus-head,
         .attacks-critabove-head,
@@ -216,10 +220,12 @@
         .attacks-damagetype-head,
         .attacks-damageclass-head,
         .attacks-cost-head,
-        .attacks-resource-head {
-            text-align: center;
-            background-color: lightskyblue;
+        .attacks-resource-head,
+        .attacks-numattacks-head,
+        .attacks-numtargets-head {
+            background-color: lightblue;
             font-weight: bold;
+            text-align: center;
         }
 
         .div-attacks-details {
@@ -230,6 +236,9 @@
                 'display'
                 'private-head'
                 'private'
+                'effects-section'
+                'powercard-head'
+                'powercard'
             ;
             border: 1px solid var(--borderColor);
             .attacks-display-head {
@@ -245,6 +254,39 @@
             }
             .attacks-private {
                 grid-area: private;
+            }
+            .attacks-effects-section {
+                grid-area: effects-section;
+
+                .attacks-effects-head {
+                    grid-area: effects-head;
+                    background-color: lightgray;
+                    width: 20%;
+                }
+                .attacks-effects-apply {
+                    grid-area: apply;
+                    @include k.base-button;
+                    background-color: lightblue;
+                    width: 60px;
+                    text-align: center;
+                }
+                .attacks-effects-remove {
+                    grid-area: remove;
+                    @include k.base-button;
+                    background-color: lightblue;
+                    width: 60px;
+                    text-align:center;
+                }
+                .attacks-effects {
+                    grid-area: effects;
+                }
+            }
+            .attacks-powercard-head {
+                grid-area: powercard-head;
+                background-color: lightgray;
+            }
+            .attacks-powercard {
+                grid-area: powercard;
             }
         }
     } 
