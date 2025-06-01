@@ -1,9 +1,74 @@
 +tab({name:"risetopower", container:"article", button:{class:'thelandrpg-tabs-button boxed','data-i18n':"Rise To Power"}})
-    .thelandrpg-tabs-section-risetopower
+    .risetopower-main
+        +span({'data-i18n':'RISE TO POWER'}).risetopower-title.paper-background
+        .div
+            .risetopower-section.paper-background
+                .div-inline
+                    +span({'data-i18n':'Rise Type'}).risetopower-head-type
+                    +span({'data-i18n':'Old'}).risetopower-head-old
+                    +span({'data-i18n':'New'}).risetopower-head-new
+                    +span({'data-i18n':'Change'}).risetopower-head-change
+                +customControlFieldset({name:'risetopower-rows',addClass:''})
+                    .div-inline
+                        +text({name:'risetopower-type',readonly:'',class:'underlined'}).risetopower-type
+                        +number({name:'risetopower-old',readonly:'',class:'boxed'}).risetopower-old
+                        +number({name:'risetopower-new',readonly:'',class:'boxed'}).risetopower-new
+                        +number({name:'risetopower-change',readonly:'',class:'boxed'}).risetopower-chanage
 +scss('sheet').
-    .thelandrpg-tabs-section-risetopower{
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: var(--tiny-gap);
+    .risetopower-main{
+        .repcontrol-button--add {
+            display:none;
+        }
+        .repcontrol {
+            display:none;
+        }
+
+        display: grid;
+        grid-gap: var(--tiny-gap);
+        font: {size: 12px;family: Arial;weight: normal;};
+        width: 1100px;
+        
+        grid-template-columns: auto;
+        grid-template-areas:
+            'title'
+            'risetopower'
+        ;
+
+        .risetopower-title{
+            grid-area: title;
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .risetopower-section {
+            grid-area: risetopower;
+            width: 450px;
+
+            .risetopower-head-type,
+            .risetopower-type {
+                width: 250px;
+            }
+            .risetopower-head-old,
+            .risetopower-old {
+                width: 50px;
+            }
+            .risetopower-head-new,
+            .risetopower-new {
+                width: 50px;
+            }
+            .risetopower-head-change,
+            .risetopower-change {
+                width: 50px;
+            }
+            
+            .risetopower-head-type,
+            .risetopower-head-old,
+            .risetopower-head-new,
+            .risetopower-head-change {
+                text-align: center;
+                background-color: lightblue;
+                font-weight: bold;
+            }
+        }
     }

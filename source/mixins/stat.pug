@@ -9,11 +9,11 @@ mixin rowStat(iPage,iZone,iTemplate,iStat)
 
     .div-inline
         - theID = getFieldID(iPage,iZone,iTemplate,idRoller,iStat);
-        +roller({name:theID,class:'general-roller row-stat-roller','data-i18n':theDisplayName,trigger:{triggeredFuncs:['funcCore']}})
+        +roller({name:theID,class:'general-roller row-stat-roller','data-i18n':theDisplayName,trigger:{triggeredFuncs:['funcCore','funcLogChange']}})
 
         - theID = getFieldID(iPage,iZone,iTemplate,idBase,iStat);
         - theFormula += '@{'+theID+'} +';
-        +number({name:theID,class:'boxed',value:theDefault,trigger:{calculation:['calcCheckMax'],affects:[theTotalID]}}).row-stat-base
+        +number({name:theID,class:'boxed',value:theDefault,trigger:{calculation:['calcCheckMax'],affects:[theTotalID],triggeredFuncs:['funcLogStat']}}).row-stat-base
 
         - theID = getFieldID(iPage,iZone,iTemplate,idEquipBonus,iStat);
         - theFormula += '@{'+theID+'} +';
@@ -48,5 +48,25 @@ mixin rowStat(iPage,iZone,iTemplate,iStat)
         return 342;
     };
     k.registerFuncs({calcCheckMax});
+    
+    const funcLogStat = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const theCallerID = buttonName;
+        const [thePage,theZone,theStat,theField] = parseFieldName(buttonName);
+
+        if (theField===idBase) {
+            let theOldValue = 0;
+            if (trigger.previousValue) {
+                theOldValue = trigger.previousValue;
+            };
+            const theNewValue = trigger.newValue;
+            const theRiseType = 'base stat - '+k.capitalize(theStat);
+
+            if (theNewValue) {
+                doLogRiseToPower(attributes,sections,theRiseType,theOldValue,theNewValue);
+            }
+        }
+    };
+    k.registerFuncs({funcLogStat});
     
 +scss('sheet').

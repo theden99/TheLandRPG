@@ -197,6 +197,17 @@
     };
     k.registerFuncs({doWriteLog});
 
+    const doLogRiseToPower = (attributes,sections,iRiseType,iOldValue,iNewValue) => {
+        const systemSection = 'repeating_risetopower-rows';
+        const systemSectionId = k.generateRowID(systemSection,sections);
+
+        attributes[systemSectionId+'_risetopower-type'] = iRiseType;
+        attributes[systemSectionId+'_risetopower-old'] = iOldValue;
+        attributes[systemSectionId+'_risetopower-new'] = iNewValue;
+        attributes[systemSectionId+'_risetopower-change'] = iNewValue-iOldValue;
+    };
+    k.registerFuncs({doLogRiseToPower});
+
     const doAPIActivityMessage = async function(iItemId,iMessageStart,iMessageDone){
         const theAPICall = '!activityMessage '+iItemId+'|'+iMessageStart+'|'+iMessageDone;
 

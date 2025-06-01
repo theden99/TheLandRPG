@@ -42,6 +42,9 @@
     .div-character-deaths.div-inline
       +span({'data-i18n':'Deaths:'}).character-deaths-label
       +number({name:'header-character-deaths',class:'underlined'}).character-deaths-input
+    .div-character-desc
+      +span({'data-i18n':'Description'}).character-desc-label
+      +adaptiveTextarea({name:'header-character-desc',class:'boxed'}).character-desc-input
   .div-character-image
     +img({name:'character_avatar'}).character-image
     .div-character-id.div-inline
@@ -70,6 +73,13 @@
         }
         .header-details {
           width: 700px;
+          .div-character-desc
+            .character-desc-label {
+
+            }
+            .character-desc-input {
+
+            }
           .div-character-name {
             width: 250px;
             .character-name-label{

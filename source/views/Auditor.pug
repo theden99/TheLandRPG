@@ -1,11 +1,94 @@
 +tab({name:'auditor', container:'article', button:{class:'thelandrpg-tabs-button boxed','data-i18n':'Auditor',trigger:{triggeredFuncs:['doTabAuditor']}}})
-    .thelandrpg-tabs-section-auditor
-        +span({'data-i18n':'AUDITOR ONLY'}).chaosseed-title.paper-background
+    .auditor-main
+        +span({'data-i18n':'AUDITOR ONLY'}).auditor-title.paper-background
+        .div
+            .auditor-section.paper-background
+                +span({'data-i18n':'NPC text'}).npc-title
+                +textarea({name:'npc-text',class:'boxed'}).npc-text
+                +roller({name:'npc-button','data-i18n':'Update Character',class:'general-roller thelandrpg-subtab-button npc-button',trigger:{triggeredFuncs:['doUpdateNPC']}})
 +module.
+    const doUpdateNPC = async function({trigger,attributes,sections,casc}){
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        //get charid
+        const theAPICall = '!tlrpg --setcharid '+attributes['character_name'];
+        const roll = await startRoll(theAPICall);
+        finishRoll(roll.rollId);
+
+        let theCharName = 'jimmy';
+        let theCharDesc = 'jimmy was here';
+        let theStr = 0;
+        let theAgi = 0;
+        let theDex = 0;
+        let theCon = 0;
+        let theEnd = 0;
+        let theInt = 0;
+        let theWis = 0;
+        let theChr = 0;
+        let theLuck = 0;
+
+        const lines = attributes['npc-text'].split('\n');
+        theCharName = lines[0];
+        theCharDesc = lines[1];
+        theStr = parseInt(lines[4].slice(10));
+        theDex = parseInt(lines[6].slice(11));
+        theAgi = parseInt(lines[8].slice(9));
+        theEnd = parseInt(lines[10].slice(11));
+        theCon = parseInt(lines[12].slice(14));
+        theWis = parseInt(lines[14].slice(8));
+        theInt = parseInt(lines[16].slice(14));
+        theChr = parseInt(lines[18].slice(10));
+        theLuck = parseInt(lines[20].slice(6));
+
+        let theAV = 20 + theAgi + Math.floor(theLuck/10);
+        let theDV = 20 + theAgi + Math.floor(theLuck/10);
+        let theMV = 20 + theWis + Math.floor(theLuck/10);
+        let theHealth = theCon * 10;
+        let theCS = 15 + theAgi + Math.floor(theLuck/10);
+        let theMove = 25 + Math.floor(theAgi/2);
+
+        theAV = parseInt(lines[23].slice(18)) - theAV;
+        theDV = parseInt(lines[25].slice(18)) - theDV;
+        theMV = parseInt(lines[27].slice(19)) - theMV;
+        theHealth = parseInt(lines[29].slice(8)) - theHealth;
+        theMove = (parseInt(lines[30].slice(7))*5) - theMove;
+        theCS = parseInt(lines[31].slice(17)) - theCS;
+
+        let theUpdates = {};
+        //update name
+        theUpdates['character_name'] = theCharName;
+        //update desc
+        theUpdates['header-character-desc'] = theCharDesc;
+        //update stats
+        theUpdates['chaosseed-stats-strength-base'] = theStr;
+        theUpdates['chaosseed-stats-agility-base'] = theAgi;
+        theUpdates['chaosseed-stats-dexterity-base'] = theDex;
+        theUpdates['chaosseed-stats-constitution-base'] = theCon;
+        theUpdates['chaosseed-stats-endurance-base'] = theEnd;
+        theUpdates['chaosseed-stats-intelligence-base'] = theInt;
+        theUpdates['chaosseed-stats-wisdom-base'] = theWis;
+        theUpdates['chaosseed-stats-charisma-base'] = theChr;
+        theUpdates['chaosseed-stats-luck-base'] = theLuck;
+
+        k.setAttrs(theUpdates,true);
+
+        //update combat stats
+        theUpdates['chaosseed-combatstats-armorvalue-miscbonus'] = theAV;
+        theUpdates['chaosseed-combatstats-dodgevalue-miscbonus'] = theDV;
+        theUpdates['chaosseed-combatstats-mentalvalue-miscbonus'] = theMV;
+        theUpdates['chaosseed-combatstats-health-miscbonus'] = theHealth;
+        theUpdates['chaosseed-combatstats-combatspeed-miscbonus'] = theCS;
+        //update movement
+        theUpdates['chaosseed-movement-movementspeed-miscbonus'] = theMove;
+
+        k.setAttrs(theUpdates,true);
+    };
+    k.registerFuncs({doUpdateNPC});    
+
     const doTabAuditor = ({trigger,attributes,sections,casc}) => {
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
-        const thePassword = attributes['auditor-password'];
+        const thePassword = 'jimmy was here'; //attributes['auditor-password'];
         if (thePassword!=='jimmy was here') {
             const theMessage = 'Unauthorized access attempted. Incorrect password('+thePassword+').';
             doWriteLog(attributes,sections,theMessage);
@@ -24,9 +107,45 @@
     };
     k.registerFuncs({doTabAuditor});
 +scss('sheet').
-    .thelandrpg-tabs-section-auditor{
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: var(--tiny-gap);
+    .auditor-main{
+        display: grid;
+        grid-gap: var(--tiny-gap);
+        font: {size: 12px;family: Arial;weight: normal;};
+        width: 1100px;
+        
+        grid-template-columns: auto;
+        grid-template-areas:
+            'title'
+            'auditor'
+        ;
+
+        .auditor-title{
+            grid-area: title;
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .auditor-section {
+            grid-area: auditor;
+                grid-area: title;
+                font-size: 16px;
+                text-align: center;
+                font-weight: bold;
+            .npc-title {
+
+            }
+            .npc-text {
+                height: 32rem;
+                width: 100%;
+            }
+            .npc-button {
+                background-color: lightblue;
+                font-size: 16px;
+                text-align: center;
+                font-weight: bold;
+                width:25%;
+            }
+        }
+
     }

@@ -121,6 +121,7 @@ on('chat:message',function(msg){
                 doResources(theParams);
             } else {
                 log('no --charid found');
+                sendChat('TheLandRPG','Character ID not found.  Go to Settings and use the Set Character Id button.')
             };
         };
     };
