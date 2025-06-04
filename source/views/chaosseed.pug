@@ -46,6 +46,7 @@
                     - theFormula = 'floor(@{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovementSpeed) + '}/ 5)';
                     +number({name:idMoveSquares,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula}}).row-move-squares
                     +span({'data-i18n':'Squares'}).row-move-squares-text
+                    +roller({name:'move-range','data-i18n':'Move Range',class:'general-roller move-range',trigger:{triggeredFuncs:['doMoveRange']}})
         .chaosseed-combat
             .row-combat-section.paper-background
                 +span({'data-i18n':'Combat Stats'}).row-combat-title
@@ -70,8 +71,8 @@
                     +number({name:'curmana',class:'boxed',value:0}).row-combat-curmana
                 .div-inline
                     +roller({name:'full-resources','data-i18n':'Full Resources',class:'general-roller row-combat-fullbutton',trigger:{triggeredFuncs:['doFullResources']}})
-                    +roller({name:'regen-stamina','data-i18n':'Regen Stamina',class:'general-roller row-combat-staminabutton',trigger:{triggeredFuncs:['doRegenStamina']}})
-                    +roller({name:'regen-mana','data-i18n':'Regen Mana',class:'general-roller row-combat-manabutton',trigger:{triggeredFuncs:['doRegenMana']}})
+                    +roller({name:'start-turn','data-i18n':'Start Turn',class:'general-roller row-combat-startturn',trigger:{triggeredFuncs:['doStartTurn']}})
+                    +roller({name:'concentrate','data-i18n':'Concentrate',class:'general-roller row-combat-concentrate',trigger:{triggeredFuncs:['doConcentrate']}})
         .chaosseed-resists
             .row-resists-section.paper-background
                 +span({'data-i18n':'Normal Resistances'}).row-resists-title
@@ -139,25 +140,39 @@
     };
     k.registerFuncs({doFullResources});
 
-    const doRegenStamina = async function({trigger,attributes,sections,casc}){
+    const doConcentrate = async function({trigger,attributes,sections,casc}){
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
-        const theAPICall = '!tlrpg --charid '+attributes['header-character-id']+' --stamina';
+        const theAPICall = '!tlrpg --charid '+attributes['header-character-id']+' --concentrate';
 
         const roll = await startRoll(theAPICall);
         finishRoll(roll.rollId);
     };
-    k.registerFuncs({doRegenStamina});
+    k.registerFuncs({doConcentrate});
     
-    const doRegenMana = async function({trigger,attributes,sections,casc}){
+    const doStartTurn = async function({trigger,attributes,sections,casc}){
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
-        const theAPICall = '!tlrpg --charid '+attributes['header-character-id']+' --mana';
+        const theAPICall = '!tlrpg --charid '+attributes['header-character-id']+' --startturn';
 
         const roll = await startRoll(theAPICall);
         finishRoll(roll.rollId);
     };
-    k.registerFuncs({doRegenMana});    
+    k.registerFuncs({doStartTurn});    
+
+    const doMoveRange = async function({trigger,attributes,sections,casc}){
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const theRange = Math.floor(attributes['chaosseed-movement-movementspeed-total']/5)*5;
+        const theAPICall = '!tlrpg --charid '+attributes['header-character-id']+' --moverange '
+            +theRange+'|'+theRange
+            ;
+
+        const roll = await startRoll(theAPICall);
+        finishRoll(roll.rollId);
+    };
+    k.registerFuncs({doMoveRange});    
+
 +scss('sheet').
     .thelandrpg-tabs-section-chaosseed{
         .repitem:hover > .collapse, .repitem:hover .roll-container,
@@ -326,11 +341,11 @@
                     width: 120px;
                     background-color: lightblue;
                 }
-                .row-combat-staminabutton {
+                .row-combat-startturn {
                     width: 120px;
                     background-color: lightblue;
                 }
-                .row-combat-manabutton {
+                .row-combat-concentrate {
                     width: 120px;
                     background-color: lightblue;
                 }
@@ -381,7 +396,7 @@
 
                 .row-move-move-text {
                     text-align: right;
-                    width: 60px;
+                    width: 50px;
                     padding: 5px;
                     font-weight: bold;
                 }
@@ -392,7 +407,7 @@
                 }
                 .row-move-feet-text {
                     text-align: left;
-                    width: 60px;
+                    width: 40px;
                     padding: 5px;
                     font-weight: bold;
                 }
@@ -403,9 +418,13 @@
                 }
                 .row-move-squares-text {
                     text-align: left;
-                    width: 60px;
+                    width: 50px;
                     padding: 5px;
                     font-weight: bold;
+                }
+                .move-range {
+                    width: 100px;
+                    background-color: lightblue;
                 }
             }
         }

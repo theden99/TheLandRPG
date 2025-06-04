@@ -3091,11 +3091,11 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chao
   width: 120px;
   background-color: lightblue;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-combat .row-combat-section .row-combat-staminabutton {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-combat .row-combat-section .row-combat-startturn {
   width: 120px;
   background-color: lightblue;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-combat .row-combat-section .row-combat-manabutton {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-combat .row-combat-section .row-combat-concentrate {
   width: 120px;
   background-color: lightblue;
 }
@@ -3143,7 +3143,7 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chao
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-movement .row-movement-section .row-move-move-text {
   text-align: right;
-  width: 60px;
+  width: 50px;
   padding: 5px;
   font-weight: bold;
 }
@@ -3154,7 +3154,7 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chao
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-movement .row-movement-section .row-move-feet-text {
   text-align: left;
-  width: 60px;
+  width: 40px;
   padding: 5px;
   font-weight: bold;
 }
@@ -3165,9 +3165,13 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chao
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-movement .row-movement-section .row-move-squares-text {
   text-align: left;
-  width: 60px;
+  width: 50px;
   padding: 5px;
   font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-movement .row-movement-section .move-range {
+  width: 100px;
+  background-color: lightblue;
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-spellresists,
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-resists {
@@ -3654,7 +3658,7 @@ body .ui-dialog .tab-content .charsheet .battle-main .battle-spells {
 }
 body .ui-dialog .tab-content .charsheet .battle-main .battle-spells .battle-spells-section {
   display: grid;
-  width: 950px;
+  width: 1000px;
   grid-template-columns: auto;
   grid-template-areas: "title" "spells";
 }
@@ -4225,6 +4229,30 @@ body .ui-dialog .tab-content .charsheet .spells-main .spells-numtargets-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-numtargets {
   width: 50px;
 }
+body .ui-dialog .tab-content .charsheet .spells-main .spells-showrange {
+  background-color: rgba(220, 220, 220, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px black;
+  border-width: 0;
+  transition-property: box-shadow, backdrop-filter;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+  backdrop-filter: blur(1px);
+  overflow: hidden;
+  background-color: lightblue;
+  width: 80px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-showrange:is(:hover, :focus) {
+  background-color: rgba(133, 133, 133, 0.5019607843);
+  box-shadow: 0 4px 6px black;
+  backdrop-filter: blur(2px);
+}
+body .ui-dialog .tab-content .charsheet .spells-main .spells-showrange:active {
+  background-color: #858585;
+  box-shadow: 0 1px 2px black;
+  backdrop-filter: blur(0px);
+}
 body .ui-dialog .tab-content .charsheet .spells-main .spells-roller-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-name-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-level-head,
@@ -4534,6 +4562,30 @@ body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagebonus-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-damagebonus {
   width: 60px;
   text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-showrange {
+  background-color: rgba(220, 220, 220, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px black;
+  border-width: 0;
+  transition-property: box-shadow, backdrop-filter;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+  backdrop-filter: blur(1px);
+  overflow: hidden;
+  background-color: lightblue;
+  width: 80px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-showrange:is(:hover, :focus) {
+  background-color: rgba(133, 133, 133, 0.5019607843);
+  box-shadow: 0 4px 6px black;
+  backdrop-filter: blur(2px);
+}
+body .ui-dialog .tab-content .charsheet .attacks-main .attacks-showrange:active {
+  background-color: #858585;
+  box-shadow: 0 1px 2px black;
+  backdrop-filter: blur(0px);
 }
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-roller-head,
 body .ui-dialog .tab-content .charsheet .attacks-main .attacks-name-head,

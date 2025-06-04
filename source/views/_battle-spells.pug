@@ -70,6 +70,7 @@
                 +option({value:'Mana','data-i18n':'Mana'})
                 +option({value:'N/A','data-i18n':'N/A'})
             +number({name:'attacks-numtargets',value:'0',class:'attacks-numtargets boxed'})
+            +button({name:'spells-showrange',type:'action',class:'spells-showrange','data-i18n':'Show Range',trigger:{triggeredFuncs:['doSpellRange']}})
         .div
             .collapse-container
                 +collapse('spells-desc-collapse')
@@ -197,6 +198,26 @@
         };
     };
     k.registerFuncs({doEffectsRemove});
+
+    const doSpellRange = async function({trigger,attributes,sections,casc}){
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        let theRange = attributes[sectionName+'_'+rowID+'_spells-range'];
+        if (theRange==='Self') {
+            theRange = 0;
+        } else if (theRange==='Touch') {
+            theRange = 5;
+        }
+        theRange = Math.floor(theRange/5)*5;
+        const theAPICall = '!tlrpg --charid '+attributes['header-character-id']+' --moverange '
+            +theRange+'|0';
+            ;
+
+        const roll = await startRoll(theAPICall);
+        finishRoll(roll.rollId);
+    };
+    k.registerFuncs({doSpellRange});    
+
 +scss('sheet').
     .spells-main{
 
@@ -260,6 +281,12 @@
         .spells-numtargets-head,
         .spells-numtargets {
             width: 50px;
+        }
+        .spells-showrange {
+            @include k.base-button;
+            background-color: lightblue;
+            width: 80px;
+            text-align: center;
         }
 
         .spells-roller-head,

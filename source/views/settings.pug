@@ -7,23 +7,23 @@
                 +customControlFieldset({name:'system-main-messages',addClass:''})
                     .logs-general-main
                         +adaptiveTextarea({name:'system-message',class:'general-note boxed'})
-        .auditor-password
-            .auditor-password-section.paper-background
-                +span({'data-i18n':'Auditor Password'}).auditor-password-subtitle
-                .auditor-text
-                    +text({name:'auditor-password',value:'enter password',class:'auditor-password-text underlined'})
+        //.auditor-password
+        //    .auditor-password-section.paper-background
+        //        +span({'data-i18n':'Auditor Password'}).auditor-password-subtitle
+        //        .auditor-text
+        //            +text({name:'auditor-password',value:'enter password',class:'auditor-password-text underlined'})
         .settings-charids
             .charids-section.paper-background
                 +span({'data-i18n':'Character IDs'}).section-title
                 +roller({name:'setcharids-button','data-i18n':'Set Character Id',class:'general-roller thelandrpg-subtab-button setcharids-button',trigger:{triggeredFuncs:['doSetCharIds']}})
-                .div-inline
-                    +span({}).addbutton-padding
-                    +span({'data-i18n':'Name'}).charids-name-head
-                    +span({'data-i18n':'ID'}).charids-id-head
-                +customControlFieldset({name:'settings-charids',addClass:''})
-                    .div-inline
-                        +text({name:'charids-rows-name',value:'',class:'underlined'}).charids-name
-                        +text({name:'charids-rows-id',value:'',class:'underlined'}).charids-id
+                //.div-inline
+                //    +span({}).addbutton-padding
+                //    +span({'data-i18n':'Name'}).charids-name-head
+                //    +span({'data-i18n':'ID'}).charids-id-head
+                //+customControlFieldset({name:'settings-charids',addClass:''})
+                //    .div-inline
+                //        +text({name:'charids-rows-name',value:'',class:'underlined'}).charids-name
+                //        +text({name:'charids-rows-id',value:'',class:'underlined'}).charids-id
 +module.
     const doSetCharIds = async function({trigger,attributes,sections,casc}){
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);

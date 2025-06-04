@@ -58,6 +58,7 @@
             +text({name:'attacks-damage',value:'0',class:'attacks-damage boxed'})
             +text({name:'attacks-accbonus',value:'0',class:'attacks-accbonus boxed'})
             +text({name:'attacks-damagebonus',value:'0',class:'attacks-damagebonus boxed'})
+            +button({name:'attacks-showrange',type:'action',class:'attacks-showrange','data-i18n':'Show Range',trigger:{triggeredFuncs:['doAttackRange']}})
         .div
             .collapse-container
                 +collapse('attacks-desc-collapse')
@@ -116,6 +117,20 @@
                             +span({'data-i18n':'Power Card'}).attacks-powercard-head
                             +adaptiveTextarea({name:'attacks-powercard',class:'attacks-powercard boxed'})
 +module.
+    const doAttackRange = async function({trigger,attributes,sections,casc}){
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        let theRange = attributes[sectionName+'_'+rowID+'_attacks-range'];
+        theRange = Math.floor(theRange/5)*5;
+        const theAPICall = '!tlrpg --charid '+attributes['header-character-id']+' --moverange '
+            +theRange+'|0';
+            ;
+
+        const roll = await startRoll(theAPICall);
+        finishRoll(roll.rollId);
+    };
+    k.registerFuncs({doAttackRange});    
+
 +scss('sheet').
     .attacks-main{
 
@@ -165,6 +180,12 @@
         .attacks-damagebonus-head,
         .attacks-damagebonus {
             width: 60px;
+            text-align: center;
+        }
+        .attacks-showrange {
+            @include k.base-button;
+            background-color: lightblue;
+            width: 80px;
             text-align: center;
         }
 

@@ -1,13 +1,47 @@
 //log('==> The Land RPG mod v1.0.0')
-on('chat:message',function(msg){
-    const paramSetCharId = 'setcharid';
-    const paramCharId = 'charid'
-    const paramRegenMana = 'mana';
-    const paramRegenStamina = 'stamina';
-    const paramRegenHealth = 'health';
-    const paramFullResources = 'full';
+"use strict";
 
-    const paramHasValueArray = [paramSetCharId,paramCharId];
+const paramSetCharId = 'setcharid';
+const paramCharId = 'charid'
+const paramFullResources = 'full';
+const paramStartTurn = 'startturn';
+const paramConcentrate = 'concentrate';
+const paramMoveRange = 'moverange';
+
+const paramHasValueArray = [paramSetCharId,paramCharId,paramMoveRange];
+
+on('chat:message',function(msg){
+
+    if (!state.theLandRPG) {
+        state.theLandRPG = {
+            version: 1.0,
+            chars: []
+        }
+    }
+
+    function getCharVars() {
+        const characters = findObjs({type:'character'});
+        const theChars = characters.map(theChar => {
+            return {
+                'id':theChar.get('id'),
+                'name':theChar.get('name')
+            };
+        });
+        theChars.forEach(theChar => {
+            //init char
+            if (!state.theLandRPG.chars[theChar.id]) {
+                state.theLandRPG.chars[theChar.id] = {
+                    'oldRadius1': 0,
+                    'oldColor1': '#ffff00',
+                    'oldIsSquare1': false,
+                    'oldRadius2': 0,
+                    'oldColor2': '#59e594',
+                    'oldIsSquare2': false,
+                    'isMoveRangeOn': false
+                }
+            };
+        });
+    }
 
     // These functions parse the chat input.
     parseParams = function (iContent) {
@@ -49,7 +83,23 @@ on('chat:message',function(msg){
         return theAttr.get('current');
     };
 
-    function doSetCharId(iParams) {
+    function doSetAttrByName(iCharId,iAttrName,iValue) {
+        var theAttr = findObjs({
+                                type: 'attribute',
+                                characterid: iCharId,
+                                name: iAttrName
+        }, {caseInsensitive: true})[0];
+        if (!theAttr) {
+            theAttr = createObj('attribute', {
+                            characterid: iCharId,
+                            name: iAttrName
+            });
+        }
+
+        return theAttr.set('current',iValue);
+    };
+
+    function setCharId(iParams) {
         const characters = findObjs({type:'character'});
         const theChars = characters.map(theChar => {
             return {'id':theChar.get('id'),'name':theChar.get('name')};
@@ -65,60 +115,120 @@ on('chat:message',function(msg){
             };
         });
     };
+
+    function addMax(iCur,iAdd,iMax) {
+        let theCur = iCur;
+        theCur = theCur+iAdd;
+        if (theCur>iMax) {
+            theCur = iMax;
+        }
+
+        return theCur;
+    }
     
-    function doResources(iParams) {
-        const theCharId = iParams[paramCharId];
+    function setResources(iCharId,iParams) {
+        const curMana = parseInt(doGetAttrByName(iCharId,'curmana'));
+        const curStamina = parseInt(doGetAttrByName(iCharId,'curstamina'));
+        const curHealth = parseInt(doGetAttrByName(iCharId,'curhealth'));
 
-        const curMana = parseInt(doGetAttrByName(theCharId,'curmana'));
-        const curStamina = parseInt(doGetAttrByName(theCharId,'curstamina'));
-        const curHealth = parseInt(doGetAttrByName(theCharId,'curhealth'));
+        const maxMana = parseInt(doGetAttrByName(iCharId,'chaosseed-combatstats-mana-total'));
+        const maxStamina = parseInt(doGetAttrByName(iCharId,'chaosseed-combatstats-stamina-total'));
+        const maxHealth = parseInt(doGetAttrByName(iCharId,'chaosseed-combatstats-health-total'));
 
-        const maxMana = parseInt(doGetAttrByName(theCharId,'chaosseed-combatstats-mana-total'));
-        const maxStamina = parseInt(doGetAttrByName(theCharId,'chaosseed-combatstats-stamina-total'));
-        const maxHealth = parseInt(doGetAttrByName(theCharId,'chaosseed-combatstats-health-total'));
-
-        const regenMana = parseInt(doGetAttrByName(theCharId,'chaosseed-combatstats-manaregen-total'));
-        const regenStamina = parseInt(doGetAttrByName(theCharId,'chaosseed-combatstats-staminaregen-total'));
-        const regenHealth = parseInt(doGetAttrByName(theCharId,'chaosseed-combatstats-healthregen-total'));
-
-        let attrMana = findObjs({ type: 'attribute', characterid: theCharId, name: 'curmana' })[0];
-        let attrStamina = findObjs({ type: 'attribute', characterid: theCharId, name: 'curstamina' })[0];
-        let attrHealth = findObjs({ type: 'attribute', characterid: theCharId, name: 'curhealth' })[0];
-
-            //add mana regen to mana
-        if (iParams[paramRegenMana]) {
-            attrMana.set('current',curMana+regenMana);
+        //concentrate
+        if (iParams[paramConcentrate]) {
+            const theConc = parseInt(doGetAttrByName(iCharId,'chaosseed-skills-concentration-total'));
+            doSetAttrByName(iCharId,'curmana',addMax(curMana,Math.floor(theConc/5),maxMana));
+            doSetAttrByName(iCharId,'curstamina',addMax(curStamina,Math.floor(theConc/10),maxStamina));
         };
 
-            //add stamina regen to stamina
-        if (iParams[paramRegenStamina]) {
-            attrStamina.set('current',curStamina+regenStamina);
+        //start turn
+        if (iParams[paramStartTurn]) {
+            const regenMana = parseInt(doGetAttrByName(iCharId,'chaosseed-combatstats-manaregen-total'));
+            //const regenStamina = parseInt(doGetAttrByName(iCharId,'chaosseed-combatstats-staminaregen-total'));
+            //const regenHealth = parseInt(doGetAttrByName(iCharId,'chaosseed-combatstats-healthregen-total'));
+
+            doSetAttrByName(iCharId,'curmana',addMax(curMana,regenMana,maxMana));
         };
 
-            //add stamina regen to stamina
-        if (iParams[paramRegenHealth]) {
-            attrHealth.set('current',curHealth+regenHealth);
-        };
-
-            //reset to full resources
+        //reset to full resources
         if (iParams[paramFullResources]) {
             log('setting:'+maxMana+'/'+maxStamina+'/'+maxHealth);
-            attrMana.set('current',maxMana);
-            attrStamina.set('current',maxStamina);
-            attrHealth.set('current',maxHealth);
+            doSetAttrByName(iCharId,'curmana',maxMana);
+            doSetAttrByName(iCharId,'curstamina',maxStamina);
+            doSetAttrByName(iCharId,'curhealth',maxHealth);
         };
     }
 
+    function toggleMoveRange(iCharId,iRange,iExtRange) {
+        let bOk = true;
+        var theToken = findObjs({
+            pageid: Campaign().get("playerpageid"),
+            type: 'graphic',
+            represents: iCharId
+        })[0];
+        //log('moverange='+iRange+' on='+bMoveRangeOn+' token='+theToken);
+        if (theToken) {
+            theState = state.theLandRPG.chars[iCharId];
+            if (theState.isMoveRangeOn===false) {
+                theState.isMoveRangeOn = true;
+                theState.oldRaduis1 = theToken.get('aura1_radius');
+                theState.oldColor1 = theToken.get('aura1_color');
+                theState.oldIsSquare1 = theToken.get('aura1_square');
+                theState.oldRaduis2 = theToken.get('aura2_radius');
+                theState.oldColor2 = theToken.get('aura2_color');
+                theState.oldIsSquare2 = theToken.get('aura2_square');
+                //set range and color
+                theToken.set('aura1_radius',iRange);
+                theToken.set('aura1_color','#59e594');
+                theToken.set('aura1_square',true);
+                if (iExtRange>0) {
+                    theToken.set('aura2_radius',iRange+iExtRange);
+                    theToken.set('aura2_color','#ffff00');
+                    theToken.set('aura2_square',true);
+                }
+            } else {
+                theState.isMoveRangeOn = false;
+                //set saved values
+                theToken.set('aura1_radius',theState.oldRadius1);
+                theToken.set('aura1_color',theState.oldColor1);
+                theToken.set('aura1_square',theState.oldIsSquare1);
+                theToken.set('aura2_radius',theState.oldRadius2);
+                theToken.set('aura2_color',theState.oldColor2);
+                theToken.set('aura2_square',theState.oldIsSquare2);
+            }
+        } else {
+            bOk = false;
+        }
+
+        return bOk;
+    }
+
     if (msg.type=='api' && msg.content.indexOf('!tlrpg')==0){
-        let theParams = parseParams(msg.content);
+        const theParams = parseParams(msg.content);
         log(theParams);
 
+        getCharVars();
+        log(state.theLandRPG);
+        
         //set Ids for all chars
         if (theParams[paramSetCharId]) {
-            doSetCharId(theParams);
+            setCharId(theParams);
         } else {
             if (theParams[paramCharId]) {
-                doResources(theParams);
+                const theCharId = theParams[paramCharId];
+                if ((theParams[paramFullResources]) || (theParams[paramConcentrate]) || (theParams[paramStartTurn])) {
+                    setResources(theCharId,theParams);
+                } else if (theParams[paramMoveRange]) {
+                    const theRanges = theParams[paramMoveRange].split('|');
+                    const theRange = parseInt(theRanges[0]);
+                    const theExtRange = parseInt(theRanges[1]);
+                    //log('range='+theRange+' extrange='+theExtRange);
+                    if (!toggleMoveRange(theCharId,theRange,theExtRange)) {
+                        log(theCharId+'no token found')
+                        sendChat('TheLandRPG','No token found for setting aura of range');
+                    }
+                }
             } else {
                 log('no --charid found');
                 sendChat('TheLandRPG','Character ID not found.  Go to Settings and use the Set Character Id button.')

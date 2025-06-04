@@ -302,6 +302,7 @@
 
     const funcSpells = async function({trigger,attributes,sections,casc}){
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const theSectionId = sectionName+'_'+rowID+'_';
         const powerCard = attributes[sectionName+'_'+rowID+'_spells-powercard'];
         let theAPICall = '';
         //console.log(sectionName);
@@ -309,17 +310,33 @@
         //console.log(buttonName);
         //console.log(powerCard);
 
+        //subtract cost from current
+        const theCost = attributes[theSectionId+'spells-cost'];
+        const theCostType = attributes[theSectionId+'spells-costtype'];
+        let theCurHealth = attributes['curhealth'];
+        let theCurMana = attributes['curmana'];
+        let theCurStamina = attributes['curstamina'];
+        if (theCostType==='Health') {
+            theCurHealth -= theCost;
+            attributes['curhealth'] = theCurHealth;
+        } else if (theCostType==='Mana') {
+            theCurMana -= theCost;
+            attributes['curmana'] = theCurMana;
+        } else if (theCostType==='Stamina') {
+            theCurStamina -= theCost;
+            attributes['curstamina'] = theCurStamina;
+        }
+
         if (powerCard!=='') {
             theAPICall = powerCard;
         } else {
             //default card
-            const theSectionId = sectionName+'_'+rowID+'_';
             const theName = attributes[theSectionId+'spells-name'];
             const theMagicType = schemaCore[idSkills][attributes[theSectionId+'spells-magictype']].displayname;
             const theSubskill = attributes[theSectionId+'spells-subskill'];
             const theLevel = attributes[theSectionId+'spells-level'];
             const theActionType = attributes[theSectionId+'spells-actiontype'];
-            const theCostLine = attributes[theSectionId+'spells-costtype']+' '+attributes[theSectionId+'spells-cost'];
+            const theCostLine = theCostType+' '+theCost;
             let theMagicTypeTotal = attributes[getMagicTypeTotal(attributes[theSectionId+'spells-magictype'])];
             let theMagicTypeRank = attributes['chaosseed-skills-'+attributes[theSectionId+'spells-magictype']+'-rank'];
             let theMagicTypeStatBonus = attributes[getMagicTypeStatBonus(attributes[theSectionId+'spells-magictype'])];
@@ -403,6 +420,23 @@
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
         let theAPICall = '';
         const theSectionId = sectionName+'_'+rowID+'_';
+
+        //subtract cost from current
+        const theCost = attributes[theSectionId+'attacks-cost'];
+        const theCostType = attributes[theSectionId+'attacks-resource'];
+        let theCurHealth = attributes['curhealth'];
+        let theCurMana = attributes['curmana'];
+        let theCurStamina = attributes['curstamina'];
+        if (theCostType==='Health') {
+            theCurHealth -= theCost;
+            attributes['curhealth'] = theCurHealth;
+        } else if (theCostType==='Mana') {
+            theCurMana -= theCost;
+            attributes['curmana'] = theCurMana;
+        } else if (theCostType==='Stamina') {
+            theCurStamina -= theCost;
+            attributes['curstamina'] = theCurStamina;
+        }
 
         const theName = attributes[theSectionId+'attacks-name'];
         const theCharName = attributes['character_name'];
