@@ -7,8 +7,10 @@ const paramFullResources = 'full';
 const paramStartTurn = 'startturn';
 const paramConcentrate = 'concentrate';
 const paramMoveRange = 'moverange';
+const paramSpell = 'spell'
+const paramAttack = 'attack'
 
-const paramHasValueArray = [paramSetCharId,paramCharId,paramMoveRange];
+const listParamHasValue = [paramSetCharId,paramCharId,paramMoveRange,paramSpell,paramAttack];
 
 on('chat:message',function(msg){
 
@@ -19,28 +21,19 @@ on('chat:message',function(msg){
         }
     }
 
-    function getCharVars() {
-        const characters = findObjs({type:'character'});
-        const theChars = characters.map(theChar => {
-            return {
-                'id':theChar.get('id'),
-                'name':theChar.get('name')
-            };
-        });
-        theChars.forEach(theChar => {
-            //init char
-            if (!state.theLandRPG.chars[theChar.id]) {
-                state.theLandRPG.chars[theChar.id] = {
-                    'oldRadius1': 0,
-                    'oldColor1': '#ffff00',
-                    'oldIsSquare1': false,
-                    'oldRadius2': 0,
-                    'oldColor2': '#59e594',
-                    'oldIsSquare2': false,
-                    'isMoveRangeOn': false
-                }
-            };
-        });
+    function setDefaultCharVars(iCharId) {
+        //init vars
+        if (!state.theLandRPG.chars[iCharId]) {
+            state.theLandRPG.chars[iCharId] = {
+                'oldRadius1': 0,
+                'oldColor1': '#ffff00',
+                'oldIsSquare1': false,
+                'oldRadius2': 0,
+                'oldColor2': '#59e594',
+                'oldIsSquare2': false,
+                'isMoveRangeOn': false
+            }
+        };
     }
 
     // These functions parse the chat input.
@@ -58,7 +51,7 @@ on('chat:message',function(msg){
             .slice(1)
             .reduce((m, arg) => {
                 const kv = arg.split(/\s(.+)/);
-                if (paramHasValueArray.includes(kv[0])) {
+                if (listParamHasValue.includes(kv[0])) {
                     m[kv[0]] = kv[1] || "";
                 } else {
                     m[arg] = true;
@@ -112,6 +105,8 @@ on('chat:message',function(msg){
                 const theCharId = doGetAttrByName(theChar.id,'header-character-id');
                 const theIdField = findObjs({ type: 'attribute', characterid: theChar.id, name: 'header-character-id' })[0];
                 theIdField.set('current',theChar.id);
+                setDefaultCharVars(theChar.id);
+                log(state.theLandRPG);
             };
         });
     };
@@ -204,12 +199,16 @@ on('chat:message',function(msg){
         return bOk;
     }
 
+    function doSpell(iCharId,iSectionId) {
+
+    }
+
+    function doAttack(iCharId,iSectionId) {
+    }
+
     if (msg.type=='api' && msg.content.indexOf('!tlrpg')==0){
         const theParams = parseParams(msg.content);
         log(theParams);
-
-        getCharVars();
-        log(state.theLandRPG);
         
         //set Ids for all chars
         if (theParams[paramSetCharId]) {
@@ -228,6 +227,12 @@ on('chat:message',function(msg){
                         log(theCharId+'no token found')
                         sendChat('TheLandRPG','No token found for setting aura of range');
                     }
+                } else if (theParams[paramSpell]) {
+                    const theSectionId = theParams[paramSpell];
+                    doSpell(theCharId,theSectionId);
+                } else if (theParams[paramAttack]) {
+                    const theSectionId = theParams[paramAttack];
+                    doAttack(theCharId,theSectionId);
                 }
             } else {
                 log('no --charid found');

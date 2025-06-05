@@ -131,10 +131,39 @@
                             +span({'data-i18n':'Radius Type'}).spells-radiustype-head
                         .div-accbonus
                             +text({name:'spells-accbonus',value:'0',class:'spells-accbonus boxed'})
-                            +span({'data-i18n':'ACC Bonus'}).spells-accbonus-head
+                            +span({'data-i18n':'Acc Bonus'}).spells-accbonus-head
                         .div-damagebonus
                             +text({name:'spells-damagebonus',value:'0',class:'spells-damagebonus boxed'})
                             +span({'data-i18n':'Damage Bonus'}).spells-damagebonus-head
+                        .div-particletype
+                            +select({name:'spells-particletype',class:'spells-particletype underlined'})
+                                +option({value:'none','data-i18n':'None'})
+                                +option({value:'beam','data-i18n':'Beam'})
+                                +option({value:'bomb','data-i18n':'Bomb'})
+                                +option({value:'breath','data-i18n':'Breath'})
+                                +option({value:'bubbling','data-i18n':'Bubbling'})
+                                +option({value:'burn','data-i18n':'Burn'})
+                                +option({value:'burst','data-i18n':'Burst'})
+                                +option({value:'explode','data-i18n':'Explode'})
+                                +option({value:'glow','data-i18n':'Glow'})
+                                +option({value:'missile','data-i18n':'Missile'})
+                                +option({value:'nova','data-i18n':'Nova'})
+                                +option({value:'splatter','data-i18n':'Splatter'})
+                            +span({'data-i18n':'Particle Type'}).spells-particletype-head
+                        .div-particlecolor
+                            +select({name:'spells-particlecolor',class:'spells-particlecolor underlined'})
+                                +option({value:'acid','data-i18n':'Acid'})
+                                +option({value:'blood','data-i18n':'Blood'})
+                                +option({value:'charm','data-i18n':'Charm'})
+                                +option({value:'death','data-i18n':'Death'})
+                                +option({value:'fire','data-i18n':'Fire'})
+                                +option({value:'frost','data-i18n':'Frost'})
+                                +option({value:'holy','data-i18n':'Holy'})
+                                +option({value:'magic','data-i18n':'Magic'})
+                                +option({value:'slime','data-i18n':'Slime'})
+                                +option({value:'smoke','data-i18n':'Smoke'})
+                                +option({value:'water','data-i18n':'Water'})
+                            +span({'data-i18n':'Particle Color'}).spells-particlecolor-head
                         .div-critabove
                             +text({name:'spells-critabove',value:'0',class:'spells-critabove boxed'})
                             +span({'data-i18n':'Crit Above'}).spells-critabove-head
@@ -314,7 +343,7 @@
             grid-template-areas : 
                 'duration durationamount durationtype conditiontype'
                 'radius radiustype damagetype damageclass'
-                'accbonus damagebonus damagebonus .'
+                'accbonus damagebonus particletype particlecolor'
                 'critabove critbonus critdamagebonus .'
                 'desc-head desc-head desc-head desc-head'
                 'desc desc desc desc'
@@ -418,6 +447,30 @@
                     background-color: gainsboro;
                 }
                 .spells-damagebonus{
+                    width:100%;
+                    text-align: center;
+                }
+            }
+            .div-particletype {
+                grid-area: particletype;
+                width: 65px;
+                text-align: center;
+                .spells-particletype-head {
+                    background-color: gainsboro;
+                }
+                .spells-particletype{
+                    width:100%;
+                    text-align: center;
+                }
+            }
+            .div-particlecolor {
+                grid-area: particlecolor;
+                width: 65px;
+                text-align: center;
+                .spells-particlecolor-head {
+                    background-color: gainsboro;
+                }
+                .spells-particlecolor{
                     width:100%;
                     text-align: center;
                 }

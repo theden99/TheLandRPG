@@ -49,14 +49,10 @@
     +img({name:'character_avatar'}).character-image
     .div-character-id.div-inline
       +span({'data-i18n':' ID:'}).character-id-label
-      +text({name:'header-character-id',trigger:{triggeredFuncs:['doCharacterID']}}).underlined
+      +text({name:'header-character-id',readonly:''}).underlined
   .div-character-image
     +img({name:'character_token'}).character-image
 +module.
-  const doCharacterID = ({trigger,attributes,sections,casc}) => {
-    //attributes['character-id'] = k.parseMacro('@{character-deaths}',attributes,sections);
-  };
-  k.registerFuncs({doCharacterID});
 +scss('sheet').
     .thelandrpg-header{
         .logo-image {

@@ -3658,7 +3658,7 @@ body .ui-dialog .tab-content .charsheet .battle-main .battle-spells {
 }
 body .ui-dialog .tab-content .charsheet .battle-main .battle-spells .battle-spells-section {
   display: grid;
-  width: 1000px;
+  width: 950px;
   grid-template-columns: auto;
   grid-template-areas: "title" "spells";
 }
@@ -4013,7 +4013,7 @@ body .ui-dialog .tab-content .charsheet .risetopower-main .risetopower-title {
 }
 body .ui-dialog .tab-content .charsheet .risetopower-main .risetopower-section {
   grid-area: risetopower;
-  width: 450px;
+  width: 550px;
 }
 body .ui-dialog .tab-content .charsheet .risetopower-main .risetopower-section .risetopower-head-type,
 body .ui-dialog .tab-content .charsheet .risetopower-main .risetopower-section .risetopower-type {
@@ -4031,10 +4031,15 @@ body .ui-dialog .tab-content .charsheet .risetopower-main .risetopower-section .
 body .ui-dialog .tab-content .charsheet .risetopower-main .risetopower-section .risetopower-change {
   width: 50px;
 }
+body .ui-dialog .tab-content .charsheet .risetopower-main .risetopower-section .risetopower-head-date,
+body .ui-dialog .tab-content .charsheet .risetopower-main .risetopower-section .risetopower-date {
+  width: 140px;
+}
 body .ui-dialog .tab-content .charsheet .risetopower-main .risetopower-section .risetopower-head-type,
 body .ui-dialog .tab-content .charsheet .risetopower-main .risetopower-section .risetopower-head-old,
 body .ui-dialog .tab-content .charsheet .risetopower-main .risetopower-section .risetopower-head-new,
-body .ui-dialog .tab-content .charsheet .risetopower-main .risetopower-section .risetopower-head-change {
+body .ui-dialog .tab-content .charsheet .risetopower-main .risetopower-section .risetopower-head-change,
+body .ui-dialog .tab-content .charsheet .risetopower-main .risetopower-section .risetopower-head-date {
   text-align: center;
   background-color: lightblue;
   font-weight: bold;
@@ -4274,7 +4279,7 @@ body .ui-dialog .tab-content .charsheet .spells-main .spells-numtargets-head {
 body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details {
   display: grid;
   grid-template-columns: repeat(auto, 4);
-  grid-template-areas: "duration durationamount durationtype conditiontype" "radius radiustype damagetype damageclass" "accbonus damagebonus damagebonus ." "critabove critbonus critdamagebonus ." "desc-head desc-head desc-head desc-head" "desc desc desc desc" "spelleffect-head spelleffect-head spelleffect-head spelleffect-head" "spelleffect spelleffect spelleffect spelleffect" "effects-section effects-section effects-section effects-section" "powercard-head powercard-head powercard-head powercard-head" "powercard powercard powercard powercard";
+  grid-template-areas: "duration durationamount durationtype conditiontype" "radius radiustype damagetype damageclass" "accbonus damagebonus particletype particlecolor" "critabove critbonus critdamagebonus ." "desc-head desc-head desc-head desc-head" "desc desc desc desc" "spelleffect-head spelleffect-head spelleffect-head spelleffect-head" "spelleffect spelleffect spelleffect spelleffect" "effects-section effects-section effects-section effects-section" "powercard-head powercard-head powercard-head powercard-head" "powercard powercard powercard powercard";
   border: 1px solid var(--borderColor);
 }
 body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-duration {
@@ -4370,6 +4375,30 @@ body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-da
   background-color: gainsboro;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-damagebonus .spells-damagebonus {
+  width: 100%;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-particletype {
+  grid-area: particletype;
+  width: 65px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-particletype .spells-particletype-head {
+  background-color: gainsboro;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-particletype .spells-particletype {
+  width: 100%;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-particlecolor {
+  grid-area: particlecolor;
+  width: 65px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-particlecolor .spells-particlecolor-head {
+  background-color: gainsboro;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-particlecolor .spells-particlecolor {
   width: 100%;
   text-align: center;
 }

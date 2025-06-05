@@ -718,9 +718,8 @@ const schemaCore = {
             '',
             {
                 [idBase] : {
-                    [idFormula] : '25 + (' + capitalize(idAgility) + '/2) + ' + capitalize(idMovePenalty),
-                    [idKFormula] : '25 + (@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility) + '}/2) + ' + 
-                                    '@{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovePenalty) + '}',
+                    [idFormula] : '25 + (' + capitalize(idAgility) + '/2)',
+                    [idKFormula] : '25 + floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idAgility) + '}/2)',
                 },
             },
             {

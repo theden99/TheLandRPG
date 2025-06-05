@@ -40,13 +40,13 @@
                     +collapseHelp(idChaosSeed,idMovement,idMovement,stat,entry)
                 .div-inline
                     +span({'data-i18n':'Move'}).row-move-move-text
-                    - theFormula = 'floor(@{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovementSpeed) + '})';
+                    - theFormula = 'floor(@{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovementSpeed) + '}) - @{chaosseed-movement-movepenalty-total}';
                     +number({name:idMoveTotal,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula}}).row-move-total
                     +span({'data-i18n':'Feet'}).row-move-feet-text
-                    - theFormula = 'floor(@{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovementSpeed) + '}/ 5)';
+                    - theFormula = 'floor((@{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovementSpeed) + '} - @{chaosseed-movement-movepenalty-total})/ 5)';
                     +number({name:idMoveSquares,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula}}).row-move-squares
                     +span({'data-i18n':'Squares'}).row-move-squares-text
-                    +roller({name:'move-range','data-i18n':'Move Range',class:'general-roller move-range',trigger:{triggeredFuncs:['doMoveRange']}})
+                    +roller({name:'move-range','data-i18n':'Show Range',class:'general-roller move-range',trigger:{triggeredFuncs:['doMoveRange']}})
         .chaosseed-combat
             .row-combat-section.paper-background
                 +span({'data-i18n':'Combat Stats'}).row-combat-title

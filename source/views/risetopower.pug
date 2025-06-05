@@ -4,16 +4,18 @@
         .div
             .risetopower-section.paper-background
                 .div-inline
-                    +span({'data-i18n':'Rise Type'}).risetopower-head-type
+                    +span({'data-i18n':'Type of Power'}).risetopower-head-type
                     +span({'data-i18n':'Old'}).risetopower-head-old
                     +span({'data-i18n':'New'}).risetopower-head-new
                     +span({'data-i18n':'Change'}).risetopower-head-change
+                    +span({'data-i18n':'Date/Time'}).risetopower-head-date
                 +customControlFieldset({name:'risetopower-rows',addClass:''})
                     .div-inline
                         +text({name:'risetopower-type',readonly:'',class:'underlined'}).risetopower-type
                         +number({name:'risetopower-old',readonly:'',class:'boxed'}).risetopower-old
                         +number({name:'risetopower-new',readonly:'',class:'boxed'}).risetopower-new
                         +number({name:'risetopower-change',readonly:'',class:'boxed'}).risetopower-chanage
+                        +text({name:'risetopower-date',readonly:'',class:'boxed'}).risetopower-date
 +scss('sheet').
     .risetopower-main{
         .repcontrol-button--add {
@@ -43,7 +45,7 @@
 
         .risetopower-section {
             grid-area: risetopower;
-            width: 450px;
+            width: 550px;
 
             .risetopower-head-type,
             .risetopower-type {
@@ -61,11 +63,16 @@
             .risetopower-change {
                 width: 50px;
             }
+            .risetopower-head-date,
+            .risetopower-date {
+                width: 140px;
+            }
             
             .risetopower-head-type,
             .risetopower-head-old,
             .risetopower-head-new,
-            .risetopower-head-change {
+            .risetopower-head-change, 
+            .risetopower-head-date {
                 text-align: center;
                 background-color: lightblue;
                 font-weight: bold;
