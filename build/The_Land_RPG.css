@@ -3416,6 +3416,7 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosse
   text-align: right;
   font-weight: bold;
   width: 450;
+  padding: 5px;
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-skills .row-skills-section .row-skills-base {
   font-size: 14px;
@@ -3658,7 +3659,7 @@ body .ui-dialog .tab-content .charsheet .battle-main .battle-spells {
 }
 body .ui-dialog .tab-content .charsheet .battle-main .battle-spells .battle-spells-section {
   display: grid;
-  width: 950px;
+  width: 1010px;
   grid-template-columns: auto;
   grid-template-areas: "title" "spells";
 }
@@ -3693,7 +3694,7 @@ body .ui-dialog .tab-content .charsheet .battle-main .battle-attacks {
 }
 body .ui-dialog .tab-content .charsheet .battle-main .battle-attacks .battle-attacks-section {
   display: grid;
-  width: 880px;
+  width: 940px;
   grid-template-columns: auto;
   grid-template-areas: "title" "attacks";
 }
@@ -3959,6 +3960,39 @@ body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure .logs-adventu
   font-size: 16px;
   text-align: center;
   font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure .logs-adventure-section .logs-adventure-totaldowntime-head {
+  font-size: 14px;
+  text-align: right;
+  font-weight: bold;
+  padding: 5px;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure .logs-adventure-section .logs-adventure-totaldowntime {
+  font-size: 14px;
+  font-weight: bold;
+  width: 60;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure .logs-adventure-section .logs-adventure-totalskills-head {
+  font-size: 14px;
+  text-align: right;
+  font-weight: bold;
+  padding: 5px;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure .logs-adventure-section .logs-adventure-totalskills {
+  font-size: 14px;
+  font-weight: bold;
+  width: 60;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure .logs-adventure-section .logs-adventure-totalstats-head {
+  font-size: 14px;
+  text-align: right;
+  font-weight: bold;
+  padding: 5px;
+}
+body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure .logs-adventure-section .logs-adventure-totalstats {
+  font-size: 14px;
+  font-weight: bold;
+  width: 60;
 }
 body .ui-dialog .tab-content .charsheet .logs-main .logs-adventure .logs-adventure-section .logs-adventure-head .logs-adventure-main .adventure-entry {
   width: 240px;

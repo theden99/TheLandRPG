@@ -35,13 +35,13 @@
       +text({name:'header-character-classprofession',class:'underlined'}).character-classprofession-input
     .div-character-exp.div-inline
       +span({'data-i18n':'Exp:'}).character-exp-label
-      +number({name:'header-character-exp',class:'underlined'}).character-exp-input
+      +number({name:'header-character-exp',class:'boxed',readonly:'',trigger:{calculation:'doXpTotal'}}).character-exp-input
     .div-character-level.div-inline
       +span({'data-i18n':'Level:'}).character-level-label
-      +number({name:'header-character-level',value:0,class:'underlined'}).character-level-input
+      +number({name:'header-character-level',value:0,class:'boxed',trigger:{triggeredFuncs:['funcLogLevel']}}).character-level-input
     .div-character-deaths.div-inline
       +span({'data-i18n':'Deaths:'}).character-deaths-label
-      +number({name:'header-character-deaths',class:'underlined'}).character-deaths-input
+      +number({name:'header-character-deaths',class:'boxed'}).character-deaths-input
     .div-character-desc
       +span({'data-i18n':'Description'}).character-desc-label
       +adaptiveTextarea({name:'header-character-desc',class:'boxed'}).character-desc-input
@@ -53,6 +53,40 @@
   .div-character-image
     +img({name:'character_token'}).character-image
 +module.
+    const doXpTotal = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        let theTotal = 0;
+        const theSection = 'repeating_adventure-main-items';
+        if (sections[theSection].length>0) {
+            sections[theSection].forEach(id => {
+                const theSectionId = theSection+'_'+id+'_adventure-xp';
+                theTotal = theTotal + attributes[theSectionId];
+            });
+        };
+
+        return theTotal;
+    };
+    k.registerFuncs({doXpTotal});
+
+    const funcLogLevel = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const theCallerID = buttonName;
+        const [thePage,theZone,theStat,theField] = parseFieldName(buttonName);
+
+        let theOldValue = 0;
+        if (trigger.previousValue) {
+            theOldValue = trigger.previousValue;
+        };
+        const theNewValue = trigger.newValue;
+        const theRiseType = 'Level';
+
+        if (theNewValue) {
+            doLogRiseToPower(attributes,sections,theRiseType,theOldValue,theNewValue);
+        }
+    };
+    k.registerFuncs({funcLogLevel});
+
 +scss('sheet').
     .thelandrpg-header{
         .logo-image {

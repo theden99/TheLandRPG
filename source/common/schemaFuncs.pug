@@ -308,8 +308,11 @@
         const theSectionId = sectionName+'_'+rowID+'_';
 
         //subtract cost from current
-        const theCost = attributes[theSectionId+'attacks-cost'];
+        let theCost = attributes[theSectionId+'attacks-cost'];
         const theCostType = attributes[theSectionId+'attacks-resource'];
+        if (theCostType==='Mana') {
+            theCost = theCost - Math.floor(theCost*(attributes['chaosseed-combatvalues-efficiencies-total']/100));
+        }
         let theCurHealth = attributes['curhealth'];
         let theCurMana = attributes['curmana'];
         let theCurStamina = attributes['curstamina'];
@@ -341,7 +344,7 @@
         const theVs = attributes[theSectionId+'attacks-vs'];
         const theDamageLine = '[[ '+attributes[theSectionId+'attacks-damage']
             +' [Base Dam] + '+theDamageStatTot
-            +' ['+attributes[theSectionId+'attacks-attackcat']+' Bonus] + '+(theSkillRank/5)
+            +' ['+attributes[theSectionId+'attacks-attackcat']+' Bonus] + '+Math.floor(theSkillRank/5)
             +' [Skill Dam] + '+attributes[theSectionId+'attacks-damagebonus']
             +' [Dam Bonus] ]]'
             ;
@@ -361,7 +364,7 @@
             +' ('+attributes[theSectionId+'attacks-damageclass']+') damage'
             ;
         const theDisplay = attributes[theSectionId+'attacks-display'];
-        const theCostLine = attributes[theSectionId+'attacks-cost']+' '+attributes[theSectionId+'attacks-resource'];
+        const theCostLine = theCost+' '+theCostType;
 
         theAPICall = '!power {{'+
             ' --name|'+theName+
@@ -390,8 +393,11 @@
         //console.log(powerCard);
 
         //subtract cost from current
-        const theCost = attributes[theSectionId+'spells-cost'];
+        let theCost = attributes[theSectionId+'spells-cost'];
         const theCostType = attributes[theSectionId+'spells-costtype'];
+        if (theCostType==='Mana') {
+            theCost = theCost - Math.floor(theCost*(attributes['chaosseed-combatvalues-efficiencies-total']/100));
+        }
         let theCurHealth = attributes['curhealth'];
         let theCurMana = attributes['curmana'];
         let theCurStamina = attributes['curstamina'];

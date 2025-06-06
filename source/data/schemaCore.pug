@@ -750,7 +750,7 @@
                 "formulas": {
                     "base": {
                         "formula": "((sum of skill in Light,Medium,Heavy armor)/2)",
-                        "kformula": "(floor(( @{chaosseed-skills-lightarmor-total} +@{chaosseed-skills-mediumarmor-total} +@{chaosseed-skills-heavyarmor-total} )/2))"
+                        "kformula": "-(floor(( @{chaosseed-skills-lightarmor-total} +@{chaosseed-skills-mediumarmor-total} +@{chaosseed-skills-heavyarmor-total} )/2))"
                     }
                 },
                 "calcs": {},
@@ -3276,7 +3276,7 @@
                 ],
                 "subskills": [],
                 "stats": [
-                    "charisma",
+                    "wisdom",
                     "endurance"
                 ],
                 "subskillsprime": [],
@@ -3936,7 +3936,7 @@
                 ],
                 "subskills": [],
                 "stats": [
-                    "luck"
+                    "wisdom"
                 ],
                 "subskillsprime": [],
                 "effects": [
@@ -9717,6 +9717,58 @@
                 "effects": [],
                 "affects": [],
                 "categories": []
+            },
+            "resists": {
+                "roller": "default",
+                "displayname": "Resists",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "Reduce damage for all resists",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "",
+                        "kformula": ""
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "subskillsprime": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "efficiencies": {
+                "roller": "default",
+                "displayname": "Efficiencies",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "Reduce mana cost for all uses of mana",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "",
+                        "kformula": ""
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "subskillsprime": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
             }
         },
         "traits": {
@@ -9800,7 +9852,9 @@
             "chaosseed-skills-persistance-stat",
             "chaosseed-skills-materiels-stat",
             "chaosseed-skills-enchanting-stat",
+            "chaosseed-skills-artistry-stat",
             "chaosseed-skills-healing-stat",
+            "chaosseed-skills-combathealing-stat",
             "chaosseed-skills-necromancy-stat",
             "chaosseed-skills-herblore-stat",
             "chaosseed-skills-intuition-stat",
@@ -9910,7 +9964,6 @@
             "chaosseed-skills-forgery-stat",
             "chaosseed-skills-seduction-stat",
             "chaosseed-skills-entertain-stat",
-            "chaosseed-skills-artistry-stat",
             "chaosseed-skills-percussion-stat",
             "chaosseed-skills-singing-stat",
             "chaosseed-skills-stringinstrument-stat",
@@ -10004,7 +10057,6 @@
             "chaosseed-skills-gambling-stat",
             "chaosseed-skills-tactics-stat",
             "chaosseed-skills-randomthoughts-stat",
-            "chaosseed-skills-combathealing-stat",
             "chaosseed-skills-metagaming-stat",
             "chaosseed-skills-puzzlesolving-stat",
             "chaosseed-skills-scavenging-stat",

@@ -6,19 +6,28 @@
                 .logs-adventure
                     .logs-adventure-section.paper-background
                         +span({'data-i18n':'Adventure'}).logs-adventure-subtitle
+                        .div-inline
+                            +span({'data-i18n':'Total Downtime:'}).logs-adventure-totaldowntime-head
+                            +number({name:'downtime-total',class:'',readonly:'',value:0,trigger:{calculation:'doDowntimeTotal'}}).logs-adventure-totaldowntime
+                        .div-inline
+                            +span({'data-i18n':'Total Skills:'}).logs-adventure-totalskills-head
+                            +number({name:'skills-total',class:'',readonly:'',value:0,trigger:{calculation:'doSkillsTotal'}}).logs-adventure-totalskills
+                        .div-inline
+                            +span({'data-i18n':'Total Stats:'}).logs-adventure-totalstats-head
+                            +number({name:'stats-total',class:'',readonly:'',value:0,trigger:{calculation:'doStatsTotal'}}).logs-adventure-totalstats
                         .logs-adventure-head
                             +customControlFieldset({name:'adventure-main-items',addClass:'',trigger:{addFuncs:['doAddEntry']}})
                                 .logs-adventure-main
                                     +text({name:'adventure-entry',class:'adventure-entry underlined'})
                                     +adaptiveTextarea({name:'adventure-note',class:'adventure-note boxed'})
                                     +text({name:'adventure-xp-label',readonly:'',value:'XP: ',class:'adventure-xp-label'})
-                                    +text({name:'adventure-xp',class:'adventure-xp boxed'})
+                                    +number({name:'adventure-xp',value:1000,class:'adventure-xp boxed',trigger:{affects:['header-character-exp']}})
                                     +text({name:'adventure-downtime-label',readonly:'',value:'Downtime: ',class:'adventure-downtime-label'})
-                                    +text({name:'adventure-downtime',class:'adventure-downtime boxed'})
+                                    +number({name:'adventure-downtime',value:10,class:'adventure-downtime boxed',trigger:{affects:['downtime-total']}})
                                     +text({name:'adventure-skillpoints-label',readonly:'',value:'Skill Points: ',class:'adventure-skillpoints-label'})
-                                    +text({name:'adventure-skillpoints',class:'adventure-skillpoints boxed'})
+                                    +number({name:'adventure-skillpoints',value:0,class:'adventure-skillpoints boxed',trigger:{affects:['skills-total']}})
                                     +text({name:'adventure-statpoints-label',readonly:'',value:'Stat Points: ',class:'adventure-statpoints-label'})
-                                    +text({name:'adventure-statpoints',class:'adventure-statpoints boxed'})
+                                    +number({name:'adventure-statpoints',value:0,class:'adventure-statpoints boxed',trigger:{affects:['stats-total']}})
             +tab({name:'logs-notes',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Notes'}})
                 .logs-notes
                     .logs-notes-section.paper-background
@@ -47,6 +56,54 @@
         };
     };
     k.registerFuncs({doAddEntry});
+
+    const doDowntimeTotal = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        let theTotal = 0;
+        const theSection = 'repeating_adventure-main-items';
+        if (sections[theSection].length>0) {
+            sections[theSection].forEach(id => {
+                const theSectionId = theSection+'_'+id+'_adventure-downtime';
+                theTotal = theTotal + attributes[theSectionId];
+            });
+        };
+
+        return theTotal;
+    };
+    k.registerFuncs({doDowntimeTotal});
+
+    const doSkillsTotal = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        let theTotal = 0;
+        const theSection = 'repeating_adventure-main-items';
+        if (sections[theSection].length>0) {
+            sections[theSection].forEach(id => {
+                const theSectionId = theSection+'_'+id+'_adventure-skillpoints';
+                theTotal = theTotal + attributes[theSectionId];
+            });
+        };
+
+        return theTotal;
+    };
+    k.registerFuncs({doSkillsTotal});
+
+    const doStatsTotal = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        let theTotal = 0;
+        const theSection = 'repeating_adventure-main-items';
+        if (sections[theSection].length>0) {
+            sections[theSection].forEach(id => {
+                const theSectionId = theSection+'_'+id+'_adventure-statpoints';
+                theTotal = theTotal + attributes[theSectionId];
+            });
+        };
+
+        return theTotal;
+    };
+    k.registerFuncs({doStatsTotal});
 +scss('sheet').
     .logs-main{
         .repitem:hover > .collapse, .repitem:hover .roll-container,
@@ -142,6 +199,40 @@
                     text-align: center;
                     font-weight: bold;
                 }
+                .logs-adventure-totaldowntime-head {
+                    font-size: 14px;
+                    text-align: right;
+                    font-weight: bold;
+                    padding: 5px;
+                }
+                .logs-adventure-totaldowntime {
+                    font-size: 14px;
+                    font-weight: bold;
+                    width: 60;
+                }
+                .logs-adventure-totalskills-head {
+                    font-size: 14px;
+                    text-align: right;
+                    font-weight: bold;
+                    padding: 5px;
+                }
+                .logs-adventure-totalskills {
+                    font-size: 14px;
+                    font-weight: bold;
+                    width: 60;
+                }
+                .logs-adventure-totalstats-head {
+                    font-size: 14px;
+                    text-align: right;
+                    font-weight: bold;
+                    padding: 5px;
+                }
+                .logs-adventure-totalstats {
+                    font-size: 14px;
+                    font-weight: bold;
+                    width: 60;
+                }
+
                 .logs-adventure-head {
                     .logs-adventure-main {
                         .adventure-entry {

@@ -734,7 +734,7 @@ const schemaCore = {
             {
                 [idBase] : {
                     [idFormula] : '((sum of skill in Light,Medium,Heavy armor)/2)',
-                    [idKFormula] : '(floor(( '+
+                    [idKFormula] : '-(floor(( '+
                                         '@{'+getFieldID(idChaosSeed,idSkills,idSkills,idTotal,idLightArmor)+'} +' +
                                         '@{'+getFieldID(idChaosSeed,idSkills,idSkills,idTotal,idMediumArmor)+'} +' +
                                         '@{'+getFieldID(idChaosSeed,idSkills,idSkills,idTotal,idHeavyArmor)+'} ' +
@@ -2328,7 +2328,7 @@ const schemaCore = {
             idUncommon,
             [idEntertain],
             [],
-            [idCharisma,idEndurance],
+            [idWisdom,idEndurance],
         ),
         [idPercussion] : getListEntry(idDefault,'Percussion','0','0',
             'survial is fun',
@@ -2766,7 +2766,7 @@ const schemaCore = {
             idUncommon,
             [idHealing],
             [],
-            [idLuck],
+            [idWisdom],
             [],
             [idCombatMedic],
         ),
@@ -6552,6 +6552,36 @@ const schemaCore = {
                     [idFormula] : capitalize(idIntelligence) + ' + (' + capitalize(idLuck) + '/10)',
                     [idKFormula] : '@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idIntelligence) + '} + ' + 
                                     'floor(@{' + getFieldID(idChaosSeed,idStats,idStats,idTotal,idLuck) + '}/10)',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idResists] : getListEntry(idDefault,'Resists','0','0',
+            'Reduce damage for all resists',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idEfficiencies] : getListEntry(idDefault,'Efficiencies','0','0',
+            'Reduce mana cost for all uses of mana',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
                 },
             },
             {

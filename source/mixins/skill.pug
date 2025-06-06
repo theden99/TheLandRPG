@@ -136,13 +136,21 @@ mixin rowSkill(iPage,iZone,iTemplate,iSkill)
         }
 
         //also set MaxRank
+        let theSkillMaxRank = 0;
+        const theLevelMaxRank = (2+
+                                    attributes['header-character-level']+
+                                    (attributes[getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,theTemplate)]/25)
+                                );
         theParents = schemaCore.skills[theTemplate].parents;
         if (theParents.length>0) {
             const theParentSkill = theParents[0];
             const theRanks = getFieldID(idChaosSeed,idSkills,idSkills,idRank,theParentSkill);
-            const theMiscBonus = getFieldID(idChaosSeed,idSkills,idSkills,idMiscBonus,theParentSkill);
             const theMaxRank = getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,theTemplate);
-            attributes[theMaxRank] = attributes[theRanks]+attributes[theMiscBonus];
+            theSkillMaxRank = attributes[theRanks];
+            if (theLevelMaxRank<theSkillMaxRank) {
+                theSkillMaxRank = theLevelMaxRank;
+            }
+            attributes[theMaxRank] = theSkillMaxRank;
         };
 
         return theBonus;
