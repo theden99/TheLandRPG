@@ -200,7 +200,8 @@ on('chat:message',function(msg){
     }
 
     function doSpell(iCharId,iSectionId) {
-
+        log(msg.playerid);
+        sendChat('player|'+msg.playerid,'!power {{ --name|test power card }}')
     }
 
     function doAttack(iCharId,iSectionId) {

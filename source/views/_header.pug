@@ -29,7 +29,9 @@
     .div
     .div-character-race.div-inline
       +span({'data-i18n':'Race:'}).character-race-label
-      +text({name:'header-character-race',class:'underlined'}).character-race-input
+      +select({name:'header-character-race',class:'underlined',trigger:{triggeredFuncs:['doRaceDesc']}}).character-race-input
+        each entry,race in schemaCore.race
+          +option({value:race,'data-i18n':entry.displayname})
     .div-character-classprofession.div-inline
       +span({'data-i18n':'Class/Profession:'}).character-classprofession-label
       +text({name:'header-character-classprofession',class:'underlined'}).character-classprofession-input
@@ -53,6 +55,16 @@
   .div-character-image
     +img({name:'character_token'}).character-image
 +module.
+    const doRaceDesc = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const theRace = attributes['header-character-race'];
+        const theDesc = schemaCore.race[theRace].helpdesc;
+
+        attributes['header-character-desc'] = theDesc;
+    };
+    k.registerFuncs({doRaceDesc});
+
     const doXpTotal = ({trigger,attributes,sections,casc}) => {
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
@@ -201,14 +213,14 @@
             }
           };
           .div-character-race {
-            width: 120px;
+            width: 160px;
             .character-race-label{
                 margin-right: 3px;
                 margin-top: 5px;
             }
             .character-race-input{
                 margin-right: 5px;
-                width: 80px;
+                width: 140px;
             }
           };
           .div-character-classprofession {

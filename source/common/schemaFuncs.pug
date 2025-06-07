@@ -304,8 +304,9 @@
 
     const funcAttacks = async function({trigger,attributes,sections,casc}){
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
-        let theAPICall = '';
         const theSectionId = sectionName+'_'+rowID+'_';
+        const powerCard = attributes[sectionName+'_'+rowID+'_attacks-powercard'];
+        let theAPICall = '';
 
         //subtract cost from current
         let theCost = attributes[theSectionId+'attacks-cost'];
@@ -327,55 +328,59 @@
             attributes['curstamina'] = theCurStamina;
         }
 
-        const theName = attributes[theSectionId+'attacks-name'];
-        const theCharName = attributes['character_name'];
-        const theActionType = attributes[theSectionId+'attacks-actiontype'];
-        const theRange = attributes[theSectionId+'attacks-range'];
-        const theAccStatTot = attributes['chaosseed-combatvalues-'+attributes[theSectionId+'attacks-attackcat']+'acc-total'];
-        const theDamageStatTot = attributes['chaosseed-combatvalues-'+attributes[theSectionId+'attacks-attackcat']+'damage-total'];
-        const theSkillTot = attributes['chaosseed-skills-'+attributes[theSectionId+'attacks-weapontype']+'-total'];
-        const theSkillRank = attributes['chaosseed-skills-'+attributes[theSectionId+'attacks-weapontype']+'-rank'];
-        const theAccLine = theAccStatTot
-            +' ['+attributes[theSectionId+'attacks-attackcat']+' Bonus] + '+theSkillTot
-            +' [Skill Bonus] + '+attributes[theSectionId+'attacks-accbonus']
-            +' [Acc Bonus] - '+attributes[theSectionId+'attacks-attacktype']
-            +' [Attack Penalty]'
-            ;
-        const theVs = attributes[theSectionId+'attacks-vs'];
-        const theDamageLine = '[[ '+attributes[theSectionId+'attacks-damage']
-            +' [Base Dam] + '+theDamageStatTot
-            +' ['+attributes[theSectionId+'attacks-attackcat']+' Bonus] + '+Math.floor(theSkillRank/5)
-            +' [Skill Dam] + '+attributes[theSectionId+'attacks-damagebonus']
-            +' [Dam Bonus] ]]'
-            ;
-        const theAnatomyBonus = Math.floor(attributes['chaosseed-skills-anatomy-rank']/10);
-        const theCritSkillBonus = Math.floor(theSkillRank/2);
-        const theCritLine = 'If the check is [['+attributes[theSectionId+'attacks-critabove']+' -'
-            +' '+theAnatomyBonus
-            +' [Anatomy Bonus] ]] or more than needed, it takes an additional [[ '
-            +attributes[theSectionId+'attacks-damage']
-            +' [Base Dam] + '+theDamageStatTot
-            +' ['+attributes[theSectionId+'attacks-attackcat']+' Bonus] + '+(theSkillRank/5)
-            +' [Skill Dam] + '+attributes[theSectionId+'attacks-damagebonus']
-            +' [Dam Bonus] + '+attributes[theSectionId+'attacks-critdamagebonus']
-            +' [Crit Dam Bonus] + '+theCritSkillBonus
-            +' [Crit Skill Bonus] ]] '
-            +attributes[theSectionId+'attacks-damagetype']
-            +' ('+attributes[theSectionId+'attacks-damageclass']+') damage'
-            ;
-        const theDisplay = attributes[theSectionId+'attacks-display'];
-        const theCostLine = theCost+' '+theCostType;
+        if (powerCard!=='') {
+            theAPICall = powerCard;
+        } else {
+            const theName = attributes[theSectionId+'attacks-name'];
+            const theCharName = attributes['character_name'];
+            const theActionType = attributes[theSectionId+'attacks-actiontype'];
+            const theRange = attributes[theSectionId+'attacks-range'];
+            const theAccStatTot = attributes['chaosseed-combatvalues-'+attributes[theSectionId+'attacks-attackcat']+'acc-total'];
+            const theDamageStatTot = attributes['chaosseed-combatvalues-'+attributes[theSectionId+'attacks-attackcat']+'damage-total'];
+            const theSkillTot = attributes['chaosseed-skills-'+attributes[theSectionId+'attacks-weapontype']+'-total'];
+            const theSkillRank = attributes['chaosseed-skills-'+attributes[theSectionId+'attacks-weapontype']+'-rank'];
+            const theAccLine = theAccStatTot
+                +' ['+attributes[theSectionId+'attacks-attackcat']+' Bonus] + '+theSkillTot
+                +' [Skill Bonus] + '+attributes[theSectionId+'attacks-accbonus']
+                +' [Acc Bonus] - '+attributes[theSectionId+'attacks-attacktype']
+                +' [Attack Penalty]'
+                ;
+            const theVs = attributes[theSectionId+'attacks-vs'];
+            const theDamageLine = '[[ '+attributes[theSectionId+'attacks-damage']
+                +' [Base Dam] + '+theDamageStatTot
+                +' ['+attributes[theSectionId+'attacks-attackcat']+' Bonus] + '+Math.floor(theSkillRank/5)
+                +' [Skill Dam] + '+attributes[theSectionId+'attacks-damagebonus']
+                +' [Dam Bonus] ]]'
+                ;
+            const theAnatomyBonus = Math.floor(attributes['chaosseed-skills-anatomy-rank']/10);
+            const theCritSkillBonus = Math.floor(theSkillRank/2);
+            const theCritLine = 'If the check is [['+attributes[theSectionId+'attacks-critabove']+' -'
+                +' '+theAnatomyBonus
+                +' [Anatomy Bonus] ]] or more than needed, it takes an additional [[ '
+                +attributes[theSectionId+'attacks-damage']
+                +' [Base Dam] + '+theDamageStatTot
+                +' ['+attributes[theSectionId+'attacks-attackcat']+' Bonus] + '+(theSkillRank/5)
+                +' [Skill Dam] + '+attributes[theSectionId+'attacks-damagebonus']
+                +' [Dam Bonus] + '+attributes[theSectionId+'attacks-critdamagebonus']
+                +' [Crit Dam Bonus] + '+theCritSkillBonus
+                +' [Crit Skill Bonus] ]] '
+                +attributes[theSectionId+'attacks-damagetype']
+                +' ('+attributes[theSectionId+'attacks-damageclass']+') damage'
+                ;
+            const theDisplay = attributes[theSectionId+'attacks-display'];
+            const theCostLine = theCost+' '+theCostType;
 
-        theAPICall = '!power {{'+
-            ' --name|'+theName+
-            ' --leftsub|'+theCharName+
-            ' --rightsub|'+theActionType+' (range: '+theRange+' ft)'+
-            ' --Accuracy Check:|[[ 1d100 + '+theAccLine+' ]] vs. '+theVs+
-            ' --Damage:|'+theDamageLine+
-            ' --Critical Chance:|'+theCritLine+
-            ' --Cost:|'+theCostLine+
-            ' --Notes:|'+theDisplay
+            theAPICall = '!power {{'+
+                ' --name|'+theName+
+                ' --leftsub|'+theCharName+
+                ' --rightsub|'+theActionType+' (range: '+theRange+' ft)'+
+                ' --Accuracy Check:|[[ 1d100 + '+theAccLine+' ]] vs. '+theVs+
+                ' --Damage:|'+theDamageLine+
+                ' --Critical Chance:|'+theCritLine+
+                ' --Cost:|'+theCostLine+
+                ' --Notes:|'+theDisplay
             ;
+        };
 
         const roll = await startRoll(theAPICall);
         finishRoll(roll.rollId);
@@ -396,7 +401,12 @@
         let theCost = attributes[theSectionId+'spells-cost'];
         const theCostType = attributes[theSectionId+'spells-costtype'];
         if (theCostType==='Mana') {
-            theCost = theCost - Math.floor(theCost*(attributes['chaosseed-combatvalues-efficiencies-total']/100));
+            //get global efficiencies
+            theMult = attributes['chaosseed-combatvalues-efficiencies-total'];
+            //get magic type efficienices
+            const theEffType = attributes[theSectionId+'spells-magictype'];
+            theMult += attributes['chaosseed-efficiencies-'+theEffType+'-total'];
+            theCost = theCost - Math.floor(theCost*(theMult/100));
         }
         let theCurHealth = attributes['curhealth'];
         let theCurMana = attributes['curmana'];

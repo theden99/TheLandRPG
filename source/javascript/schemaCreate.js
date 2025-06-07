@@ -458,10 +458,31 @@ const idMeleeAcc = 'meleeacc';
 const idThrownAcc = 'thrownacc';
 const idRangedAcc = 'rangedacc';
 const idSpellAcc = 'spellacc';
-//traits
-const idTrait = 'trait';
-const idHerbalSpirit = 'herbalspirit';
-const idMeleeWeaponProdigy = 'meleeweaponprodigy';
+//race
+const idRace = 'race';
+const idBeastling = 'beastling';
+const idDrakarth = 'drakarth';
+const idCitydwarf = 'citydwarf';
+const idEeepdwarf = 'deeepdwarf';
+const idHilldwarf = 'hilldwarf';
+const idMountaindwarf = 'mountaindwarf';
+const idHighelf = 'highelf';
+const idRiverelf = 'riverelf';
+const idSandelf = 'sandelf';
+const idWoodelf = 'woodelf';
+const idFelixian = 'felixian';
+const idCoinhalfling = 'coinhalfling';
+const idQuickmounthalfling = 'quickmounthalfling';
+const idNomadhalfling = 'nomadhalfling';
+const idHuman = 'human';
+const idIrizari = 'irizari';
+const idForestsprite = 'forestsprite';
+const idHillsprite = 'hillsprite';
+const idMarshsprite = 'marshsprite';
+const idWoodsprite = 'woodsprite';
+const idAstratyche = 'astratyche';
+const idDemostyche = 'demostyche';
+const idSolostyche = 'solostyche';
 
 const idSubskillsPrime = 'subskillsprime';
 
@@ -6590,9 +6611,9 @@ const schemaCore = {
             },
         ),
     },
-    [idTraits] : {
-        [idHerbalSpirit] : getListEntry(idDefault,'Herbal Spirit','0','0',
-            'you are an herbal spirit',
+    [idRace] : {
+        [idBeastling] : getListEntry(idDefault,'Beastling','0','0',
+            'beastling is beastling',
             'this is long',
             '',
             {
@@ -6606,8 +6627,8 @@ const schemaCore = {
             {
             },
         ),
-        [idMeleeWeaponProdigy] : getListEntry(idDefault,'Melee Weapon Prodigy','0','0',
-            'you dig weapons',
+        [idDrakarth] : getListEntry(idDefault,'Drakarth','0','0',
+            '',
             'this is long',
             '',
             {
@@ -6621,7 +6642,322 @@ const schemaCore = {
             {
             },
         ),
-    },
+        [idCitydwarf] : getListEntry(idDefault,'City Dwarf','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idEeepdwarf] : getListEntry(idDefault,'Deeep Dwarf','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idHilldwarf] : getListEntry(idDefault,'Hill Dwarf','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idMountaindwarf] : getListEntry(idDefault,'Mountain Dwarf','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idHighelf] : getListEntry(idDefault,'High Elf','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idRiverelf] : getListEntry(idDefault,'River Elf','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idSandelf] : getListEntry(idDefault,'Sand Elf','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idWoodelf] : getListEntry(idDefault,'Wood Elf','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idFelixian] : getListEntry(idDefault,'Felixian','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idCoinhalfling] : getListEntry(idDefault,'Coin Halfling','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idQuickmounthalfling] : getListEntry(idDefault,'Quickmount Halfling','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idNomadhalfling] : getListEntry(idDefault,'Nomad Halfling','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idHuman] : getListEntry(idDefault,'Human','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idIrizari] : getListEntry(idDefault,'Irizari','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idForestsprite] : getListEntry(idDefault,'Forest Sprite','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idHillsprite] : getListEntry(idDefault,'Hill Sprite','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idMarshsprite] : getListEntry(idDefault,'Marsh Sprite','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idWoodsprite] : getListEntry(idDefault,'Woods Sprite','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idAstratyche] : getListEntry(idDefault,'Astra Tyche','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idDemostyche] : getListEntry(idDefault,'Demos Tyche','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idSolostyche] : getListEntry(idDefault,'Solos Tyche','0','0',
+            '',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+    }
 };
 // listStatsCharacterCreation = createSublist(listStats,[idStrength]);
 

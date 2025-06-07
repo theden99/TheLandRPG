@@ -2873,7 +2873,7 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-header .header-details .div-
   width: 80px;
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-header .header-details .div-character-race {
-  width: 120px;
+  width: 160px;
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-header .header-details .div-character-race .character-race-label {
   margin-right: 3px;
@@ -2881,7 +2881,7 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-header .header-details .div-
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-header .header-details .div-character-race .character-race-input {
   margin-right: 5px;
-  width: 80px;
+  width: 140px;
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-header .header-details .div-character-classprofession {
   width: 210px;

@@ -23,13 +23,12 @@
                         +span({'data-i18n':'Rarity'}).traits-head-rarity
                     .div-traits-rows.div-inline
                         +customControlFieldset({name:'traits-rows',addClass:''})
-                            +select({name:'traits-trait',class:'row-traits-trait underlined'})
-                                each entry,stat in schemaCore.traits
-                                    +option({value:stat,'data-i18n':entry.displayname})
+                            +text({name:'traits-trait',class:'row-traits-trait underlined'})
                             +select({name:'traits-rarity',class:'row-traits-rarity underlined'})
-                                +option({value:'idCommon','data-i18n':'Common'})
-                                +option({value:'idUnommon','data-i18n':'Uncommon'})
-                                +option({value:'idRare','data-i18n':'Rare'})
+                                +option({value:'common','data-i18n':'Common'})
+                                +option({value:'uncommon','data-i18n':'Uncommon'})
+                                +option({value:'rare','data-i18n':'Rare'})
+                                +option({value:'racial','data-i18n':'Racial'})
                             +span({}).trashcan-padding
                             .collapse-container
                                 +collapse('details-collapse')
@@ -39,7 +38,6 @@
                                     .div-item-details
                                         .div-traits-desc
                                             +adaptiveTextarea({name:'traits-desc',class:'boxed'})
-                                            +span({'data-i18n':'Description'}).traits-head-desc
 +module.
 +scss('sheet').
     .thelandrpg-tabs-section-skills{
