@@ -3,20 +3,24 @@
         +span({'data-i18n':'BATTLE(CRUSH YOUR ENEMIES)'}).battle-title.paper-background
         +tabs({name:'battle-crushthem',defaultActiveTab:'battle-spells',persistent:true})
             +tab({name:'battle-spells',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Spells'}})
-                .battle-spells
-                    .battle-spells-section.paper-background
-                        +span({'data-i18n':'Spells/Techniques'}).battle-spells-subtitle
-                        include _battle-spells.pug
-            //+tab({name:'battle-techs',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Techniques'}})
-            //    .battle-techs
-            //        .battle-techs-section.paper-background
-            //            +span({'data-i18n':'Techniques'}).battle-techs-subtitle
-            //            include _battle-techs.pug
+                +tabs({name:'spells-books',defaultActiveTab:'spells-book1',persistent:true})
+                    +spells-books('book1')
+                    +spells-books('book2')
+                    +spells-books('book3')
+                    +spells-books('book4')
+                    +spells-books('book5')
+                    +spells-books('book6')
+                    +spells-books('book7')
+                    +spells-books('book8')
+                    +spells-books('book9')
+                    +spells-books('book10')
             +tab({name:'battle-attacks',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Attacks'}})
-                .battle-attacks
-                    .battle-attacks-section.paper-background
-                        +span({'data-i18n':'Attacks'}).battle-attacks-subtitle
-                        include _battle-attacks.pug
+                +tabs({name:'attacks-attacks',defaultActiveTab:'attacks-attacks1',persistent:true})
+                    +attacks-attacks('attacks1')
+                    +attacks-attacks('attacks2')
+                    +attacks-attacks('attacks3')
+                    +attacks-attacks('attacks4')
+                    +attacks-attacks('attacks5')
 +module.
 +scss('sheet').
     .battle-main{
@@ -73,7 +77,8 @@
                 .spells-main {
                     grid-area: spells;
                 }
-            }
+         
+         }
         }
         .battle-techs {
             grid-area: buttons;
