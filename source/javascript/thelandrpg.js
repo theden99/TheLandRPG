@@ -1,6 +1,13 @@
 //log('==> The Land RPG mod v1.0.0')
 "use strict";
 
+if (!state.theLandRPG) {
+    state.theLandRPG = {
+        version: 1.0,
+        chars: {}
+    }
+}
+
 const paramSetCharId = 'setcharid';
 const paramCharId = 'charid'
 const paramFullResources = 'full';
@@ -12,14 +19,49 @@ const paramAttack = 'attack'
 
 const listParamHasValue = [paramSetCharId,paramCharId,paramMoveRange,paramSpell,paramAttack];
 
-on('chat:message',function(msg){
-
-    if (!state.theLandRPG) {
-        state.theLandRPG = {
-            version: 1.0,
-            chars: []
-        }
+function doGetAttrByName(iCharId,iAttrName) {
+    var theAttr = findObjs({
+                            type: 'attribute',
+                            characterid: iCharId,
+                            name: iAttrName
+    }, {caseInsensitive: true})[0];
+    if (!theAttr) {
+        theAttr = createObj('attribute', {
+                        characterid: iCharId,
+                        name: iAttrName
+        });
     }
+
+    return theAttr.get('current');
+};
+
+function doSetAttrByName(iCharId,iAttrName,iValue) {
+    var theAttr = findObjs({
+                            type: 'attribute',
+                            characterid: iCharId,
+                            name: iAttrName
+    }, {caseInsensitive: true})[0];
+    if (!theAttr) {
+        theAttr = createObj('attribute', {
+                        characterid: iCharId,
+                        name: iAttrName
+        });
+    }
+
+    return theAttr.set('current',iValue);
+};
+
+function addMax(iCur,iAdd,iMax) {
+    let theCur = iCur;
+    theCur = theCur+iAdd;
+    if (theCur>iMax) {
+        theCur = iMax;
+    }
+
+    return theCur;
+}
+
+on('chat:message',function(msg){
 
     function setDefaultCharVars(iCharId) {
         //init vars
@@ -60,38 +102,6 @@ on('chat:message',function(msg){
             }, {});
     };
 
-    function doGetAttrByName(iCharId,iAttrName) {
-        var theAttr = findObjs({
-                                type: 'attribute',
-                                characterid: iCharId,
-                                name: iAttrName
-        }, {caseInsensitive: true})[0];
-        if (!theAttr) {
-            theAttr = createObj('attribute', {
-                            characterid: iCharId,
-                            name: iAttrName
-            });
-        }
-
-        return theAttr.get('current');
-    };
-
-    function doSetAttrByName(iCharId,iAttrName,iValue) {
-        var theAttr = findObjs({
-                                type: 'attribute',
-                                characterid: iCharId,
-                                name: iAttrName
-        }, {caseInsensitive: true})[0];
-        if (!theAttr) {
-            theAttr = createObj('attribute', {
-                            characterid: iCharId,
-                            name: iAttrName
-            });
-        }
-
-        return theAttr.set('current',iValue);
-    };
-
     function setCharId(iParams) {
         const characters = findObjs({type:'character'});
         const theChars = characters.map(theChar => {
@@ -111,16 +121,6 @@ on('chat:message',function(msg){
         });
     };
 
-    function addMax(iCur,iAdd,iMax) {
-        let theCur = iCur;
-        theCur = theCur+iAdd;
-        if (theCur>iMax) {
-            theCur = iMax;
-        }
-
-        return theCur;
-    }
-    
     function setResources(iCharId,iParams) {
         const curMana = parseInt(doGetAttrByName(iCharId,'curmana'));
         const curStamina = parseInt(doGetAttrByName(iCharId,'curstamina'));
@@ -133,8 +133,8 @@ on('chat:message',function(msg){
         //concentrate
         if (iParams[paramConcentrate]) {
             const theConc = parseInt(doGetAttrByName(iCharId,'chaosseed-skills-concentration-total'));
-            doSetAttrByName(iCharId,'curmana',addMax(curMana,Math.floor(theConc/5),maxMana));
-            doSetAttrByName(iCharId,'curstamina',addMax(curStamina,Math.floor(theConc/10),maxStamina));
+            doSetAttrByName(iCharId,'curmana',addMax(curMana,theConc,maxMana));
+            doSetAttrByName(iCharId,'curstamina',addMax(curStamina,theConc,maxStamina));
         };
 
         //start turn
@@ -242,3 +242,42 @@ on('chat:message',function(msg){
         };
     };
 });
+
+/*
+let listTurnOrder = [];
+on('change:campaign:turnorder',function(msg){
+    log(msg);
+    if (Campaign().get("turnorder") == "") {
+        listTurnOrder = []; 
+    } else {
+        listTurnOrder = JSON.parse(Campaign().get("turnorder"));
+    }
+    log(listTurnOrder);
+
+    if (listTurnOrder.length>0) {
+        const curTurn = listTurnOrder[0];
+        log(curTurn);
+        let theChar;
+        let theToken;
+        if (curTurn.id==='-1') {
+            const thePlayer = findObjs({type:'player',displayname:curTurn.custom})[0];
+            const thePlayerId = thePlayer.get('id');
+            theChar = findObjs({type:'character',controlledby:thePlayerId})[0];
+            if (theChar) {
+                const theCharId = theChar.get('id');
+                theToken = findObjs({type:'graphic',subtype:'token',represents:theCharId})[0];
+            } else {
+                log('character controlled by needs to be set');
+            }
+        } else {
+            theToken = findObjs({ id:curTurn.id })[0];
+            const theRepresents = theToken.get('represents');
+            theChar = findObjs({ id:theRepresents })[0];
+        }
+        log(theChar);
+        log(theToken);
+    } else {
+        log('no turn order');
+    }
+});
+*/
