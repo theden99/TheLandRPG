@@ -14,6 +14,7 @@
                     +spells-books('book8')
                     +spells-books('book9')
                     +spells-books('book10')
+                    +spells-books('buffs')
             +tab({name:'battle-attacks',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Attacks'}})
                 +tabs({name:'attacks-attacks',defaultActiveTab:'attacks-attacks1',persistent:true})
                     +attacks-attacks('attacks1')
@@ -58,71 +59,8 @@
 
         .battle-spells {
             grid-area: buttons;
-
-            .battle-spells-section {
-                display: grid;
-                width: 1010px;
-                grid-template-columns: auto;
-                grid-template-areas: 
-                    'title'
-                    'spells'
-                ;
-
-                .battle-spells-subtitle{
-                    grid-area: title;
-                    font-size: 16px;
-                    text-align: center;
-                    font-weight: bold;
-                }
-                .spells-main {
-                    grid-area: spells;
-                }
-         
-         }
-        }
-        .battle-techs {
-            grid-area: buttons;
-
-            .battle-techs-section {
-                display: grid;
-                grid-template-columns: auto;
-                grid-template-areas: 
-                    'title'
-                    'techs'
-                ;
-
-                .battle-techs-subtitle{
-                    grid-area: title;
-                    font-size: 16px;
-                    text-align: center;
-                    font-weight: bold;
-                }
-                .techs-main {
-                    grid-area: techs;
-                }
-            }
         }
         .battle-attacks {
             grid-area: buttons;
-
-            .battle-attacks-section {
-                display: grid;
-                width: 940px;
-                grid-template-columns: auto;
-                grid-template-areas: 
-                    'title'
-                    'attacks'
-                ;
-
-                .battle-attacks-subtitle{
-                    grid-area: title;
-                    font-size: 16px;
-                    text-align: center;
-                    font-weight: bold;
-                }
-                .attack-main {
-                    grid-area: attacks;
-                }
-            }
         }
     }

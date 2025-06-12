@@ -74,7 +74,7 @@ mixin spells-books(iTableName)
                         +option({value:'Stamina','data-i18n':'Stamina'})
                         +option({value:'Mana','data-i18n':'Mana'})
                         +option({value:'N/A','data-i18n':'N/A'})
-                    +number({name:'attacks-numtargets',value:'0',class:'attacks-numtargets boxed'})
+                    +number({name:'spells-numtargets',value:'0',class:'spells-numtargets boxed'})
                     +button({name:'spells-showrange',type:'action',class:'spells-showrange','data-i18n':'Show Range',trigger:{triggeredFuncs:['doSpellRange']}})
                 .div
                     .collapse-container
@@ -174,7 +174,7 @@ mixin spells-books(iTableName)
                                     +span({'data-i18n':'Crit Above'}).spells-critabove-head
                                 .div-critbonus
                                     +text({name:'spells-critbonus',value:'0',class:'spells-critbonus boxed'})
-                                    +span({'data-i18n':'Crit Bonus'}).spells-critbonus-head
+                                    +span({'data-i18n':'Crit Above Bonus'}).spells-critbonus-head
                                 .div-critdamagebonus
                                     +text({name:'spells-critdamagebonus',value:'0',class:'spells-critdamagebonus boxed'})
                                     +span({'data-i18n':'Crit Dam Bonus'}).spells-critdamagebonus-head
@@ -254,6 +254,7 @@ mixin spells-books(iTableName)
 
 +scss('sheet').
     .spells-main{
+        width: 1000px;
 
         .spells-roller-head,
         .spells-roller {

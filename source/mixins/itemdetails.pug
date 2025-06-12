@@ -22,7 +22,7 @@ mixin collapseItemDetails(iTotWeightFunc)
                         +option({value:'sizeGigantic','data-i18n':'Gigantic'})
                     +span({'data-i18n':'Size'}).item-head-size
                 .div-armorvalue
-                    +number({name:'armorvalue',class:'item-armorvalue boxed',value:0})
+                    +number({name:'armorvalue',class:'item-armorvalue boxed',value:0,trigger:{triggeredFuncs:['doLockDown']}})
                     +span({'data-i18n':'Armor Value'}).item-head-armorvalue
                 .div-armortype
                     +select({name:'armortype',class:'item-armortype underlined'})
@@ -32,7 +32,7 @@ mixin collapseItemDetails(iTotWeightFunc)
                         +option({value:'armorHeavy','data-i18n':'Heavy'})
                     +span({'data-i18n':'Armor Type'}).item-head-armortype
                 .div-movepen
-                    +number({name:'movepen',class:'item-movepen boxed',value:0})
+                    +number({name:'movepen',class:'item-movepen boxed',value:0,trigger:{triggeredFuncs:['doLockDown']}})
                     +span({'data-i18n':'Move Penalty'}).item-head-movepen
                 .div-accmod
                     +number({name:'accmod',class:'item_accmod boxed',value:0})
@@ -73,7 +73,7 @@ mixin collapseItemDetails(iTotWeightFunc)
                     +adaptiveTextarea({name:'notes',class:'boxed'})
                 .div-effects
                     +span({'data-i18n':'Effects'}).item-head-effects
-                    +adaptiveTextarea({name:'effects',class:'boxed',spellcheck:'false'})
+                    +adaptiveTextarea({name:'effects',class:'boxed',spellcheck:'false',trigger:{triggeredFuncs:['doLockDown']}})
                 .div-weapontype
                     +select({name:'weapontype',class:'item-weapontype underlined'})
                         +option({value:'na','data-i18n':'N/A'})

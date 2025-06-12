@@ -71,6 +71,19 @@ mixin inventory-items(iTableName,iIsStorage)
                     +text({name:'slottype',class:'underlined hidden',readonly:''})
                     +collapseItemDetails('inventory-totweight')
 +module.
+    const doLockDown = function({trigger,attributes,sections,casc}){
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const theSectionID = sectionName+'_'+rowID;
+
+        //don't allow fields to change if equipped
+        if (attributes[theSectionID+'_isequipped']==1) {
+            if ((buttonName=='armorvalue') || (buttonName=='movepen') || (buttonName=='effects')) {
+                attributes[theSectionID+'_'+buttonName] = trigger.previousValue;
+            }
+        }
+    };
+    k.registerFuncs({doLockDown});
+
     const doEquipItem = (attributes,sections,iSectionID,iMult) => {
         let theArmorValue = attributes[iSectionID+'_armorvalue'];
         let theMovePen = attributes[iSectionID+'_movepen'];

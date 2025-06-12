@@ -76,7 +76,7 @@ mixin attacks-attacks(iTableName)
                                     +span({'data-i18n':'Crit Above'}).attacks-critabove-head
                                 .div-critbonus
                                     +text({name:'attacks-critbonus',value:'0',class:'attacks-critbonus boxed'})
-                                    +span({'data-i18n':'Crit Bonus'}).attacks-critbonus-head
+                                    +span({'data-i18n':'Crit ACC Bonus'}).attacks-critbonus-head
                                 .div-critdamagebonus
                                     +text({name:'attacks-critdamagebonus',value:'0',class:'attacks-critdamagebonus boxed'})
                                     +span({'data-i18n':'Crit Dam Bonus'}).attacks-critdamagebonus-head
@@ -138,6 +138,7 @@ mixin attacks-attacks(iTableName)
 
 +scss('sheet').
     .attacks-main{
+        width: 940px;
 
         .attacks-roller-head,
         .attacks-roller {
