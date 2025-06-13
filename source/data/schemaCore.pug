@@ -447,17 +447,41 @@
 - const idThrownAcc = 'thrownacc';
 - const idRangedAcc = 'rangedacc';
 - const idSpellAcc = 'spellacc';
-- //traits
-- const idTrait = 'trait';
-- const idHerbalSpirit = 'herbalspirit';
-- const idMeleeWeaponProdigy = 'meleeweaponprodigy';
+- const idArcaneEfficiencies = 'arcaneefficiencies';
+- //race
+- const idRace = 'race';
+- const idBeastling = 'beastling';
+- const idDrakarth = 'drakarth';
+- const idCitydwarf = 'citydwarf';
+- const idEeepdwarf = 'deeepdwarf';
+- const idHilldwarf = 'hilldwarf';
+- const idMountaindwarf = 'mountaindwarf';
+- const idHighelf = 'highelf';
+- const idRiverelf = 'riverelf';
+- const idSandelf = 'sandelf';
+- const idWoodelf = 'woodelf';
+- const idFelixian = 'felixian';
+- const idCoinhalfling = 'coinhalfling';
+- const idQuickmounthalfling = 'quickmounthalfling';
+- const idNomadhalfling = 'nomadhalfling';
+- const idHuman = 'human';
+- const idIrizari = 'irizari';
+- const idForestsprite = 'forestsprite';
+- const idHillsprite = 'hillsprite';
+- const idMarshsprite = 'marshsprite';
+- const idWoodsprite = 'woodsprite';
+- const idAstratyche = 'astratyche';
+- const idDemostyche = 'demostyche';
+- const idSolostyche = 'solostyche';
 - 
 - const idSubskillsPrime = 'subskillsprime';
 - 
-- const tableIsTemplate = [idStats,idMovement,idCombatStats,idSkills,idResists,idSpellResists,idEfficiencies,idCombatValues];
+- const tableIsTemplate = [idStats,idMovement,idCombatStats,idSkills,idResists,idSpellResists,idEfficiencies,idCombatValues,idArcaneEfficiencies];
 - 
-- const listMartialSkills = [idDoubleAttack,idDualWielding,idKeenShot,idMartialRage,idMeleeFocus,idTwoHandedWielding];
+- const listMagicSkills = [idAirMagic,idDarkMagic,idDeathMagic,idEarthMagic,idFireMagic,idLifeMagic,idWaterMagic,idEldritchMagic,idChaosMagic];
 - const listMetamagicSkills = [idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting];
+- const listCombatSkills = [idArchery,idAxes,idCrossbows,idHammers,idMaces,idSmallBlades,idSpears,idStaves,idSwords,idShieldBash,idUnarmedCombat];
+- const listMartialSkills = [idDoubleAttack,idDualWielding,idKeenShot,idMartialRage,idMeleeFocus,idTwoHandedWielding];
 - 
 
 - 
@@ -1395,6 +1419,268 @@
             }
         },
         "efficiencies": {
+            "airmagic": {
+                "roller": "default",
+                "displayname": "Air Magic",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "this is short",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "",
+                        "kformula": ""
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "subskillsprime": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "darkmagic": {
+                "roller": "default",
+                "displayname": "Dark Magic",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "this is short",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "",
+                        "kformula": ""
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "subskillsprime": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "deathmagic": {
+                "roller": "default",
+                "displayname": "Death Magic",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "this is short",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "",
+                        "kformula": ""
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "subskillsprime": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "earthmagic": {
+                "roller": "default",
+                "displayname": "Earth Magic",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "this is short",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "",
+                        "kformula": ""
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "subskillsprime": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "firemagic": {
+                "roller": "default",
+                "displayname": "Fire Magic",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "this is short",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "",
+                        "kformula": ""
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "subskillsprime": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "lifemagic": {
+                "roller": "default",
+                "displayname": "Life Magic",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "this is short",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "",
+                        "kformula": ""
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "subskillsprime": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "lightmagic": {
+                "roller": "default",
+                "displayname": "Light Magic",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "this is short",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "",
+                        "kformula": ""
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "subskillsprime": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "watermagic": {
+                "roller": "default",
+                "displayname": "Water Magic",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "this is short",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "",
+                        "kformula": ""
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "subskillsprime": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "eldritch": {
+                "roller": "default",
+                "displayname": "Eldritch Magic",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "this is short",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "",
+                        "kformula": ""
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "subskillsprime": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "chaos": {
+                "roller": "default",
+                "displayname": "Chaos Magic",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "this is short",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "",
+                        "kformula": ""
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "subskillsprime": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            }
+        },
+        "arcaneefficiencies": {
             "airmagic": {
                 "roller": "default",
                 "displayname": "Air Magic",
@@ -9723,7 +10009,7 @@
                 "displayname": "Resists",
                 "default": "0",
                 "decimals": "0",
-                "helpdesc": "Reduce damage for all resists",
+                "helpdesc": "Reduce damage for all resist types",
                 "infodesc": "this is long",
                 "infourl": "",
                 "formulas": {
@@ -9749,7 +10035,33 @@
                 "displayname": "Efficiencies",
                 "default": "0",
                 "decimals": "0",
-                "helpdesc": "Reduce mana cost for all uses of mana",
+                "helpdesc": "increases the damage for all spell types",
+                "infodesc": "this is long",
+                "infourl": "",
+                "formulas": {
+                    "base": {
+                        "formula": "",
+                        "kformula": ""
+                    }
+                },
+                "calcs": {},
+                "funcs": {},
+                "skilltype": "n/a",
+                "rarity": "common",
+                "parents": [],
+                "subskills": [],
+                "stats": [],
+                "subskillsprime": [],
+                "effects": [],
+                "affects": [],
+                "categories": []
+            },
+            "arcaneefficiencies": {
+                "roller": "default",
+                "displayname": "Arcane Efficiencies",
+                "default": "0",
+                "decimals": "0",
+                "helpdesc": "Reduce mana cost for all spell types",
                 "infodesc": "this is long",
                 "infourl": "",
                 "formulas": {

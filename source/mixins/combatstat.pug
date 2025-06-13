@@ -19,7 +19,7 @@ mixin rowCombatStat(iPage,iZone,iTemplate,iStat,iEntry,iClassPrefix,iRoller)
         - theFormula = '@{'+theID+'} +';
         - theSchemaFormula = theStat.formulas[idBase].kformula;
         if (iTemplate===idCombatStats) || (iTemplate===idCombatValues) || (iTemplate===idMovement) 
-            if (iStat===idResists) || (iStat===idEfficiencies)
+            if (iStat===idResists) || (iStat===idEfficiencies) || (iStat===idArcaneEfficiencies)
                 +number({name:theID,class:'boxed '+iClassPrefix+'-base',value:theDefault,trigger:{formula:theSchemaFormula,affects:[theTotalID]}})
             else
                 +number({name:theID,readonly:'',class:'boxed '+iClassPrefix+'-base',value:theDefault,trigger:{formula:theSchemaFormula,affects:[theTotalID]}})

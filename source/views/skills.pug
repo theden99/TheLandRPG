@@ -37,8 +37,41 @@
                                 .collapsed
                                     .div-item-details
                                         .div-traits-desc
+                                            +span({'data-i18n':'Description'}).traits-effects-head
                                             +adaptiveTextarea({name:'traits-desc',class:'boxed'})
+                                        .traits-effects-section.div-inline
+                                            +span({'data-i18n':'Effects'}).traits-effects-head
+                                            +button({name:'traits-effects-apply',type:'action',class:'traits-effects-apply','data-i18n':'Apply',trigger:{triggeredFuncs:['doTraitsEffectsApply']}})
+                                            +button({name:'traits-effects-remove',type:'action',class:'traits-effects-remove','data-i18n':'Remove',trigger:{triggeredFuncs:['doTraitsEffectsRemove']}})
+                                            +text({name:'traits-effects-applied',readonly:'',class:'traits-effects-applied',value:'Not Applied'})
+                                        .div
+                                            +adaptiveTextarea({name:'traits-effects',class:'traits-effects boxed'})
 +module.
+    const doTraitsEffectsApply = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const theEffects = attributes[sectionName+'_'+rowID+'_traits-effects'];
+
+        if (attributes[sectionName+'_'+rowID+'_traits-effects-applied']==='Not Applied') {
+            ApplyEffects(attributes,theEffects,1);
+            attributes[sectionName+'_'+rowID+'_traits-effects-applied'] = 'Applied';
+        };
+
+    };
+    k.registerFuncs({doTraitsEffectsApply});
+
+    const doTraitsEffectsRemove = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        const theEffects = attributes[sectionName+'_'+rowID+'_traits-effects'];
+
+        if (attributes[sectionName+'_'+rowID+'_traits-effects-applied']==='Applied') {
+            ApplyEffects(attributes,theEffects,-1);
+            attributes[sectionName+'_'+rowID+'_traits-effects-applied'] = 'Not Applied';
+        };
+    };
+    k.registerFuncs({doTraitsEffectsRemove});
+
 +scss('sheet').
     .thelandrpg-tabs-section-skills{
         .repitem:hover > .collapse, .repitem:hover .roll-container,
@@ -133,6 +166,7 @@
                             grid-template-columns: auto;
                             grid-template-areas : 
                                 'desc'
+                                'effects'
                             ;
                             border: 1px solid var(--borderColor);
                             .div-traits-desc {
@@ -142,6 +176,32 @@
                                     background-color: gainsboro;
                                 }
 
+                            }
+                            .traits-effects-section {
+                                grid-area: effects;
+
+                                .traits-effects-head {
+                                    grid-area: effects-head;
+                                    background-color: lightgray;
+                                    width: 20%;
+                                }
+                                .traits-effects-apply {
+                                    grid-area: apply;
+                                    @include k.base-button;
+                                    background-color: lightblue;
+                                    width: 60px;
+                                    text-align: center;
+                                }
+                                .traits-effects-remove {
+                                    grid-area: remove;
+                                    @include k.base-button;
+                                    background-color: lightblue;
+                                    width: 60px;
+                                    text-align:center;
+                                }
+                                .traits-effects-applied {
+                                    width: 100px;
+                                }
                             }
                         }
                     }

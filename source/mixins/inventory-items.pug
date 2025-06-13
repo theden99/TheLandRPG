@@ -62,9 +62,7 @@ mixin inventory-items(iTableName,iIsStorage)
                         +option({value:'slotStorageWagonMount','data-i18n':'Wagon/Mount'})
                         +option({value:'slotStorageHouseBank','data-i18n':'House/Bank'})
                         +option({value:'slotDiscardPile','data-i18n':'Discard Pile'})
-                    +select({name:'isequipped',class:'item_equipped underlined',readonly:''})
-                        +option({value:0,'data-i18n':'No'})
-                        +option({value:1,'data-i18n':'Yes'})
+                    +text({name:'isequipped',class:'item_equipped underlined',readonly:'',value:'No'})
                     +button({name:'equip-storage-button',type:'action','data-i18n':'Equip',class:'staging-button',trigger:{triggeredFuncs:['doEquip']}})
                     +button({name:'unequip-storage-button',type:'action','data-i18n':'Unequip',class:'staging-button',trigger:{triggeredFuncs:['doUnequip']}})
                     +text({name:'trashcan-padding',class:'item_padding',readonly:''})
@@ -76,7 +74,7 @@ mixin inventory-items(iTableName,iIsStorage)
         const theSectionID = sectionName+'_'+rowID;
 
         //don't allow fields to change if equipped
-        if (attributes[theSectionID+'_isequipped']==1) {
+        if (attributes[theSectionID+'_isequipped']==='Yes') {
             if ((buttonName=='armorvalue') || (buttonName=='movepen') || (buttonName=='effects')) {
                 attributes[theSectionID+'_'+buttonName] = trigger.previousValue;
             }
@@ -110,10 +108,10 @@ mixin inventory-items(iTableName,iIsStorage)
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
         const theSectionID = sectionName+'_'+rowID;
-        if (attributes[theSectionID+'_isequipped']===0) {
+        if (attributes[theSectionID+'_isequipped']==='No') {
             const bOk = doEquipItem(attributes,sections,theSectionID,1);
             if (bOk===0) {
-                attributes[theSectionID+'_isequipped'] = 1;
+                attributes[theSectionID+'_isequipped'] = 'Yes';
             } else {
                 const theMessage = 'error equipping '+theSectionID;
                 doLogError(attributes,sections,theMessage);
@@ -126,10 +124,10 @@ mixin inventory-items(iTableName,iIsStorage)
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
         const theSectionID = sectionName+'_'+rowID;
-        if (attributes[theSectionID+'_isequipped']===1) {
+        if (attributes[theSectionID+'_isequipped']==='Yes') {
             const bOk = doEquipItem(attributes,sections,theSectionID,-1);
             if (bOk===0) {
-                attributes[theSectionID+'_isequipped'] = 0;
+                attributes[theSectionID+'_isequipped'] = 'No';
             } else {
                 const theMessage = 'error equipping '+theSectionID;
                 doLogError(attributes,sections,theMessage);
@@ -209,6 +207,7 @@ mixin inventory-items(iTableName,iIsStorage)
             }       
             .item_equipped{
                 width: 70px;
+                text-align: center;
             }       
         }
     }

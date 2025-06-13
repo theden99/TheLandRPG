@@ -154,7 +154,7 @@
     }
     k.registerFuncs({doSectionDelete});
 
-    const doSetLevel = ({trigger,attributes,sections,casc}) => {
+    const doInitSheet = ({trigger,attributes,sections,casc}) => {
         //const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
         if (attributes['header-character-level']===0) {
@@ -187,7 +187,7 @@
             },true,()=>{console.log('set luck2')});
         };
     };
-    k.registerFuncs({doSetLevel},{type:['opener']});
+    k.registerFuncs({doInitSheet},{type:['opener']});
 
     const doWriteLog = (attributes,sections,iMessage) => {
         const systemSection = 'repeating_system-main-messages';
@@ -312,7 +312,12 @@
         let theCost = attributes[theSectionId+'attacks-cost'];
         const theCostType = attributes[theSectionId+'attacks-resource'];
         if (theCostType==='Mana') {
-            theCost = theCost - Math.floor(theCost*(attributes['chaosseed-combatvalues-efficiencies-total']/100));
+            //get global efficiencies
+            theMult = attributes['chaosseed-combatvalues-arcaneefficiency-total'];
+            //get magic type efficienices
+            const theEffType = attributes[theSectionId+'spells-magictype'];
+            theMult += attributes['chaosseed-arcaneefficiency-'+theEffType+'-total'];
+            theCost = theCost - Math.floor(theCost*(theMult/100));
         }
         let theCurHealth = attributes['curhealth'];
         let theCurMana = attributes['curmana'];
@@ -395,31 +400,6 @@
         const powerCard = attributes[sectionName+'_'+rowID+'_spells-powercard'];
         let theAPICall = '';
 
-        //subtract cost from current
-        let theCost = attributes[theSectionId+'spells-cost'];
-        const theCostType = attributes[theSectionId+'spells-costtype'];
-        if (theCostType==='Mana') {
-            //get global efficiencies
-            theMult = attributes['chaosseed-combatvalues-efficiencies-total'];
-            //get magic type efficienices
-            const theEffType = attributes[theSectionId+'spells-magictype'];
-            theMult += attributes['chaosseed-efficiencies-'+theEffType+'-total'];
-            theCost = theCost - Math.floor(theCost*(theMult/100));
-        }
-        let theCurHealth = attributes['curhealth'];
-        let theCurMana = attributes['curmana'];
-        let theCurStamina = attributes['curstamina'];
-        if (theCostType==='Health') {
-            theCurHealth -= theCost;
-            attributes['curhealth'] = theCurHealth;
-        } else if (theCostType==='Mana') {
-            theCurMana -= theCost;
-            attributes['curmana'] = theCurMana;
-        } else if (theCostType==='Stamina') {
-            theCurStamina -= theCost;
-            attributes['curstamina'] = theCurStamina;
-        }
-
         if (powerCard!=='') {
             theAPICall = powerCard;
         } else {
@@ -433,12 +413,19 @@
                 +' --charid '+attributes['header-character-id']
                 +' --spell '+theSectionId
 
+            //if (sectionName.includes('book')) {
+            //    theAPICall += ' --spell '+theSectionId
+            //}
+            //else if (sectionName.includes('attack')) {
+            //    theAPICall += ' --attack '+theSectionId
+            //}
+
             const theNumTargets = attributes[theSectionId+'spells-numtargets'];
             if (theNumTargets>0) {
                 //get target ids
                 let theTargets = '@{target|Target 1|token_id}';
                 for (let i=1;i<theNumTargets;i++) {
-                theTargets += '|@{target|Target '+(i+1)+'|token_id}';
+                    theTargets += '|@{target|Target '+(i+1)+'|token_id}';
                 }
                 theAPICall += ' --targets '+theTargets;
 
@@ -464,10 +451,40 @@
                 theAPICall += ' --targetparams '+theTargetParams
             }
         }
-        //log(theAPICall);
+        log(theAPICall);
 
         const roll = await startRoll(theAPICall);
         finishRoll(roll.rollId);
+        log('back from roll');
+
+        //subtract cost from current
+        //let theCost = attributes[theSectionId+'spells-cost'];
+        //const theCostType = attributes[theSectionId+'spells-costtype'];
+        //if (theCostType==='Mana') {
+        //    //get global efficiencies
+        //    theMult = attributes['chaosseed-combatvalues-arcaneefficiencies-total'];
+        //    log(theMult);
+        //    //get magic type efficienices
+        //    const theEffType = attributes[theSectionId+'spells-magictype'];
+        //    theMult += attributes['chaosseed-arcaneefficiencies-'+theEffType+'-total'];
+        //    log(theMult);
+        //    //adjust cost
+        //    theCost = theCost - Math.floor(theCost*(theMult/100));
+        //    log(theCost);
+        //}
+        //let theCurHealth = attributes['curhealth'];
+        //let theCurMana = attributes['curmana'];
+        //let theCurStamina = attributes['curstamina'];
+        //if (theCostType==='Health') {
+        //    theCurHealth -= theCost;
+        //    attributes['curhealth'] = theCurHealth;
+        //} else if (theCostType==='Mana') {
+        //    theCurMana -= theCost;
+        //    attributes['curmana'] = theCurMana;
+        //} else if (theCostType==='Stamina') {
+        //   theCurStamina -= theCost;
+        //    attributes['curstamina'] = theCurStamina;
+        //}
     };
     k.registerFuncs({funcSpells});
 

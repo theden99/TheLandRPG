@@ -1,16 +1,19 @@
-mixin spells-books(iTableName)
-    - const theTableName = 'spells-'+iTableName;
-    +tab({name:theTableName, container:"article", button:{class:'thelandrpg-subtab-button boxed','data-i18n':iTableName}})
+mixin spells-books(iTableType,iTableName)
+    +tab({name:iTableName, container:"article", button:{class:'thelandrpg-subtab-button boxed','data-i18n':iTableName}})
         .spells-main.paper-background
-            +text({name:'book-'+theTableName,class:'underlined',value:theTableName})
+            +text({name:iTableName,class:'underlined',value:iTableName})
             .div
             .div-inline
                 +span({}).spells-roller-head
                 +span({'data-i18n':'Name'}).spells-name-head
-                +span({'data-i18n':'Level'}).spells-level-head
-                +span({'data-i18n':'Magic Type'}).spells-magictype-head
+                if (iTableType==='spell') 
+                    +span({'data-i18n':'Level'}).spells-level-head
+                    +span({'data-i18n':'Magic Type'}).spells-magictype-head
+                else if (iTableType==='combat')
+                    +span({'data-i18n':'Weapon Type'}).spells-magictype-head
                 +span({'data-i18n':'Subskill'}).spells-subskill-head
                 +span({'data-i18n':'Action Type'}).spells-actiontype-head
+                +span({'data-i18n':'Value Catagory'}).attacks-attackcat-head
                 +span({'data-i18n':'Cost'}).spells-cost-head
                 +span({'data-i18n':'Cost Resource'}).spells-costtype-head
                 +span({'data-i18n':'Range'}).spells-range-head
@@ -19,27 +22,44 @@ mixin spells-books(iTableName)
                 +span({'data-i18n':'Effect Amount'}).spells-amount-head
                 +span({'data-i18n':'Effect Resource'}).spells-amounttype-head
                 +span({'data-i18n':'# of Targets'}).spells-numtargets-head
-            +customControlFieldset({name:theTableName+'-items',addClass:''})
+            +customControlFieldset({name:iTableName+'-items',addClass:''})
                 .div-inline
                     +roller({name:'spells-roller',class:'general-roller spells-roller',trigger:{triggeredFuncs:['funcSpells']}})
                     +text({name:'spells-name',class:'spells-name underlined',value:''})
-                    +number({name:'spells-level',class:'spells-level boxed'})
-                    +select({name:'spells-magictype',class:'spells-magictype'})
-                        each entry,stat in schemaCore.spellresists
-                            +option({value:stat,'data-i18n':entry.displayname})
-                    +select({name:'spells-subskill',class:'spells-subskill'})
-                        +option({value:'NA','data-i18n':'N/A'})
-                        each entry,stat in schemaCore.spellresists
-                            each skill in schemaCore.skills[stat].subskillsprime
+                    if (iTableType==='spell')
+                        +number({name:'spells-level',class:'spells-level boxed'})
+                        +select({name:'spells-magictype',class:'spells-magictype'})
+                            each skill in listMagicSkills
                                 +option({value:skill,'data-i18n':schemaCore.skills[skill].displayname})
-                        each skill in listMetamagicSkills
-                            +option({value:skill,'data-i18n':schemaCore.skills[skill].displayname})
+                    else if (iTableType==='combat')
+                        +select({name:'spells-magictype',class:'spells-magictype'})
+                            each skill in listCombatSkills
+                                +option({value:skill,'data-i18n':schemaCore.skills[skill].displayname})
+                    +select({name:'spells-subskill',class:'spells-subskill'})
+                        +option({value:'N/A','data-i18n':'N/A'})
+                        if (iTableType==='spell')
+                            each skill in listMagicSkills
+                                each subskill in schemaCore.skills[skill].subskills
+                                    +option({value:subskill,'data-i18n':schemaCore.skills[subskill].displayname})
+                            each skill in listMetamagicSkills
+                                +option({value:skill,'data-i18n':schemaCore.skills[skill].displayname})
+                        else if (iTableType==='combat')
+                            each skill in listCombatSkills
+                                each subskill in schemaCore.skills[skill].subskills
+                                    +option({value:subskill,'data-i18n':schemaCore.skills[subskill].displayname})
+                            each skill in listMartialSkills
+                                +option({value:skill,'data-i18n':schemaCore.skills[skill].displayname})
                     +select({name:'spells-actiontype',class:'spells-actiontype'})
                         +option({value:'Combat','data-i18n':'Combat'})
                         +option({value:'Bonus','data-i18n':'Bonus'})
                         +option({value:'Move','data-i18n':'Move'})
                         +option({value:'Reaction','data-i18n':'Reaction'})
                         +option({value:'Free','data-i18n':'Free'})
+                    +select({name:'spells-valuetype',class:'attacks-attackcat'})
+                        +option({value:'melee','data-i18n':'Melee'})
+                        +option({value:'thrown','data-i18n':'Thrown'})
+                        +option({value:'range','data-i18n':'Range'})
+                        +option({value:'spell','data-i18n':'Spell'})
                     +number({name:'spells-cost',class:'spells-cost boxed'})
                     +select({name:'spells-costtype',class:'spells-costtype'})
                         +option({value:'Mana','data-i18n':'Mana'})
@@ -55,8 +75,12 @@ mixin spells-books(iTableName)
                         +option({value:'40','data-i18n':'40'})
                         +option({value:'50','data-i18n':'50'})
                         +option({value:'60','data-i18n':'60'})
+                        +option({value:'70','data-i18n':'60'})
+                        +option({value:'80','data-i18n':'60'})
+                        +option({value:'90','data-i18n':'60'})
                         +option({value:'100','data-i18n':'100'})
                         +option({value:'120','data-i18n':'120'})
+                        +option({value:'150','data-i18n':'120'})
                         +option({value:'200','data-i18n':'200'})
                     +select({name:'spells-vs',class:'spells-vs'})
                         +option({value:'Mental','data-i18n':'Mental'})
@@ -68,7 +92,7 @@ mixin spells-books(iTableName)
                         +option({value:'Damage','data-i18n':'Damage'})
                         +option({value:'Condition','data-i18n':'Condition'})
                         +option({value:'Other','data-i18n':'Other'})
-                    +text({name:'spells-amount',class:'spells-amount boxed'})
+                    +text({name:'spells-amount',class:'spells-amount boxed',value:'0'})
                     +select({name:'spells-amounttype',class:'spells-amounttype'})
                         +option({value:'Health','data-i18n':'Health'})
                         +option({value:'Stamina','data-i18n':'Stamina'})
@@ -84,17 +108,17 @@ mixin spells-books(iTableName)
                         .collapsed
                             .div-spells-details
                                 .div-duration
-                                    +select({name:'spells-duration',class:'spells-duration underlined',value:''})
+                                    +select({name:'spells-duration',class:'spells-duration underlined'})
                                         +option({value:'Instant','data-i18n':'Instant'})
                                         +option({value:'Timed','data-i18n':'Timed'})
                                         +option({value:'Sustain','data-i18n':'Sustain'})
                                         +option({value:'Persistant','data-i18n':'Persistant'})
                                     +span({'data-i18n':'Duration'}).spells-duration-head
                                 .div-durationamount
-                                    +text({name:'spells-durationamount',class:'spells-durationamount boxed'})
+                                    +text({name:'spells-durationamount',class:'spells-durationamount boxed',value:'0'})
                                     +span({'data-i18n':'Duration Amount'}).spells-durationamount-head
                                 .div-durationtype
-                                    +select({name:'spells-durationtype',class:'spells-durationtype underlined',value:''})
+                                    +select({name:'spells-durationtype',class:'spells-durationtype underlined'})
                                         +option({value:'N/A','data-i18n':'N/A'})
                                         +option({value:'Rounds','data-i18n':'Rounds'})
                                         +option({value:'Turns','data-i18n':'Turns'})
@@ -104,7 +128,7 @@ mixin spells-books(iTableName)
                                         +option({value:'Days','data-i18n':'Days'})
                                     +span({'data-i18n':'Duration Type'}).spells-durationtype-head
                                 .div-conditiontype
-                                    +select({name:'spells-conditiontype',class:'spells-conditiontype underlined',value:''})
+                                    +select({name:'spells-conditiontype',class:'spells-conditiontype underlined'})
                                         +option({value:'N/A','data-i18n':'N/A'})
                                         +option({value:'Befuddled','data-i18n':'Befuddled'})
                                         +option({value:'Blighted','data-i18n':'Blighted'})
@@ -123,7 +147,7 @@ mixin spells-books(iTableName)
                                         +option({value:'Grappled','data-i18n':'Grappled'})
                                     +span({'data-i18n':'Condition Type'}).spells-conditiontype-head
                                 .div-radius
-                                    +text({name:'spells-radius',class:'spells-radius boxed'})
+                                    +number({name:'spells-radius',class:'spells-radius boxed'})
                                     +span({'data-i18n':'Radius'}).spells-radius-head
                                 .div-radiustype
                                     +select({name:'spells-radiustype',class:'spells-radiustype underlined',value:''})
@@ -140,37 +164,37 @@ mixin spells-books(iTableName)
                                 .div-damagebonus
                                     +text({name:'spells-damagebonus',value:'0',class:'spells-damagebonus boxed'})
                                     +span({'data-i18n':'Damage Bonus'}).spells-damagebonus-head
-                                .div-particletype
-                                    +select({name:'spells-particletype',class:'spells-particletype underlined'})
-                                        +option({value:'none','data-i18n':'None'})
-                                        +option({value:'beam','data-i18n':'Beam'})
-                                        +option({value:'bomb','data-i18n':'Bomb'})
-                                        +option({value:'breath','data-i18n':'Breath'})
-                                        +option({value:'bubbling','data-i18n':'Bubbling'})
-                                        +option({value:'burn','data-i18n':'Burn'})
-                                        +option({value:'burst','data-i18n':'Burst'})
-                                        +option({value:'explode','data-i18n':'Explode'})
-                                        +option({value:'glow','data-i18n':'Glow'})
-                                        +option({value:'missile','data-i18n':'Missile'})
-                                        +option({value:'nova','data-i18n':'Nova'})
-                                        +option({value:'splatter','data-i18n':'Splatter'})
-                                    +span({'data-i18n':'Particle Type'}).spells-particletype-head
-                                .div-particlecolor
-                                    +select({name:'spells-particlecolor',class:'spells-particlecolor underlined'})
-                                        +option({value:'acid','data-i18n':'Acid'})
-                                        +option({value:'blood','data-i18n':'Blood'})
-                                        +option({value:'charm','data-i18n':'Charm'})
-                                        +option({value:'death','data-i18n':'Death'})
-                                        +option({value:'fire','data-i18n':'Fire'})
-                                        +option({value:'frost','data-i18n':'Frost'})
-                                        +option({value:'holy','data-i18n':'Holy'})
-                                        +option({value:'magic','data-i18n':'Magic'})
-                                        +option({value:'slime','data-i18n':'Slime'})
-                                        +option({value:'smoke','data-i18n':'Smoke'})
-                                        +option({value:'water','data-i18n':'Water'})
-                                    +span({'data-i18n':'Particle Color'}).spells-particlecolor-head
+                                //.div-particletype
+                                //    +select({name:'spells-particletype',class:'spells-particletype underlined'})
+                                //        +option({value:'none','data-i18n':'None'})
+                                //        +option({value:'beam','data-i18n':'Beam'})
+                                //        +option({value:'bomb','data-i18n':'Bomb'})
+                                //        +option({value:'breath','data-i18n':'Breath'})
+                                //        +option({value:'bubbling','data-i18n':'Bubbling'})
+                                //        +option({value:'burn','data-i18n':'Burn'})
+                                //        +option({value:'burst','data-i18n':'Burst'})
+                                //       +option({value:'explode','data-i18n':'Explode'})
+                                //        +option({value:'glow','data-i18n':'Glow'})
+                                //        +option({value:'missile','data-i18n':'Missile'})
+                                //        +option({value:'nova','data-i18n':'Nova'})
+                                //        +option({value:'splatter','data-i18n':'Splatter'})
+                                //    +span({'data-i18n':'Particle Type'}).spells-particletype-head
+                                //.div-particlecolor
+                                //    +select({name:'spells-particlecolor',class:'spells-particlecolor underlined'})
+                                //        +option({value:'acid','data-i18n':'Acid'})
+                                //        +option({value:'blood','data-i18n':'Blood'})
+                                //        +option({value:'charm','data-i18n':'Charm'})
+                                //        +option({value:'death','data-i18n':'Death'})
+                                //        +option({value:'fire','data-i18n':'Fire'})
+                                //        +option({value:'frost','data-i18n':'Frost'})
+                                //        +option({value:'holy','data-i18n':'Holy'})
+                                //        +option({value:'magic','data-i18n':'Magic'})
+                                //        +option({value:'slime','data-i18n':'Slime'})
+                                //        +option({value:'smoke','data-i18n':'Smoke'})
+                                //        +option({value:'water','data-i18n':'Water'})
+                                //    +span({'data-i18n':'Particle Color'}).spells-particlecolor-head
                                 .div-critabove
-                                    +text({name:'spells-critabove',value:'0',class:'spells-critabove boxed'})
+                                    +text({name:'spells-critabove',value:'50',class:'spells-critabove boxed'})
                                     +span({'data-i18n':'Crit Above'}).spells-critabove-head
                                 .div-critbonus
                                     +text({name:'spells-critbonus',value:'0',class:'spells-critbonus boxed'})
@@ -191,18 +215,16 @@ mixin spells-books(iTableName)
                                             +option({value:capitalize(stat),'data-i18n':entry.displayname})
                                     +span({'data-i18n':'Damage Class'}).spells-damageclass-head
                                 .div-desc
-                                    +span({'data-i18n':'Caster'}).spells-desc-head
+                                    +span({'data-i18n':'Chaos Seed Notes'}).spells-desc-head
                                     +adaptiveTextarea({name:'spells-desc',class:'spells-desc boxed'})
                                 .div-spelleffect
-                                    +span({'data-i18n':'Spell Description'}).spells-spelleffect-head
+                                    +span({'data-i18n':'Description'}).spells-spelleffect-head
                                     +adaptiveTextarea({name:'spells-spelleffect',class:'spells-spelleffect boxed'})
                                 .spells-effects-section
                                     +span({'data-i18n':'Effects'}).spells-effects-head
                                     +button({name:'spells-effects-apply',type:'action',class:'spells-effects-apply','data-i18n':'Apply',trigger:{triggeredFuncs:['doEffectsApply']}})
                                     +button({name:'spells-effects-remove',type:'action',class:'spells-effects-remove','data-i18n':'Remove',trigger:{triggeredFuncs:['doEffectsRemove']}})
-                                    +select({name:'spells-effects-applied',readonly:'',class:'spells-effects-applied',value:0})
-                                        +option({value:0,'data-i18n':'Not Applied'})
-                                        +option({value:1,'data-i18n':'Applied'})
+                                    +text({name:'spells-effects-applied',readonly:'',class:'spells-effects-applied',value:'Not Applied'})
                                     +adaptiveTextarea({name:'spells-effects',class:'spells-effects boxed'})
                                 .div-powercard
                                     +span({'data-i18n':'Power Card'}).spells-powercard-head
@@ -213,9 +235,9 @@ mixin spells-books(iTableName)
 
         const theEffects = attributes[sectionName+'_'+rowID+'_spells-effects'];
 
-        if (attributes[sectionName+'_'+rowID+'_spells-effects-applied']===0) {
+        if (attributes[sectionName+'_'+rowID+'_spells-effects-applied']==='Not Applied') {
             ApplyEffects(attributes,theEffects,1);
-            attributes[sectionName+'_'+rowID+'_spells-effects-applied'] = 1;
+            attributes[sectionName+'_'+rowID+'_spells-effects-applied'] = 'Applied';
         };
 
     };
@@ -226,9 +248,9 @@ mixin spells-books(iTableName)
 
         const theEffects = attributes[sectionName+'_'+rowID+'_spells-effects'];
 
-        if (attributes[sectionName+'_'+rowID+'_spells-effects-applied']===1) {
+        if (attributes[sectionName+'_'+rowID+'_spells-effects-applied']==='Applied') {
             ApplyEffects(attributes,theEffects,-1);
-            attributes[sectionName+'_'+rowID+'_spells-effects-applied'] = 0;
+            attributes[sectionName+'_'+rowID+'_spells-effects-applied'] = 'Not Applied';
         };
     };
     k.registerFuncs({doEffectsRemove});
@@ -254,7 +276,7 @@ mixin spells-books(iTableName)
 
 +scss('sheet').
     .spells-main{
-        width: 1000px;
+        width: 1060px;
 
         .spells-roller-head,
         .spells-roller {
@@ -278,6 +300,10 @@ mixin spells-books(iTableName)
         }
         .spells-actiontype-head,
         .spells-actiontype{
+            width: 60px;
+        }
+        .attacks-attackcat-head,
+        .attacks-attackcat{
             width: 60px;
         }
         .spells-cost-head,
@@ -330,6 +356,7 @@ mixin spells-books(iTableName)
         .spells-magictype-head,
         .spells-subskill-head,
         .spells-actiontype-head,
+        .attacks-attackcat-head,
         .spells-cost-head,
         .spells-costtype-head,
         .spells-range-head,

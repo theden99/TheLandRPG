@@ -115,6 +115,20 @@
                 each entry,stat in schemaCore.efficiencies
                     +rowCombatStat(idChaosSeed,idEfficiencies,idEfficiencies,stat,entry,'row-efficiencies',idNone,false)
                     +collapseHelp(idChaosSeed,idEfficiencies,idEfficiencies,stat,entry)
+        .chaosseed-arcaneefficiencies
+            .row-arcaneefficiencies-section.paper-background
+                +span({'data-i18n':'Arcane Efficiencies'}).row-arcaneefficiencies-title
+                .div-inline
+                    +span({'data-i18n':'Efficiency'}).row-arcaneefficiencies-noroller.row-arcaneefficiencies-header
+                    +span({'data-i18n':'Base'}).row-arcaneefficiencies-base.row-arcaneefficiencies-header
+                    +span({'data-i18n':'Equip Bonus'}).row-arcaneefficiencies-equipbonus.row-arcaneefficiencies-header
+                    +span({'data-i18n':'Buff Bonus'}).row-arcaneefficiencies-buffbonus.row-arcaneefficiencies-header
+                    +span({'data-i18n':'Misc Bonus'}).row-arcaneefficiencies-miscbonus.row-arcaneefficiencies-header
+                    +span({'data-i18n':'Total'}).row-arcaneefficiencies-total.row-arcaneefficiencies-header
+                    +span({'data-i18n':''}).column-help.row-arcaneefficiencies-header
+                each entry,stat in schemaCore.arcaneefficiencies
+                    +rowCombatStat(idChaosSeed,idArcaneEfficiencies,idArcaneEfficiencies,stat,entry,'row-arcaneefficiencies',idNone,false)
+                    +collapseHelp(idChaosSeed,idArcaneEfficiencies,idArcaneEfficiencies,stat,entry)
         .chaosseed-combatvalues
             .row-combatvalues-section.paper-background
                 +span({'data-i18n':'Combat Values'}).row-combatvalues-title
@@ -195,13 +209,13 @@
         font: {size: 12px;family: Arial;weight: normal;};
         width: 1100px;
 
-        grid-template-columns: auto auto auto auto auto auto;
+        grid-template-columns: auto auto auto;
         grid-template-areas:
             'title title title'
             'stats combatvalues combat'
             'stats movement combat'
-            'stats movement combat'
             'resists spellresists efficiencies'
+            'resists spellresists arcane'
         ;
 
         .chaosseed-title{
@@ -514,6 +528,49 @@
                     width: 45px;
                 }
                 .row-efficiencies-total {
+                    text-align: center;
+                    width: 45px;
+                }
+            }
+        }
+        .chaosseed-arcaneefficiencies {
+            grid-area: arcane;
+            width: 365px;
+
+            .row-arcaneefficiencies-section {
+                display: grid;
+
+                .row-arcaneefficiencies-title {
+                    font-size: 14px;
+                    text-align: center;
+                    font-weight: bold;
+                    width: 100%;
+                }
+                .row-arcaneefficiencies-header {
+                    text-align: center;
+                    font-weight: bold;
+                    background-color: lightblue;
+                }
+                .row-arcaneefficiencies-noroller {
+                    width: 115px;
+                }
+                .row-arcaneefficiencies-base {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-arcaneefficiencies-equipbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-arcaneefficiencies-buffbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-arcaneefficiencies-miscbonus {
+                    text-align: center;
+                    width: 45px;
+                }
+                .row-arcaneefficiencies-total {
                     text-align: center;
                     width: 45px;
                 }

@@ -447,14 +447,38 @@ const idMeleeAcc = 'meleeacc';
 const idThrownAcc = 'thrownacc';
 const idRangedAcc = 'rangedacc';
 const idSpellAcc = 'spellacc';
-//traits
-const idTrait = 'trait';
-const idHerbalSpirit = 'herbalspirit';
-const idMeleeWeaponProdigy = 'meleeweaponprodigy';
+const idArcaneEfficiencies = 'arcaneefficiencies';
+//race
+const idRace = 'race';
+const idBeastling = 'beastling';
+const idDrakarth = 'drakarth';
+const idCitydwarf = 'citydwarf';
+const idEeepdwarf = 'deeepdwarf';
+const idHilldwarf = 'hilldwarf';
+const idMountaindwarf = 'mountaindwarf';
+const idHighelf = 'highelf';
+const idRiverelf = 'riverelf';
+const idSandelf = 'sandelf';
+const idWoodelf = 'woodelf';
+const idFelixian = 'felixian';
+const idCoinhalfling = 'coinhalfling';
+const idQuickmounthalfling = 'quickmounthalfling';
+const idNomadhalfling = 'nomadhalfling';
+const idHuman = 'human';
+const idIrizari = 'irizari';
+const idForestsprite = 'forestsprite';
+const idHillsprite = 'hillsprite';
+const idMarshsprite = 'marshsprite';
+const idWoodsprite = 'woodsprite';
+const idAstratyche = 'astratyche';
+const idDemostyche = 'demostyche';
+const idSolostyche = 'solostyche';
 
 const idSubskillsPrime = 'subskillsprime';
 
-const tableIsTemplate = [idStats,idMovement,idCombatStats,idSkills,idResists,idSpellResists,idEfficiencies,idCombatValues];
+const tableIsTemplate = [idStats,idMovement,idCombatStats,idSkills,idResists,idSpellResists,idEfficiencies,idCombatValues,idArcaneEfficiencies];
 
-const listMartialSkills = [idDoubleAttack,idDualWielding,idKeenShot,idMartialRage,idMeleeFocus,idTwoHandedWielding];
+const listMagicSkills = [idAirMagic,idDarkMagic,idDeathMagic,idEarthMagic,idFireMagic,idLifeMagic,idWaterMagic,idEldritchMagic,idChaosMagic];
 const listMetamagicSkills = [idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting];
+const listCombatSkills = [idArchery,idAxes,idCrossbows,idHammers,idMaces,idSmallBlades,idSpears,idStaves,idSwords,idShieldBash,idUnarmedCombat];
+const listMartialSkills = [idDoubleAttack,idDualWielding,idKeenShot,idMartialRage,idMeleeFocus,idTwoHandedWielding];

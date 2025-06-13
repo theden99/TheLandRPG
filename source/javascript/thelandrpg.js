@@ -217,14 +217,14 @@ on('chat:message',function(msg){
 
     function doCardSpell(iCharId,iSectionId,iTargets,iTargetParams) {
         function doTarget(iTarget,iTargetNum,iPowerCard) {
-            const getMagicTypeTotal = (iMagicType) => {
-                const theId = 'chaosseed-skills-'+iMagicType+'-total';
+            const getSkillTypeTotal = (iSkillType) => {
+                const theId = 'chaosseed-skills-'+iSkillType+'-total';
 
                 return theId;
             };
 
-            const getMagicTypeStatBonus = (iMagicType) => {
-                const theId = 'chaosseed-skills-'+iMagicType+'-statbonus';
+            const getSkillTypeStatBonus = (iSkillType) => {
+                const theId = 'chaosseed-skills-'+iSkillType+'-statbonus';
 
                 return theId;
             };
@@ -258,35 +258,66 @@ on('chat:message',function(msg){
                 }
             };
 
+            const getValueTypeAcc = (iValueType) => {
+                let theId = '';
+                if (iValueType==='melee') {
+                    theId = 'chaosseed-combatvalues-meleeacc-total'
+                } else if (iValueType==='ranged') {
+                    theId = 'chaosseed-combatvalues-rangedacc-total'
+                } else if (iValueType==='thrown') {
+                    theId = 'chaosseed-combatvalues-thrownacc-total'
+                } else {
+                    theId = 'chaosseed-combatvalues-spellacc-total'
+                }
+
+                return theId;
+            }
+
+            const getValueTypeDam = (iValueType) => {
+                let theId = '';
+                if (iValueType==='melee') {
+                    theId = 'chaosseed-combatvalues-meleedamage-total'
+                } else if (iValueType==='ranged') {
+                    theId = 'chaosseed-combatvalues-rangeddamage-total'
+                } else if (iValueType==='thrown') {
+                    theId = 'chaosseed-combatvalues-throwndamage-total'
+                } else {
+                    theId = 'chaosseed-combatvalues-spelldamage-total'
+                }
+
+                return theId;
+            }
+
             let bHit = 1; //assume a hit
 
             if (iPowerCard!=='') {
                 theAPICall = powerCard;
             } else {
                 const theName = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-name','');
-                const theMagicType = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-magictype','airmagic');
+                const theSkillType = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-magictype','airmagic');
                 const theSubskill = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-subskill','N/A');
-                const theLevel = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-level',0);
                 const theActionType = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-actiontype','Combat');
                 const theCostLine = theCostType+' '+theCost;
-                let theMagicTotal = getMagicTypeTotal(theMagicType);
-                let theMagicTypeTotal = doGetAttrByNameWithDefault(iCharId,theMagicTotal,0);
-                let theMagicTypeRank = doGetAttrByNameWithDefault(iCharId,'chaosseed-skills-'+theMagicType+'-rank',0);
-                let theStatTotal = getMagicTypeStatBonus(theMagicType);
-                let theMagicTypeStatBonus = doGetAttrByNameWithDefault(iCharId,theStatTotal,0);
-                if (doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-subskill',0)!=='NA') {
-                    theMagicTotal = getMagicTypeTotal(theSubskill);
-                    theMagicTypeTotal = doGetAttrByNameWithDefault(iCharId,theMagicTotal,0);
-                    theMagicTypeRank = doGetAttrByNameWithDefault(iCharId,'chaosseed-skills-'+theSubskill+'-rank',0);
-                    theStatTotal = getMagicTypeStatBonus(theSubskill)
-                    theMagicTypeStatBonus = doGetAttrByNameWithDefault(iCharId,theStatTotal,0);
+                let theSkillTotal = getSkillTypeTotal(theSkillType);
+                let theSkillTypeTotal = doGetAttrByNameWithDefault(iCharId,theSkillTotal,0);
+                let theSkillTypeRank = doGetAttrByNameWithDefault(iCharId,'chaosseed-skills-'+theSkillType+'-rank',0);
+                let theStatTotal = getSkillTypeStatBonus(theSkillType);
+                let theSkillTypeStatBonus = doGetAttrByNameWithDefault(iCharId,theStatTotal,0);
+                if (theSubskill!=='N/A') {
+                    theSkillTotal = getSkillTypeTotal(theSubskill);
+                    theSkillTypeTotal = doGetAttrByNameWithDefault(iCharId,theSkillTotal,0);
+                    theSkillTypeRank = doGetAttrByNameWithDefault(iCharId,'chaosseed-skills-'+theSubskill+'-rank',0);
+                    theStatTotal = getSkillTypeStatBonus(theSubskill)
+                    theSkillTypeStatBonus = doGetAttrByNameWithDefault(iCharId,theStatTotal,0);
                 };
-                const theMagicTypeAcc = theMagicTypeTotal-theMagicTypeStatBonus; //rank+bonuses - stat bonus already added to global spell acc/damage
-                const theMagicTypeDamage = Math.floor(theMagicTypeRank/5); //rank+bonuses/5
-                const theMagicEfficencyDamage = Math.floor(doGetAttrByNameWithDefault(iCharId,'chaosseed-efficiencies-'+doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-magictype','airmagic')+'-total',0)/25);
-                const theRadius = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-radius','');
+                const theSkillTypeAcc = theSkillTypeTotal-theSkillTypeStatBonus; //rank+bonuses - stat bonus already added to global spell acc/damage
+                const theSkillTypeDamage = Math.floor(theSkillTypeRank/5); //rank/5
+                const theGlobalEffDam = doGetAttrByNameWithDefault(iCharId,'chaosseed-combatvalues-efficiencies-total');
+                const theMagicEfficiencyDamage = doGetAttrByNameWithDefault(iCharId,'chaosseed-efficiencies-'+doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-magictype','airmagic')+'-total',0);
+                const theEfficiencyDamage = Math.floor((theGlobalEffDam+theMagicEfficiencyDamage)/25);
+                const theRadius = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-radius',0);
                 let theRadiusLine = '1 creature';
-                if (theRadius!=='') {
+                if (theRadius>0) {
                     theRadiusLine = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-radius',0)+' feet in a '+doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-radiustype','N/A')
                 };
                 const theRange = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-range','Self');
@@ -312,12 +343,11 @@ on('chat:message',function(msg){
                     theDurationLine = theDurationAmount+' '+theDurationType;
                 }
                 const theDesc = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-desc','');
-
                 theAPICall = '!power {{ '+
                 ' --bgcolor|'+theColor+
                 ' --txcolor|#ffffff'+
                 ' --titlefontshadow|#000000'+
-                ' --leftsub|'+theMagicType+' '+theLevel+' ◆ '+theActionType+
+                ' --leftsub|'+theSkillType+' ◆ '+theActionType+
                 ' --rightsub|'+theCostLine;
                 if (iTarget) {
                     theAPICall += ' --name|'+theName+'->'+iTarget.token.get('name')+'(#'+iTargetNum+')';
@@ -325,14 +355,18 @@ on('chat:message',function(msg){
                     theAPICall += ' --name|'+theName;
                 }
 
-                const theSpellAcc = doGetAttrByNameWithDefault(iCharId,'chaosseed-combatvalues-spellacc-total',0);
+                const theValueType = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-valuetype','melee');
+                const theGlobalAcc = doGetAttrByNameWithDefault(iCharId,getValueTypeAcc(theValueType),0);
+                const theGlobalDam = doGetAttrByNameWithDefault(iCharId,getValueTypeDam(theValueType),0);
                 let theAccBonus = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-accbonus',0);
                 if (iTarget) {
                     theAccBonus = iTarget.accbonus;
                 }
-                const theSpellDam = doGetAttrByNameWithDefault(iCharId,'chaosseed-combatvalues-spelldamage-total',0);
+
+                const theDamageType = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-damagetype','physical');
+                const theDamageClass = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-damageclass','basic');
                 const theDamBonus = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-damagebonus',0);
-                const theCritAbove = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-critabove',0);
+                const theCritAbove = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-critabove',50);
                 const theCritAccBonus = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-critbonus',0);
                 const theCritDamBonus = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-critdamagebonus',0);
                 let theCritAcc = theCritAbove-theCritAccBonus;
@@ -346,12 +380,12 @@ on('chat:message',function(msg){
                     } else {
                         theAPICall += ' --Attack|[[ 1d100 + '
                     }
-                    theAPICall += theSpellAcc+' [Magic Acc] + '
-                        +theMagicTypeAcc+' [Skill] + ';
+                    theAPICall += theGlobalAcc+' ['+theValueType+' ACC] + '
+                        +theSkillTypeAcc+' [Skill ACC] + ';
                     if (iTarget) {
                         theAPICall += iTarget.accbonus+' [ACC Bonus] ]] vs '+theVs;
                     } else {
-                        theAPICall += theAccBonus+' [ACC Bonus] ]] vs '+theVs;
+                        theAPICall += theAccBonus+' [Bonus ACC] ]] vs '+theVs;
                     }
                     //no text if no target
                     if (iTarget) {
@@ -359,8 +393,8 @@ on('chat:message',function(msg){
                     };
                     if (iTarget) {
                         const theAcc = parseInt(iTarget.roll)
-                            +parseInt(theSpellAcc)
-                            +parseInt(theMagicTypeAcc)
+                            +parseInt(theGlobalAcc)
+                            +parseInt(theSkillTypeAcc)
                             +parseInt(theAccBonus)
                             ;
                         if (theAcc>=theTargetVsValue) {
@@ -368,22 +402,40 @@ on('chat:message',function(msg){
                                 let theDamageTaken = 0;
                                 if (iTarget) {
                                     theDamageTaken += parseInt(theAmount)
-                                        +parseInt(theSpellDam)
-                                        +parseInt(theMagicTypeDamage)
-                                        +parseInt(theMagicEfficencyDamage)
-                                        +parseInt(theDamBonus)
+                                        +parseInt(theGlobalDam)
+                                        +parseInt(theSkillTypeDamage)
+                                        +parseInt(theDamBonus);
+                                    if (theValueType==='spell') {
+                                        theDamageTaken += parseInt(theEfficiencyDamage)
+                                    };
                                     theAPICall +=
-                                        ' --Hit|Target takes [[ '+theAmount+' [Base] + '+theSpellDam+' [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] + '+
-                                        theMagicEfficencyDamage+' [Eff Dam] + '+theDamBonus+' [Bonus Dam] ]] '+theAmountType+' '+theEffect;                                
+                                        ' --Hit|Target takes [[ '+theAmount+' [Base] + '
+                                        +theGlobalDam+' ['+theValueType+' Dam] +'
+                                        +theSkillTypeDamage+' [Skill Dam] + ';
+                                    if (theValueType==='spell') {
+                                        theAPICall += theEfficiencyDamage+' [Eff Dam] + ';
+                                    };
+                                    theAPICall +=
+                                        theDamBonus+' [Bonus Dam] ]] '
+                                        +theAmountType+' '+theEffect
+                                        +' of '+theDamageType+' as '+theDamageClass;
                                     if ((theAcc-theTargetVsValue)>=(theCritAcc)) {
                                         theDamageTaken += parseInt(iTarget.critdamage)
                                             +parseInt(theCritDamBonus)
-                                            +parseInt(theSpellDam)
-                                            +parseInt(theMagicTypeDamage)
-                                            +parseInt(theMagicEfficencyDamage)
+                                            +parseInt(theGlobalDam)
+                                            +parseInt(theSkillTypeDamage);
+                                        if (theValueType==='spell') {
+                                            theDamageTaken += parseInt(theEfficiencyDamage)
+                                        }
                                         theAPICall += 
-                                            ' --Critical|Target takes  [[ '+iTarget.critdamage+' [Base] + '+theSpellDam+' [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] + '+
-                                            theMagicEfficencyDamage+' [Eff Dam] + '+theCritDamBonus+' [Bonus Dam] ]] extra '+theAmountType+' '+theEffect;
+                                            ' --Critical|Target takes an additional [[ '+iTarget.critdamage+' [Base] + '
+                                            +theGlobalDam+' ['+theValueType+' Dam] +'
+                                            +theSkillTypeDamage+' [Skill Dam] + ';
+                                        if (theValueType==='spell') {
+                                            theAPICall += theEfficiencyDamage+' [Eff Dam] + '
+                                        }
+                                        theAPICall +=
+                                            theCritDamBonus+' [Bonus Dam] ]] extra '+theAmountType+' '+theEffect;
                                     }
                                     //remove resource from target
                                     if (theEffect==='Damage') {
@@ -396,26 +448,55 @@ on('chat:message',function(msg){
                             };
                         } else {
                             bHit = 0;
-                            theAPICall += ' --On Hit|Misses';
+                            theAPICall += ' --Misses|Target takes nothing!';
                         }
                     } else {
                         theAPICall +=
-                            ' --On Hit|Target takes [[ '+theAmount+' + '+theSpellDam+' [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] + '+
-                            theMagicEfficencyDamage+' [Eff Dam] + '+theDamBonus+' [Bonus Dam] ]] '+theAmountType+' '+theEffect;                                
+                            ' --On Hit|Target takes [[ '+theAmount+' [Base] + '
+                            +theGlobalDam+' ['+theValueType+' Dam] +'
+                            +theSkillTypeDamage+' [Skill Dam] + ';
+                        if (theValueType==='spell') {
+                            theAPICall += theEfficiencyDamage+' [Eff Dam] + '
+                        };
+                        theAPICall +=
+                            theDamBonus+' [Bonus Dam] ]] '+theAmountType+' '+theEffect
+                            +' of '+theDamageType+' as '+theDamageClass;
                         theAPICall += 
-                            ' --Critical Chance|if above '+theCritAcc+', target takes  [[ '+theAmount+' + '+theSpellDam+' [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] + '+
-                            theMagicEfficencyDamage+' [Eff Dam] + '+theCritDamBonus+' [Bonus Dam] ]] extra '+theAmountType+' '+theEffect;
+                            ' --Critical Chance|if above '+theCritAcc+', target takes  [[ '+theAmount+' [Base] + '
+                            +theGlobalDam+' ['+theValueType+' Dam] +'
+                            +theSkillTypeDamage+' [Skill Dam] + ';
+                        if (theValueType==='spell') {
+                            theAPICall += theEfficiencyDamage+' [Eff Dam] + '
+                        };
+                        theAPICall +=
+                            theCritDamBonus+' [Bonus Dam] ]] extra '+theAmountType+' '+theEffect;
                     }
                 } else {
                     if (theAmount!==0) {
                         if (iTarget) {
                             theAPICall += 
-                                ' --On Cast|Target takes [['+iTarget.damage+'+'+theSpellDam+' [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] + '+
-                                theMagicEfficencyDamage+' [Eff Dam] '+iTarget.pDamageBonus+' [Bonus Dam] ]] '+theAmountType+' '+theEffect;
+                                ' --Combat|Target takes [['+iTarget.damage+' [Base] + '
+                                +theGlobalDam+' ['+theValueType+' Dam] + '
+                                +theSkillTypeDamage+' [Skill Dam] + ';
+                            if (theValueType==='spell') {
+                                theAPICall += theEfficiencyDamage+' [Eff Dam] + '
+                            };
+                            theAPICall +=
+                                iTarget.damagebonus+' [Bonus Dam] ]] '
+                                +theAmountType+' '+theEffect
+                                +' of '+theDamageType+' as '+theDamageClass;
                         } else {
                             theAPICall += 
-                                ' --On Cast|Target takes [['+theAmount+'+'+theSpellDam+' [Magic Dam] +'+theMagicTypeDamage+' [Skill Dam] + '+
-                                theMagicEfficencyDamage+' [Eff Dam] ]] '+theAmountType+' '+theEffect;
+                                ' --Combat|Target takes [['+theAmount+' [Base] + '
+                                +theGlobalDam+' ['+theValueType+' Dam] + '
+                                +theSkillTypeDamage+' [Skill Dam] + ';
+                            if (theValueType==='spell') {
+                                theAPICall += theEfficiencyDamage+' [Eff Dam] + '
+                            };
+                            theAPICall +=
+                                +theDamBonus+' [Bonus Dam] ]] '
+                                +theAmountType+' '+theEffect
+                                +' of '+theDamageType+' as '+theDamageClass;
                         }
                     }
                 };
@@ -436,19 +517,21 @@ on('chat:message',function(msg){
                         ' --Condition|'+theCondition;
                 };
 
-                theSpellDesc = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-spelleffect','')
-                theAPICall += 
-                    ' --Spell Desc|'+theSpellDesc;
+                theSpellDesc = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-spelleffect','');
+                if (theSpellDesc!=='') {
+                    theAPICall += 
+                        ' --Description|'+theSpellDesc;
+                };
 
                 theAPICall += 
-                    ' --Caster|'+theCharName+' '+theDesc;
+                    ' --Chaos Seed|'+theCharName+' '+theDesc;
                 '}} ';
             }; //else
             
 //log(theAPICall);
             sendChat('player|'+msg.playerid,theAPICall);
 
-            const theFxType = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-particletype','none')
+            const theFxType = 'none';//doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-particletype','none')
             if ((theFxType!=='none') && (bHit===1)) {
                 if (theCharToken) {
                     const theFxColor = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-particlecolor','acid')
@@ -460,12 +543,19 @@ on('chat:message',function(msg){
                         theTargetX = iTarget.token.get('left');
                         theTargetY = iTarget.token.get('top');
                     }
-                    spawnFxBetweenPoints(
-                        {x:theX,y:theY},
-                        {x:theTargetX,y:theTargetY},
-                        theFxType+'-'+theFxColor,
-                        Campaign().get('playerpageid')
-                    );
+                    if ((theFxType.includes('beam')) || (theFxType.includes('breath')) || (theFxType.includes('splatter'))) {
+                        spawnFxBetweenPoints(
+                            {x:theX,y:theY},
+                            {x:theTargetX,y:theTargetY},
+                            theFxType+'-'+theFxColor,
+                            Campaign().get('playerpageid')
+                        );
+                    } else {
+                        spawnFx(theTargetX,theTargetY,
+                            theFxType+'-'+theFxColor,
+                            Campaign().get('playerpageid')
+                        );
+                    }
                 }
             }    
         }; //doTarget
@@ -518,11 +608,11 @@ on('chat:message',function(msg){
         let theCost = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-cost',0);
         const theCostType = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-costtype','Mana');
         if (theCostType==='Mana') {
-            //get global efficiencies
-            theMult = doGetAttrByNameWithDefault(iCharId,'chaosseed-combatvalues-efficiencies-total',0);
+            //get global arcane efficiency
+            theMult = doGetAttrByNameWithDefault(iCharId,'chaosseed-combatvalues-arcaneefficiencies-total',0);
             //get magic type efficienices
             const theEffType = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-magictype','airmagic');
-            theMult += doGetAttrByNameWithDefault(iCharId,'chaosseed-efficiencies-'+theEffType+'-total',0);
+            theMult += doGetAttrByNameWithDefault(iCharId,'chaosseed-arcaneefficiencies-'+theEffType+'-total',0);
             //adjust cost
             theCost = theCost - Math.floor(theCost*(theMult/100));
         }

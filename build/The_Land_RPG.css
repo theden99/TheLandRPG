@@ -2766,9 +2766,10 @@ body .ui-dialog .tab-content .charsheet .inventory-storage-section .div-inven-it
 }
 body .ui-dialog .tab-content .charsheet .inventory-storage-section .div-inven-items .item_equipped {
   width: 70px;
+  text-align: center;
 }
 body .ui-dialog .tab-content .charsheet .spells-main {
-  width: 1000px;
+  width: 1060px;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .spells-roller-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-roller {
@@ -2792,6 +2793,10 @@ body .ui-dialog .tab-content .charsheet .spells-main .spells-subskill {
 }
 body .ui-dialog .tab-content .charsheet .spells-main .spells-actiontype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-actiontype {
+  width: 60px;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .attacks-attackcat-head,
+body .ui-dialog .tab-content .charsheet .spells-main .attacks-attackcat {
   width: 60px;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .spells-cost-head,
@@ -2861,6 +2866,7 @@ body .ui-dialog .tab-content .charsheet .spells-main .spells-level-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-magictype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-subskill-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-actiontype-head,
+body .ui-dialog .tab-content .charsheet .spells-main .attacks-attackcat-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-cost-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-costtype-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-range-head,
@@ -3587,8 +3593,8 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed {
   font-family: Arial;
   font-weight: normal;
   width: 1100px;
-  grid-template-columns: auto auto auto auto auto auto;
-  grid-template-areas: "title title title" "stats combatvalues combat" "stats movement combat" "stats movement combat" "resists spellresists efficiencies";
+  grid-template-columns: auto auto auto;
+  grid-template-areas: "title title title" "stats combatvalues combat" "stats movement combat" "resists spellresists efficiencies" "resists spellresists arcane";
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .repitem:hover > .collapse, body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .repitem:hover .roll-container,
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .collapse-container:hover > .collapse,
@@ -3914,6 +3920,47 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chao
   text-align: center;
   width: 45px;
 }
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-arcaneefficiencies {
+  grid-area: arcane;
+  width: 365px;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-arcaneefficiencies .row-arcaneefficiencies-section {
+  display: grid;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-arcaneefficiencies .row-arcaneefficiencies-section .row-arcaneefficiencies-title {
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-arcaneefficiencies .row-arcaneefficiencies-section .row-arcaneefficiencies-header {
+  text-align: center;
+  font-weight: bold;
+  background-color: lightblue;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-arcaneefficiencies .row-arcaneefficiencies-section .row-arcaneefficiencies-noroller {
+  width: 115px;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-arcaneefficiencies .row-arcaneefficiencies-section .row-arcaneefficiencies-base {
+  text-align: center;
+  width: 45px;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-arcaneefficiencies .row-arcaneefficiencies-section .row-arcaneefficiencies-equipbonus {
+  text-align: center;
+  width: 45px;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-arcaneefficiencies .row-arcaneefficiencies-section .row-arcaneefficiencies-buffbonus {
+  text-align: center;
+  width: 45px;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-arcaneefficiencies .row-arcaneefficiencies-section .row-arcaneefficiencies-miscbonus {
+  text-align: center;
+  width: 45px;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-arcaneefficiencies .row-arcaneefficiencies-section .row-arcaneefficiencies-total {
+  text-align: center;
+  width: 45px;
+}
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-combatvalues {
   grid-area: combatvalues;
   width: 360px;
@@ -4040,7 +4087,7 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosse
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .div-item-details {
   display: grid;
   grid-template-columns: auto;
-  grid-template-areas: "desc";
+  grid-template-areas: "desc" "effects";
   border: 1px solid var(--borderColor);
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .div-item-details .div-traits-desc {
@@ -4049,6 +4096,67 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosse
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .div-item-details .div-traits-desc .traits-head-desc {
   width: 100%;
   background-color: gainsboro;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .div-item-details .traits-effects-section {
+  grid-area: effects;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .div-item-details .traits-effects-section .traits-effects-head {
+  grid-area: effects-head;
+  background-color: lightgray;
+  width: 20%;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .div-item-details .traits-effects-section .traits-effects-apply {
+  grid-area: apply;
+  background-color: rgba(220, 220, 220, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px black;
+  border-width: 0;
+  transition-property: box-shadow, backdrop-filter;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+  backdrop-filter: blur(1px);
+  overflow: hidden;
+  background-color: lightblue;
+  width: 60px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .div-item-details .traits-effects-section .traits-effects-apply:is(:hover, :focus) {
+  background-color: rgba(133, 133, 133, 0.5019607843);
+  box-shadow: 0 4px 6px black;
+  backdrop-filter: blur(2px);
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .div-item-details .traits-effects-section .traits-effects-apply:active {
+  background-color: #858585;
+  box-shadow: 0 1px 2px black;
+  backdrop-filter: blur(0px);
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .div-item-details .traits-effects-section .traits-effects-remove {
+  grid-area: remove;
+  background-color: rgba(220, 220, 220, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px black;
+  border-width: 0;
+  transition-property: box-shadow, backdrop-filter;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+  backdrop-filter: blur(1px);
+  overflow: hidden;
+  background-color: lightblue;
+  width: 60px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .div-item-details .traits-effects-section .traits-effects-remove:is(:hover, :focus) {
+  background-color: rgba(133, 133, 133, 0.5019607843);
+  box-shadow: 0 4px 6px black;
+  backdrop-filter: blur(2px);
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .div-item-details .traits-effects-section .traits-effects-remove:active {
+  background-color: #858585;
+  box-shadow: 0 1px 2px black;
+  backdrop-filter: blur(0px);
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-traits .div-traits-section .row-traits-section .div-traits-rows .div-item-details .traits-effects-section .traits-effects-applied {
+  width: 100px;
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-skills .chaosseed-skills {
   grid-area: skills;

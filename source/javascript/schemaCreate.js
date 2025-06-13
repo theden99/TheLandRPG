@@ -458,6 +458,7 @@ const idMeleeAcc = 'meleeacc';
 const idThrownAcc = 'thrownacc';
 const idRangedAcc = 'rangedacc';
 const idSpellAcc = 'spellacc';
+const idArcaneEfficiencies = 'arcaneefficiencies';
 //race
 const idRace = 'race';
 const idBeastling = 'beastling';
@@ -486,10 +487,12 @@ const idSolostyche = 'solostyche';
 
 const idSubskillsPrime = 'subskillsprime';
 
-const tableIsTemplate = [idStats,idMovement,idCombatStats,idSkills,idResists,idSpellResists,idEfficiencies,idCombatValues];
+const tableIsTemplate = [idStats,idMovement,idCombatStats,idSkills,idResists,idSpellResists,idEfficiencies,idCombatValues,idArcaneEfficiencies];
 
-const listMartialSkills = [idDoubleAttack,idDualWielding,idKeenShot,idMartialRage,idMeleeFocus,idTwoHandedWielding];
+const listMagicSkills = [idAirMagic,idDarkMagic,idDeathMagic,idEarthMagic,idFireMagic,idLifeMagic,idWaterMagic,idEldritchMagic,idChaosMagic];
 const listMetamagicSkills = [idAimedCasting,idAnchoredCasting,idDistantCasting,idDurableCasting,idEchoCasting,idEfficientTeleportation,idFocusedCasting,idGeomentricCasting,idPreciseCasting,idQuickCasting,idReboundedSpell,idSplitCasting,idStillCasting,idTranquilCasting];
+const listCombatSkills = [idArchery,idAxes,idCrossbows,idHammers,idMaces,idSmallBlades,idSpears,idStaves,idSwords,idShieldBash,idUnarmedCombat];
+const listMartialSkills = [idDoubleAttack,idDualWielding,idKeenShot,idMartialRage,idMeleeFocus,idTwoHandedWielding];
 
 
 const capitalize = function(string){
@@ -1134,6 +1137,158 @@ const schemaCore = {
         ),
     },
     [idEfficiencies] : {
+        [idAirMagic] : getListEntry(idDefault,'Air Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idDarkMagic] : getListEntry(idDefault,'Dark Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idDeathMagic] : getListEntry(idDefault,'Death Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idEarthMagic] : getListEntry(idDefault,'Earth Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idFireMagic] : getListEntry(idDefault,'Fire Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idLifeMagic] : getListEntry(idDefault,'Life Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idLightMagic] : getListEntry(idDefault,'Light Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idWaterMagic] : getListEntry(idDefault,'Water Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idEldritchMagic] : getListEntry(idDefault,'Eldritch Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+        [idChaosMagic] : getListEntry(idDefault,'Chaos Magic','0','0',
+            'this is short',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),
+    },
+    [idArcaneEfficiencies] : {
         [idAirMagic] : getListEntry(idDefault,'Air Magic','0','0',
             'this is short',
             'this is long',
@@ -6581,7 +6736,7 @@ const schemaCore = {
             },
         ),
         [idResists] : getListEntry(idDefault,'Resists','0','0',
-            'Reduce damage for all resists',
+            'Reduce damage for all resist types',
             'this is long',
             '',
             {
@@ -6596,7 +6751,22 @@ const schemaCore = {
             },
         ),
         [idEfficiencies] : getListEntry(idDefault,'Efficiencies','0','0',
-            'Reduce mana cost for all uses of mana',
+            'increases the damage for all spell types',
+            'this is long',
+            '',
+            {
+                [idBase] : {
+                    [idFormula] : '',
+                    [idKFormula] : '',
+                },
+            },
+            {
+            },
+            {
+            },
+        ),        
+        [idArcaneEfficiencies] : getListEntry(idDefault,'Arcane Efficiencies','0','0',
+            'Reduce mana cost for all spell types',
             'this is long',
             '',
             {
