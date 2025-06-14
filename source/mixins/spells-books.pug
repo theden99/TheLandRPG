@@ -1,7 +1,7 @@
 mixin spells-books(iTableType,iTableName)
     +tab({name:iTableName, container:"article", button:{class:'thelandrpg-subtab-button boxed','data-i18n':iTableName}})
         .spells-main.paper-background
-            +text({name:iTableName,class:'underlined',value:iTableName})
+            +text({name:iTableName,class:'underlined',value:iTableName}).spells-head-title
             .div
             .div-inline
                 +span({}).spells-roller-head
@@ -164,35 +164,18 @@ mixin spells-books(iTableType,iTableName)
                                 .div-damagebonus
                                     +text({name:'spells-damagebonus',value:'0',class:'spells-damagebonus boxed'})
                                     +span({'data-i18n':'Damage Bonus'}).spells-damagebonus-head
-                                //.div-particletype
-                                //    +select({name:'spells-particletype',class:'spells-particletype underlined'})
-                                //        +option({value:'none','data-i18n':'None'})
-                                //        +option({value:'beam','data-i18n':'Beam'})
-                                //        +option({value:'bomb','data-i18n':'Bomb'})
-                                //        +option({value:'breath','data-i18n':'Breath'})
-                                //        +option({value:'bubbling','data-i18n':'Bubbling'})
-                                //        +option({value:'burn','data-i18n':'Burn'})
-                                //        +option({value:'burst','data-i18n':'Burst'})
-                                //       +option({value:'explode','data-i18n':'Explode'})
-                                //        +option({value:'glow','data-i18n':'Glow'})
-                                //        +option({value:'missile','data-i18n':'Missile'})
-                                //        +option({value:'nova','data-i18n':'Nova'})
-                                //        +option({value:'splatter','data-i18n':'Splatter'})
-                                //    +span({'data-i18n':'Particle Type'}).spells-particletype-head
-                                //.div-particlecolor
-                                //    +select({name:'spells-particlecolor',class:'spells-particlecolor underlined'})
-                                //        +option({value:'acid','data-i18n':'Acid'})
-                                //        +option({value:'blood','data-i18n':'Blood'})
-                                //        +option({value:'charm','data-i18n':'Charm'})
-                                //        +option({value:'death','data-i18n':'Death'})
-                                //        +option({value:'fire','data-i18n':'Fire'})
-                                //        +option({value:'frost','data-i18n':'Frost'})
-                                //        +option({value:'holy','data-i18n':'Holy'})
-                                //        +option({value:'magic','data-i18n':'Magic'})
-                                //        +option({value:'slime','data-i18n':'Slime'})
-                                //        +option({value:'smoke','data-i18n':'Smoke'})
-                                //        +option({value:'water','data-i18n':'Water'})
-                                //    +span({'data-i18n':'Particle Color'}).spells-particlecolor-head
+                                .div-primary
+                                    +select({name:'spells-primary',class:'spells-primary underlined'})
+                                        +option({value:'none','data-i18n':'None'})
+                                        +option({value:'normal','data-i18n':'Normal'})
+                                        +option({value:'small','data-i18n':'Small'})
+                                    +span({'data-i18n':'Primary Weapon'}).spells-primary-head
+                                .div-offhand
+                                    +select({name:'spells-offhand',class:'spells-offhand underlined'})
+                                        +option({value:'none','data-i18n':'None'})
+                                        +option({value:'small','data-i18n':'Small'})
+                                        +option({value:'normal','data-i18n':'Normal'})
+                                    +span({'data-i18n':'Off Hand Weapon'}).spells-offhand-head
                                 .div-critabove
                                     +text({name:'spells-critabove',value:'50',class:'spells-critabove boxed'})
                                     +span({'data-i18n':'Crit Above'}).spells-critabove-head
@@ -202,6 +185,9 @@ mixin spells-books(iTableType,iTableName)
                                 .div-critdamagebonus
                                     +text({name:'spells-critdamagebonus',value:'0',class:'spells-critdamagebonus boxed'})
                                     +span({'data-i18n':'Crit Dam Bonus'}).spells-critdamagebonus-head
+                                .div-attacknum
+                                    +number({name:'spells-attacknum',value:1,class:'spells-attacknum boxed'})
+                                    +span({'data-i18n':'Attack #'}).spells-attacknum-head
                                 .div-damagetype
                                     +select({name:'spells-damagetype',class:'spells-damagetype underlined'})
                                         +option({value:'Physical','data-i18n':'Physical'})
@@ -229,55 +215,16 @@ mixin spells-books(iTableType,iTableName)
                                 .div-powercard
                                     +span({'data-i18n':'Power Card'}).spells-powercard-head
                                     +adaptiveTextarea({name:'spells-powercard',class:'spells-powercard boxed'})
+                                    +text({name:'spells-bufffullid',class:'hidden'})
 +module.
-    const doEffectsApply = ({trigger,attributes,sections,casc}) => {
-        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
-
-        const theEffects = attributes[sectionName+'_'+rowID+'_spells-effects'];
-
-        if (attributes[sectionName+'_'+rowID+'_spells-effects-applied']==='Not Applied') {
-            ApplyEffects(attributes,theEffects,1);
-            attributes[sectionName+'_'+rowID+'_spells-effects-applied'] = 'Applied';
-        };
-
-    };
-    k.registerFuncs({doEffectsApply});
-
-    const doEffectsRemove = ({trigger,attributes,sections,casc}) => {
-        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
-
-        const theEffects = attributes[sectionName+'_'+rowID+'_spells-effects'];
-
-        if (attributes[sectionName+'_'+rowID+'_spells-effects-applied']==='Applied') {
-            ApplyEffects(attributes,theEffects,-1);
-            attributes[sectionName+'_'+rowID+'_spells-effects-applied'] = 'Not Applied';
-        };
-    };
-    k.registerFuncs({doEffectsRemove});
-
-    const doSpellRange = async function({trigger,attributes,sections,casc}){
-        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
-
-        let theRange = attributes[sectionName+'_'+rowID+'_spells-range'];
-        if (theRange==='Self') {
-            theRange = 0;
-        } else if (theRange==='Touch') {
-            theRange = 5;
-        }
-        theRange = Math.floor(theRange/5)*5;
-        const theAPICall = '!tlrpg --charid '+attributes['header-character-id']+' --moverange '
-            +theRange+'|0';
-            ;
-
-        const roll = await startRoll(theAPICall);
-        finishRoll(roll.rollId);
-    };
-    k.registerFuncs({doSpellRange});    
-
 +scss('sheet').
     .spells-main{
         width: 1060px;
 
+        .spells-head-title {
+            font-weight: bold;
+            font-size: 16px;
+        }
         .spells-roller-head,
         .spells-roller {
             width: 26px;
@@ -376,8 +323,8 @@ mixin spells-books(iTableType,iTableName)
             grid-template-areas : 
                 'duration durationamount durationtype conditiontype'
                 'radius radiustype damagetype damageclass'
-                'accbonus damagebonus particletype particlecolor'
-                'critabove critbonus critdamagebonus .'
+                'accbonus damagebonus primary offhand'
+                'critabove critbonus critdamagebonus attacknum'
                 'desc-head desc-head desc-head desc-head'
                 'desc desc desc desc'
                 'spelleffect-head spelleffect-head spelleffect-head spelleffect-head'
@@ -484,26 +431,26 @@ mixin spells-books(iTableType,iTableName)
                     text-align: center;
                 }
             }
-            .div-particletype {
-                grid-area: particletype;
+            .div-primary {
+                grid-area: primary;
                 width: 65px;
                 text-align: center;
-                .spells-particletype-head {
+                .spells-primary-head {
                     background-color: gainsboro;
                 }
-                .spells-particletype{
+                .spells-primary{
                     width:100%;
                     text-align: center;
                 }
             }
-            .div-particlecolor {
-                grid-area: particlecolor;
+            .div-offhand {
+                grid-area: offhand;
                 width: 65px;
                 text-align: center;
-                .spells-particlecolor-head {
+                .spells-offhand-head {
                     background-color: gainsboro;
                 }
-                .spells-particlecolor{
+                .spells-offhand{
                     width:100%;
                     text-align: center;
                 }
@@ -540,6 +487,18 @@ mixin spells-books(iTableType,iTableName)
                     background-color: gainsboro;
                 }
                 .spells-critdamagebonus{
+                    width:100%;
+                    text-align: center;
+                }
+            }
+            .div-attacknum {
+                grid-area: attacknum;
+                width: 65px;
+                text-align: center;
+                .spells-attacknum-head {
+                    background-color: gainsboro;
+                }
+                .spells-attacknum{
                     width:100%;
                     text-align: center;
                 }

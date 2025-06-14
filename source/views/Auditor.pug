@@ -2,7 +2,7 @@
     .auditor-main
         +span({'data-i18n':'AUDITOR ONLY'}).auditor-title.paper-background
         .div
-            .auditor-section.paper-background
+            .import-section.paper-background
                 +span({'data-i18n':'NPC text'}).npc-title
                 +textarea({name:'npc-text',class:'boxed'}).npc-text
                 +roller({name:'npc-button','data-i18n':'Update Character',class:'general-roller thelandrpg-subtab-button npc-button',trigger:{triggeredFuncs:['doUpdateNPC']}})
@@ -116,30 +116,37 @@
         grid-template-columns: auto;
         grid-template-areas:
             'title'
-            'auditor'
+            'importnpc'
         ;
 
         .auditor-title{
             grid-area: title;
+
             font-size: 24px;
             text-align: center;
             font-weight: bold;
         }
 
-        .auditor-section {
-            grid-area: auditor;
+        .import-section {
+            grid-area: importnpc;
+
+            .npc-title {
                 grid-area: title;
+
                 font-size: 16px;
                 text-align: center;
                 font-weight: bold;
-            .npc-title {
-
+                width: 100%;
             }
             .npc-text {
-                height: 32rem;
+                grid-area: text;
+
+                height: 10rem;
                 width: 100%;
             }
             .npc-button {
+                grid-area: button;
+
                 background-color: lightblue;
                 font-size: 16px;
                 text-align: center;

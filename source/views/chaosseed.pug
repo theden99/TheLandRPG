@@ -61,18 +61,20 @@
                 each entry,stat in schemaCore.combatstats
                     +rowCombatStat(idChaosSeed,idCombatStats,idCombatStats,stat,entry,'row-combat',stat)
                     +collapseHelp(idChaosSeed,idCombatStats,idCombatStats,stat,entry)
-                +span({'data-i18n':'Current'}).row-combat-curtitle
+        .chaosseed-current
+            .row-current-section.paper-background
+                +span({'data-i18n':'Current'}).row-current-title
                 .div-inline
-                    +span({'data-i18n':'Health:'}).row-combat-curhealth-head
-                    +number({name:'curhealth',class:'boxed',value:0}).row-combat-curhealth
-                    +span({'data-i18n':'Stamina:'}).row-combat-curmana-head
-                    +number({name:'curstamina',class:'boxed',value:0}).row-combat-curstamina
-                    +span({'data-i18n':'Mana:'}).row-combat-curmana-head
-                    +number({name:'curmana',class:'boxed',value:0}).row-combat-curmana
+                    +span({'data-i18n':'Health:'}).row-current-health-head
+                    +number({name:'curhealth',class:'boxed',value:0}).row-current-health
+                    +span({'data-i18n':'Stamina:'}).row-current-mana-head
+                    +number({name:'curstamina',class:'boxed',value:0}).row-current-stamina
+                    +span({'data-i18n':'Mana:'}).row-current-mana-head
+                    +number({name:'curmana',class:'boxed',value:0}).row-current-mana
                 .div-inline
-                    +roller({name:'full-resources','data-i18n':'Full Resources',class:'general-roller row-combat-fullbutton',trigger:{triggeredFuncs:['doFullResources']}})
-                    +roller({name:'start-turn','data-i18n':'Start Turn',class:'general-roller row-combat-startturn',trigger:{triggeredFuncs:['doStartTurn']}})
-                    +roller({name:'concentrate','data-i18n':'Concentrate',class:'general-roller row-combat-concentrate',trigger:{triggeredFuncs:['doConcentrate']}})
+                    +roller({name:'full-resources','data-i18n':'Full Resources',class:'general-roller row-current-fullbutton',trigger:{triggeredFuncs:['doFullResources']}})
+                    +roller({name:'start-turn','data-i18n':'Start Turn',class:'general-roller row-current-startturn',trigger:{triggeredFuncs:['doStartTurn']}})
+                    +roller({name:'concentrate','data-i18n':'Concentrate',class:'general-roller row-current-concentrate',trigger:{triggeredFuncs:['doConcentrate']}})
         .chaosseed-resists
             .row-resists-section.paper-background
                 +span({'data-i18n':'Resists'}).row-resists-title
@@ -147,30 +149,60 @@
     const doFullResources = async function({trigger,attributes,sections,casc}){
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
-        const theAPICall = '!tlrpg --charid '+attributes['header-character-id']+' --full';
-
-        const roll = await startRoll(theAPICall);
-        finishRoll(roll.rollId);
+        const maxMana = attributes['chaosseed-combatstats-mana-total'];
+        const maxStamina = attributes['chaosseed-combatstats-stamina-total'];
+        const maxHealth = attributes['chaosseed-combatstats-health-total'];
+        attributes['curmana'] = maxMana;
+        attributes['curstamina'] = maxStamina;
+        attributes['curhealth'] = maxHealth;
     };
     k.registerFuncs({doFullResources});
 
     const doConcentrate = async function({trigger,attributes,sections,casc}){
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
-        const theAPICall = '!tlrpg --charid '+attributes['header-character-id']+' --concentrate';
+        //add mana and stamina
+        const skillConc = attributes['chaosseed-skills-concentration-total'];
+        const maxMana = attributes['chaosseed-combatstats-mana-total'];
+        const maxStamina = attributes['chaosseed-combatstats-stamina-total'];
+        let curMana = attributes['curmana'];
+        let curStamina = attributes['curstamina'];
 
-        const roll = await startRoll(theAPICall);
-        finishRoll(roll.rollId);
+        curMana += skillConc;
+        if (curMana>maxMana) {
+            curMana = maxMana;
+        }
+        attributes['curmana'] = curMana;
+
+        curStamina += skillConc;
+        if (curStamina>maxStamina) {
+            curStamina = maxStamina;
+        }
+        attributes['curstamina'] = curStamina;
     };
     k.registerFuncs({doConcentrate});
     
-    const doStartTurn = async function({trigger,attributes,sections,casc}){
+    const doStartTurn = function({trigger,attributes,sections,casc}){
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
 
-        const theAPICall = '!tlrpg --charid '+attributes['header-character-id']+' --startturn';
+        //add mana regen
+        let curMana = attributes['curmana'];
+        const maxMana = attributes['chaosseed-combatstats-mana-total'];
+        const regenMana = attributes['chaosseed-combatstats-manaregen-total'];
+        curMana += regenMana;
+        if (curMana>maxMana) {
+            curMana = maxMana;
+        }
+        attributes['curmana'] = curMana;
 
-        const roll = await startRoll(theAPICall);
-        finishRoll(roll.rollId);
+        //reduce duration of buffs table
+        const buffsSection = 'repeating_buffs-rows';
+        if (sections[buffsSection].length > 0) {
+            sections[buffsSection].forEach(id => {
+                const durationSectionId = buffsSection+'_'+id+'_buffs-duration';
+                attributes[durationSectionId] += -1;
+            });
+        };
     };
     k.registerFuncs({doStartTurn});    
 
@@ -213,7 +245,7 @@
         grid-template-areas:
             'title title title'
             'stats combatvalues combat'
-            'stats movement combat'
+            'stats movement current'
             'resists spellresists efficiencies'
             'resists spellresists arcane'
         ;
@@ -319,52 +351,61 @@
                     text-align: center;
                     width: 45px;
                 }
+            }
+        }
 
-                .row-combat-curtitle {
+        .chaosseed-current {
+            grid-area: current;
+            width: 365px;
+            
+            .row-current-section {
+                display: grid;
+
+                .row-current-title {
+                    font-size: 14px;
                     text-align: center;
                     font-weight: bold;
-                    background-color: lightblue;
-                    width: 100%;
                 }
-                .row-combat-curhealth-head {
+                .row-current-health-head {
                     text-align: right;
                     padding: 5px;
                     width: 70px;
                 }
-                .row-combat-curhealth {
+                .row-current-health {
                     width: 40px;
                 }
-                .row-combat-curmana-head {
+                .row-current-mana-head {
                     text-align: right;
                     padding: 5px;
                     width: 55px;
                 }
-                .row-combat-curmana {
+                .row-current-mana {
                     width: 40px;
                 }
-                .row-combat-curstamina-head {
+                .row-current-stamina-head {
                     text-align: right;
                     padding: 5px;
                     width: 70px;
                 }
-                .row-combat-curstamina {
+                .row-current-stamina {
                     width: 40px;
                 }
 
-                .row-combat-fullbutton {
+                .row-current-fullbutton {
                     width: 120px;
                     background-color: lightblue;
                 }
-                .row-combat-startturn {
+                .row-current-startturn {
                     width: 120px;
                     background-color: lightblue;
                 }
-                .row-combat-concentrate {
+                .row-current-concentrate {
                     width: 120px;
                     background-color: lightblue;
                 }
             }
         }
+        
         .chaosseed-movement {
             grid-area: movement;
             width: 360px;

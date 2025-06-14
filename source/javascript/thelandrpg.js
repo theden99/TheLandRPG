@@ -8,6 +8,8 @@ if (!state.theLandRPG) {
     }
 }
 
+const listMartialSkills = ['doubleattack','dualwielding','keenshot','martialrage','meleefocus','twohandedwielding'];
+
 const paramSetCharId = 'setcharid';
 const paramCharId = 'charid'
 const paramFullResources = 'full';
@@ -300,19 +302,47 @@ on('chat:message',function(msg){
                 const theCostLine = theCostType+' '+theCost;
                 let theSkillTotal = getSkillTypeTotal(theSkillType);
                 let theSkillTypeTotal = doGetAttrByNameWithDefault(iCharId,theSkillTotal,0);
-                let theSkillTypeRank = doGetAttrByNameWithDefault(iCharId,'chaosseed-skills-'+theSkillType+'-rank',0);
+                let theSkillTypeRank = parseInt(doGetAttrByNameWithDefault(iCharId,'chaosseed-skills-'+theSkillType+'-rank',0));
                 let theStatTotal = getSkillTypeStatBonus(theSkillType);
                 let theSkillTypeStatBonus = doGetAttrByNameWithDefault(iCharId,theStatTotal,0);
+                let theSubskillRank = 0;
                 if (theSubskill!=='N/A') {
                     theSkillTotal = getSkillTypeTotal(theSubskill);
-                    theSkillTypeTotal = doGetAttrByNameWithDefault(iCharId,theSkillTotal,0);
-                    theSkillTypeRank = doGetAttrByNameWithDefault(iCharId,'chaosseed-skills-'+theSubskill+'-rank',0);
+                    if (listMartialSkills.includes(theSubskill)) {
+                        theSkillTypeTotal += doGetAttrByNameWithDefault(iCharId,theSkillTotal,0); //martials don't inlcude parent bonus
+                    } else {
+                        theSkillTypeTotal = doGetAttrByNameWithDefault(iCharId,theSkillTotal,0);
+                    }
                     theStatTotal = getSkillTypeStatBonus(theSubskill)
                     theSkillTypeStatBonus = doGetAttrByNameWithDefault(iCharId,theStatTotal,0);
+                    theSubskillRank += parseInt(doGetAttrByNameWithDefault(iCharId,'chaosseed-skills-'+theSubskill+'-rank',0)); //subskills should add parent ranks
                 };
                 const theSkillTypeAcc = theSkillTypeTotal-theSkillTypeStatBonus; //rank+bonuses - stat bonus already added to global spell acc/damage
-                const theSkillTypeDamage = Math.floor(theSkillTypeRank/5); //rank/5
-                const theGlobalEffDam = doGetAttrByNameWithDefault(iCharId,'chaosseed-combatvalues-efficiencies-total');
+                const theSkillTypeDamage = Math.floor((theSkillTypeRank+theSubskillRank)/5); //rank/5
+                let theAccMod = 0;
+                if (theSubskill==='dualwielding') {
+                    thePrimary = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-primary','none');
+                    if (thePrimary==='normal') {
+                        theAccMod = -25;
+                    } else if (thePrimary==='small') {
+                        theAccMod = -15;
+                    }
+                    theOffhand = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-offhand','none');
+                    if (theOffhand==='normal') {
+                        theAccMod = -50;
+                    } else if (theOffhand==='small') {
+                        theAccMod = -40;
+                    }
+                    
+                } else if ((theSubskill==='doubleattack') || (theSubskill==='dualstrike') || (theSubskill==='multihit')) {
+                    theAttackNum = parseInt(doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-attacknum',1));
+                    theAccMod = (theAttackNum-1)*-25;
+                } else if ((theSubskill==='keenshot') || (theSubskill==='meleefocus')) {
+                    theAccMod = 10;
+                } else if ((theSubskill==='firststrike') || (theSubskill==='swordrebuke')) {
+                    theAccMod = -25;
+                }
+                const theGlobalEffDam = doGetAttrByNameWithDefault(iCharId,'chaosseed-combatvalues-efficiencies-total',0);
                 const theMagicEfficiencyDamage = doGetAttrByNameWithDefault(iCharId,'chaosseed-efficiencies-'+doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-magictype','airmagic')+'-total',0);
                 const theEfficiencyDamage = Math.floor((theGlobalEffDam+theMagicEfficiencyDamage)/25);
                 const theRadius = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-radius',0);
@@ -327,6 +357,7 @@ on('chat:message',function(msg){
                 }
                 const theVs = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-vs','Mental');
                 const theEffect = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-effect','Heal')
+                const theCombatMedicRanks = parseInt(doGetAttrByNameWithDefault(iCharId,'chaosseed-skills-combathealing-rank',0));
                 let theAmount = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-amount',0);
                 if (iTarget) {
                     theAmount = iTarget.damage;
@@ -342,13 +373,19 @@ on('chat:message',function(msg){
                 if (theDurationLine==='Timed') {
                     theDurationLine = theDurationAmount+' '+theDurationType;
                 }
+
                 const theDesc = doGetAttrByNameWithDefault(iCharId,iSectionId+'spells-desc','');
                 theAPICall = '!power {{ '+
-                ' --bgcolor|'+theColor+
-                ' --txcolor|#ffffff'+
-                ' --titlefontshadow|#000000'+
-                ' --leftsub|'+theSkillType+' ◆ '+theActionType+
-                ' --rightsub|'+theCostLine;
+                    ' --bgcolor|'+theColor+
+                    ' --txcolor|#ffffff'+
+                    ' --titlefontshadow|#000000'+
+                    ' --leftsub|'
+                    +theSkillType;
+                if (theSubskill!=='N/A') {
+                    theAPICall += '-'+theSubskill;
+                }
+                theAPICall += ' ◆ '+theActionType+
+                    ' --rightsub|'+theCostLine;
                 if (iTarget) {
                     theAPICall += ' --name|'+theName+'->'+iTarget.token.get('name')+'(#'+iTargetNum+')';
                 } else {
@@ -382,8 +419,11 @@ on('chat:message',function(msg){
                     }
                     theAPICall += theGlobalAcc+' ['+theValueType+' ACC] + '
                         +theSkillTypeAcc+' [Skill ACC] + ';
+                    if (theValueType!=='spell') {
+                        theAPICall += theAccMod+' [Mod ACC] + ';
+                    }
                     if (iTarget) {
-                        theAPICall += iTarget.accbonus+' [ACC Bonus] ]] vs '+theVs;
+                        theAPICall += iTarget.accbonus+' [Bonus ACC] ]] vs '+theVs;
                     } else {
                         theAPICall += theAccBonus+' [Bonus ACC] ]] vs '+theVs;
                     }
@@ -395,6 +435,7 @@ on('chat:message',function(msg){
                         const theAcc = parseInt(iTarget.roll)
                             +parseInt(theGlobalAcc)
                             +parseInt(theSkillTypeAcc)
+                            +parseInt(theAccMod)
                             +parseInt(theAccBonus)
                             ;
                         if (theAcc>=theTargetVsValue) {
@@ -408,6 +449,9 @@ on('chat:message',function(msg){
                                     if (theValueType==='spell') {
                                         theDamageTaken += parseInt(theEfficiencyDamage)
                                     };
+                                    if (theEffect==='Heal') {
+                                        theDamageTaken += parseInt(theCombatMedicRanks);
+                                    }
                                     theAPICall +=
                                         ' --Hit|Target takes [[ '+theAmount+' [Base] + '
                                         +theGlobalDam+' ['+theValueType+' Dam] +'
@@ -415,6 +459,9 @@ on('chat:message',function(msg){
                                     if (theValueType==='spell') {
                                         theAPICall += theEfficiencyDamage+' [Eff Dam] + ';
                                     };
+                                    if (theEffect==='Heal') {
+                                        theAPICall += theCombatMedicRanks+' [Combat Medic] + '
+                                    }
                                     theAPICall +=
                                         theDamBonus+' [Bonus Dam] ]] '
                                         +theAmountType+' '+theEffect
@@ -427,12 +474,18 @@ on('chat:message',function(msg){
                                         if (theValueType==='spell') {
                                             theDamageTaken += parseInt(theEfficiencyDamage)
                                         }
+                                        if (theEffect==='Heal') {
+                                            theDamageTaken += parseInt(theCombatMedicRanks);
+                                        }
                                         theAPICall += 
                                             ' --Critical|Target takes an additional [[ '+iTarget.critdamage+' [Base] + '
                                             +theGlobalDam+' ['+theValueType+' Dam] +'
                                             +theSkillTypeDamage+' [Skill Dam] + ';
                                         if (theValueType==='spell') {
                                             theAPICall += theEfficiencyDamage+' [Eff Dam] + '
+                                        }
+                                        if (theEffect==='Heal') {
+                                            theAPICall += theCombatMedicRanks+' [Combat Medic] + '
                                         }
                                         theAPICall +=
                                             theCritDamBonus+' [Bonus Dam] ]] extra '+theAmountType+' '+theEffect;
@@ -458,6 +511,9 @@ on('chat:message',function(msg){
                         if (theValueType==='spell') {
                             theAPICall += theEfficiencyDamage+' [Eff Dam] + '
                         };
+                        if (theEffect==='Heal') {
+                            theAPICall += theCombatMedicRanks+' [Combat Medic] + '
+                        }
                         theAPICall +=
                             theDamBonus+' [Bonus Dam] ]] '+theAmountType+' '+theEffect
                             +' of '+theDamageType+' as '+theDamageClass;
@@ -468,6 +524,9 @@ on('chat:message',function(msg){
                         if (theValueType==='spell') {
                             theAPICall += theEfficiencyDamage+' [Eff Dam] + '
                         };
+                        if (theEffect==='Heal') {
+                            theAPICall += theCombatMedicRanks+' [Combat Medic] + '
+                        }
                         theAPICall +=
                             theCritDamBonus+' [Bonus Dam] ]] extra '+theAmountType+' '+theEffect;
                     }
@@ -481,6 +540,9 @@ on('chat:message',function(msg){
                             if (theValueType==='spell') {
                                 theAPICall += theEfficiencyDamage+' [Eff Dam] + '
                             };
+                            if (theEffect==='Heal') {
+                                theAPICall += theCombatMedicRanks+' [Combat Medic] + '
+                            }
                             theAPICall +=
                                 iTarget.damagebonus+' [Bonus Dam] ]] '
                                 +theAmountType+' '+theEffect
@@ -493,6 +555,9 @@ on('chat:message',function(msg){
                             if (theValueType==='spell') {
                                 theAPICall += theEfficiencyDamage+' [Eff Dam] + '
                             };
+                            if (theEffect==='Heal') {
+                                theAPICall += theCombatMedicRanks+' [Combat Medic] + '
+                            }
                             theAPICall +=
                                 +theDamBonus+' [Bonus Dam] ]] '
                                 +theAmountType+' '+theEffect
@@ -640,96 +705,7 @@ on('chat:message',function(msg){
         }
     } //doCardSpell
 
-    function doCardAttack(iCharId,iSectionId,iTargets,iTargetParams) {
-        const thePlayer = findObjs({ id:msg.playerid })[0];
-        const theColor = thePlayer.get('color');
-        const theChar = findObjs({ id:iCharId })[0];
-        const theCharName = theChar.get('name');
 
-        const powerCard = doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-powercard','');
-        let theAPICall = '';
-
-        //subtract cost from current
-        let theCost = doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-cost',0);
-        const theCostType = doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-resource','Stamina');
-        if (theCostType==='Mana') {
-            theCost = theCost - Math.floor(theCost*(doGetAttrByNameWithDefault(iCharId,'chaosseed-combatvalues-efficiencies-total',0)/100));
-        }
-        let theCurHealth = doGetAttrByNameWithDefault(iCharId,'curhealth',0);
-        let theCurMana = doGetAttrByNameWithDefault(iCharId,'curmana',0);
-        let theCurStamina = doGetAttrByNameWithDefault(iCharId,'curstamina',0);
-        if (theCostType==='Health') {
-            theCurHealth -= theCost;
-            doSetAttrByName(iCharId,'curhealth',theCurHealth);
-        } else if (theCostType==='Mana') {
-            theCurMana -= theCost;
-            doSetAttrByName(iCharId,'curmana',theCurMana);
-        } else if (theCostType==='Stamina') {
-            theCurStamina -= theCost;
-            doSetAttrByName(iCharId,'curstamina',theCurStamina);
-        }
-
-        if (powerCard!=='') {
-            theAPICall = powerCard;
-        } else {
-            const theName = doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-name','');
-            const theActionType = doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-actiontype','combat');
-            const theRange = doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-range',0);
-            const theAttackCat = doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-attackcat','melee');
-            const theAccStatTot = doGetAttrByNameWithDefault(iCharId,'chaosseed-combatvalues-'+theAttackCat+'acc-total',0);
-            const theDamageStatTot = doGetAttrByNameWithDefault(iCharId,'chaosseed-combatvalues-'+theAttackCat+'damage-total',0);
-            const theWeaponType = doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-weapontype','archery');
-            const theSkillTot = doGetAttrByNameWithDefault(iCharId,'chaosseed-skills-'+theWeaponType+'-total',0);
-            const theSkillRank = doGetAttrByNameWithDefault(iCharId,'chaosseed-skills-'+theWeaponType+'-rank',0);
-            const theAccLine = theAccStatTot
-                +' ['+doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-attackcat','melee')+' Bonus] + '+theSkillTot
-                +' [Skill Bonus] + '+doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-accbonus',0)
-                +' [Acc Bonus] - '+doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-attacktype',0)
-                +' [Attack Penalty]'
-                ;
-            const theVs = doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-vs','armor');
-            const theDamageLine = '[[ '+doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-damage','0')
-                +' [Base Dam] + '+theDamageStatTot
-                +' ['+doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-attackcat','melee')+' Bonus] + '+Math.floor(theSkillRank/5)
-                +' [Skill Dam] + '+doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-damagebonus',0)
-                +' [Dam Bonus] ]]'
-                ;
-            const theAnatomyBonus = Math.floor(doGetAttrByNameWithDefault(iCharId,'chaosseed-skills-anatomy-rank',0)/10);
-            const theCritSkillBonus = Math.floor(theSkillRank/2);
-            const theCritLine = 'If the check is [['+doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-critabove',0)+' -'
-                +' '+theAnatomyBonus
-                +' [Anatomy Bonus] ]] or more than needed, it takes an additional [[ '
-                +doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-damage',0)
-                +' [Base Dam] + '+theDamageStatTot
-                +' ['+doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-attackcat','melee')+' Bonus] + '+(theSkillRank/5)
-                +' [Skill Dam] + '+doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-damagebonus',0)
-                +' [Dam Bonus] + '+doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-critdamagebonus',0)
-                +' [Crit Dam Bonus] + '+theCritSkillBonus
-                +' [Crit Skill Bonus] ]] '
-                +doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-damagetype','physical')
-                +' ('+doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-damageclass','none')+') damage'
-                ;
-            const theDisplay = doGetAttrByNameWithDefault(iCharId,iSectionId+'attacks-display','');
-            const theCostLine = theCost+' '+theCostType;
-
-            theAPICall = '!power {{'+
-                ' --bgcolor|'+theColor+
-                ' --txcolor|#ffffff'+
-                ' --titlefontshadow|#000000'+
-                ' --name|'+theName+
-                ' --leftsub|'+theCharName+
-                ' --rightsub|'+theActionType+' (range: '+theRange+' ft)'+
-                ' --Accuracy Check:|[[ 1d100 + '+theAccLine+' ]] vs. '+theVs+
-                ' --Damage:|'+theDamageLine+
-                ' --Critical Chance:|'+theCritLine+
-                ' --Cost:|'+theCostLine+
-                ' --Notes:|'+theDisplay
-            ;
-
-        };
-        //log(theAPICall);
-        sendChat('player|'+msg.playerid,theAPICall);
-    }; //doCardAttack
 
     //MAIN
     if (msg.type=='api' && msg.content.indexOf('!tlrpg')==0){
@@ -766,7 +742,7 @@ on('chat:message',function(msg){
                             theParams[paramTargets],
                             theRolls);
                     } else {
-                        doCardAttack(theCharId,
+                        doCardSpell(theCharId,
                             theParams[paramSpell],
                             theParams[paramTargets],
                             theRolls);
@@ -779,6 +755,10 @@ on('chat:message',function(msg){
         };
     };
 });
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
 let listTurnOrder = [];

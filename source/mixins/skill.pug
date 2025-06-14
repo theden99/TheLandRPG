@@ -53,7 +53,7 @@ mixin rowSkill(iPage,iZone,iTemplate,iSkill)
 
         - theID = getFieldID(iPage,iZone,iTemplate,idAffinity,iSkill);
         - theAffects = getFieldID(iPage,iZone,iTemplate,idMaxRank,iSkill);
-        +select({name:theID,class:'row-skill-affinity',value:0,trigger:{affects:theAffects,triggeredFuncs:['funcLogSkill']}})
+        +select({name:theID,class:'row-skill-affinity',value:0,trigger:{affects:theAffects,triggeredFuncs:['doUpdateMaxRank','funcLogSkill']}})
             +option({value:0,'data-i18n':idAffinity0})
             +option({value:25,'data-i18n':idAffinity25})
             +option({value:50,'data-i18n':idAffinity50})
@@ -85,6 +85,30 @@ mixin rowSkill(iPage,iZone,iTemplate,iSkill)
         - theID = getFieldID(iPage,iZone,iTemplate,idHelpButton,iSkill);
         +button({name:theID,type:'action',class:'button-help',trigger:{triggeredFuncs:['funcHelpButton']}}).column-help
 +module.                                
+    const doUpdateMaxRank = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const theCallerID = buttonName;
+        const [thePage,theZone,theSkill,theField] = parseFieldName(buttonName);
+
+        let theSkillMaxRank = 0;
+        const theLevelMaxRank = (2+
+                                    attributes['header-character-level']+
+                                    (attributes[getFieldID(idChaosSeed,idSkills,idSkills,idAffinity,theSkill)]/25)
+                                );
+        theParents = schemaCore.skills[theSkill].parents;
+        if (theParents.length>0) {
+            const theParentSkill = theParents[0];
+            const theRanks = getFieldID(idChaosSeed,idSkills,idSkills,idRank,theParentSkill);
+            const theMaxRank = getFieldID(idChaosSeed,idSkills,idSkills,idMaxRank,theSkill);
+            theSkillMaxRank = attributes[theRanks];
+            if (theLevelMaxRank<theSkillMaxRank) {
+                theSkillMaxRank = theLevelMaxRank;
+            }
+            attributes[theMaxRank] = theSkillMaxRank;
+        };
+    };
+    k.registerFuncs({doUpdateMaxRank});
+
     const funcLogSkill = ({trigger,attributes,sections,casc}) => {
         const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
         const theCallerID = buttonName;

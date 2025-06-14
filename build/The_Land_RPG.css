@@ -2771,6 +2771,10 @@ body .ui-dialog .tab-content .charsheet .inventory-storage-section .div-inven-it
 body .ui-dialog .tab-content .charsheet .spells-main {
   width: 1060px;
 }
+body .ui-dialog .tab-content .charsheet .spells-main .spells-head-title {
+  font-weight: bold;
+  font-size: 16px;
+}
 body .ui-dialog .tab-content .charsheet .spells-main .spells-roller-head,
 body .ui-dialog .tab-content .charsheet .spells-main .spells-roller {
   width: 26px;
@@ -2882,7 +2886,7 @@ body .ui-dialog .tab-content .charsheet .spells-main .spells-numtargets-head {
 body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details {
   display: grid;
   grid-template-columns: repeat(auto, 4);
-  grid-template-areas: "duration durationamount durationtype conditiontype" "radius radiustype damagetype damageclass" "accbonus damagebonus particletype particlecolor" "critabove critbonus critdamagebonus ." "desc-head desc-head desc-head desc-head" "desc desc desc desc" "spelleffect-head spelleffect-head spelleffect-head spelleffect-head" "spelleffect spelleffect spelleffect spelleffect" "effects-section effects-section effects-section effects-section" "powercard-head powercard-head powercard-head powercard-head" "powercard powercard powercard powercard";
+  grid-template-areas: "duration durationamount durationtype conditiontype" "radius radiustype damagetype damageclass" "accbonus damagebonus primary offhand" "critabove critbonus critdamagebonus attacknum" "desc-head desc-head desc-head desc-head" "desc desc desc desc" "spelleffect-head spelleffect-head spelleffect-head spelleffect-head" "spelleffect spelleffect spelleffect spelleffect" "effects-section effects-section effects-section effects-section" "powercard-head powercard-head powercard-head powercard-head" "powercard powercard powercard powercard";
   border: 1px solid var(--borderColor);
 }
 body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-duration {
@@ -2981,27 +2985,27 @@ body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-da
   width: 100%;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-particletype {
-  grid-area: particletype;
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-primary {
+  grid-area: primary;
   width: 65px;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-particletype .spells-particletype-head {
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-primary .spells-primary-head {
   background-color: gainsboro;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-particletype .spells-particletype {
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-primary .spells-primary {
   width: 100%;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-particlecolor {
-  grid-area: particlecolor;
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-offhand {
+  grid-area: offhand;
   width: 65px;
   text-align: center;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-particlecolor .spells-particlecolor-head {
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-offhand .spells-offhand-head {
   background-color: gainsboro;
 }
-body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-particlecolor .spells-particlecolor {
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-offhand .spells-offhand {
   width: 100%;
   text-align: center;
 }
@@ -3038,6 +3042,18 @@ body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-cr
   background-color: gainsboro;
 }
 body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-critdamagebonus .spells-critdamagebonus {
+  width: 100%;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-attacknum {
+  grid-area: attacknum;
+  width: 65px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-attacknum .spells-attacknum-head {
+  background-color: gainsboro;
+}
+body .ui-dialog .tab-content .charsheet .spells-main .div-spells-details .div-attacknum .spells-attacknum {
   width: 100%;
   text-align: center;
 }
@@ -3594,7 +3610,7 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed {
   font-weight: normal;
   width: 1100px;
   grid-template-columns: auto auto auto;
-  grid-template-areas: "title title title" "stats combatvalues combat" "stats movement combat" "resists spellresists efficiencies" "resists spellresists arcane";
+  grid-template-areas: "title title title" "stats combatvalues combat" "stats movement current" "resists spellresists efficiencies" "resists spellresists arcane";
 }
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .repitem:hover > .collapse, body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .repitem:hover .roll-container,
 body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .collapse-container:hover > .collapse,
@@ -3709,45 +3725,51 @@ body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chao
   text-align: center;
   width: 45px;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-combat .row-combat-section .row-combat-curtitle {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-current {
+  grid-area: current;
+  width: 365px;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-current .row-current-section {
+  display: grid;
+}
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-current .row-current-section .row-current-title {
+  font-size: 14px;
   text-align: center;
   font-weight: bold;
-  background-color: lightblue;
-  width: 100%;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-combat .row-combat-section .row-combat-curhealth-head {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-current .row-current-section .row-current-health-head {
   text-align: right;
   padding: 5px;
   width: 70px;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-combat .row-combat-section .row-combat-curhealth {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-current .row-current-section .row-current-health {
   width: 40px;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-combat .row-combat-section .row-combat-curmana-head {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-current .row-current-section .row-current-mana-head {
   text-align: right;
   padding: 5px;
   width: 55px;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-combat .row-combat-section .row-combat-curmana {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-current .row-current-section .row-current-mana {
   width: 40px;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-combat .row-combat-section .row-combat-curstamina-head {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-current .row-current-section .row-current-stamina-head {
   text-align: right;
   padding: 5px;
   width: 70px;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-combat .row-combat-section .row-combat-curstamina {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-current .row-current-section .row-current-stamina {
   width: 40px;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-combat .row-combat-section .row-combat-fullbutton {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-current .row-current-section .row-current-fullbutton {
   width: 120px;
   background-color: lightblue;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-combat .row-combat-section .row-combat-startturn {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-current .row-current-section .row-current-startturn {
   width: 120px;
   background-color: lightblue;
 }
-body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-combat .row-combat-section .row-combat-concentrate {
+body .ui-dialog .tab-content .charsheet .thelandrpg-tabs-section-chaosseed .chaosseed-current .row-current-section .row-current-concentrate {
   width: 120px;
   background-color: lightblue;
 }
@@ -4386,8 +4408,8 @@ body .ui-dialog .tab-content .charsheet .battle-main {
   font-family: Arial;
   font-weight: normal;
   width: 1100px;
-  grid-template-columns: auto;
-  grid-template-areas: "title" "buttons";
+  grid-template-columns: auto auto auto;
+  grid-template-areas: "title title title" "movement buffs current" "tabs tabs tabs";
 }
 body .ui-dialog .tab-content .charsheet .battle-main .repitem:hover > .collapse, body .ui-dialog .tab-content .charsheet .battle-main .repitem:hover .roll-container,
 body .ui-dialog .tab-content .charsheet .battle-main .collapse-container:hover > .collapse,
@@ -4408,11 +4430,174 @@ body .ui-dialog .tab-content .charsheet .battle-main .battle-title {
   text-align: center;
   font-weight: bold;
 }
-body .ui-dialog .tab-content .charsheet .battle-main .battle-spells {
+body .ui-dialog .tab-content .charsheet .battle-main .battle-movement {
+  grid-area: movement;
+  width: 365px;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-movement .row-movement-section {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-areas: "title" "move";
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-movement .row-movement-section .row-movement-title {
+  grid-area: title;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-movement .row-movement-section .row-move {
+  grid-area: move;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-movement .row-movement-section .row-move .row-move-move-text {
+  text-align: right;
+  width: 50px;
+  padding: 5px;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-movement .row-movement-section .row-move .row-move-total {
+  text-align: center;
+  width: 40px;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-movement .row-movement-section .row-move .row-move-feet-text {
+  text-align: left;
+  width: 40px;
+  padding: 5px;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-movement .row-movement-section .row-move .row-move-squares {
+  text-align: center;
+  width: 40px;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-movement .row-movement-section .row-move .row-move-squares-text {
+  text-align: left;
+  width: 50px;
+  padding: 5px;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-movement .row-movement-section .row-move .move-range {
+  width: 100px;
+  background-color: lightblue;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-current {
+  grid-area: current;
+  width: 365px;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-current .row-current-section {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-areas: "title" "current" "buttons";
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-current .row-current-section .row-current-title {
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-current .row-current-section .row-current {
+  grid-area: current;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-current .row-current-section .row-current .row-current-health-head {
+  text-align: right;
+  padding: 5px;
+  width: 70px;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-current .row-current-section .row-current .row-current-health {
+  width: 40px;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-current .row-current-section .row-current .row-current-mana-head {
+  text-align: right;
+  padding: 5px;
+  width: 55px;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-current .row-current-section .row-current .row-current-mana {
+  width: 40px;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-current .row-current-section .row-current .row-current-stamina-head {
+  text-align: right;
+  padding: 5px;
+  width: 70px;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-current .row-current-section .row-current .row-current-stamina {
+  width: 40px;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-current .row-current-section .row-buttons {
   grid-area: buttons;
 }
-body .ui-dialog .tab-content .charsheet .battle-main .battle-attacks {
-  grid-area: buttons;
+body .ui-dialog .tab-content .charsheet .battle-main .battle-current .row-current-section .row-buttons .row-current-fullbutton {
+  width: 120px;
+  background-color: lightblue;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-current .row-current-section .row-buttons .row-current-startturn {
+  width: 120px;
+  background-color: lightblue;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-current .row-current-section .row-buttons .row-current-concentrate {
+  width: 120px;
+  background-color: lightblue;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs {
+  grid-area: buffs;
+  width: 355px;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .repitem:hover > .collapse, body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .repitem:hover .roll-container,
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .collapse-container:hover > .collapse,
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .collapse-container:hover .roll-container {
+  opacity: 1;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .repitem > .collapse,
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .collapse-container > .collapse {
+  opacity: 1;
+  position: absolute;
+  left: -10px;
+  top: 0px;
+  pointer-events: auto;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .repcontrol-button--add {
+  display: none;
+  pointer-events: none;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .div-buffs-section .buffs-buff-head,
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .div-buffs-section .buffs-buff {
+  width: 140px;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .div-buffs-section .buffs-duration-head,
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .div-buffs-section .buffs-duration {
+  width: 50px;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .div-buffs-section .buffs-remove {
+  background-color: rgba(220, 220, 220, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px black;
+  border-width: 0;
+  transition-property: box-shadow, backdrop-filter;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+  backdrop-filter: blur(1px);
+  overflow: hidden;
+  background-color: lightblue;
+  width: 60px;
+  text-align: center;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .div-buffs-section .buffs-remove:is(:hover, :focus) {
+  background-color: rgba(133, 133, 133, 0.5019607843);
+  box-shadow: 0 4px 6px black;
+  backdrop-filter: blur(2px);
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .div-buffs-section .buffs-remove:active {
+  background-color: #858585;
+  box-shadow: 0 1px 2px black;
+  backdrop-filter: blur(0px);
+}
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .div-buffs-section .buffs-buff-head,
+body .ui-dialog .tab-content .charsheet .battle-main .battle-buffs .div-buffs-section .buffs-duration-head {
+  text-align: center;
+  background-color: lightblue;
+  font-weight: bold;
+}
+body .ui-dialog .tab-content .charsheet .battle-main .row-tabs-section {
+  grid-area: tabs;
+  display: grid;
 }
 body .ui-dialog .tab-content .charsheet .inventory-main {
   display: grid;
@@ -4888,7 +5073,7 @@ body .ui-dialog .tab-content .charsheet .auditor-main {
   font-weight: normal;
   width: 1100px;
   grid-template-columns: auto;
-  grid-template-areas: "title" "auditor";
+  grid-template-areas: "title" "importnpc";
 }
 body .ui-dialog .tab-content .charsheet .auditor-main .auditor-title {
   grid-area: title;
@@ -4896,18 +5081,23 @@ body .ui-dialog .tab-content .charsheet .auditor-main .auditor-title {
   text-align: center;
   font-weight: bold;
 }
-body .ui-dialog .tab-content .charsheet .auditor-main .auditor-section {
-  grid-area: auditor;
+body .ui-dialog .tab-content .charsheet .auditor-main .import-section {
+  grid-area: importnpc;
+}
+body .ui-dialog .tab-content .charsheet .auditor-main .import-section .npc-title {
   grid-area: title;
   font-size: 16px;
   text-align: center;
   font-weight: bold;
-}
-body .ui-dialog .tab-content .charsheet .auditor-main .auditor-section .npc-text {
-  height: 32rem;
   width: 100%;
 }
-body .ui-dialog .tab-content .charsheet .auditor-main .auditor-section .npc-button {
+body .ui-dialog .tab-content .charsheet .auditor-main .import-section .npc-text {
+  grid-area: text;
+  height: 10rem;
+  width: 100%;
+}
+body .ui-dialog .tab-content .charsheet .auditor-main .import-section .npc-button {
+  grid-area: button;
   background-color: lightblue;
   font-size: 16px;
   text-align: center;

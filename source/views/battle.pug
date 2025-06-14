@@ -1,33 +1,169 @@
 +tab({name:'battle', container:'article', button:{class:'thelandrpg-tabs-button boxed','data-i18n':'Battle'}})
     .battle-main
         +span({'data-i18n':'BATTLE(CRUSH YOUR ENEMIES)'}).battle-title.paper-background
-        +tabs({name:'battle-crushthem',defaultActiveTab:'battle-spells',persistent:true})
-            +tab({name:'battle-spells',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Spells'}})
-                +tabs({name:'spells-books',defaultActiveTab:'spells-book1',persistent:true})
-                    +spells-books('spell','book1')
-                    +spells-books('spell','book2')
-                    +spells-books('spell','book3')
-                    +spells-books('spell','book4')
-                    +spells-books('spell','book5')
-                    +spells-books('spell','book6')
-                    +spells-books('spell','book7')
-                    +spells-books('spell','book8')
-                    +spells-books('spell','book9')
-                    +spells-books('spell','book10')
-                    +spells-books('spell','buffs')
-            +tab({name:'battle-attacks',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Attacks'}})
-                +tabs({name:'attacks-attacks',defaultActiveTab:'attacks-attacks1',persistent:true})
-                    +spells-books('combat','attacks1')
-                    +spells-books('combat','attacks2')
-                    +spells-books('combat','attacks3')
-                    +spells-books('combat','attacks4')
-                    +spells-books('combat','attacks5')
-                    +spells-books('combat','attacks6')
-                    +spells-books('combat','attacks7')
-                    +spells-books('combat','attacks8')
-                    +spells-books('combat','attacks9')
-                    +spells-books('combat','attacks10')
+        .battle-movement
+            .row-movement-section.paper-background
+                +span({'data-i18n':'Movement'}).row-movement-title
+                .row-move.div-inline
+                    +span({'data-i18n':'Move'}).row-move-move-text
+                    - theFormula = 'floor(@{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovementSpeed) + '}) - @{chaosseed-movement-movepenalty-total}';
+                    +number({name:idMoveTotal,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula}}).row-move-total
+                    +span({'data-i18n':'Feet'}).row-move-feet-text
+                    - theFormula = 'floor((@{' + getFieldID(idChaosSeed,idMovement,idMovement,idTotal,idMovementSpeed) + '} - @{chaosseed-movement-movepenalty-total})/ 5)';
+                    +number({name:idMoveSquares,class:'boxed',readonly:'',value:0,trigger:{formula:theFormula}}).row-move-squares
+                    +span({'data-i18n':'Squares'}).row-move-squares-text
+                    +roller({name:'move-range','data-i18n':'Show Range',class:'general-roller move-range',trigger:{triggeredFuncs:['doMoveRange']}})
+        .battle-current
+            .row-current-section.paper-background
+                +span({'data-i18n':'Current'}).row-current-title
+                .row-current.div-inline
+                    +span({'data-i18n':'Health:'}).row-current-health-head
+                    +number({name:'curhealth',class:'boxed',value:0}).row-current-health
+                    +span({'data-i18n':'Stamina:'}).row-current-mana-head
+                    +number({name:'curstamina',class:'boxed',value:0}).row-current-stamina
+                    +span({'data-i18n':'Mana:'}).row-current-mana-head
+                    +number({name:'curmana',class:'boxed',value:0}).row-current-mana
+                .row-buttons.div-inline
+                    +roller({name:'start-turn','data-i18n':'Start Turn',class:'general-roller row-current-startturn',trigger:{triggeredFuncs:['doStartTurn']}})
+                    +roller({name:'concentrate','data-i18n':'Concentrate',class:'general-roller row-current-concentrate',trigger:{triggeredFuncs:['doConcentrate']}})
+                    +roller({name:'full-resources','data-i18n':'Full Resources',class:'general-roller row-current-fullbutton',trigger:{triggeredFuncs:['doFullResources']}})
+        .battle-buffs
+            .div-buffs-section.paper-background
+                .div-inline
+                    +span({'data-i18n':'Buff'}).buffs-buff-head
+                    +span({'data-i18n':'Duration'}).buffs-duration-head
+                +customControlFieldset({name:'buffs-rows',addClass:''})
+                    .div-inline
+                        +text({name:'buffs-buff',readyonly:'',class:'buffs-buff underlined'})
+                        +number({name:'buffs-duration',readonly:'',class:'buffs-duration boxed'})
+                        +button({name:'buffs-remove',type:'action',class:'buffs-remove','data-i18n':'Remove',trigger:{triggeredFuncs:['doBuffsEffectsRemove']}})
+                        +text({name:'buffs-effectsfullid',class:'hidden'})
+                        +text({name:'buffs-bufffullid',class:'hidden'})
+        .row-tabs-section.paper-background
+            +tabs({name:'battle-crushthem',defaultActiveTab:'battle-spells',persistent:true})
+                +tab({name:'battle-spells',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Spells'}})
+                    +tabs({name:'spells-books',defaultActiveTab:'spells-book1',persistent:true})
+                        +spells-books('spell','book1')
+                        +spells-books('spell','book2')
+                        +spells-books('spell','book3')
+                        +spells-books('spell','book4')
+                        +spells-books('spell','book5')
+                        +spells-books('spell','book6')
+                        +spells-books('spell','book7')
+                        +spells-books('spell','book8')
+                        +spells-books('spell','book9')
+                        +spells-books('spell','book10')
+                        +spells-books('spell','book11')
+                        +spells-books('spell','book12')
+                        +spells-books('spell','book13')
+                        +spells-books('spell','book14')
+                        +spells-books('spell','book15')
+                        +spells-books('spell','book16')
+                        +spells-books('spell','book17')
+                        +spells-books('spell','book18')
+                        +spells-books('spell','book19')
+                        +spells-books('spell','book20')
+                +tab({name:'battle-attacks',containter:'article',button:{class:'thelandrpg-subtab-button','data-i18n':'Attacks'}})
+                    +tabs({name:'attacks-attacks',defaultActiveTab:'attacks-attacks1',persistent:true})
+                        +spells-books('combat','attack1')
+                        +spells-books('combat','attack2')
+                        +spells-books('combat','attack3')
+                        +spells-books('combat','attack4')
+                        +spells-books('combat','attack5')
+                        +spells-books('combat','attack6')
+                        +spells-books('combat','attack7')
+                        +spells-books('combat','attack8')
+                        +spells-books('combat','attack9')
+                        +spells-books('combat','attack10')
+                        +spells-books('combat','attack11')
+                        +spells-books('combat','attack12')
+                        +spells-books('combat','attack13')
+                        +spells-books('combat','attack14')
+                        +spells-books('combat','attack15')
+                        +spells-books('combat','attack16')
+                        +spells-books('combat','attack17')
+                        +spells-books('combat','attack18')
+                        +spells-books('combat','attack19')
+                        +spells-books('combat','attack20')
 +module.
+    const doEffectsApply = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const theSectionId = sectionName+'_'+rowID;
+
+        const theEffects = attributes[theSectionId+'_spells-effects'];
+
+        if (attributes[theSectionId+'_spells-effects-applied']==='Not Applied') {
+            ApplyEffects(attributes,theEffects,1);
+            attributes[theSectionId+'_spells-effects-applied'] = 'Applied';
+        };
+
+        //add to buffs table
+        const buffSection = 'repeating_buffs-rows';
+        const buffSectionId = k.generateRowID(buffSection,sections);
+
+        attributes[buffSectionId+'_buffs-buff'] = attributes[theSectionId+'_spells-name'];
+        attributes[buffSectionId+'_buffs-duration'] = attributes[theSectionId+'_spells-durationamount'];
+        attributes[buffSectionId+'_buffs-desc'] = attributes[theSectionId+'_spells-spelleffect'];
+        attributes[buffSectionId+'_buffs-effects'] = attributes[theSectionId+'_spells-effects'];
+        attributes[buffSectionId+'_buffs-effectsfullid'] = theSectionId;
+        attributes[theSectionId+'_spells-bufffullid'] = buffSectionId;
+    };
+    k.registerFuncs({doEffectsApply});
+
+    const doEffectsRemove = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const theSectionId = sectionName+'_'+rowID;
+
+        const theEffects = attributes[theSectionId+'_spells-effects'];
+
+        if (attributes[theSectionId+'_spells-effects-applied']==='Applied') {
+            ApplyEffects(attributes,theEffects,-1);
+            attributes[theSectionId+'_spells-effects-applied'] = 'Not Applied';
+        };
+
+        //remove from buffs table
+        const theBuffFullId = attributes[theSectionId+'_spells-bufffullid'];
+        k.removeRepeatingRow(theBuffFullId,attributes,sections);
+    };
+    k.registerFuncs({doEffectsRemove});
+
+    const doBuffsEffectsRemove = ({trigger,attributes,sections,casc}) => {
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+        const theSectionId = sectionName+'_'+rowID;
+
+        //update spell row
+        const theSpellSectionId = attributes[theSectionId+'_buffs-effectsfullid'];
+
+        const theEffects = attributes[theSpellSectionId+'_spells-effects'];
+        if (attributes[theSpellSectionId+'_spells-effects-applied']==='Applied') {
+            ApplyEffects(attributes,theEffects,-1);
+            attributes[theSpellSectionId+'_spells-effects-applied'] = 'Not Applied';
+        };
+
+        //remove from buffs(this) table
+        k.removeRepeatingRow(theSectionId,attributes,sections);
+    };
+    k.registerFuncs({doBuffsEffectsRemove});
+
+    const doSpellRange = async function({trigger,attributes,sections,casc}){
+        const [sectionName,rowID,buttonName] = k.parseTriggerName(trigger.name);
+
+        let theRange = attributes[sectionName+'_'+rowID+'_spells-range'];
+        if (theRange==='Self') {
+            theRange = 0;
+        } else if (theRange==='Touch') {
+            theRange = 5;
+        }
+        theRange = Math.floor(theRange/5)*5;
+        const theAPICall = '!tlrpg --charid '+attributes['header-character-id']+' --moverange '
+            +theRange+'|0';
+            ;
+
+        const roll = await startRoll(theAPICall);
+        finishRoll(roll.rollId);
+    };
+    k.registerFuncs({doSpellRange});    
+
 +scss('sheet').
     .battle-main{
         .repitem:hover > .collapse, .repitem:hover .roll-container,
@@ -49,10 +185,11 @@
         font: {size: 12px;family: Arial;weight: normal;};
         width: 1100px;
 
-        grid-template-columns: auto;
+        grid-template-columns: auto auto auto;
         grid-template-areas:
-            'title'
-            'buttons'
+            'title title title'
+            'movement buffs current'
+            'tabs tabs tabs'
         ;
 
         .battle-title{
@@ -62,10 +199,180 @@
             font-weight: bold;
         }
 
-        .battle-spells {
-            grid-area: buttons;
+        .battle-movement {
+            grid-area: movement;
+            width: 365px;
+            
+            .row-movement-section {
+                display:grid;
+
+                grid-template-columns: auto;
+                grid-template-areas:
+                    'title'
+                    'move'
+                ;
+                .row-movement-title {
+                    grid-area: title;
+
+                    font-size: 16px;
+                    text-align: center;
+                    font-weight: bold;
+                }
+                .row-move {
+                    grid-area: move;
+                    .row-move-move-text {
+                        text-align: right;
+                        width: 50px;
+                        padding: 5px;
+                        font-weight: bold;
+                    }
+                    .row-move-total {
+                        text-align: center;
+                        width: 40px;
+                        font-weight: bold;
+                    }
+                    .row-move-feet-text {
+                        text-align: left;
+                        width: 40px;
+                        padding: 5px;
+                        font-weight: bold;
+                    }
+                    .row-move-squares {
+                        text-align: center;
+                        width: 40px;
+                        font-weight: bold;
+                    }
+                    .row-move-squares-text {
+                        text-align: left;
+                        width: 50px;
+                        padding: 5px;
+                        font-weight: bold;
+                    }
+                    .move-range {
+                        width: 100px;
+                        background-color: lightblue;
+                    }
+                }
+            }
         }
-        .battle-attacks {
-            grid-area: buttons;
+        .battle-current {
+            grid-area: current;
+            width: 365px;
+            
+            .row-current-section {
+                display: grid;
+
+                grid-template-columns: auto;
+                grid-template-areas:
+                    'title'
+                    'current'
+                    'buttons'
+                ;
+                .row-current-title {
+                    font-size: 14px;
+                    text-align: center;
+                    font-weight: bold;
+                }
+                .row-current {
+                    grid-area: current;
+                    .row-current-health-head {
+                        text-align: right;
+                        padding: 5px;
+                        width: 70px;
+                    }
+                    .row-current-health {
+                        width: 40px;
+                    }
+                    .row-current-mana-head {
+                        text-align: right;
+                        padding: 5px;
+                        width: 55px;
+                    }
+                    .row-current-mana {
+                        width: 40px;
+                    }
+                    .row-current-stamina-head {
+                        text-align: right;
+                        padding: 5px;
+                        width: 70px;
+                    }
+                    .row-current-stamina {
+                        width: 40px;
+                    }
+                }
+                .row-buttons {
+                    grid-area: buttons;
+                    .row-current-fullbutton {
+                        width: 120px;
+                        background-color: lightblue;
+                    }
+                    .row-current-startturn {
+                        width: 120px;
+                        background-color: lightblue;
+                    }
+                    .row-current-concentrate {
+                        width: 120px;
+                        background-color: lightblue;
+                    }
+                }
+            }
+        }
+
+        .battle-buffs {
+            .repitem:hover > .collapse, .repitem:hover .roll-container,
+            .collapse-container:hover > .collapse,
+            .collapse-container:hover .roll-container {
+                opacity: 1;
+            }
+            .repitem > .collapse,
+            .collapse-container > .collapse {
+                opacity:  1;
+                position: absolute;
+                left: -10px;
+                top: 0px;
+                pointer-events: auto;
+            }
+            .repcontrol-button--add {
+                display:none;
+                pointer-events: none;
+            }
+            
+            grid-area: buffs;
+            width: 355px;
+
+            .div-buffs-section {
+                .buffs-buff-head,
+                .buffs-buff {
+                    width: 140px;
+                }
+                .buffs-duration-head,
+                .buffs-duration {
+                    width: 50px;
+                }
+                .buffs-remove {
+                    @include k.base-button;
+                    background-color: lightblue;
+                    width: 60px;
+                    text-align:center;
+                }
+                .buffs-buff-head,
+                .buffs-duration-head {
+                    text-align: center;
+                    background-color: lightblue;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .row-tabs-section {
+            grid-area: tabs;
+
+            display: grid;
+
+            .battle-spells {
+            }
+            .battle-attacks {
+            }
         }
     }
+ 
